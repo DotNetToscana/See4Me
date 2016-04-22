@@ -1,0 +1,12 @@
+﻿"AppName"="See4Me";
+"BackCameraReady"="Back camera ready";
+"FrontCameraReady"="Front camera ready";
+"InitializationError"="Error during app initialization.";
+"NoConnection"="I\'m sorry, Internet is not available.";
+"QueryingVisionService"="Analyzing the image...";
+"RecognitionError"="I\'m sorry, there was un unexpected error.";
+"RecognitionFailed"="I\'m sorry, I don\'t recognize the image.";
+"ResourceLanguage"="en";
+"Translating"="Translating...";
+"UnableToGetImage"="I\'m sorry, I can\'t get the image.";
+"VisionServiceQueried"="Imaged successfully analyzed.";

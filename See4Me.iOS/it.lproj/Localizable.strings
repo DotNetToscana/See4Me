@@ -1,0 +1,12 @@
+﻿"AppName"="See4Me";
+"BackCameraReady"="Fotocamera posteriore pronta";
+"FrontCameraReady"="Fotocamera frontale pronta";
+"InitializationError"="Errore durante l\'avvio dell\'app.";
+"NoConnection"="Mi dispiace, Internet non è disponibile.";
+"QueryingVisionService"="Analisi dell\'immagine...";
+"RecognitionError"="Mi dispiace, si è verificato un errore inatteso.";
+"RecognitionFailed"="Mi dispiace, non riconosco l\'immagine.";
+"ResourceLanguage"="it";
+"Translating"="Traduzione...";
+"UnableToGetImage"="Mi dispiace, non riesco a scattare la foto.";
+"VisionServiceQueried"="Immagine analizzata con successo.";

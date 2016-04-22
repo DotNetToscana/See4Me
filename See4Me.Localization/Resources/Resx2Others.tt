@@ -1,0 +1,92 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension="log" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.IO" #>
+<#@ assembly name="EnvDTE" #>
+<#@ include file="Resx2OthersTemplate.tt" #>
+<#
+    // Create instances of the templates for iOS and Android
+    Resx2AndroidTemplate androidTemplate = null;
+    Resx2iOSTemplate iosTemplate = null;
+    Resx2ClassTemplate classTemplate = new Resx2ClassTemplate();
+ 
+    var hostServiceProvider = (IServiceProvider)Host;
+    var dte = (EnvDTE.DTE)hostServiceProvider.GetService(typeof(EnvDTE.DTE));        
+ 
+    foreach(EnvDTE.Project project in dte.Solution.Projects)
+    {
+        string projectName = project.Name.ToLower();
+        if(projectName.Contains("ios") || projectName.Contains("touch"))
+        {
+            iosTemplate = new Resx2iOSTemplate();
+            iosTemplate.Output.Project = project.FullName;
+            iosTemplate.Output.ItemType = "Content";
+        }
+        else if(projectName.Contains("droid"))
+        {
+            androidTemplate = new Resx2AndroidTemplate();
+            androidTemplate.Output.Project = project.FullName;
+            androidTemplate.Output.ItemType = "AndroidResource";
+        }
+         
+    }
+     
+    // Set the current directory to the .tt folder
+    Directory.SetCurrentDirectory(Path.GetDirectoryName(Host.TemplateFile));
+ 
+    // Set the file mask for the resx files to read from
+    var files = Directory.GetFiles(".", "AppResources*.resx");
+ 
+    foreach(var resxFile in files)
+    {
+        WriteLine("Processing file {0}", resxFile);
+ 
+        // Fix up the file name
+        string resxFileName = resxFile.Replace(".\\","");
+                 
+        string locale = ResxUtilities.GetLocale(resxFile);
+ 
+        if (!(locale.Equals("qps-ploc", StringComparison.CurrentCultureIgnoreCase)))
+        {
+            if (!string.IsNullOrWhiteSpace(locale))
+            {
+                locale = "-" + locale.Replace("-", "-r");
+            }
+ 
+            // Android
+            if(androidTemplate != null)
+            {
+                androidTemplate.ResxFileName = resxFileName;
+                string androidStringsFolder = @"Resources\Values" + locale;
+ 
+                // Set the destination filename and path and transform the resource
+                androidTemplate.Output.File = Path.Combine(androidStringsFolder, Path.GetFileName(Path.ChangeExtension(ResxUtilities.GetNameSpace(resxFile), ".xml")));
+                androidTemplate.Output.Encoding = Encoding.UTF8;
+                androidTemplate.Render();
+            }
+ 
+            // iOS
+            if(iosTemplate != null)
+            {
+                iosTemplate.ResxFileName = resxFileName;
+                // Don't need the locale, just the language
+                var lang = ResxUtilities.GetLanguage(iosTemplate.ResxFileName);
+ 
+                if (lang != null) 
+                {
+                    iosTemplate.Output.File = Path.Combine(lang + ".lproj",  "Localizable.strings");
+                    iosTemplate.Output.Encoding = Encoding.UTF8;
+                    iosTemplate.Render();
+                }
+            }
+ 
+            // generate a class file with constants only for the main resource file (which doesn't specify a locale)
+            if(String.IsNullOrWhiteSpace(locale))
+            {
+                classTemplate.Output.File = "Strings.cs";
+                classTemplate.ResxFileName = resxFileName;
+                classTemplate.Render();
+            }
+        }
+    }
+#>

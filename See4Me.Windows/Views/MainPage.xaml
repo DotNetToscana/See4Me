@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="See4Me.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:See4Me"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    DataContext="{Binding Source={StaticResource Locator}, Path=MainViewModel}"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
+    xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:behaviors="using:See4Me.Behaviors"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <CaptureElement Name="video" Stretch="UniformToFill" Margin="0" />
+            <TextBlock Text="{Binding StatusMessage}" Style="{StaticResource SubheaderTextBlockStyle}" TextAlignment="Center"
+                       HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="12" TextWrapping="Wrap" />
+
+            <Interactivity:Interaction.Behaviors>
+                <Interactions:EventTriggerBehavior EventName="Tapped">
+                    <Interactions:InvokeCommandAction Command="{Binding VideoCommand}"  />
+                </Interactions:EventTriggerBehavior>
+                <behaviors:SwipeTriggerBehavior Direction="Left">
+                    <Interactions:InvokeCommandAction Command="{Binding SwipeCommand}" 
+                                                      InputConverter="{StaticResource SwipeDirectionConverter}" InputConverterParameter="Left" />
+                </behaviors:SwipeTriggerBehavior>
+                <behaviors:SwipeTriggerBehavior Direction="Right">
+                    <Interactions:InvokeCommandAction Command="{Binding SwipeCommand}"  
+                                                      InputConverter="{StaticResource SwipeDirectionConverter}" InputConverterParameter="Right" />
+                </behaviors:SwipeTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>            
+        </Grid>
+
+        <MediaElement x:Name="ding" Source="/Assets/Sounds/Ding.mp3" AutoPlay="False" />
+        
+        <Interactivity:Interaction.Behaviors>
+            <behaviors:CameraPressedBehavior>
+                <Interactions:InvokeCommandAction Command="{Binding VideoCommand}"  />
+            </behaviors:CameraPressedBehavior>            
+        </Interactivity:Interaction.Behaviors>
+    </Grid>
+</Page>

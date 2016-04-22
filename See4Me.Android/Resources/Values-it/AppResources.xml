@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="AppName">See4Me</string>
+  <string name="BackCameraReady">Fotocamera posteriore pronta</string>
+  <string name="FrontCameraReady">Fotocamera frontale pronta</string>
+  <string name="InitializationError">Errore durante l\'avvio dell\'app.</string>
+  <string name="NoConnection">Mi dispiace, Internet non è disponibile.</string>
+  <string name="QueryingVisionService">Analisi dell\'immagine...</string>
+  <string name="RecognitionError">Mi dispiace, si è verificato un errore inatteso.</string>
+  <string name="RecognitionFailed">Mi dispiace, non riconosco l\'immagine.</string>
+  <string name="ResourceLanguage">it</string>
+  <string name="Translating">Traduzione...</string>
+  <string name="UnableToGetImage">Mi dispiace, non riesco a scattare la foto.</string>
+  <string name="VisionServiceQueried">Immagine analizzata con successo.</string>
+</resources>

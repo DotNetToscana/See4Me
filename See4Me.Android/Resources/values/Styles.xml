@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <!-- Base application theme. -->
+  <style name="See4Me">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">true</item>
+  </style>
+
+  <style name="See4Me.Splash">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">true</item>
+    <item name="android:windowBackground">@drawable/splash_screen</item>
+  </style>
+</resources>
