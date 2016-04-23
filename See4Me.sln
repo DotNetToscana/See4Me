@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "See4Me.Localization", "See4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "See4Me.Common", "See4Me.Common", "{DB58863E-8ED2-4360-B584-295218B176A3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Native", "Native", "{4CE3747F-DA40-4E31-B325-28FC13BFC37F}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		See4Me.Shared\See4Me.Shared.projitems*{bb5e6ea7-347b-47eb-8abf-0c37a25ef101}*SharedItemsImports = 4
@@ -269,34 +271,10 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{0D590B16-EF65-40FB-9218-96E5F5D40F1C} = {4CE3747F-DA40-4E31-B325-28FC13BFC37F}
 		{9E2CEC20-3EA7-4627-A5FB-1F57F0716AA2} = {DB58863E-8ED2-4360-B584-295218B176A3}
+		{BB5E6EA7-347B-47EB-8ABF-0C37A25EF101} = {4CE3747F-DA40-4E31-B325-28FC13BFC37F}
+		{07D2CE91-D4C3-4E01-88CC-9E40FE3F8D47} = {4CE3747F-DA40-4E31-B325-28FC13BFC37F}
 		{10463B05-995D-4730-B617-D2CA57D95C65} = {DB58863E-8ED2-4360-B584-295218B176A3}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://marcominerva.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = See4Me.Shared\\See4Me.Shared.shproj
-		SccProjectTopLevelParentUniqueName1 = See4Me.sln
-		SccProjectName1 = See4Me.Shared
-		SccLocalPath1 = See4Me.Shared
-		SccProjectUniqueName2 = See4Me.Shared\\See4Me.Shared.projitems
-		SccProjectTopLevelParentUniqueName2 = See4Me.Shared\\See4Me.Shared.shproj
-		SccProjectName2 = See4Me.Shared
-		SccLocalPath2 = See4Me.Shared
-		SccProjectUniqueName3 = See4Me.Windows\\See4Me.Windows.csproj
-		SccProjectName3 = See4Me.Windows
-		SccLocalPath3 = See4Me.Windows
-		SccProjectUniqueName4 = See4Me.Android\\See4Me.Android.csproj
-		SccProjectName4 = See4Me.Android
-		SccLocalPath4 = See4Me.Android
-		SccProjectUniqueName5 = See4Me.iOS\\See4Me.iOS.csproj
-		SccProjectName5 = See4Me.iOS
-		SccLocalPath5 = See4Me.iOS
-		SccProjectUniqueName6 = See4Me.Localization\\See4Me.Localization.csproj
-		SccProjectTopLevelParentUniqueName6 = See4Me.sln
-		SccProjectName6 = See4Me.Localization
-		SccLocalPath6 = See4Me.Localization
 	EndGlobalSection
 EndGlobal

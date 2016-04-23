@@ -23,12 +23,12 @@ namespace See4Me.ViewModels
             SimpleIoc.Default.Register<ITranslatorService>(() =>
             {
                 var language = GetLanguage();
-                var service = new TranslatorService(Constants.TranslatorClientId, Constants.TranslatorClientSecret, language);
+                var service = new TranslatorService(ServiceKeys.TranslatorClientId, ServiceKeys.TranslatorClientSecret, language);
 
                 return service;
             });
 
-            SimpleIoc.Default.Register<VisionServiceClient>(() => new VisionServiceClient(Constants.VisionSubscriptionKey));
+            SimpleIoc.Default.Register<VisionServiceClient>(() => new VisionServiceClient(ServiceKeys.VisionSubscriptionKey));
 
             SimpleIoc.Default.Register<ISpeechService, SpeechService>();
             SimpleIoc.Default.Register<IStreamingService, StreamingService>();
