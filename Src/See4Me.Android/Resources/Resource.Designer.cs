@@ -26,8 +26,6 @@ namespace See4Me.Android
 		
 		public static void UpdateIdValues()
 		{
-			global::GalaSoft.MvvmLight.Resource.String.ApplicationName = global::See4Me.Android.Resource.String.ApplicationName;
-			global::GalaSoft.MvvmLight.Resource.String.Hello = global::See4Me.Android.Resource.String.Hello;
 			global::Plugin.TextToSpeech.Resource.String.ApplicationName = global::See4Me.Android.Resource.String.ApplicationName;
 			global::Plugin.TextToSpeech.Resource.String.Hello = global::See4Me.Android.Resource.String.Hello;
 		}

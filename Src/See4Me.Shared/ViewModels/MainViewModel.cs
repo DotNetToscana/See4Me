@@ -156,7 +156,7 @@ namespace See4Me.ViewModels
 
             // Speaks the result.
             StatusMessage = message;
-            await speechService.SpeechAsync(message, Language);
+            await speechService.SpeechAsync(message, languge: Language);
 
             IsBusy = false;
         }

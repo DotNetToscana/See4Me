@@ -17,7 +17,7 @@ namespace See4Me.Services
             synthesizer.Init();
         }
 
-        public Task SpeechAsync(string text, string language = null)
+        public Task SpeechAsync(string text, bool queue = false, string language = null)
         {
             CrossLocale? locale = null;
 
@@ -27,7 +27,7 @@ namespace See4Me.Services
                 locale = locale.Value.Language != null ? locale : null;
             }
 
-            synthesizer.Speak(text, crossLocale: locale);
+            synthesizer.Speak(text, queue: queue, crossLocale: locale);
             return Task.FromResult<object>(null);
         }
     }
