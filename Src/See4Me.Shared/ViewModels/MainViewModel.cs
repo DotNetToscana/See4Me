@@ -15,6 +15,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using See4Me.Extensions;
 using System.IO;
+using System.Text;
 
 namespace See4Me.ViewModels
 {
@@ -148,7 +149,10 @@ namespace See4Me.ViewModels
                                 if (success && result.Faces?.Count() > 0)
                                 {
                                     stream.Position = 0;
+                                    message = string.Empty;
+                                    var messageBuilder = new StringBuilder();
                                     byte[] imageBytes = null;
+
                                     using (var ms = new MemoryStream())
                                     {
                                         await stream.CopyToAsync(ms);
@@ -162,7 +166,7 @@ namespace See4Me.ViewModels
                                             var emotions = await emotionService.RecognizeAsync(ms, face.FaceRectangle.ToRectangle());
                                             var bestEmotion = emotions.FirstOrDefault()?.Scores.GetBestEmotion();
 
-                                            var a = 5;
+                                            // I see two faces: 20 year old woman looking happy...
                                         }
                                     }
                                 }

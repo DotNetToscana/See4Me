@@ -1,20 +1,22 @@
 ﻿using Microsoft.ProjectOxford.Emotion.Contract;
-using Microsoft.ProjectOxford.Vision.Contract;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using Microsoft.ProjectOxford.Common;
 
 namespace See4Me.Extensions
 {
     public static class EmotionExtensions
     {
-        public static Microsoft.ProjectOxford.Common.Rectangle[] ToRectangle(this FaceRectangle faceRectangle)
-            => new Microsoft.ProjectOxford.Common.Rectangle[] {
-                new Microsoft.ProjectOxford.Common.Rectangle {
+        public static Rectangle[] ToRectangle(this Microsoft.ProjectOxford.Vision.Contract.FaceRectangle faceRectangle)
+            => new Rectangle[] {
+                new Rectangle {
                     Height = faceRectangle.Height,
                     Left = faceRectangle.Left,
                     Top = faceRectangle.Top,
-                    Width = faceRectangle.Width }
+                    Width = faceRectangle.Width
+                }
             };
 
         public static string GetBestEmotion(this Scores scores)
@@ -31,7 +33,8 @@ namespace See4Me.Extensions
                 [nameof(Scores.Surprise)] = scores.Surprise,
             };
 
-            return null;
+            var bestEmotion = list.FirstOrDefault(x => x.Value == list.Values.Max()).Key;
+            return bestEmotion;
         }
     }
 }
