@@ -1,6 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.ProjectOxford.Emotion;
+using Microsoft.ProjectOxford.Emotion.Contract;
 using Microsoft.ProjectOxford.Vision;
+using Microsoft.ProjectOxford.Vision.Contract;
 using See4Me.Common;
 using See4Me.Localization.Resources;
 using See4Me.Services;
@@ -10,13 +13,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using See4Me.Extensions;
+using System.IO;
 
 namespace See4Me.ViewModels
 {
     public partial class MainViewModel : ViewModelBase
     {
         private readonly IStreamingService streamingService;
-        private readonly VisionServiceClient visionServiceClient;
+        private readonly EmotionServiceClient emotionService;
+        private readonly VisionServiceClient visionService;
         private readonly ITranslatorService translatorService;
         private readonly ISpeechService speechService;
 
@@ -33,11 +39,12 @@ namespace See4Me.ViewModels
 
         private CameraPanel lastCameraPanel = CameraPanel.Unknown;
 
-        public MainViewModel(IStreamingService streamingService, VisionServiceClient visionServiceClient, ITranslatorService translatorService,
-            ISpeechService speechService)
+        public MainViewModel(IStreamingService streamingService, VisionServiceClient visionService, EmotionServiceClient emotionService,
+            ITranslatorService translatorService, ISpeechService speechService)
         {
             this.streamingService = streamingService;
-            this.visionServiceClient = visionServiceClient;
+            this.visionService = visionService;
+            this.emotionService = emotionService;
             this.translatorService = translatorService;
             this.speechService = speechService;
 
@@ -99,7 +106,9 @@ namespace See4Me.ViewModels
         public async Task DescribeImageAsync()
         {
             IsBusy = true;
+
             string message = null;
+            var success = false;
 
             if (IsOnline)
             {
@@ -113,20 +122,49 @@ namespace See4Me.ViewModels
                         {
                             StatusMessage = AppResources.QueryingVisionService;
 
-                            var result = await visionServiceClient.DescribeAsync(stream);
+                            var visualFeatures = new VisualFeature[] { VisualFeature.Description, VisualFeature.Faces };
+                            var result = await visionService.AnalyzeImageAsync(stream, visualFeatures);
 
                             StatusMessage = AppResources.VisionServiceQueried;
 
                             if (result.Description.Captions.Length > 0)
                             {
                                 message = result.Description.Captions.First().Text;
-                                StatusMessage = message;
 
                                 if (Settings.AutomaticTranslation && Language != Constants.DefaultLanguge)
                                 {
                                     // The description needs to be translated.
                                     StatusMessage = AppResources.Translating;
                                     message = await translatorService.TranslateAsync(message);
+                                }
+
+                                success = true;
+
+                                // Speaks the description of the image.
+                                StatusMessage = message;
+                                await speechService.SpeechAsync(message, languge: Language);
+
+                                // If there is one or more faces, asks the service information about them.
+                                if (success && result.Faces?.Count() > 0)
+                                {
+                                    stream.Position = 0;
+                                    byte[] imageBytes = null;
+                                    using (var ms = new MemoryStream())
+                                    {
+                                        await stream.CopyToAsync(ms);
+                                        imageBytes = ms.ToArray();
+                                    }
+
+                                    foreach (var face in result.Faces)
+                                    {
+                                        using (var ms = new MemoryStream(imageBytes))
+                                        {
+                                            var emotions = await emotionService.RecognizeAsync(ms, face.FaceRectangle.ToRectangle());
+                                            var bestEmotion = emotions.FirstOrDefault()?.Scores.GetBestEmotion();
+
+                                            var a = 5;
+                                        }
+                                    }
                                 }
                             }
                             else
@@ -143,8 +181,6 @@ namespace See4Me.ViewModels
                 catch (Exception ex)
                 {
                     var msg = ex.Message;
-                    Debug.WriteLine(msg);
-
                     message = AppResources.RecognitionError;
                 }
             }
@@ -154,9 +190,12 @@ namespace See4Me.ViewModels
                 message = AppResources.NoConnection;
             }
 
-            // Speaks the result.
-            StatusMessage = message;
-            await speechService.SpeechAsync(message, languge: Language);
+            if (!success)
+            {
+                // Speaks the error result.
+                StatusMessage = message;
+                await speechService.SpeechAsync(message, languge: Language);
+            }
 
             IsBusy = false;
         }

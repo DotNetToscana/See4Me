@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using Microsoft.ProjectOxford.Emotion;
 using Microsoft.ProjectOxford.Vision;
 using See4Me.Services;
 using See4Me.Services.Translator;
@@ -29,6 +30,7 @@ namespace See4Me.ViewModels
             });
 
             SimpleIoc.Default.Register<VisionServiceClient>(() => new VisionServiceClient(ServiceKeys.VisionSubscriptionKey));
+            SimpleIoc.Default.Register<EmotionServiceClient>(() => new EmotionServiceClient(ServiceKeys.EmotionSubscriptionKey));
 
             SimpleIoc.Default.Register<ISpeechService, SpeechService>();
             SimpleIoc.Default.Register<IStreamingService, StreamingService>();

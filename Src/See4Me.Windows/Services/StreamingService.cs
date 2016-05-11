@@ -309,6 +309,7 @@ namespace See4Me.Services
                     if (!await this.StartWebcamStreamingAsync(panel, preview))
                     {
                         await this.ChangeScenarioStateAsync(ScenarioState.Idle);
+                        newState = ScenarioState.Idle;
                         break;
                     }
 
