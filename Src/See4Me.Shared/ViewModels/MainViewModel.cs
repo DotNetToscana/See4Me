@@ -108,8 +108,9 @@ namespace See4Me.ViewModels
         {
             IsBusy = true;
 
-            string message = null;
-            var success = false;
+            string imageDescription = null;
+            string facesRecognizedDescription = null;
+            string emotionDescription = null;
 
             if (IsOnline)
             {
@@ -126,80 +127,74 @@ namespace See4Me.ViewModels
                             var visualFeatures = new VisualFeature[] { VisualFeature.Description, VisualFeature.Faces };
                             var result = await visionService.AnalyzeImageAsync(stream, visualFeatures);
 
-                            StatusMessage = AppResources.VisionServiceQueried;
-
                             if (result.Description.Captions.Length > 0)
                             {
-                                message = result.Description.Captions.First().Text;
+                                imageDescription = result.Description.Captions.First().Text;
 
                                 if (Settings.AutomaticTranslation && Language != Constants.DefaultLanguge)
                                 {
                                     // The description needs to be translated.
                                     StatusMessage = AppResources.Translating;
-                                    message = await translatorService.TranslateAsync(message);
+                                    imageDescription = await translatorService.TranslateAsync(imageDescription);
                                 }
 
-                                success = true;
+                                StatusMessage = imageDescription;
 
-                                // Speaks the description of the image.
-                                StatusMessage = message;
-                                await speechService.SpeechAsync(message, languge: Language);
-
-                                // If there is one or more faces, asks the service information about them.
-                                if (success && result.Faces?.Count() > 0)
+                                try
                                 {
-                                    stream.Position = 0;
-                                    message = string.Empty;
-                                    var messageBuilder = new StringBuilder();
-                                    byte[] imageBytes = null;
-
-                                    using (var ms = new MemoryStream())
+                                    // If there is one or more faces, asks the service information about them.
+                                    if (result.Faces?.Count() > 0)
                                     {
-                                        await stream.CopyToAsync(ms);
-                                        imageBytes = ms.ToArray();
-                                    }
+                                        // Describes how many faces have been recognized.
+                                        if (result.Faces.Count() == 1)
+                                            facesRecognizedDescription = AppResources.FaceRecognizedSingular;
+                                        else
+                                            facesRecognizedDescription = string.Format(AppResources.FacesRecognizedPlural, result.Faces.Count());
 
-                                    foreach (var face in result.Faces)
-                                    {
-                                        using (var ms = new MemoryStream(imageBytes))
+                                        var imageBytes = await stream.ToArrayAsync();
+                                        foreach (var face in result.Faces)
                                         {
-                                            var emotions = await emotionService.RecognizeAsync(ms, face.FaceRectangle.ToRectangle());
-                                            var bestEmotion = emotions.FirstOrDefault()?.Scores.GetBestEmotion();
+                                            using (var ms = new MemoryStream(imageBytes))
+                                            {
+                                                var emotions = await emotionService.RecognizeAsync(ms, face.FaceRectangle.ToRectangle());
+                                                var bestEmotion = emotions.FirstOrDefault()?.Scores.GetBestEmotion();
 
-                                            // I see two faces: 20 year old woman looking happy...
+                                                // Creates the emotion description text to be speeched.
+                                                var gender = AppResources.ResourceManager.GetString(face.Gender);
+                                                var emotion = AppResources.ResourceManager.GetString(bestEmotion + face.Gender);
+                                                emotionDescription += string.Format(AppResources.ResourceManager.GetString(Constants.EmotionMessage + face.Gender) + Constants.SentenceEnd, face.Age, gender, emotion);
+                                            }
                                         }
                                     }
                                 }
+                                catch { }
                             }
                             else
                             {
-                                message = AppResources.RecognitionFailed;
+                                imageDescription = AppResources.RecognitionFailed;
                             }
                         }
                         else
                         {
-                            message = AppResources.UnableToGetImage;
+                            imageDescription = AppResources.UnableToGetImage;
                         }
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    var msg = ex.Message;
-                    message = AppResources.RecognitionError;
+                    imageDescription = AppResources.RecognitionError;
                 }
             }
             else
             {
                 // Internet isn't available, to service cannot be reached.
-                message = AppResources.NoConnection;
+                imageDescription = AppResources.NoConnection;
             }
 
-            if (!success)
-            {
-                // Speaks the error result.
-                StatusMessage = message;
-                await speechService.SpeechAsync(message, languge: Language);
-            }
+            // Speaks the result.
+            StatusMessage = imageDescription;
+            var message = $"{imageDescription}{Constants.SentenceEnd} {facesRecognizedDescription}{Constants.SentenceEnd} {emotionDescription}";
+            await speechService.SpeechAsync(message, languge: Language);
 
             IsBusy = false;
         }

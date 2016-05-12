@@ -117,40 +117,106 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AngerFemale" xml:space="preserve">
+    <value>Angry</value>
+  </data>
+  <data name="AngerMale" xml:space="preserve">
+    <value>Angry</value>
+  </data>
   <data name="AppName" xml:space="preserve">
     <value>See4Me</value>
   </data>
   <data name="BackCameraReady" xml:space="preserve">
     <value>Back camera ready</value>
   </data>
+  <data name="ContemptFemale" xml:space="preserve">
+    <value>To show contempt</value>
+  </data>
+  <data name="ContemptMale" xml:space="preserve">
+    <value>To show contempt</value>
+  </data>
+  <data name="DisgustFemale" xml:space="preserve">
+    <value>Disgusted</value>
+  </data>
+  <data name="DisgustMale" xml:space="preserve">
+    <value>Disgusted</value>
+  </data>
+  <data name="EmotionMessageFemale" xml:space="preserve">
+    <value>A {0} years old {1} looking {2}</value>
+  </data>
+  <data name="EmotionMessageMale" xml:space="preserve">
+    <value>A {0} years old {1} looking {2}</value>
+  </data>
+  <data name="FaceRecognizedSingular" xml:space="preserve">
+    <value>In the image I see a person</value>
+  </data>
+  <data name="FacesRecognizedPlural" xml:space="preserve">
+    <value>In the image I see {0} people</value>
+  </data>
+  <data name="FearFemale" xml:space="preserve">
+    <value>Fearful</value>
+  </data>
+  <data name="FearMale" xml:space="preserve">
+    <value>Fearful</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Female</value>
+  </data>
   <data name="FrontCameraReady" xml:space="preserve">
     <value>Front camera ready</value>
   </data>
+  <data name="HappinessFemale" xml:space="preserve">
+    <value>Happy</value>
+  </data>
+  <data name="HappinessMale" xml:space="preserve">
+    <value>Happy</value>
+  </data>
   <data name="InitializationError" xml:space="preserve">
-    <value>Error during app initialization.</value>
+    <value>Error during app initialization</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="NeutralFemale" xml:space="preserve">
+    <value>Neutral</value>
+  </data>
+  <data name="NeutralMale" xml:space="preserve">
+    <value>Neutral</value>
   </data>
   <data name="NoConnection" xml:space="preserve">
-    <value>I'm sorry, Internet is not available.</value>
+    <value>I'm sorry, Internet is not available</value>
   </data>
   <data name="QueryingVisionService" xml:space="preserve">
     <value>Analyzing the image...</value>
   </data>
   <data name="RecognitionError" xml:space="preserve">
-    <value>I'm sorry, there was un unexpected error.</value>
+    <value>I'm sorry, there was un unexpected error</value>
   </data>
   <data name="RecognitionFailed" xml:space="preserve">
-    <value>I'm sorry, I don't recognize the image.</value>
+    <value>I'm sorry, I don't recognize the image</value>
   </data>
   <data name="ResourceLanguage" xml:space="preserve">
     <value>en</value>
+  </data>
+  <data name="SadnessFemale" xml:space="preserve">
+    <value>Sad</value>
+  </data>
+  <data name="SadnessMale" xml:space="preserve">
+    <value>Sad</value>
+  </data>
+  <data name="SurpriseFemale" xml:space="preserve">
+    <value>Surprised</value>
+  </data>
+  <data name="SurpriseMale" xml:space="preserve">
+    <value>Surprised</value>
   </data>
   <data name="Translating" xml:space="preserve">
     <value>Translating...</value>
   </data>
   <data name="UnableToGetImage" xml:space="preserve">
-    <value>I'm sorry, I can't get the image.</value>
+    <value>I'm sorry, I can't get the image</value>
   </data>
   <data name="VisionServiceQueried" xml:space="preserve">
-    <value>Imaged successfully analyzed.</value>
+    <value>Imaged successfully analyzed</value>
   </data>
 </root>

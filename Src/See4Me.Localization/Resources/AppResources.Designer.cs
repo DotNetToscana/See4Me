@@ -62,6 +62,24 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Angry.
+        /// </summary>
+        public static string AngerFemale {
+            get {
+                return ResourceManager.GetString("AngerFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Angry.
+        /// </summary>
+        public static string AngerMale {
+            get {
+                return ResourceManager.GetString("AngerMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to See4Me.
         /// </summary>
         public static string AppName {
@@ -80,6 +98,105 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To show contempt.
+        /// </summary>
+        public static string ContemptFemale {
+            get {
+                return ResourceManager.GetString("ContemptFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To show contempt.
+        /// </summary>
+        public static string ContemptMale {
+            get {
+                return ResourceManager.GetString("ContemptMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disgusted.
+        /// </summary>
+        public static string DisgustFemale {
+            get {
+                return ResourceManager.GetString("DisgustFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disgusted.
+        /// </summary>
+        public static string DisgustMale {
+            get {
+                return ResourceManager.GetString("DisgustMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} years old {1} looking {2}.
+        /// </summary>
+        public static string EmotionMessageFemale {
+            get {
+                return ResourceManager.GetString("EmotionMessageFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} years old {1} looking {2}.
+        /// </summary>
+        public static string EmotionMessageMale {
+            get {
+                return ResourceManager.GetString("EmotionMessageMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In the image I see a person.
+        /// </summary>
+        public static string FaceRecognizedSingular {
+            get {
+                return ResourceManager.GetString("FaceRecognizedSingular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In the image I see {0} people.
+        /// </summary>
+        public static string FacesRecognizedPlural {
+            get {
+                return ResourceManager.GetString("FacesRecognizedPlural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fearful.
+        /// </summary>
+        public static string FearFemale {
+            get {
+                return ResourceManager.GetString("FearFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fearful.
+        /// </summary>
+        public static string FearMale {
+            get {
+                return ResourceManager.GetString("FearMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Female.
+        /// </summary>
+        public static string Female {
+            get {
+                return ResourceManager.GetString("Female", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Front camera ready.
         /// </summary>
         public static string FrontCameraReady {
@@ -89,7 +206,25 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error during app initialization..
+        ///   Looks up a localized string similar to Happy.
+        /// </summary>
+        public static string HappinessFemale {
+            get {
+                return ResourceManager.GetString("HappinessFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Happy.
+        /// </summary>
+        public static string HappinessMale {
+            get {
+                return ResourceManager.GetString("HappinessMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error during app initialization.
         /// </summary>
         public static string InitializationError {
             get {
@@ -98,7 +233,34 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I&apos;m sorry, Internet is not available..
+        ///   Looks up a localized string similar to Male.
+        /// </summary>
+        public static string Male {
+            get {
+                return ResourceManager.GetString("Male", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neutral.
+        /// </summary>
+        public static string NeutralFemale {
+            get {
+                return ResourceManager.GetString("NeutralFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neutral.
+        /// </summary>
+        public static string NeutralMale {
+            get {
+                return ResourceManager.GetString("NeutralMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I&apos;m sorry, Internet is not available.
         /// </summary>
         public static string NoConnection {
             get {
@@ -116,7 +278,7 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I&apos;m sorry, there was un unexpected error..
+        ///   Looks up a localized string similar to I&apos;m sorry, there was un unexpected error.
         /// </summary>
         public static string RecognitionError {
             get {
@@ -125,7 +287,7 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I&apos;m sorry, I don&apos;t recognize the image..
+        ///   Looks up a localized string similar to I&apos;m sorry, I don&apos;t recognize the image.
         /// </summary>
         public static string RecognitionFailed {
             get {
@@ -143,6 +305,42 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sad.
+        /// </summary>
+        public static string SadnessFemale {
+            get {
+                return ResourceManager.GetString("SadnessFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sad.
+        /// </summary>
+        public static string SadnessMale {
+            get {
+                return ResourceManager.GetString("SadnessMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surprised.
+        /// </summary>
+        public static string SurpriseFemale {
+            get {
+                return ResourceManager.GetString("SurpriseFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surprised.
+        /// </summary>
+        public static string SurpriseMale {
+            get {
+                return ResourceManager.GetString("SurpriseMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Translating....
         /// </summary>
         public static string Translating {
@@ -152,7 +350,7 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I&apos;m sorry, I can&apos;t get the image..
+        ///   Looks up a localized string similar to I&apos;m sorry, I can&apos;t get the image.
         /// </summary>
         public static string UnableToGetImage {
             get {
@@ -161,7 +359,7 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Imaged successfully analyzed..
+        ///   Looks up a localized string similar to Imaged successfully analyzed.
         /// </summary>
         public static string VisionServiceQueried {
             get {

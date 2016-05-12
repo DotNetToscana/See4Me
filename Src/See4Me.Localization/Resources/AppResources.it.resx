@@ -117,40 +117,106 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AngerFemale" xml:space="preserve">
+    <value>Arrabbiata</value>
+  </data>
+  <data name="AngerMale" xml:space="preserve">
+    <value>Arrabbiato</value>
+  </data>
   <data name="AppName" xml:space="preserve">
     <value>See4Me</value>
   </data>
   <data name="BackCameraReady" xml:space="preserve">
     <value>Fotocamera posteriore pronta</value>
   </data>
+  <data name="ContemptFemale" xml:space="preserve">
+    <value>Mostrare disprezzo</value>
+  </data>
+  <data name="ContemptMale" xml:space="preserve">
+    <value>Mostrare disprezzo</value>
+  </data>
+  <data name="DisgustFemale" xml:space="preserve">
+    <value>Disgustata</value>
+  </data>
+  <data name="DisgustMale" xml:space="preserve">
+    <value>Disgustato</value>
+  </data>
+  <data name="EmotionMessageFemale" xml:space="preserve">
+    <value>Una {1} di {0} anni che sembra {2}</value>
+  </data>
+  <data name="EmotionMessageMale" xml:space="preserve">
+    <value>Un {1} di {0} anni che sembra {2}</value>
+  </data>
+  <data name="FaceRecognizedSingular" xml:space="preserve">
+    <value>Nell'immagine ho riconosciuto una persona</value>
+  </data>
+  <data name="FacesRecognizedPlural" xml:space="preserve">
+    <value>Nell'immagine ho riconosciuto {0} persone</value>
+  </data>
+  <data name="FearFemale" xml:space="preserve">
+    <value>Speventata</value>
+  </data>
+  <data name="FearMale" xml:space="preserve">
+    <value>Spaventato</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Femmina</value>
+  </data>
   <data name="FrontCameraReady" xml:space="preserve">
     <value>Fotocamera frontale pronta</value>
   </data>
+  <data name="HappinessFemale" xml:space="preserve">
+    <value>Felice</value>
+  </data>
+  <data name="HappinessMale" xml:space="preserve">
+    <value>Felice</value>
+  </data>
   <data name="InitializationError" xml:space="preserve">
-    <value>Errore durante l'avvio dell'app.</value>
+    <value>Errore durante l'avvio dell'app</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Maschio</value>
+  </data>
+  <data name="NeutralFemale" xml:space="preserve">
+    <value>Neutro</value>
+  </data>
+  <data name="NeutralMale" xml:space="preserve">
+    <value>Neutro</value>
   </data>
   <data name="NoConnection" xml:space="preserve">
-    <value>Mi dispiace, Internet non è disponibile.</value>
+    <value>Mi dispiace, Internet non è disponibile</value>
   </data>
   <data name="QueryingVisionService" xml:space="preserve">
     <value>Analisi dell'immagine...</value>
   </data>
   <data name="RecognitionError" xml:space="preserve">
-    <value>Mi dispiace, si è verificato un errore inatteso.</value>
+    <value>Mi dispiace, si è verificato un errore inatteso</value>
   </data>
   <data name="RecognitionFailed" xml:space="preserve">
-    <value>Mi dispiace, non riconosco l'immagine.</value>
+    <value>Mi dispiace, non riconosco l'immagine</value>
   </data>
   <data name="ResourceLanguage" xml:space="preserve">
     <value>it</value>
+  </data>
+  <data name="SadnessFemale" xml:space="preserve">
+    <value>Triste</value>
+  </data>
+  <data name="SadnessMale" xml:space="preserve">
+    <value>Triste</value>
+  </data>
+  <data name="SurpriseFemale" xml:space="preserve">
+    <value>Sorpresa</value>
+  </data>
+  <data name="SurpriseMale" xml:space="preserve">
+    <value>Sorpreso</value>
   </data>
   <data name="Translating" xml:space="preserve">
     <value>Traduzione...</value>
   </data>
   <data name="UnableToGetImage" xml:space="preserve">
-    <value>Mi dispiace, non riesco a scattare la foto.</value>
+    <value>Mi dispiace, non riesco a scattare la foto</value>
   </data>
   <data name="VisionServiceQueried" xml:space="preserve">
-    <value>Immagine analizzata con successo.</value>
+    <value>Immagine analizzata con successo</value>
   </data>
 </root>

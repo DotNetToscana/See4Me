@@ -132,7 +132,6 @@
       <DependentUpon>MainViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\ViewControllerBase.cs" />
-    <Content Include="en.lproj\Localizable.strings" />
     <BundleResource Include="Resources\Icon-72.png" />
     <BundleResource Include="Resources\Icon-72%402x.png" />
     <BundleResource Include="Resources\Icon-76.png" />
@@ -143,7 +142,6 @@
     <BundleResource Include="Resources\eye.png" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="it.lproj\Localizable.strings" />
     <InterfaceDefinition Include="Main.storyboard">
       <SubType>Designer</SubType>
     </InterfaceDefinition>

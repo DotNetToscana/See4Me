@@ -157,12 +157,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\AppResources.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\Values-it\AppResources.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Resources\raw\" />
   </ItemGroup>
   <ItemGroup>

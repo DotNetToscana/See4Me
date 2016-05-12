@@ -7,5 +7,8 @@
         public const string MainPage = "MainPage";
         public const string PhotoTaken = "PhotoTaken";
         public const string InitializeStreaming = "InitializeStreaming";
+
+        public const string EmotionMessage = "EmotionMessage";
+        public const string SentenceEnd = "..";
     }
 }
