@@ -34,7 +34,10 @@ namespace See4Me.Extensions
             };
 
             var bestEmotion = list.FirstOrDefault(x => x.Value == list.Values.Max()).Key;
-            return bestEmotion;
+            if (bestEmotion != nameof(Scores.Neutral))
+                return bestEmotion;
+
+            return null;
         }
     }
 }

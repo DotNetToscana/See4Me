@@ -10,8 +10,6 @@
         public static string ContemptMale = "ContemptMale";
         public static string DisgustFemale = "DisgustFemale";
         public static string DisgustMale = "DisgustMale";
-        public static string EmotionMessageFemale = "EmotionMessageFemale";
-        public static string EmotionMessageMale = "EmotionMessageMale";
         public static string FaceRecognizedSingular = "FaceRecognizedSingular";
         public static string FacesRecognizedPlural = "FacesRecognizedPlural";
         public static string FearFemale = "FearFemale";
@@ -25,6 +23,8 @@
         public static string NeutralFemale = "NeutralFemale";
         public static string NeutralMale = "NeutralMale";
         public static string NoConnection = "NoConnection";
+        public static string PersonAgeMessageFemale = "PersonAgeMessageFemale";
+        public static string PersonAgeMessageMale = "PersonAgeMessageMale";
         public static string QueryingVisionService = "QueryingVisionService";
         public static string RecognitionError = "RecognitionError";
         public static string RecognitionFailed = "RecognitionFailed";

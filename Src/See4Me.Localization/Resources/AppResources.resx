@@ -129,6 +129,18 @@
   <data name="BackCameraReady" xml:space="preserve">
     <value>Back camera ready</value>
   </data>
+  <data name="BoyFemale" xml:space="preserve">
+    <value>Girl</value>
+  </data>
+  <data name="BoyMale" xml:space="preserve">
+    <value>Boy</value>
+  </data>
+  <data name="ChildFemale" xml:space="preserve">
+    <value>Child</value>
+  </data>
+  <data name="ChildMale" xml:space="preserve">
+    <value>Child</value>
+  </data>
   <data name="ContemptFemale" xml:space="preserve">
     <value>To show contempt</value>
   </data>
@@ -140,12 +152,6 @@
   </data>
   <data name="DisgustMale" xml:space="preserve">
     <value>Disgusted</value>
-  </data>
-  <data name="EmotionMessageFemale" xml:space="preserve">
-    <value>A {0} years old {1} looking {2}</value>
-  </data>
-  <data name="EmotionMessageMale" xml:space="preserve">
-    <value>A {0} years old {1} looking {2}</value>
   </data>
   <data name="FaceRecognizedSingular" xml:space="preserve">
     <value>In the image I see a person</value>
@@ -159,9 +165,6 @@
   <data name="FearMale" xml:space="preserve">
     <value>Fearful</value>
   </data>
-  <data name="Female" xml:space="preserve">
-    <value>Female</value>
-  </data>
   <data name="FrontCameraReady" xml:space="preserve">
     <value>Front camera ready</value>
   </data>
@@ -174,8 +177,17 @@
   <data name="InitializationError" xml:space="preserve">
     <value>Error during app initialization</value>
   </data>
-  <data name="Male" xml:space="preserve">
-    <value>Male</value>
+  <data name="LookingFemale" xml:space="preserve">
+    <value>looking {0}</value>
+  </data>
+  <data name="LookingMale" xml:space="preserve">
+    <value>looking {0}</value>
+  </data>
+  <data name="ManFemale" xml:space="preserve">
+    <value>Woman</value>
+  </data>
+  <data name="ManMale" xml:space="preserve">
+    <value>Man</value>
   </data>
   <data name="NeutralFemale" xml:space="preserve">
     <value>Neutral</value>
@@ -185,6 +197,12 @@
   </data>
   <data name="NoConnection" xml:space="preserve">
     <value>I'm sorry, Internet is not available</value>
+  </data>
+  <data name="PersonAgeMessageFemale" xml:space="preserve">
+    <value>A {0} years old {1}</value>
+  </data>
+  <data name="PersonAgeMessageMale" xml:space="preserve">
+    <value>A {0} years old {1}</value>
   </data>
   <data name="QueryingVisionService" xml:space="preserve">
     <value>Analyzing the image...</value>

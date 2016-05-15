@@ -129,6 +129,18 @@
   <data name="BackCameraReady" xml:space="preserve">
     <value>Fotocamera posteriore pronta</value>
   </data>
+  <data name="BoyFemale" xml:space="preserve">
+    <value>Ragazza</value>
+  </data>
+  <data name="BoyMale" xml:space="preserve">
+    <value>Ragazzo</value>
+  </data>
+  <data name="ChildFemale" xml:space="preserve">
+    <value>Bambina</value>
+  </data>
+  <data name="ChildMale" xml:space="preserve">
+    <value>Bambino</value>
+  </data>
   <data name="ContemptFemale" xml:space="preserve">
     <value>Mostrare disprezzo</value>
   </data>
@@ -140,12 +152,6 @@
   </data>
   <data name="DisgustMale" xml:space="preserve">
     <value>Disgustato</value>
-  </data>
-  <data name="EmotionMessageFemale" xml:space="preserve">
-    <value>Una {1} di {0} anni che sembra {2}</value>
-  </data>
-  <data name="EmotionMessageMale" xml:space="preserve">
-    <value>Un {1} di {0} anni che sembra {2}</value>
   </data>
   <data name="FaceRecognizedSingular" xml:space="preserve">
     <value>Nell'immagine ho riconosciuto una persona</value>
@@ -159,9 +165,6 @@
   <data name="FearMale" xml:space="preserve">
     <value>Spaventato</value>
   </data>
-  <data name="Female" xml:space="preserve">
-    <value>Femmina</value>
-  </data>
   <data name="FrontCameraReady" xml:space="preserve">
     <value>Fotocamera frontale pronta</value>
   </data>
@@ -174,8 +177,17 @@
   <data name="InitializationError" xml:space="preserve">
     <value>Errore durante l'avvio dell'app</value>
   </data>
-  <data name="Male" xml:space="preserve">
-    <value>Maschio</value>
+  <data name="LookingFemale" xml:space="preserve">
+    <value>che sembra {0}</value>
+  </data>
+  <data name="LookingMale" xml:space="preserve">
+    <value>che sembra {0}</value>
+  </data>
+  <data name="ManFemale" xml:space="preserve">
+    <value>Donna</value>
+  </data>
+  <data name="ManMale" xml:space="preserve">
+    <value>Uomo</value>
   </data>
   <data name="NeutralFemale" xml:space="preserve">
     <value>Neutro</value>
@@ -185,6 +197,12 @@
   </data>
   <data name="NoConnection" xml:space="preserve">
     <value>Mi dispiace, Internet non è disponibile</value>
+  </data>
+  <data name="PersonAgeMessageFemale" xml:space="preserve">
+    <value>Una {1} di {0} anni</value>
+  </data>
+  <data name="PersonAgeMessageMale" xml:space="preserve">
+    <value>Un {1} di {0} anni</value>
   </data>
   <data name="QueryingVisionService" xml:space="preserve">
     <value>Analisi dell'immagine...</value>

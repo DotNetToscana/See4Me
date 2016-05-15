@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "See4Me.Localization", "Src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "See4Me.Common", "See4Me.Common", "{DB58863E-8ED2-4360-B584-295218B176A3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Native", "Native", "{4CE3747F-DA40-4E31-B325-28FC13BFC37F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{4CE3747F-DA40-4E31-B325-28FC13BFC37F}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

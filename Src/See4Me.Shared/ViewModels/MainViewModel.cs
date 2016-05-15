@@ -151,7 +151,9 @@ namespace See4Me.ViewModels
                                         else
                                             facesRecognizedDescription = string.Format(AppResources.FacesRecognizedPlural, result.Faces.Count());
 
+                                        var messages = new StringBuilder();
                                         var imageBytes = await stream.ToArrayAsync();
+
                                         foreach (var face in result.Faces)
                                         {
                                             using (var ms = new MemoryStream(imageBytes))
@@ -160,11 +162,11 @@ namespace See4Me.ViewModels
                                                 var bestEmotion = emotions.FirstOrDefault()?.Scores.GetBestEmotion();
 
                                                 // Creates the emotion description text to be speeched.
-                                                var gender = AppResources.ResourceManager.GetString(face.Gender);
-                                                var emotion = AppResources.ResourceManager.GetString(bestEmotion + face.Gender);
-                                                emotionDescription += string.Format(AppResources.ResourceManager.GetString(Constants.EmotionMessage + face.Gender) + Constants.SentenceEnd, face.Age, gender, emotion);
+                                                messages.Append(SpeechHelper.GetEmotionMessage(face, bestEmotion));
                                             }
                                         }
+
+                                        emotionDescription = messages.ToString();
                                     }
                                 }
                                 catch { }

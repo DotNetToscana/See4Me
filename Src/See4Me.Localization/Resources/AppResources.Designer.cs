@@ -98,6 +98,42 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Girl.
+        /// </summary>
+        public static string BoyFemale {
+            get {
+                return ResourceManager.GetString("BoyFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Boy.
+        /// </summary>
+        public static string BoyMale {
+            get {
+                return ResourceManager.GetString("BoyMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Child.
+        /// </summary>
+        public static string ChildFemale {
+            get {
+                return ResourceManager.GetString("ChildFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Child.
+        /// </summary>
+        public static string ChildMale {
+            get {
+                return ResourceManager.GetString("ChildMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To show contempt.
         /// </summary>
         public static string ContemptFemale {
@@ -130,24 +166,6 @@ namespace See4Me.Localization.Resources {
         public static string DisgustMale {
             get {
                 return ResourceManager.GetString("DisgustMale", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A {0} years old {1} looking {2}.
-        /// </summary>
-        public static string EmotionMessageFemale {
-            get {
-                return ResourceManager.GetString("EmotionMessageFemale", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A {0} years old {1} looking {2}.
-        /// </summary>
-        public static string EmotionMessageMale {
-            get {
-                return ResourceManager.GetString("EmotionMessageMale", resourceCulture);
             }
         }
         
@@ -188,15 +206,6 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Female.
-        /// </summary>
-        public static string Female {
-            get {
-                return ResourceManager.GetString("Female", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Front camera ready.
         /// </summary>
         public static string FrontCameraReady {
@@ -233,11 +242,38 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Male.
+        ///   Looks up a localized string similar to looking {0}.
         /// </summary>
-        public static string Male {
+        public static string LookingFemale {
             get {
-                return ResourceManager.GetString("Male", resourceCulture);
+                return ResourceManager.GetString("LookingFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to looking {0}.
+        /// </summary>
+        public static string LookingMale {
+            get {
+                return ResourceManager.GetString("LookingMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Woman.
+        /// </summary>
+        public static string ManFemale {
+            get {
+                return ResourceManager.GetString("ManFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Man.
+        /// </summary>
+        public static string ManMale {
+            get {
+                return ResourceManager.GetString("ManMale", resourceCulture);
             }
         }
         
@@ -265,6 +301,24 @@ namespace See4Me.Localization.Resources {
         public static string NoConnection {
             get {
                 return ResourceManager.GetString("NoConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} years old {1}.
+        /// </summary>
+        public static string PersonAgeMessageFemale {
+            get {
+                return ResourceManager.GetString("PersonAgeMessageFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} years old {1}.
+        /// </summary>
+        public static string PersonAgeMessageMale {
+            get {
+                return ResourceManager.GetString("PersonAgeMessageMale", resourceCulture);
             }
         }
         
