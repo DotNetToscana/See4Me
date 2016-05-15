@@ -10,6 +10,7 @@
     xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
     xmlns:controls="using:Template10.Controls"
     xmlns:behaviors="using:See4Me.Behaviors"
+    xmlns:triggers="using:WindowsStateTriggers"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -18,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <Grid>
-            <CaptureElement Name="video" Stretch="UniformToFill" Margin="0" />
+            <CaptureElement x:Name="video" Stretch="UniformToFill" Margin="0" />
             <TextBlock Text="{Binding StatusMessage}" Style="{StaticResource SubheaderTextBlockStyle}" TextAlignment="Center"
                        HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="12" TextWrapping="Wrap" />
 
@@ -44,5 +45,19 @@
                 <Interactions:InvokeCommandAction Command="{Binding VideoCommand}"  />
             </behaviors:CameraPressedBehavior>            
         </Interactivity:Interaction.Behaviors>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="iot">
+                    <VisualState.StateTriggers>
+                        <triggers:DeviceFamilyStateTrigger DeviceFamily="IoT" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="video.Width" Value="640" />
+                        <Setter Target="video.Height" Value="480" />
+                    </VisualState.Setters>
+                </VisualState>                
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>
