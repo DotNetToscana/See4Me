@@ -4,10 +4,12 @@ using System.Text;
 using Microsoft.Practices.ServiceLocation;
 using See4Me.ViewModels;
 using GalaSoft.MvvmLight.Views;
+using UIKit;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace See4Me.iOS.Common
 {
-    public abstract class ViewControllerBase<T> : ControllerBase where T : ViewModelBase
+    public abstract class ViewControllerBase<T> : UIViewController where T : ViewModelBase
     {
         protected T ViewModel => ServiceLocator.Current.GetInstance<T>();
 
@@ -17,7 +19,7 @@ namespace See4Me.iOS.Common
         public override void ViewDidUnload()
         {
             base.ViewDidUnload();
-            GalaSoft.MvvmLight.Messaging.Messenger.Default.Unregister(this);
+            Messenger.Default.Unregister(this);
         }
     }
 }

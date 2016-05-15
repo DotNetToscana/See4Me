@@ -25,6 +25,8 @@ namespace See4Me.Services
 {
     public class StreamingService : IStreamingService
     {
+        private static string deviceFamily;
+
         /// <summary>
         /// Holds the current scenario state value.
         /// </summary>
@@ -64,6 +66,12 @@ namespace See4Me.Services
         /// Semaphore to ensure FaceTracking logic only executes one at a time
         /// </summary>
         private SemaphoreSlim frameProcessingSemaphore = new SemaphoreSlim(1);
+
+        static StreamingService()
+        {
+            deviceFamily = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
+        }
+
 
         public Task InitializeAsync()
         {
@@ -337,7 +345,7 @@ namespace See4Me.Services
             {
                 await mediaCapture.StopPreviewAsync();
                 mediaCapture.Dispose();
-                mediaCapture = null;                
+                mediaCapture = null;
             }
             catch { }
 
@@ -357,20 +365,31 @@ namespace See4Me.Services
 
             try
             {
-                // Create a VideoFrame object specifying the pixel format we want our capture image to be.
-                // GetPreviewFrame will convert the native webcam frame into this format.
-                const BitmapPixelFormat InputPixelFormat = BitmapPixelFormat.Bgra8;
-                using (var previewFrame = new VideoFrame(InputPixelFormat, 320, 240))   // (int)this.videoProperties.Width, (int)this.videoProperties.Height)
+                if (deviceFamily == "Windows.IoT")
                 {
-                    await this.mediaCapture.GetPreviewFrameAsync(previewFrame);
+                    var stream = new InMemoryRandomAccessStream();
+                    await mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream);
 
-                    // Create a WritableBitmap for our visualization display; copy the original bitmap pixels to wb's buffer.
-                    using (var convertedSource = SoftwareBitmap.Convert(previewFrame.SoftwareBitmap, InputPixelFormat))
+                    stream.Seek(0);
+                    return stream.AsStream();
+                }
+                else
+                {
+                    // Create a VideoFrame object specifying the pixel format we want our capture image to be.
+                    // GetPreviewFrame will convert the native webcam frame into this format.
+                    const BitmapPixelFormat InputPixelFormat = BitmapPixelFormat.Bgra8;
+                    using (var previewFrame = new VideoFrame(InputPixelFormat, 320, 240))   // (int)this.videoProperties.Width, (int)this.videoProperties.Height)
                     {
-                        var displaySource = new WriteableBitmap(convertedSource.PixelWidth, convertedSource.PixelHeight);
-                        convertedSource.CopyToBuffer(displaySource.PixelBuffer);
+                        await this.mediaCapture.GetPreviewFrameAsync(previewFrame);
 
-                        return await this.ConvertToStreamAsync(displaySource);
+                        // Create a WritableBitmap for our visualization display; copy the original bitmap pixels to wb's buffer.
+                        using (var convertedSource = SoftwareBitmap.Convert(previewFrame.SoftwareBitmap, InputPixelFormat))
+                        {
+                            var displaySource = new WriteableBitmap(convertedSource.PixelWidth, convertedSource.PixelHeight);
+                            convertedSource.CopyToBuffer(displaySource.PixelBuffer);
+
+                            return await this.ConvertToStreamAsync(displaySource);
+                        }
                     }
                 }
             }

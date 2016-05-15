@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "See4Me.Windows", "Src\See4Me.Windows\See4Me.Windows.csproj", "{0D590B16-EF65-40FB-9218-96E5F5D40F1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "See4Me.Windows", "src\See4Me.Windows\See4Me.Windows.csproj", "{0D590B16-EF65-40FB-9218-96E5F5D40F1C}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "See4Me.Shared", "Src\See4Me.Shared\See4Me.Shared.shproj", "{9E2CEC20-3EA7-4627-A5FB-1F57F0716AA2}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "See4Me.Shared", "src\See4Me.Shared\See4Me.Shared.shproj", "{9E2CEC20-3EA7-4627-A5FB-1F57F0716AA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "See4Me.Android", "Src\See4Me.Android\See4Me.Android.csproj", "{BB5E6EA7-347B-47EB-8ABF-0C37A25EF101}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "See4Me.Android", "src\See4Me.Android\See4Me.Android.csproj", "{BB5E6EA7-347B-47EB-8ABF-0C37A25EF101}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "See4Me.iOS", "Src\See4Me.iOS\See4Me.iOS.csproj", "{07D2CE91-D4C3-4E01-88CC-9E40FE3F8D47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "See4Me.iOS", "src\See4Me.iOS\See4Me.iOS.csproj", "{07D2CE91-D4C3-4E01-88CC-9E40FE3F8D47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "See4Me.Localization", "Src\See4Me.Localization\See4Me.Localization.csproj", "{10463B05-995D-4730-B617-D2CA57D95C65}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "See4Me.Localization", "src\See4Me.Localization\See4Me.Localization.csproj", "{10463B05-995D-4730-B617-D2CA57D95C65}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "See4Me.Common", "See4Me.Common", "{DB58863E-8ED2-4360-B584-295218B176A3}"
 EndProject
