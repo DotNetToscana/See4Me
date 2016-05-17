@@ -43,7 +43,10 @@
         <Interactivity:Interaction.Behaviors>
             <behaviors:CameraPressedBehavior>
                 <Interactions:InvokeCommandAction Command="{Binding VideoCommand}"  />
-            </behaviors:CameraPressedBehavior>            
+            </behaviors:CameraPressedBehavior>
+            <behaviors:PushButtonPressedBehavior PinNumber="27" ButtonType="PullDown">
+                <Interactions:InvokeCommandAction Command="{Binding VideoCommand}"  />
+            </behaviors:PushButtonPressedBehavior>
         </Interactivity:Interaction.Behaviors>
 
         <VisualStateManager.VisualStateGroups>

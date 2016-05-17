@@ -440,7 +440,8 @@ namespace See4Me.Services
             var desiredDevice = allVideoDevices.FirstOrDefault(x => x.EnclosureLocation?.Panel == desiredPanel);
 
             // If there is no device mounted on the desired panel, return the first device found
-            return desiredDevice ?? allVideoDevices.FirstOrDefault();
+            return desiredDevice ?? allVideoDevices.FirstOrDefault(x => x.EnclosureLocation == null || x.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Back) 
+                ?? allVideoDevices.FirstOrDefault();
         }
 
         #region Panel helpers

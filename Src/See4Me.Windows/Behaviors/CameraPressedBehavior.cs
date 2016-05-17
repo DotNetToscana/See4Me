@@ -40,7 +40,7 @@ namespace See4Me.Behaviors
         }
 
         [System.Runtime.CompilerServices.PlatformSpecific]
-        private bool isTypePresent;
+        private readonly bool isTypePresent;
 
         public CameraPressedBehavior()
         {

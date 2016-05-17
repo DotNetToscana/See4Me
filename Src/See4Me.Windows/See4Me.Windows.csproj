@@ -99,6 +99,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviors\PushButtonPressedBehavior.cs" />
     <Compile Include="Behaviors\CameraPressedBehavior.cs" />
     <Compile Include="Behaviors\SwipeTriggerBehavior.cs" />
     <Compile Include="Converters\SwipeDirectionConverter.cs" />
@@ -175,6 +176,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <SDKReference Include="WindowsIoT, Version=10.0.10586.0">
+      <Name>Windows IoT Extensions for the UWP</Name>
+    </SDKReference>
     <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
