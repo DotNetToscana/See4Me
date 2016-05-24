@@ -62,8 +62,11 @@ namespace See4Me.ViewModels
         {
             try
             {
-                // Retrieves tha authorization token for the translator service.
-                var task = translatorService.InitializeAsync();
+                if (IsOnline)
+                {
+                    // Retrieves tha authorization token for the translator service.
+                    var task = translatorService.InitializeAsync();
+                }
 
                 // Asks the view the UI element in which to start camera streaming.
                 Messenger.Default.Send(new NotificationMessageAction<object>(Constants.InitializeStreaming, async (video) =>
@@ -133,9 +136,15 @@ namespace See4Me.ViewModels
 
                                 if (Settings.AutomaticTranslation && Language != Constants.DefaultLanguge)
                                 {
-                                    // The description needs to be translated.
-                                    StatusMessage = AppResources.Translating;
-                                    imageDescription = await translatorService.TranslateAsync(imageDescription);
+                                    if (!translatorService.IsInitialized && IsOnline)
+                                        await this.translatorService.InitializeAsync();
+
+                                    if (translatorService.IsInitialized)
+                                    {
+                                        // The description needs to be translated.
+                                        StatusMessage = AppResources.Translating;
+                                        imageDescription = await translatorService.TranslateAsync(imageDescription);
+                                    }
                                 }
 
                                 StatusMessage = imageDescription;
@@ -182,9 +191,13 @@ namespace See4Me.ViewModels
                         }
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    imageDescription = AppResources.RecognitionError;
+                    var error = AppResources.RecognitionError;
+#if DEBUG
+                    error = $"{error} ({ex.Message})";
+#endif
+                    imageDescription = error;
                 }
             }
             else
@@ -194,8 +207,8 @@ namespace See4Me.ViewModels
             }
 
             // Speaks the result.
-            StatusMessage = imageDescription;
             var message = $"{imageDescription}{Constants.SentenceEnd} {facesRecognizedDescription}{Constants.SentenceEnd} {emotionDescription}";
+            StatusMessage = this.GetNormalizedMessage(message);
             await speechService.SpeechAsync(message, languge: Language);
 
             IsBusy = false;
@@ -242,5 +255,8 @@ namespace See4Me.ViewModels
             StatusMessage = AppResources.InitializationError;
             await speechService.SpeechAsync(StatusMessage);
         }
+
+        private string GetNormalizedMessage(string message)
+            => message.Replace(Constants.SentenceEnd, ". ").TrimEnd('.').Trim().Replace("  ", " ").Replace(" .", ".").Replace("..", ".");
     }
 }

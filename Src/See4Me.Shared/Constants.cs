@@ -14,6 +14,13 @@
         public const string LookingMessage = "Looking";
         public const string PersonAgeMessage = "PersonAgeMessage";
         public const string EmotionMessage = "EmotionMessage";
+
+#if __ANDROID__
+        public const string SentenceEnd = " / ";
+#elif __IOS__
+        public const string SentenceEnd = @"\r\n";
+#else
         public const string SentenceEnd = "..";
+#endif
     }
 }

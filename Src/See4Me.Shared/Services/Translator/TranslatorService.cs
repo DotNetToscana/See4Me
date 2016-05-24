@@ -58,6 +58,12 @@ namespace See4Me.Services.Translator
         /// <seealso cref="GetLanguagesAsync"/>
         public string Language { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value that tells whether the TranslatorService is initialized.
+        /// </summary>
+        /// <value><strong>true</strong> if the TranslatorService is initialized, <strong>false</strong> otherwise.</value>
+        public bool IsInitialized { get; private set; }
+
         #endregion
 
         /// <summary>
@@ -240,10 +246,17 @@ namespace See4Me.Services.Translator
                 // Token has expired. Make a request for a new one.
                 tokenRequestTime = DateTime.Now;
                 var admAuth = new AdmAuthentication(ClientId, ClientSecret);
-                var admToken = await admAuth.GetAccessTokenAsync();
 
-                tokenValiditySeconds = int.Parse(admToken.ExpiresIn);
-                headerValue = "Bearer " + admToken.AccessToken;
+                try
+                {
+                    var admToken = await admAuth.GetAccessTokenAsync();
+
+                    tokenValiditySeconds = int.Parse(admToken.ExpiresIn);
+                    headerValue = "Bearer " + admToken.AccessToken;
+                    IsInitialized = true;
+                }
+                catch
+                { }
             }
         }
 

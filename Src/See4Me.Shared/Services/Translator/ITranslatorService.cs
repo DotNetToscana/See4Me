@@ -18,5 +18,7 @@ namespace See4Me.Services.Translator
         Task InitializeAsync();
 
         Task<string> TranslateAsync(string text, string to = null);
+
+        bool IsInitialized { get; }
     }
 }
