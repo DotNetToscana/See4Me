@@ -119,7 +119,7 @@ namespace See4Me.ViewModels
             {
                 try
                 {
-                    MessengerInstance.Send(new NotificationMessage(Constants.PhotoTaken));
+                    MessengerInstance.Send(new NotificationMessage(Constants.TakePhoto));
 
                     using (var stream = await streamingService.GetCurrentFrameAsync())
                     {
@@ -136,12 +136,12 @@ namespace See4Me.ViewModels
 
                                 if (Settings.AutomaticTranslation && Language != Constants.DefaultLanguge)
                                 {
+                                    // The description needs to be translated.
                                     if (!translatorService.IsInitialized && IsOnline)
                                         await this.translatorService.InitializeAsync();
 
                                     if (translatorService.IsInitialized)
                                     {
-                                        // The description needs to be translated.
                                         StatusMessage = AppResources.Translating;
                                         imageDescription = await translatorService.TranslateAsync(imageDescription);
                                     }

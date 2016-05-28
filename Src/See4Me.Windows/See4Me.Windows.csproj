@@ -119,7 +119,7 @@
     <None Include="See4Me_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Sounds\Ding.mp3">
+    <Content Include="Assets\Sounds\Shutter.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\SplashScreen.scale-100.png" />

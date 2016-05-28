@@ -38,7 +38,7 @@
             </Interactivity:Interaction.Behaviors>            
         </Grid>
 
-        <MediaElement x:Name="ding" Source="/Assets/Sounds/Ding.mp3" AutoPlay="False" />
+        <MediaElement x:Name="shutter" Source="/Assets/Sounds/Shutter.mp3" AutoPlay="False" />
         
         <Interactivity:Interaction.Behaviors>
             <behaviors:CameraPressedBehavior>

@@ -125,7 +125,7 @@ namespace See4Me.iOS
                 {
                     switch (message.Notification)
                     {
-                        case Constants.PhotoTaken:
+                        case Constants.TakePhoto:
                             SoundTools.TriggerSoundAndViber();
                             break;
                     }

@@ -378,7 +378,7 @@ namespace See4Me.Services
                     // Create a VideoFrame object specifying the pixel format we want our capture image to be.
                     // GetPreviewFrame will convert the native webcam frame into this format.
                     const BitmapPixelFormat InputPixelFormat = BitmapPixelFormat.Bgra8;
-                    using (var previewFrame = new VideoFrame(InputPixelFormat, 320, 240))   // (int)this.videoProperties.Width, (int)this.videoProperties.Height)
+                    using (var previewFrame = new VideoFrame(InputPixelFormat, 800, 600))   // (int)this.videoProperties.Width, (int)this.videoProperties.Height)
                     {
                         await this.mediaCapture.GetPreviewFrameAsync(previewFrame);
 

@@ -5,7 +5,7 @@
         public const string DefaultLanguge = "en";
 
         public const string MainPage = "MainPage";
-        public const string PhotoTaken = "PhotoTaken";
+        public const string TakePhoto = "TakePhoto";
         public const string InitializeStreaming = "InitializeStreaming";
 
         public const string Child = "Child";

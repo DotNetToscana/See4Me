@@ -24,7 +24,7 @@ namespace See4Me.Extensions
             }
             else
             {
-                // No emotion recognized, so speeches only the age.
+                // No emotion recognized, so includes only the age in the message.
                 emotionMessage = personAgeMessage;
             }
 

@@ -28,8 +28,8 @@ namespace See4Me.Views
             {
                 switch (message.Notification)
                 {
-                    case Constants.PhotoTaken:
-                        ding.Play();
+                    case Constants.TakePhoto:
+                        shutter.Play();
                         break;
                 }
             });
