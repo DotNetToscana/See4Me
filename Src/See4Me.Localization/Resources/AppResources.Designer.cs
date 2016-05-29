@@ -170,7 +170,7 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In the image I see a person.
+        ///   Looks up a localized string similar to I see a person.
         /// </summary>
         public static string FaceRecognizedSingular {
             get {
@@ -179,7 +179,7 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In the image I see {0} people.
+        ///   Looks up a localized string similar to I see {0} people.
         /// </summary>
         public static string FacesRecognizedPlural {
             get {

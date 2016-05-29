@@ -154,10 +154,10 @@
     <value>Disgusted</value>
   </data>
   <data name="FaceRecognizedSingular" xml:space="preserve">
-    <value>In the image I see a person</value>
+    <value>I see a person</value>
   </data>
   <data name="FacesRecognizedPlural" xml:space="preserve">
-    <value>In the image I see {0} people</value>
+    <value>I see {0} people</value>
   </data>
   <data name="FearFemale" xml:space="preserve">
     <value>Fearful</value>

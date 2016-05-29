@@ -16,6 +16,8 @@ using System.Threading.Tasks;
 using See4Me.Extensions;
 using System.IO;
 using System.Text;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace See4Me.ViewModels
 {
@@ -110,6 +112,7 @@ namespace See4Me.ViewModels
         public async Task DescribeImageAsync()
         {
             IsBusy = true;
+            StatusMessage = null;
 
             string imageDescription = null;
             string facesRecognizedDescription = null;
@@ -130,9 +133,13 @@ namespace See4Me.ViewModels
                             var visualFeatures = new VisualFeature[] { VisualFeature.Description, VisualFeature.Faces };
                             var result = await visionService.AnalyzeImageAsync(stream, visualFeatures);
 
-                            if (result.Description.Captions.Length > 0)
+                            var description = result.Description.Captions.FirstOrDefault();
+                            if (description != null)
                             {
-                                imageDescription = result.Description.Captions.First().Text;
+                                imageDescription = description.Text;
+#if DEBUG
+                                imageDescription = $"{imageDescription} ({Math.Round(description.Confidence, 2)})";
+#endif
 
                                 if (Settings.AutomaticTranslation && Language != Constants.DefaultLanguge)
                                 {
@@ -191,6 +198,11 @@ namespace See4Me.ViewModels
                         }
                     }
                 }
+                catch (WebException)
+                {
+                    // Internet isn't available, to service cannot be reached.
+                    imageDescription = AppResources.NoConnection;
+                }
                 catch (Exception ex)
                 {
                     var error = AppResources.RecognitionError;
@@ -209,6 +221,7 @@ namespace See4Me.ViewModels
             // Speaks the result.
             var message = $"{imageDescription}{Constants.SentenceEnd} {facesRecognizedDescription}{Constants.SentenceEnd} {emotionDescription}";
             StatusMessage = this.GetNormalizedMessage(message);
+            message = this.GetSpeechMessage(message);
             await speechService.SpeechAsync(message, languge: Language);
 
             IsBusy = false;
@@ -258,5 +271,8 @@ namespace See4Me.ViewModels
 
         private string GetNormalizedMessage(string message)
             => message.Replace(Constants.SentenceEnd, ". ").TrimEnd('.').Trim().Replace("  ", " ").Replace(" .", ".").Replace("..", ".");
+
+        private string GetSpeechMessage(string message)
+            => Regex.Replace(message, @" ?\(.*?\)", string.Empty);
     }
 }
