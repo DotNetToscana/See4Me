@@ -6,7 +6,7 @@
 
 First, you must obtain a Cognitive API subscription key by following instructions in [Microsoft Cognitive Services subscription](https://www.microsoft.com/cognitive-services/en-us/sign-up). Then, you also need to subscribe to [Microsoft Translator Service](https://datamarket.azure.com/dataset/bing/microsofttranslator) and register a [new application](https://datamarket.azure.com/developer/applications).
 
-You need to insert theses service keys (Subscription Key for Vision and Emotion, ClientId and ClientSecret for Translator Service) in the *See4Me.Shared/ServiceKeys.cs* file.
+You need to insert theses service keys (Subscription Key for Vision and Emotion, ClientId and ClientSecret for Translator Service) in the *Src/See4Me.Shared/ServiceKeys.cs* file.
 
 **Contribute**
 
