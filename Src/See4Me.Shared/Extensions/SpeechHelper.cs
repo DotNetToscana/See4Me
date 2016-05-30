@@ -14,12 +14,12 @@ namespace See4Me.Extensions
             string emotionMessage = null;
 
             var ageDescription = GetAgeDescription(face);
-            var personAgeMessage = string.Format(AppResources.ResourceManager.GetString(Constants.PersonAgeMessage + face.Gender), face.Age, ageDescription);
+            var personAgeMessage = string.Format(GetString(Constants.PersonAgeMessage, face.Gender), face.Age, ageDescription);
 
             if (bestEmotion != null)
             {
-                var emotion = AppResources.ResourceManager.GetString(bestEmotion + face.Gender);
-                var lookingMessage = string.Format(AppResources.ResourceManager.GetString(Constants.LookingMessage + face.Gender), emotion);
+                var emotion = GetString(bestEmotion, face.Gender);
+                var lookingMessage = string.Format(GetString(Constants.LookingMessage, face.Gender), emotion);
                 emotionMessage = $"{personAgeMessage} {lookingMessage}";
             }
             else
@@ -43,8 +43,11 @@ namespace See4Me.Extensions
             else
                 key = Constants.Man;
 
-            var ageDescription = AppResources.ResourceManager.GetString(key + face.Gender);
+            var ageDescription = GetString(key, face.Gender);
             return ageDescription;
         }
+
+        private static string GetString(string key, string gender) 
+            => AppResources.ResourceManager.GetString(key + gender);
     }
 }

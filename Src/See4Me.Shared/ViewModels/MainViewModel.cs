@@ -1,9 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.ProjectOxford.Emotion;
-using Microsoft.ProjectOxford.Emotion.Contract;
 using Microsoft.ProjectOxford.Vision;
-using Microsoft.ProjectOxford.Vision.Contract;
 using See4Me.Common;
 using See4Me.Localization.Resources;
 using See4Me.Services;
@@ -64,9 +62,11 @@ namespace See4Me.ViewModels
         {
             try
             {
-                if (IsOnline)
+                if (IsOnline && Language != Constants.DefaultLanguge)
                 {
                     // Retrieves tha authorization token for the translator service.
+                    // This is necessary only if the app language is different from the default language,
+                    // otherwise no translation will be performed.
                     var task = translatorService.InitializeAsync();
                 }
 
@@ -141,7 +141,7 @@ namespace See4Me.ViewModels
                                 imageDescription = $"{imageDescription} ({Math.Round(description.Confidence, 2)})";
 #endif
 
-                                if (Settings.AutomaticTranslation && Language != Constants.DefaultLanguge)
+                                if (Language != Constants.DefaultLanguge)
                                 {
                                     // The description needs to be translated.
                                     if (!translatorService.IsInitialized && IsOnline)

@@ -7,7 +7,6 @@ namespace See4Me.Services
     public class SettingsService : ISettingsService
     {
         private const string CAMERA_PANEL = "CameraPanel";
-        private const string AUTOMATIC_TRANSLATION = "AutomaticTranslation";
 
         private ISettings settings;
 
@@ -24,12 +23,6 @@ namespace See4Me.Services
                 return (CameraPanel)Enum.Parse(typeof(CameraPanel), setting);
             }
             set { settings.AddOrUpdateValue(CAMERA_PANEL, value.ToString()); }
-        }
-
-        public bool AutomaticTranslation
-        {
-            get { return settings.GetValueOrDefault(AUTOMATIC_TRANSLATION, true); }
-            set { settings.AddOrUpdateValue(CAMERA_PANEL, value); }
         }
     }
 }

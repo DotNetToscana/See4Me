@@ -196,7 +196,7 @@
     <value>Neutral</value>
   </data>
   <data name="NoConnection" xml:space="preserve">
-    <value>I'm sorry, Internet is not available</value>
+    <value>I'm sorry, there is no Internet connection</value>
   </data>
   <data name="PersonAgeMessageFemale" xml:space="preserve">
     <value>A {0} years old {1}</value>

@@ -296,7 +296,7 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I&apos;m sorry, Internet is not available.
+        ///   Looks up a localized string similar to I&apos;m sorry, there is no Internet connection.
         /// </summary>
         public static string NoConnection {
             get {

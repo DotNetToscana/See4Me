@@ -6,6 +6,10 @@
         public static string AngerMale = "AngerMale";
         public static string AppName = "AppName";
         public static string BackCameraReady = "BackCameraReady";
+        public static string BoyFemale = "BoyFemale";
+        public static string BoyMale = "BoyMale";
+        public static string ChildFemale = "ChildFemale";
+        public static string ChildMale = "ChildMale";
         public static string ContemptFemale = "ContemptFemale";
         public static string ContemptMale = "ContemptMale";
         public static string DisgustFemale = "DisgustFemale";
@@ -14,12 +18,14 @@
         public static string FacesRecognizedPlural = "FacesRecognizedPlural";
         public static string FearFemale = "FearFemale";
         public static string FearMale = "FearMale";
-        public static string Female = "Female";
         public static string FrontCameraReady = "FrontCameraReady";
         public static string HappinessFemale = "HappinessFemale";
         public static string HappinessMale = "HappinessMale";
         public static string InitializationError = "InitializationError";
-        public static string Male = "Male";
+        public static string LookingFemale = "LookingFemale";
+        public static string LookingMale = "LookingMale";
+        public static string ManFemale = "ManFemale";
+        public static string ManMale = "ManMale";
         public static string NeutralFemale = "NeutralFemale";
         public static string NeutralMale = "NeutralMale";
         public static string NoConnection = "NoConnection";
