@@ -48,7 +48,5 @@ namespace See4Me.Android.Common
         }
 
         protected virtual void OnInitialize(Bundle bundle) { }
-
-        public INavigationService NavigationService => ServiceLocator.Current.GetInstance<INavigationService>();
     }
 }

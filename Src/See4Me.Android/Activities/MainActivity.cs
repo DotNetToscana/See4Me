@@ -95,6 +95,17 @@ namespace See4Me.Android
             return false;
         }
 
+        public override bool OnKeyDown([GeneratedEnum] Keycode keyCode, KeyEvent e)
+        {
+            if (keyCode == Keycode.VolumeDown || keyCode == Keycode.VolumeUp)
+            {
+                ViewModel.VideoCommand.Execute(null);
+                return true;
+            }
+
+            return base.OnKeyDown(keyCode, e);
+        }
+
         #region Unused Gesture methods
 
         public bool OnDown(MotionEvent e) => false;
