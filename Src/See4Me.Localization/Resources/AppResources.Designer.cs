@@ -332,7 +332,7 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I&apos;m sorry, there was un unexpected error.
+        ///   Looks up a localized string similar to I&apos;m sorry, there was an unexpected error.
         /// </summary>
         public static string RecognitionError {
             get {

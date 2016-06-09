@@ -137,9 +137,9 @@ namespace See4Me.ViewModels
                             if (description != null)
                             {
                                 imageDescription = description.Text;
-#if DEBUG
-                                imageDescription = $"{imageDescription} ({Math.Round(description.Confidence, 2)})";
-#endif
+
+                                if (Settings.ShowDescriptionConfidence)
+                                    imageDescription = $"{imageDescription} ({Math.Round(description.Confidence, 2)})";
 
                                 if (Language != Constants.DefaultLanguge)
                                 {
@@ -206,9 +206,10 @@ namespace See4Me.ViewModels
                 catch (Exception ex)
                 {
                     var error = AppResources.RecognitionError;
-#if DEBUG
-                    error = $"{error} ({ex.Message})";
-#endif
+
+                    if (Settings.ShowExceptionOnError)
+                        error = $"{error} ({ex.Message})";
+
                     imageDescription = error;
                 }
             }

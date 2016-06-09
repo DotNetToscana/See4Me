@@ -3,5 +3,9 @@
     public interface ISettingsService
     {
         CameraPanel CameraPanel { get; set; }
+
+        bool ShowDescriptionConfidence { get; set; }
+
+        bool ShowExceptionOnError { get; set; }
     }
 }

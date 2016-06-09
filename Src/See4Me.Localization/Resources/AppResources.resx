@@ -208,7 +208,7 @@
     <value>Analyzing the image...</value>
   </data>
   <data name="RecognitionError" xml:space="preserve">
-    <value>I'm sorry, there was un unexpected error</value>
+    <value>I'm sorry, there was an unexpected error</value>
   </data>
   <data name="RecognitionFailed" xml:space="preserve">
     <value>I'm sorry, I don't recognize the image</value>
