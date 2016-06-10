@@ -68,7 +68,7 @@ namespace See4Me.Services
             using (var pixelBuffer = sampleBuffer.GetImageBuffer() as CVPixelBuffer)
             {
                 // Lock the base address
-                pixelBuffer.Lock(CVOptionFlags.None);
+                pixelBuffer.Lock(CVPixelBufferLock.None);
 
                 // Get the number of bytes per row for the pixel buffer
                 var baseAddress = pixelBuffer.BaseAddress;
@@ -84,7 +84,7 @@ namespace See4Me.Services
                     {
                         using (CGImage cgImage = context.ToImage())
                         {
-                            pixelBuffer.Unlock(CVOptionFlags.None);
+                            pixelBuffer.Unlock(CVPixelBufferLock.None);
                             return UIImage.FromImage(cgImage);
                         }
                     }

@@ -18,7 +18,7 @@
 #if __ANDROID__
         public const string SentenceEnd = " / ";
 #elif __IOS__
-        public const string SentenceEnd = @"\r\n";
+        public const string SentenceEnd = ".";
 #else
         public const string SentenceEnd = "..";
 #endif

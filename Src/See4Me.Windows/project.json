@@ -2,8 +2,8 @@
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "Microsoft.ProjectOxford.Common": "1.0.308",
-    "Microsoft.ProjectOxford.Emotion": "1.0.251",
-    "Microsoft.ProjectOxford.Vision": "1.0.296",
+    "Microsoft.ProjectOxford.Emotion": "1.0.310",
+    "Microsoft.ProjectOxford.Vision": "1.0.354",
     "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
     "MvvmLightLibs": "5.3.0",
     "Newtonsoft.Json": "8.0.3",
