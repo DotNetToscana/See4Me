@@ -170,7 +170,7 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I see a person.
+        ///   Looks up a localized string similar to I see.
         /// </summary>
         public static string FaceRecognizedSingular {
             get {
@@ -305,7 +305,7 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A {0} years old {1}.
+        ///   Looks up a localized string similar to A {1} years old {0}.
         /// </summary>
         public static string PersonAgeMessageFemale {
             get {
@@ -314,11 +314,29 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A {0} years old {1}.
+        ///   Looks up a localized string similar to A {1} years old {0}.
         /// </summary>
         public static string PersonAgeMessageMale {
             get {
                 return ResourceManager.GetString("PersonAgeMessageMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0}.
+        /// </summary>
+        public static string PersonMessageFemale {
+            get {
+                return ResourceManager.GetString("PersonMessageFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0}.
+        /// </summary>
+        public static string PersonMessageMale {
+            get {
+                return ResourceManager.GetString("PersonMessageMale", resourceCulture);
             }
         }
         

@@ -8,13 +8,18 @@ namespace See4Me.Extensions
 {
     public static class SpeechHelper
     {
-        public static string GetEmotionMessage(Face face, string bestEmotion)
+        public static string GetEmotionMessage(Face face, string bestEmotion, bool includeAge)
         {
             // Creates the emotion description text to be speeched.
+            string personAgeMessage = null;
             string emotionMessage = null;
 
             var ageDescription = GetAgeDescription(face);
-            var personAgeMessage = string.Format(GetString(Constants.PersonAgeMessage, face.Gender), face.Age, ageDescription);
+
+            if (includeAge)
+                personAgeMessage = string.Format(GetString(Constants.PersonAgeMessage, face.Gender), ageDescription, face.Age);
+            else
+                personAgeMessage = string.Format(GetString(Constants.PersonMessage, face.Gender), ageDescription);
 
             if (bestEmotion != null)
             {
@@ -47,7 +52,7 @@ namespace See4Me.Extensions
             return ageDescription;
         }
 
-        private static string GetString(string key, string gender) 
+        private static string GetString(string key, string gender)
             => AppResources.ResourceManager.GetString(key + gender);
     }
 }

@@ -154,7 +154,7 @@
     <value>Disgusted</value>
   </data>
   <data name="FaceRecognizedSingular" xml:space="preserve">
-    <value>I see a person</value>
+    <value>I see</value>
   </data>
   <data name="FacesRecognizedPlural" xml:space="preserve">
     <value>I see {0} people</value>
@@ -199,10 +199,16 @@
     <value>I'm sorry, there is no Internet connection</value>
   </data>
   <data name="PersonAgeMessageFemale" xml:space="preserve">
-    <value>A {0} years old {1}</value>
+    <value>A {1} years old {0}</value>
   </data>
   <data name="PersonAgeMessageMale" xml:space="preserve">
-    <value>A {0} years old {1}</value>
+    <value>A {1} years old {0}</value>
+  </data>
+  <data name="PersonMessageFemale" xml:space="preserve">
+    <value>A {0}</value>
+  </data>
+  <data name="PersonMessageMale" xml:space="preserve">
+    <value>A {0}</value>
   </data>
   <data name="QueryingVisionService" xml:space="preserve">
     <value>Analyzing the image...</value>

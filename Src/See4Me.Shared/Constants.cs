@@ -13,6 +13,7 @@
         public const string Man = "Man";
         public const string LookingMessage = "Looking";
         public const string PersonAgeMessage = "PersonAgeMessage";
+        public const string PersonMessage = "PersonMessage";
         public const string EmotionMessage = "EmotionMessage";
 
 #if __ANDROID__

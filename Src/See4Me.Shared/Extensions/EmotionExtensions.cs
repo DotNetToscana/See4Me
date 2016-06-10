@@ -20,20 +20,8 @@ namespace See4Me.Extensions
             };
 
         public static string GetBestEmotion(this Scores scores)
-        {
-            var list = new Dictionary<string, float>
-            {
-                [nameof(Scores.Anger)] = scores.Anger,
-                [nameof(Scores.Contempt)] = scores.Contempt,
-                [nameof(Scores.Disgust)] = scores.Disgust,
-                [nameof(Scores.Fear)] = scores.Fear,
-                [nameof(Scores.Happiness)] = scores.Happiness,
-                [nameof(Scores.Neutral)] = scores.Neutral,
-                [nameof(Scores.Sadness)] = scores.Sadness,
-                [nameof(Scores.Surprise)] = scores.Surprise,
-            };
-
-            var bestEmotion = list.FirstOrDefault(x => x.Value == list.Values.Max()).Key;
+        {            
+            var bestEmotion = scores.ToRankedList().FirstOrDefault().Key;
             if (bestEmotion != nameof(Scores.Neutral))
                 return bestEmotion;
 

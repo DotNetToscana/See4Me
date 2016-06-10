@@ -31,6 +31,8 @@
         public static string NoConnection = "NoConnection";
         public static string PersonAgeMessageFemale = "PersonAgeMessageFemale";
         public static string PersonAgeMessageMale = "PersonAgeMessageMale";
+        public static string PersonMessageFemale = "PersonMessageFemale";
+        public static string PersonMessageMale = "PersonMessageMale";
         public static string QueryingVisionService = "QueryingVisionService";
         public static string RecognitionError = "RecognitionError";
         public static string RecognitionFailed = "RecognitionFailed";

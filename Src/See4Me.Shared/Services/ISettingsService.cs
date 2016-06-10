@@ -7,5 +7,7 @@
         bool ShowDescriptionConfidence { get; set; }
 
         bool ShowExceptionOnError { get; set; }
+
+        bool GuessAge { get; set; }
     }
 }

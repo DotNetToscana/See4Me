@@ -165,7 +165,7 @@ namespace See4Me.ViewModels
                                         if (result.Faces.Count() == 1)
                                             facesRecognizedDescription = AppResources.FaceRecognizedSingular;
                                         else
-                                            facesRecognizedDescription = string.Format(AppResources.FacesRecognizedPlural, result.Faces.Count());
+                                            facesRecognizedDescription = $"{string.Format(AppResources.FacesRecognizedPlural, result.Faces.Count())} {Constants.SentenceEnd}";
 
                                         var messages = new StringBuilder();
                                         var imageBytes = await stream.ToArrayAsync();
@@ -178,7 +178,7 @@ namespace See4Me.ViewModels
                                                 var bestEmotion = emotions.FirstOrDefault()?.Scores.GetBestEmotion();
 
                                                 // Creates the emotion description text to be speeched.
-                                                messages.Append(SpeechHelper.GetEmotionMessage(face, bestEmotion));
+                                                messages.Append(SpeechHelper.GetEmotionMessage(face, bestEmotion, includeAge: Settings.GuessAge));
                                             }
                                         }
 
@@ -220,7 +220,7 @@ namespace See4Me.ViewModels
             }
 
             // Speaks the result.
-            var message = $"{imageDescription}{Constants.SentenceEnd} {facesRecognizedDescription}{Constants.SentenceEnd} {emotionDescription}";
+            var message = $"{imageDescription}{Constants.SentenceEnd} {facesRecognizedDescription} {emotionDescription}";
             StatusMessage = this.GetNormalizedMessage(message);
             message = this.GetSpeechMessage(message);
             await speechService.SpeechAsync(message, languge: Language);

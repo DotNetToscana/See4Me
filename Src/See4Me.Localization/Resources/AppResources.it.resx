@@ -154,7 +154,7 @@
     <value>Disgustato</value>
   </data>
   <data name="FaceRecognizedSingular" xml:space="preserve">
-    <value>Ho riconosciuto una persona</value>
+    <value>Ho riconosciuto</value>
   </data>
   <data name="FacesRecognizedPlural" xml:space="preserve">
     <value>Ho riconosciuto {0} persone</value>
@@ -199,10 +199,16 @@
     <value>Mi dispiace, non hai connessione ad Internet</value>
   </data>
   <data name="PersonAgeMessageFemale" xml:space="preserve">
-    <value>Una {1} di {0} anni</value>
+    <value>Una {0} di {1} anni</value>
   </data>
   <data name="PersonAgeMessageMale" xml:space="preserve">
-    <value>Un {1} di {0} anni</value>
+    <value>Un {0} di {1} anni</value>
+  </data>
+  <data name="PersonMessageFemale" xml:space="preserve">
+    <value>Una {0}</value>
+  </data>
+  <data name="PersonMessageMale" xml:space="preserve">
+    <value>Un {0}</value>
   </data>
   <data name="QueryingVisionService" xml:space="preserve">
     <value>Analisi dell'immagine...</value>
