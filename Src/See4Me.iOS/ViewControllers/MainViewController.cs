@@ -64,6 +64,7 @@ namespace See4Me.iOS
                 this.SetBinding(() => ViewModel.StatusMessage, () => MessageLabel.Text, BindingMode.OneWay)
             };
 
+            View.AddGestureRecognizer(new UILongPressGestureRecognizer(tap => ViewModel.GuessAgeCommand.Execute(null)));
             View.AddGestureRecognizer(new UITapGestureRecognizer(tap => ViewModel.VideoCommand.Execute(null)));
 
             await ViewModel.InitializeAsync();
@@ -121,16 +122,6 @@ namespace See4Me.iOS
 
         private void RegisterMessages()
         {
-            Messenger.Default.Register<NotificationMessage>(this, (message) =>
-                {
-                    switch (message.Notification)
-                    {
-                        case Constants.TakePhoto:
-                            SoundTools.TriggerSoundAndViber();
-                            break;
-                    }
-                });
-
             Messenger.Default.Register<NotificationMessageAction<object>>(this, (message) =>
                 {
                     switch (message.Notification)
@@ -140,6 +131,16 @@ namespace See4Me.iOS
                             break;
                     }
                 });
+
+            Messenger.Default.Register<NotificationMessage>(this, (message) =>
+            {
+                switch (message.Notification)
+                {
+                    case Constants.TakePhoto:
+                        SoundTools.TriggerSoundAndViber();
+                        break;
+                }
+            });
         }
     }
 }

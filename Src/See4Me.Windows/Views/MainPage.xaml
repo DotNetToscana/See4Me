@@ -35,6 +35,12 @@
                     <Interactions:InvokeCommandAction Command="{Binding SwipeCommand}"  
                                                       InputConverter="{StaticResource SwipeDirectionConverter}" InputConverterParameter="Right" />
                 </behaviors:SwipeTriggerBehavior>
+                <behaviors:SwipeTriggerBehavior Direction="Up">
+                    <Interactions:InvokeCommandAction Command="{Binding GuessAgeCommand}" />
+                </behaviors:SwipeTriggerBehavior>
+                <behaviors:SwipeTriggerBehavior Direction="Down">
+                    <Interactions:InvokeCommandAction Command="{Binding GuessAgeCommand}" />
+                </behaviors:SwipeTriggerBehavior>
             </Interactivity:Interaction.Behaviors>            
         </Grid>
 

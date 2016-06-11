@@ -170,6 +170,15 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I will not try to guess age anymore.
+        /// </summary>
+        public static string DontGuessAge {
+            get {
+                return ResourceManager.GetString("DontGuessAge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I see.
         /// </summary>
         public static string FaceRecognizedSingular {
@@ -211,6 +220,15 @@ namespace See4Me.Localization.Resources {
         public static string FrontCameraReady {
             get {
                 return ResourceManager.GetString("FrontCameraReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I will try to guess age.
+        /// </summary>
+        public static string GuessAge {
+            get {
+                return ResourceManager.GetString("GuessAge", resourceCulture);
             }
         }
         
@@ -391,6 +409,15 @@ namespace See4Me.Localization.Resources {
         public static string SadnessMale {
             get {
                 return ResourceManager.GetString("SadnessMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attention, the service is not registered.
+        /// </summary>
+        public static string ServiceNotRegistered {
+            get {
+                return ResourceManager.GetString("ServiceNotRegistered", resourceCulture);
             }
         }
         

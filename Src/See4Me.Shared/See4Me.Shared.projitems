@@ -16,6 +16,7 @@
     <Import_RootNamespace>See4Me.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Common\AutoRelayCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\SwipeDirection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EmotionExtensions.cs" />

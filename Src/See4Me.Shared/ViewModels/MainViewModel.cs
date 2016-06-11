@@ -27,6 +27,10 @@ namespace See4Me.ViewModels
         private readonly ITranslatorService translatorService;
         private readonly ISpeechService speechService;
 
+        public bool IsServiceRegistered
+            => !string.IsNullOrWhiteSpace(ServiceKeys.VisionSubscriptionKey) && !string.IsNullOrWhiteSpace(ServiceKeys.EmotionSubscriptionKey)
+            && !string.IsNullOrWhiteSpace(ServiceKeys.TranslatorClientId) && !string.IsNullOrWhiteSpace(ServiceKeys.TranslatorClientSecret);
+
         private string statusMessage;
         public string StatusMessage
         {
@@ -34,9 +38,11 @@ namespace See4Me.ViewModels
             set { this.Set(ref statusMessage, value); }
         }
 
-        public RelayCommand VideoCommand { get; set; }
+        public AutoRelayCommand VideoCommand { get; set; }
 
-        public RelayCommand<SwipeDirection> SwipeCommand { get; set; }
+        public AutoRelayCommand<SwipeDirection> SwipeCommand { get; set; }
+
+        public AutoRelayCommand GuessAgeCommand { get; set; }
 
         private CameraPanel lastCameraPanel = CameraPanel.Unknown;
 
@@ -54,12 +60,19 @@ namespace See4Me.ViewModels
 
         private void CreateCommands()
         {
-            VideoCommand = new RelayCommand(async () => await DescribeImageAsync(), () => !IsBusy);
-            SwipeCommand = new RelayCommand<SwipeDirection>(async (direction) => await SwapCameraAsync(direction));
+            VideoCommand = new AutoRelayCommand(async () => await DescribeImageAsync(), () => IsServiceRegistered && !IsBusy)
+                .DependsOn(() => IsBusy);
+
+            SwipeCommand = new AutoRelayCommand<SwipeDirection>(async (direction) => await SwapCameraAsync(direction), (direction) => !IsBusy).
+                DependsOn(() => IsBusy);
+
+            GuessAgeCommand = new AutoRelayCommand(async () => await SetGuessAgeAsync());
         }
 
         public async Task InitializeAsync()
         {
+            IsBusy = true;
+
             try
             {
                 if (IsOnline && Language != Constants.DefaultLanguge)
@@ -86,10 +99,19 @@ namespace See4Me.ViewModels
                     { }
                     finally
                     {
-                        if (successful)
+                        if (!IsServiceRegistered)
+                        {
+                            StatusMessage = AppResources.ServiceNotRegistered;
+                            await speechService.SpeechAsync(AppResources.ServiceNotRegistered);
+                        }
+                        else if (successful)
+                        {
                             await this.NotifyCameraPanelAsync();
+                        }
                         else
+                        {
                             await this.NotifyInitializationErrorAsync();
+                        }
                     }
                 }));
             }
@@ -97,6 +119,8 @@ namespace See4Me.ViewModels
             {
                 await this.NotifyInitializationErrorAsync();
             }
+
+            IsBusy = false;
         }
 
         public async Task CleanupAsync()
@@ -114,7 +138,7 @@ namespace See4Me.ViewModels
             IsBusy = true;
             StatusMessage = null;
 
-            string imageDescription = null;
+            string baseDescription = null;
             string facesRecognizedDescription = null;
             string emotionDescription = null;
 
@@ -136,10 +160,10 @@ namespace See4Me.ViewModels
                             var description = result.Description.Captions.FirstOrDefault();
                             if (description != null)
                             {
-                                imageDescription = description.Text;
+                                baseDescription = description.Text;
 
                                 if (Settings.ShowDescriptionConfidence)
-                                    imageDescription = $"{imageDescription} ({Math.Round(description.Confidence, 2)})";
+                                    baseDescription = $"{baseDescription} ({Math.Round(description.Confidence, 2)})";
 
                                 if (Language != Constants.DefaultLanguge)
                                 {
@@ -150,23 +174,17 @@ namespace See4Me.ViewModels
                                     if (translatorService.IsInitialized)
                                     {
                                         StatusMessage = AppResources.Translating;
-                                        imageDescription = await translatorService.TranslateAsync(imageDescription);
+                                        baseDescription = await translatorService.TranslateAsync(baseDescription);
                                     }
                                 }
 
-                                StatusMessage = imageDescription;
+                                StatusMessage = baseDescription;
 
                                 try
                                 {
                                     // If there is one or more faces, asks the service information about them.
                                     if (result.Faces?.Count() > 0)
                                     {
-                                        // Describes how many faces have been recognized.
-                                        if (result.Faces.Count() == 1)
-                                            facesRecognizedDescription = AppResources.FaceRecognizedSingular;
-                                        else
-                                            facesRecognizedDescription = $"{string.Format(AppResources.FacesRecognizedPlural, result.Faces.Count())} {Constants.SentenceEnd}";
-
                                         var messages = new StringBuilder();
                                         var imageBytes = await stream.ToArrayAsync();
 
@@ -177,31 +195,43 @@ namespace See4Me.ViewModels
                                                 var emotions = await emotionService.RecognizeAsync(ms, face.FaceRectangle.ToRectangle());
                                                 var bestEmotion = emotions.FirstOrDefault()?.Scores.GetBestEmotion();
 
-                                                // Creates the emotion description text to be speeched.
-                                                messages.Append(SpeechHelper.GetEmotionMessage(face, bestEmotion, includeAge: Settings.GuessAge));
+                                                // Creates the emotion description text to be speeched (if there are interesting information).
+                                                var emotionMessage = SpeechHelper.GetEmotionMessage(face, bestEmotion, includeAge: Settings.GuessAge);
+                                                if (!string.IsNullOrWhiteSpace(emotionMessage))
+                                                    messages.Append(emotionMessage);
                                             }
                                         }
 
-                                        emotionDescription = messages.ToString();
+                                        // Checks if at least an emotion has been actually recognized.
+                                        if (messages.Length > 0)
+                                        {
+                                            // Describes how many faces have been recognized.
+                                            if (result.Faces.Count() == 1)
+                                                facesRecognizedDescription = AppResources.FaceRecognizedSingular;
+                                            else
+                                                facesRecognizedDescription = $"{string.Format(AppResources.FacesRecognizedPlural, result.Faces.Count())} {Constants.SentenceEnd}";
+
+                                            emotionDescription = messages.ToString();
+                                        }
                                     }
                                 }
                                 catch { }
                             }
                             else
                             {
-                                imageDescription = AppResources.RecognitionFailed;
+                                baseDescription = AppResources.RecognitionFailed;
                             }
                         }
                         else
                         {
-                            imageDescription = AppResources.UnableToGetImage;
+                            baseDescription = AppResources.UnableToGetImage;
                         }
                     }
                 }
                 catch (WebException)
                 {
                     // Internet isn't available, to service cannot be reached.
-                    imageDescription = AppResources.NoConnection;
+                    baseDescription = AppResources.NoConnection;
                 }
                 catch (Exception ex)
                 {
@@ -210,17 +240,17 @@ namespace See4Me.ViewModels
                     if (Settings.ShowExceptionOnError)
                         error = $"{error} ({ex.Message})";
 
-                    imageDescription = error;
+                    baseDescription = error;
                 }
             }
             else
             {
                 // Internet isn't available, to service cannot be reached.
-                imageDescription = AppResources.NoConnection;
+                baseDescription = AppResources.NoConnection;
             }
 
             // Speaks the result.
-            var message = $"{imageDescription}{Constants.SentenceEnd} {facesRecognizedDescription} {emotionDescription}";
+            var message = $"{baseDescription}{Constants.SentenceEnd} {facesRecognizedDescription} {emotionDescription}";
             StatusMessage = this.GetNormalizedMessage(message);
             message = this.GetSpeechMessage(message);
             await speechService.SpeechAsync(message, languge: Language);
@@ -230,6 +260,7 @@ namespace See4Me.ViewModels
 
         public async Task SwapCameraAsync(SwipeDirection direction)
         {
+            IsBusy = true;
             var successful = false;
 
             try
@@ -248,6 +279,18 @@ namespace See4Me.ViewModels
                 else
                     await this.NotifyInitializationErrorAsync();
             }
+
+            IsBusy = false;
+        }
+
+        private async Task SetGuessAgeAsync()
+        {
+            Settings.GuessAge = !Settings.GuessAge;
+
+            var message = Settings.GuessAge ? AppResources.GuessAge : AppResources.DontGuessAge;
+            StatusMessage = message;
+
+            await speechService.SpeechAsync(message);
         }
 
         private async Task NotifyCameraPanelAsync()

@@ -89,6 +89,11 @@ namespace See4Me.Android
             return true;
         }
 
+        public void OnLongPress(MotionEvent e)
+        {
+            ViewModel.GuessAgeCommand.Execute(null);
+        }
+
         public override bool OnTouchEvent(MotionEvent e)
         {
             gestureDetector.OnTouchEvent(e);
@@ -111,8 +116,6 @@ namespace See4Me.Android
         public bool OnDown(MotionEvent e) => false;
 
         public bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) => false;
-
-        public void OnLongPress(MotionEvent e) { }
 
         public bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) => false;
 

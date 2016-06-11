@@ -24,22 +24,22 @@ namespace See4Me.Views
 
         private void RegisterMessages()
         {
-            Messenger.Default.Register<NotificationMessage>(this, (message) =>
-            {
-                switch (message.Notification)
-                {
-                    case Constants.TakePhoto:
-                        shutter.Play();
-                        break;
-                }
-            });
-
             Messenger.Default.Register<NotificationMessageAction<object>>(this, (message) =>
             {
                 switch (message.Notification)
                 {
                     case Constants.InitializeStreaming:
                         message.Execute(video);
+                        break;
+                }
+            });
+
+            Messenger.Default.Register<NotificationMessage>(this, (message) =>
+            {
+                switch (message.Notification)
+                {
+                    case Constants.TakePhoto:
+                        shutter.Play();
                         break;
                 }
             });

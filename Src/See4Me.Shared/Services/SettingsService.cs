@@ -42,7 +42,7 @@ namespace See4Me.Services
 
         public bool GuessAge
         {
-            get { return settings.GetValueOrDefault(GUESS_AGE, true); }
+            get { return settings.GetValueOrDefault(GUESS_AGE, false); }
             set { settings.AddOrUpdateValue(GUESS_AGE, value); }
         }
     }

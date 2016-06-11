@@ -11,7 +11,7 @@ using See4Me.Android.Common;
 namespace SpeedOrder.Droid.Activities
 {
     [Activity(MainLauncher = true, Label = "@string/ApplicationName", Theme = "@style/See4Me.Splash", Icon = "@drawable/icon",
-        NoHistory = true)]
+        ScreenOrientation = ScreenOrientation.Landscape, NoHistory = true)]
     public class SplashActivity : ActivityBase<SplashViewModel>
     {
         protected override async void OnResume()

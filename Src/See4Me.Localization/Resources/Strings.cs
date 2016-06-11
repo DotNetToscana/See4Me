@@ -14,11 +14,13 @@
         public static string ContemptMale = "ContemptMale";
         public static string DisgustFemale = "DisgustFemale";
         public static string DisgustMale = "DisgustMale";
+        public static string DontGuessAge = "DontGuessAge";
         public static string FaceRecognizedSingular = "FaceRecognizedSingular";
         public static string FacesRecognizedPlural = "FacesRecognizedPlural";
         public static string FearFemale = "FearFemale";
         public static string FearMale = "FearMale";
         public static string FrontCameraReady = "FrontCameraReady";
+        public static string GuessAge = "GuessAge";
         public static string HappinessFemale = "HappinessFemale";
         public static string HappinessMale = "HappinessMale";
         public static string InitializationError = "InitializationError";
@@ -39,6 +41,7 @@
         public static string ResourceLanguage = "ResourceLanguage";
         public static string SadnessFemale = "SadnessFemale";
         public static string SadnessMale = "SadnessMale";
+        public static string ServiceNotRegistered = "ServiceNotRegistered";
         public static string SurpriseFemale = "SurpriseFemale";
         public static string SurpriseMale = "SurpriseMale";
         public static string Translating = "Translating";

@@ -153,6 +153,9 @@
   <data name="DisgustMale" xml:space="preserve">
     <value>Disgustato</value>
   </data>
+  <data name="DontGuessAge" xml:space="preserve">
+    <value>Non proverò più ad indovinare le età</value>
+  </data>
   <data name="FaceRecognizedSingular" xml:space="preserve">
     <value>Ho riconosciuto</value>
   </data>
@@ -167,6 +170,9 @@
   </data>
   <data name="FrontCameraReady" xml:space="preserve">
     <value>Fotocamera frontale pronta</value>
+  </data>
+  <data name="GuessAge" xml:space="preserve">
+    <value>Ora proverò ad indovinare le età</value>
   </data>
   <data name="HappinessFemale" xml:space="preserve">
     <value>Felice</value>
@@ -227,6 +233,9 @@
   </data>
   <data name="SadnessMale" xml:space="preserve">
     <value>Triste</value>
+  </data>
+  <data name="ServiceNotRegistered" xml:space="preserve">
+    <value>Attenzione, il servizio non è registrato</value>
   </data>
   <data name="SurpriseFemale" xml:space="preserve">
     <value>Sorpresa</value>
