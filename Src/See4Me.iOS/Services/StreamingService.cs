@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AVFoundation;
 using CoreFoundation;
 using CoreImage;
 using CoreVideo;
+using Foundation;
+using MediaPlayer;
+using See4Me.iOS.Extensions;
 using UIKit;
 
 namespace See4Me.Services
@@ -20,7 +24,7 @@ namespace See4Me.Services
 
         public ScenarioState CurrentState { get; private set; }
 
-        public CameraPanel CameraPanel { get; } = CameraPanel.Back;
+        public CameraPanel CameraPanel { get; private set; } = CameraPanel.Back;
 
         public Task InitializeAsync() => Task.FromResult<object>(null);
 
@@ -44,7 +48,46 @@ namespace See4Me.Services
 
         public Task SwapCameraAsync()
         {
-            throw new NotImplementedException();
+            if (session != null)
+            {
+                var currentCameraInput = session.Inputs[0];
+
+                AVCaptureDevice newCamera;
+                if (currentCameraInput.GetPosition() == AVCaptureDevicePosition.Back)
+                    newCamera =
+                        AVCaptureDevice
+                            .DevicesWithMediaType(AVMediaType.Video)
+                            .FirstOrDefault(d => d.Position == AVCaptureDevicePosition.Front);
+                else
+                    newCamera =
+                        AVCaptureDevice
+                            .DevicesWithMediaType(AVMediaType.Video)
+                            .FirstOrDefault(d => d.Position == AVCaptureDevicePosition.Back);
+
+                if (newCamera != null)
+                {
+                    session.BeginConfiguration();
+                    session.RemoveInput(currentCameraInput);
+
+                    NSError error = null;
+                    var newInput = new AVCaptureDeviceInput(newCamera, out error);
+
+                    if (error == null)
+                    {
+                        session.AddInput(newInput);
+                        CameraPanel = currentCameraInput.GetPosition() == AVCaptureDevicePosition.Back
+                            ? CameraPanel.Front : CameraPanel.Back;
+                    }
+                    else
+                    {
+                        //rollback
+                        session.RemoveInput(currentCameraInput);
+                    }
+
+                    session.CommitConfiguration();
+                }
+            }
+            return Task.FromResult<object>(null);
         }
 
         private void TryStart()

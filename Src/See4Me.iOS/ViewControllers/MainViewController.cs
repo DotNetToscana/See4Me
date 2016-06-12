@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CoreGraphics;
 using GalaSoft.MvvmLight.Helpers;
+using MediaPlayer;
 using SceneKit;
 using See4Me.iOS.Extensions;
 using See4Me.Localization.Resources;
@@ -63,9 +64,31 @@ namespace See4Me.iOS
             {
                 this.SetBinding(() => ViewModel.StatusMessage, () => MessageLabel.Text, BindingMode.OneWay)
             };
-
-            View.AddGestureRecognizer(new UILongPressGestureRecognizer(tap => ViewModel.GuessAgeCommand.Execute(null)));
+            
+            // TAP
             View.AddGestureRecognizer(new UITapGestureRecognizer(tap => ViewModel.VideoCommand.Execute(null)));
+
+            // Swipe UP & Down
+            var swipeUp = new UISwipeGestureRecognizer(() => {
+                ViewModel.GuessAgeCommand.Execute(null);
+            }){ Direction = UISwipeGestureRecognizerDirection.Up, Enabled = true };
+            var swipeDown = new UISwipeGestureRecognizer(() => {
+                ViewModel.GuessAgeCommand.Execute(null);
+            }) { Direction = UISwipeGestureRecognizerDirection.Down, Enabled = true };
+            View.AddGestureRecognizer(swipeUp);
+            View.AddGestureRecognizer(swipeDown);
+
+            // Swipe Left & Right
+            var swipeLeft = new UISwipeGestureRecognizer(() => {
+                ViewModel.SwipeCommand.Execute(null);
+            })
+            { Direction = UISwipeGestureRecognizerDirection.Left, Enabled = true };
+            var swipeRight = new UISwipeGestureRecognizer(() => {
+                ViewModel.SwipeCommand.Execute(null);
+            })
+            { Direction = UISwipeGestureRecognizerDirection.Right, Enabled = true };
+            View.AddGestureRecognizer(swipeLeft);
+            View.AddGestureRecognizer(swipeRight);
 
             await ViewModel.InitializeAsync();
         }

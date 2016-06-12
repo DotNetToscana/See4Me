@@ -123,6 +123,7 @@
     <BundleResource Include="Resources\Icon-Small-40%402x.png" />
     <BundleResource Include="Resources\Icon-Small.png" />
     <BundleResource Include="Resources\Icon.png" />
+    <Compile Include="Extensions\AVCaptureExtensions.cs" />
     <Compile Include="Services\ImageTools.cs" />
     <Compile Include="Services\OutputRecorder.cs" />
     <Compile Include="Services\SoundTools.cs" />
@@ -141,7 +142,7 @@
     <BundleResource Include="Resources\Icon-Small-50.png" />
     <BundleResource Include="Resources\Icon-Small-50%402x.png" />
     <BundleResource Include="Resources\Icon-Small-40.png" />
-    <BundleResource Include="Resources\eye.png" />
+    <BundleResource Include="Resources\Images\Eye.png" />
     <None Include="app.config" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />

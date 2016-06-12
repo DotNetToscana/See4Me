@@ -11,11 +11,11 @@ using UIKit;
 
 namespace See4Me.iOS
 {
-	[Register ("MainViewController")]
-	partial class MainViewController
-	{
-		void ReleaseDesignerOutlets ()
-		{
-		}
-	}
+    [Register ("MainViewController")]
+    partial class MainViewController
+    {
+        void ReleaseDesignerOutlets ()
+        {
+        }
+    }
 }
