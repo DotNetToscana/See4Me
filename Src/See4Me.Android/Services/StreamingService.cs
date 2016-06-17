@@ -17,6 +17,8 @@ using Hardware = global::Android.Hardware;
 
 namespace See4Me.Services
 {
+#pragma warning disable 0618
+
     public class StreamingService : Java.Lang.Object, IStreamingService, TextureView.ISurfaceTextureListener, Hardware.Camera.IPictureCallback
     {
         private Hardware.Camera camera;
@@ -148,4 +150,6 @@ namespace See4Me.Services
 
         #endregion
     }
+
+#pragma warning restore 0618
 }

@@ -42,7 +42,7 @@ namespace See4Me.iOS
                 VideoGravity = AVLayerVideoGravity.ResizeAspectFill,
                 Frame = this.View.Bounds
             };
-            
+
             View.Layer.AddSublayer(previewLayer);
 
             MessageLabel = new UILabel
@@ -64,29 +64,39 @@ namespace See4Me.iOS
             {
                 this.SetBinding(() => ViewModel.StatusMessage, () => MessageLabel.Text, BindingMode.OneWay)
             };
-            
+
             // TAP
             View.AddGestureRecognizer(new UITapGestureRecognizer(tap => ViewModel.VideoCommand.Execute(null)));
 
             // Swipe UP & Down
-            var swipeUp = new UISwipeGestureRecognizer(() => {
-                ViewModel.GuessAgeCommand.Execute(null);
-            }){ Direction = UISwipeGestureRecognizerDirection.Up, Enabled = true };
-            var swipeDown = new UISwipeGestureRecognizer(() => {
-                ViewModel.GuessAgeCommand.Execute(null);
-            }) { Direction = UISwipeGestureRecognizerDirection.Down, Enabled = true };
+            var swipeUp = new UISwipeGestureRecognizer(() => ViewModel.GuessAgeCommand.Execute(null))
+            {
+                Direction = UISwipeGestureRecognizerDirection.Up,
+                Enabled = true
+            };
+
+            var swipeDown = new UISwipeGestureRecognizer(() => ViewModel.GuessAgeCommand.Execute(null))
+            {
+                Direction = UISwipeGestureRecognizerDirection.Down,
+                Enabled = true
+            };
+
             View.AddGestureRecognizer(swipeUp);
             View.AddGestureRecognizer(swipeDown);
 
             // Swipe Left & Right
-            var swipeLeft = new UISwipeGestureRecognizer(() => {
-                ViewModel.SwipeCommand.Execute(null);
-            })
-            { Direction = UISwipeGestureRecognizerDirection.Left, Enabled = true };
-            var swipeRight = new UISwipeGestureRecognizer(() => {
-                ViewModel.SwipeCommand.Execute(null);
-            })
-            { Direction = UISwipeGestureRecognizerDirection.Right, Enabled = true };
+            var swipeLeft = new UISwipeGestureRecognizer(() => ViewModel.SwipeCommand.Execute(null))
+            {
+                Direction = UISwipeGestureRecognizerDirection.Left,
+                Enabled = true
+            };
+
+            var swipeRight = new UISwipeGestureRecognizer(() => ViewModel.SwipeCommand.Execute(null))
+            {
+                Direction = UISwipeGestureRecognizerDirection.Right,
+                Enabled = true
+            };
+
             View.AddGestureRecognizer(swipeLeft);
             View.AddGestureRecognizer(swipeRight);
 
