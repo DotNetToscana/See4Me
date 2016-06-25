@@ -8,14 +8,17 @@ namespace See4Me.ViewModels
     {
         protected ISettingsService Settings { get; }
 
+        protected INetworkService Network { get; }
+
         public ViewModelBase()
         {
             Settings = ServiceLocator.Current.GetInstance<ISettingsService>();
+            Network = ServiceLocator.Current.GetInstance<INetworkService>();
 
-            IsOnline = Plugin.Connectivity.CrossConnectivity.Current.IsConnected;
-            Plugin.Connectivity.CrossConnectivity.Current.ConnectivityChanged += (s, e) =>
+            IsConnected = Network.IsConnected;
+            Network.ConnectivityChanged += (s, e) =>
             {
-                DispatcherHelper.CheckBeginInvokeOnUI(() => IsOnline = e.IsConnected);
+                DispatcherHelper.CheckBeginInvokeOnUI(() => IsConnected = Network.IsConnected);
             };
         }
 
@@ -51,13 +54,13 @@ namespace See4Me.ViewModels
             return isSet;
         }
 
-        private bool isOnline;
-        public bool IsOnline
+        private bool isConnected;
+        public bool IsConnected
         {
-            get { return isOnline; }
+            get { return isConnected; }
             set
             {
-                if (this.Set(ref isOnline, value, broadcast: true))
+                if (this.Set(ref isConnected, value, broadcast: true))
                 {
                     OnNetworkAvailabilityChangedBase();
                     OnNetworkAvailabilityChanged();

@@ -22,10 +22,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EmotionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\SpeechHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StreamExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\VisionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ServiceKeys.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\INetworkService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ISettingsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ISpeechService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IStreamingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\NetworkService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SpeechService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Translator\AdmAuthentication.cs" />

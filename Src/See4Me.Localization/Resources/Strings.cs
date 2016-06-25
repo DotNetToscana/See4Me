@@ -38,6 +38,7 @@
         public static string QueryingVisionService = "QueryingVisionService";
         public static string RecognitionError = "RecognitionError";
         public static string RecognitionFailed = "RecognitionFailed";
+        public static string RecognizingFaces = "RecognizingFaces";
         public static string ResourceLanguage = "ResourceLanguage";
         public static string SadnessFemale = "SadnessFemale";
         public static string SadnessMale = "SadnessMale";

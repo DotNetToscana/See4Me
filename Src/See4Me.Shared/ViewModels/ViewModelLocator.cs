@@ -35,6 +35,7 @@ namespace See4Me.ViewModels
             SimpleIoc.Default.Register<ISpeechService, SpeechService>();
             SimpleIoc.Default.Register<IStreamingService, StreamingService>();
             SimpleIoc.Default.Register<ISettingsService, SettingsService>();
+            SimpleIoc.Default.Register<INetworkService, NetworkService>();
 
             SimpleIoc.Default.Register<MainViewModel>();
 

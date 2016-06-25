@@ -16,6 +16,7 @@ using System.IO;
 using System.Text;
 using System.Net;
 using System.Text.RegularExpressions;
+using Microsoft.ProjectOxford.Vision.Contract;
 
 namespace See4Me.ViewModels
 {
@@ -75,7 +76,7 @@ namespace See4Me.ViewModels
 
             try
             {
-                if (IsOnline && Language != Constants.DefaultLanguge)
+                if (IsConnected && Language != Constants.DefaultLanguge)
                 {
                     // Retrieves tha authorization token for the translator service.
                     // This is necessary only if the app language is different from the default language,
@@ -142,12 +143,12 @@ namespace See4Me.ViewModels
             string facesRecognizedDescription = null;
             string emotionDescription = null;
 
-            if (IsOnline)
+            MessengerInstance.Send(new NotificationMessage(Constants.TakePhoto));
+
+            if (IsConnected && await Network.GetIsInternetAvailableAsync())
             {
                 try
                 {
-                    MessengerInstance.Send(new NotificationMessage(Constants.TakePhoto));
-
                     using (var stream = await streamingService.GetCurrentFrameAsync())
                     {
                         if (stream != null)
@@ -157,8 +158,8 @@ namespace See4Me.ViewModels
                             var visualFeatures = new VisualFeature[] { VisualFeature.Description, VisualFeature.Faces };
                             var result = await visionService.AnalyzeImageAsync(stream, visualFeatures);
 
-                            var description = result.Description.Captions.FirstOrDefault();
-                            if (description != null)
+                            Caption description;
+                            if (result.IsValid(out description))
                             {
                                 baseDescription = description.Text;
 
@@ -168,7 +169,7 @@ namespace See4Me.ViewModels
                                 if (Language != Constants.DefaultLanguge)
                                 {
                                     // The description needs to be translated.
-                                    if (!translatorService.IsInitialized && IsOnline)
+                                    if (!translatorService.IsInitialized && IsConnected)
                                         await this.translatorService.InitializeAsync();
 
                                     if (translatorService.IsInitialized)
@@ -185,6 +186,8 @@ namespace See4Me.ViewModels
                                     // If there is one or more faces, asks the service information about them.
                                     if (result.Faces?.Count() > 0)
                                     {
+                                        StatusMessage = AppResources.RecognizingFaces;
+
                                         var messages = new StringBuilder();
                                         var imageBytes = await stream.ToArrayAsync();
 
