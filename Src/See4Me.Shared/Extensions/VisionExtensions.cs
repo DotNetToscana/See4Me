@@ -27,7 +27,8 @@ namespace See4Me.Extensions
             "a dark night",
             "a cat sitting in a dark room",
             "a laptop is lit up",
-            "a cat that is lit up"
+            "a cat that is lit up",
+            "a man flying"
         };
 
         private static List<string> RemovedDescriptions = new List<string>
@@ -42,7 +43,9 @@ namespace See4Me.Extensions
             "holding a wii remote",
             "brushing his teeth",
             "brushing her teeth",
-            "with a remote"
+            "with a remote",
+            "the airplane is parked on the side of",
+            "a picture of"
         };
 
         public static bool IsValid(this AnalysisResult result, out Caption description)
@@ -56,7 +59,7 @@ namespace See4Me.Extensions
 
                 description = new Caption
                 {
-                    Text = !string.IsNullOrWhiteSpace(textToRemove) ? caption.Text.Replace(textToRemove, string.Empty) : caption.Text,
+                    Text = !string.IsNullOrWhiteSpace(textToRemove) ? caption.Text.Replace(textToRemove, string.Empty).Trim() : caption.Text,
                     Confidence = caption.Confidence
                 };
 

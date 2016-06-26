@@ -226,7 +226,7 @@
     <value>Mi dispiace, non riconosco l'immagine</value>
   </data>
   <data name="RecognizingFaces" xml:space="preserve">
-    <value>Riconoscimento dei volti...</value>
+    <value>Riconoscimento dei volti e delle emozioni...</value>
   </data>
   <data name="ResourceLanguage" xml:space="preserve">
     <value>it</value>
