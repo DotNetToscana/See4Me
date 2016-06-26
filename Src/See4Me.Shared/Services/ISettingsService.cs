@@ -9,5 +9,7 @@
         bool ShowExceptionOnError { get; set; }
 
         bool GuessAge { get; set; }
+
+        bool ShowOriginalDescriptionOnTranslation { get; set; }
     }
 }

@@ -11,7 +11,8 @@ namespace See4Me.Extensions
         private const double MINIMUM_CONFIDENCE = 0.16d;
 
         // Somes strings represents a description that is actually invalid
-        // or just need to be removed.
+        // or need to be temporaly removed (the latter will be probably added
+        // again in a future release).
         private static List<string> InvalidDescriptions = new List<string>
         {
             "a bird that is lit up at night",
@@ -22,7 +23,11 @@ namespace See4Me.Extensions
             "a room with a remote control",
             "a reflection in a mirror",
             "a blurry photo of",
-            "a blurry picture of"
+            "a blurry picture of",
+            "a dark night",
+            "a cat sitting in a dark room",
+            "a laptop is lit up",
+            "a cat that is lit up"
         };
 
         private static List<string> RemovedDescriptions = new List<string>
@@ -31,9 +36,13 @@ namespace See4Me.Extensions
             "holding a basketball bat",
             "holding a remote control",
             "holding a donut",
+            "eating a donut",
             "and a tie",
             "wearing a tie",
             "holding a wii remote",
+            "brushing his teeth",
+            "brushing her teeth",
+            "with a remote"
         };
 
         public static bool IsValid(this AnalysisResult result, out Caption description)

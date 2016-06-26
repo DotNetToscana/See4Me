@@ -175,7 +175,12 @@ namespace See4Me.ViewModels
                                     if (translatorService.IsInitialized)
                                     {
                                         StatusMessage = AppResources.Translating;
-                                        baseDescription = await translatorService.TranslateAsync(baseDescription);
+                                        var translation = await translatorService.TranslateAsync(baseDescription);
+
+                                        if (Settings.ShowOriginalDescriptionOnTranslation)
+                                            baseDescription = $"{translation} ({baseDescription})";
+                                        else
+                                            baseDescription = translation;
                                     }
                                 }
 

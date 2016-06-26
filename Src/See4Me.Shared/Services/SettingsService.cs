@@ -10,6 +10,7 @@ namespace See4Me.Services
         private const string SHOW_DESCRIPTION_CONFIDENCE = "ShowDescriptionConfidence";
         private const string SHOW_EXCEPTION_ON_ERROR = "ShowExceptionOnError";
         private const string GUESS_AGE = "GuessAge";
+        private const string SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION = "ShowOriginalDescriptionOnTranslation";
 
         private readonly ISettings settings;
 
@@ -44,6 +45,12 @@ namespace See4Me.Services
         {
             get { return settings.GetValueOrDefault(GUESS_AGE, false); }
             set { settings.AddOrUpdateValue(GUESS_AGE, value); }
+        }
+
+        public bool ShowOriginalDescriptionOnTranslation
+        {
+            get { return settings.GetValueOrDefault(SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION, true); }
+            set { settings.AddOrUpdateValue(SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION, value); }
         }
     }
 }
