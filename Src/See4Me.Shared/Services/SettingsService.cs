@@ -11,6 +11,7 @@ namespace See4Me.Services
         private const string SHOW_EXCEPTION_ON_ERROR = "ShowExceptionOnError";
         private const string GUESS_AGE = "GuessAge";
         private const string SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION = "ShowOriginalDescriptionOnTranslation";
+        private const string SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION = "ShowRawDescriptionOnInvalidRecognition";
 
         private readonly ISettings settings;
 
@@ -48,6 +49,12 @@ namespace See4Me.Services
         }
 
         public bool ShowOriginalDescriptionOnTranslation
+        {
+            get { return settings.GetValueOrDefault(SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION, true); }
+            set { settings.AddOrUpdateValue(SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION, value); }
+        }
+
+        public bool ShowRawDescriptionOnInvalidRecognition
         {
             get { return settings.GetValueOrDefault(SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION, true); }
             set { settings.AddOrUpdateValue(SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION, value); }

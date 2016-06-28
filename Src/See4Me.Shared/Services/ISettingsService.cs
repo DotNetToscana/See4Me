@@ -11,5 +11,7 @@
         bool GuessAge { get; set; }
 
         bool ShowOriginalDescriptionOnTranslation { get; set; }
+
+        bool ShowRawDescriptionOnInvalidRecognition { get; set; }
     }
 }

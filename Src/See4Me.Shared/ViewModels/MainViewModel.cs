@@ -137,7 +137,7 @@ namespace See4Me.ViewModels
         public async Task DescribeImageAsync()
         {
             IsBusy = true;
-            StatusMessage = null;
+            StatusMessage = AppResources.QueryingVisionService;
 
             string baseDescription = null;
             string facesRecognizedDescription = null;
@@ -153,18 +153,18 @@ namespace See4Me.ViewModels
                     {
                         if (stream != null)
                         {
-                            StatusMessage = AppResources.QueryingVisionService;
-
                             var visualFeatures = new VisualFeature[] { VisualFeature.Description, VisualFeature.Faces };
                             var result = await visionService.AnalyzeImageAsync(stream, visualFeatures);
 
-                            Caption description;
-                            if (result.IsValid(out description))
+                            Caption originalDescription;
+                            Caption filteredDescription;
+
+                            if (result.IsValid(out originalDescription, out filteredDescription))
                             {
-                                baseDescription = description.Text;
+                                baseDescription = filteredDescription.Text;
 
                                 if (Settings.ShowDescriptionConfidence)
-                                    baseDescription = $"{baseDescription} ({Math.Round(description.Confidence, 2)})";
+                                    baseDescription = $"{baseDescription} ({Math.Round(filteredDescription.Confidence, 2)})";
 
                                 if (Language != Constants.DefaultLanguge)
                                 {
@@ -175,7 +175,7 @@ namespace See4Me.ViewModels
                                     if (translatorService.IsInitialized)
                                     {
                                         StatusMessage = AppResources.Translating;
-                                        var translation = await translatorService.TranslateAsync(baseDescription);
+                                        var translation = await translatorService.TranslateAsync(filteredDescription.Text);
 
                                         if (Settings.ShowOriginalDescriptionOnTranslation)
                                             baseDescription = $"{translation} ({baseDescription})";
@@ -210,7 +210,7 @@ namespace See4Me.ViewModels
                                             }
                                         }
 
-                                        // Checks if at least an emotion has been actually recognized.
+                                        // Checks if at least one emotion has been actually recognized.
                                         if (messages.Length > 0)
                                         {
                                             // Describes how many faces have been recognized.
@@ -227,7 +227,10 @@ namespace See4Me.ViewModels
                             }
                             else
                             {
-                                baseDescription = AppResources.RecognitionFailed;
+                                if (Settings.ShowRawDescriptionOnInvalidRecognition && originalDescription != null)
+                                    baseDescription = $"{AppResources.RecognitionFailed} ({originalDescription.Text}, {Math.Round(originalDescription.Confidence, 2)})";
+                                else
+                                    baseDescription = AppResources.RecognitionFailed;
                             }
                         }
                         else
@@ -238,7 +241,7 @@ namespace See4Me.ViewModels
                 }
                 catch (WebException)
                 {
-                    // Internet isn't available, to service cannot be reached.
+                    // Internet isn't available, the service cannot be reached.
                     baseDescription = AppResources.NoConnection;
                 }
                 catch (Exception ex)
