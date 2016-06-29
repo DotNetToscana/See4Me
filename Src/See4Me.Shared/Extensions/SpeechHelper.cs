@@ -10,11 +10,11 @@ namespace See4Me.Extensions
     {
         public static string GetEmotionMessage(Face face, string bestEmotion, bool includeAge)
         {
-            if (bestEmotion == null && !includeAge)
-            {
-                // If no emotion recognized and we don't want to speech age, we actually don't have anything.
-                return null;
-            }
+            //if (bestEmotion == null && !includeAge)
+            //{
+            //    // If no emotion recognized and we don't want to speech age, we actually don't have anything.
+            //    return null;
+            //}
 
             // Creates the emotion description text to be speeched.
             string personAgeMessage = null;

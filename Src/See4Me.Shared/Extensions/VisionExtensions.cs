@@ -26,7 +26,8 @@ namespace See4Me.Extensions
             "a counter",
             "a airplane that is on display",
             "an image of a bird",
-            "a laptop is lit up on the screen"
+            "a laptop is lit up on the screen",
+            "himself in the mirror"
             //"a dark room",
             //"a close up of",
             //"a cat sitting in a dark room",
@@ -63,6 +64,7 @@ namespace See4Me.Extensions
             "a close up of",
             "a bird walikng on",
             "a cat is laying on",
+            "a cat laying on",
             "a man laying on",
             "a black cat laying on",
             "a white toilet sitting in",
@@ -73,7 +75,8 @@ namespace See4Me.Extensions
             "a train that is on",
             "a man flying through",
             "a plane that is flying in",
-            "a bird flying over"
+            "a bird flying over",
+            "the air while riding a skateboard on"
         };
 
         public static bool IsValid(this AnalysisResult result, out Caption rawDescription, out Caption filteredDescription)
