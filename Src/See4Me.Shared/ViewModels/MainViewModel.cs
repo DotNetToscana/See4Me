@@ -163,9 +163,6 @@ namespace See4Me.ViewModels
                             {
                                 baseDescription = filteredDescription.Text;
 
-                                if (Settings.ShowDescriptionConfidence)
-                                    baseDescription = $"{baseDescription} ({Math.Round(filteredDescription.Confidence, 2)})";
-
                                 if (Language != Constants.DefaultLanguge)
                                 {
                                     // The description needs to be translated.
@@ -178,13 +175,14 @@ namespace See4Me.ViewModels
                                         var translation = await translatorService.TranslateAsync(filteredDescription.Text);
 
                                         if (Settings.ShowOriginalDescriptionOnTranslation)
-                                            baseDescription = $"{translation} ({baseDescription})";
+                                            baseDescription = $"{translation} ({filteredDescription.Text})";
                                         else
                                             baseDescription = translation;
                                     }
                                 }
 
-                                StatusMessage = baseDescription;
+                                if (Settings.ShowDescriptionConfidence)
+                                    baseDescription = $"{baseDescription} ({Math.Round(filteredDescription.Confidence, 2)})";
 
                                 try
                                 {

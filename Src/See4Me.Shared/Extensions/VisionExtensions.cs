@@ -24,10 +24,12 @@ namespace See4Me.Extensions
             "a fire hydrant",
             "the dark",
             "a counter",
+            "a airplane that is on display",
+            "an image of a bird",
+            "a laptop is lit up on the screen"
             //"a dark room",
             //"a close up of",
             //"a cat sitting in a dark room",
-            //"a laptop is lit up",
             //"a cat that is lit up",
         };
 
@@ -66,7 +68,12 @@ namespace See4Me.Extensions
             "a white toilet sitting in",
             "a man riding a skateboard up",
             "a hot dog in",
-            "playing a video game"
+            "playing a video game",
+            "a street scene with focus on",
+            "a train that is on",
+            "a man flying through",
+            "a plane that is flying in",
+            "a bird flying over"
         };
 
         public static bool IsValid(this AnalysisResult result, out Caption rawDescription, out Caption filteredDescription)

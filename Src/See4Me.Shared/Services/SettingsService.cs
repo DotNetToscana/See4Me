@@ -32,7 +32,7 @@ namespace See4Me.Services
 
         public bool ShowDescriptionConfidence
         {
-            get { return settings.GetValueOrDefault(SHOW_DESCRIPTION_CONFIDENCE, false); }
+            get { return settings.GetValueOrDefault(SHOW_DESCRIPTION_CONFIDENCE, true); }
             set { settings.AddOrUpdateValue(SHOW_DESCRIPTION_CONFIDENCE, value); }
         }
 

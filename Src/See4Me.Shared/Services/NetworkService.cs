@@ -43,7 +43,7 @@ namespace See4Me.Services
                     return true;
                 }
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return false;
             }
