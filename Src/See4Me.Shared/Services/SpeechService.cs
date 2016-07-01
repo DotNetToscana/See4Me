@@ -17,10 +17,13 @@ namespace See4Me.Services
             synthesizer.Init();
         }
 
+        public string Language { get; set; }
+
         public Task SpeechAsync(string text, string language = null)
         {
             CrossLocale? locale = null;
 
+            language = language ?? Language;
             if (language != null)
             {
                 locale = synthesizer.GetInstalledLanguages().FirstOrDefault(l => l.Language.StartsWith(language));

@@ -262,7 +262,7 @@ namespace See4Me.ViewModels
             var message = $"{baseDescription}{Constants.SentenceEnd} {facesRecognizedDescription} {emotionDescription}";
             StatusMessage = this.GetNormalizedMessage(message);
             message = this.GetSpeechMessage(message);
-            await speechService.SpeechAsync(message, languge: Language);
+            await speechService.SpeechAsync(message);
 
             IsBusy = false;
         }

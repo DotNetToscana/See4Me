@@ -19,20 +19,24 @@ namespace See4Me.ViewModels
 
         static ViewModelLocator()
         {
+            var language = GetLanguage();
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<ITranslatorService>(() =>
             {
-                var language = GetLanguage();
                 var service = new TranslatorService(ServiceKeys.TranslatorClientId, ServiceKeys.TranslatorClientSecret, language);
-
                 return service;
             });
 
             SimpleIoc.Default.Register<VisionServiceClient>(() => new VisionServiceClient(ServiceKeys.VisionSubscriptionKey));
             SimpleIoc.Default.Register<EmotionServiceClient>(() => new EmotionServiceClient(ServiceKeys.EmotionSubscriptionKey));
 
-            SimpleIoc.Default.Register<ISpeechService, SpeechService>();
+            SimpleIoc.Default.Register<ISpeechService>(() =>
+            {
+                var service = new SpeechService { Language = language };
+                return service;
+            });
+
             SimpleIoc.Default.Register<IStreamingService, StreamingService>();
             SimpleIoc.Default.Register<ISettingsService, SettingsService>();
             SimpleIoc.Default.Register<INetworkService, NetworkService>();
@@ -52,7 +56,7 @@ namespace See4Me.ViewModels
             if (culture == null)
             {
 #if __ANDROID__ || __IOS__
-                var language = See4Me.Localization.Resources.AppResources.ResourceLanguage;
+                var language = Localization.Resources.AppResources.ResourceLanguage;
 #else
                 var language = global::Windows.System.UserProfile.GlobalizationPreferences.Languages[0];
 #endif

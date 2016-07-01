@@ -27,7 +27,8 @@ namespace See4Me.Extensions
             "a airplane that is on display",
             "an image of a bird",
             "a laptop is lit up on the screen",
-            "himself in the mirror"
+            "himself in the mirror",
+            "a blurry picture"
             //"a dark room",
             //"a close up of",
             //"a cat sitting in a dark room",
