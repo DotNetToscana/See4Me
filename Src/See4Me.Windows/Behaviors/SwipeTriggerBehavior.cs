@@ -11,15 +11,15 @@ namespace See4Me.Behaviors
     public class SwipeTriggerBehavior : Behavior<UIElement>
     {
         /// <summary>
-        /// Get/Sets the direction of the Swipe gesture 
+        /// Get/Sets the direction of the Swipe gesture
         /// </summary>
         public SwipeDirection Direction { get; set; }
 
         #region Actions Dependency Property
 
-        /// <summary> 
-        /// Actions collection 
-        /// </summary> 
+        /// <summary>
+        /// Actions collection
+        /// </summary>
         public ActionCollection Actions
         {
             get
@@ -34,9 +34,9 @@ namespace See4Me.Behaviors
             }
         }
 
-        /// <summary> 
-        /// Backing storage for Actions collection 
-        /// </summary> 
+        /// <summary>
+        /// Backing storage for Actions collection
+        /// </summary>
         public static readonly DependencyProperty ActionsProperty =
             DependencyProperty.Register("Actions",
                                         typeof(ActionCollection),

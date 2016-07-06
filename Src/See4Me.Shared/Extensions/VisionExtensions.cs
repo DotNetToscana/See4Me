@@ -23,16 +23,14 @@ namespace See4Me.Extensions
             "a dark night",
             "a fire hydrant",
             "the dark",
-            "a counter",
             "a airplane that is on display",
             "an image of a bird",
             "a laptop is lit up on the screen",
             "himself in the mirror",
-            "a blurry picture"
-            //"a dark room",
-            //"a close up of",
-            //"a cat sitting in a dark room",
-            //"a cat that is lit up",
+            "a blurry picture",
+            "a cat that is lit up",
+            "a dog that is lit up",
+            "a bird that is lit up"
         };
 
         private static List<string> RemovedDescriptions = new List<string>

@@ -15,6 +15,7 @@ namespace See4Me.Extensions
             using (var ms = new MemoryStream())
             {
                 await stream.CopyToAsync(ms);
+                stream.Position = 0;
                 return ms.ToArray();
             }
         }

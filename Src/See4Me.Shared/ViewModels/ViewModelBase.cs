@@ -1,6 +1,8 @@
 using Microsoft.Practices.ServiceLocation;
 using See4Me.Services;
 using GalaSoft.MvvmLight.Threading;
+using Newtonsoft.Json;
+using GalaSoft.MvvmLight.Views;
 
 namespace See4Me.ViewModels
 {
@@ -10,10 +12,18 @@ namespace See4Me.ViewModels
 
         protected INetworkService Network { get; }
 
+#if __ANDROID__ || __IOS__
+        protected INavigationService NavigationService { get; }
+#endif
+
         public ViewModelBase()
         {
             Settings = ServiceLocator.Current.GetInstance<ISettingsService>();
             Network = ServiceLocator.Current.GetInstance<INetworkService>();
+
+#if __ANDROID__ || __IOS__
+            NavigationService = ServiceLocator.Current.GetInstance<INavigationService>();
+#endif
 
             IsConnected = Network.IsConnected;
             Network.ConnectivityChanged += (s, e) =>

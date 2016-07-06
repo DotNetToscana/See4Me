@@ -27,7 +27,7 @@ namespace See4Me.Android
         public override void OnCreate()
         {
             base.OnCreate();
-            
+
             // Registers services for core library
             this.Initialize();
         }

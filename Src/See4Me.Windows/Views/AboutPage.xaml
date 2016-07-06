@@ -1,0 +1,89 @@
+﻿<Page
+    x:Class="See4Me.Views.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:See4Me"
+    DataContext="{Binding Source={StaticResource Locator}, Path=AboutViewModel}"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:behaviors="using:See4Me.Behaviors"
+    xmlns:triggers="using:WindowsStateTriggers"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controls:PageHeader Frame="{x:Bind Frame}" Text="{Binding Path=LocalizedResources.About, Source={StaticResource LocalizedStrings}}" />
+
+        <ScrollViewer Grid.Row="1" Margin="12" Padding="5,0,5,0">
+            <StackPanel>
+                <TextBlock Text="{Binding Path=LocalizedResources.AppName, Source={StaticResource LocalizedStrings}}" Margin="5,0"
+                           Style="{StaticResource TitleTextBlockStyle}" />
+                <TextBlock Text="{Binding AppVersion}" Margin="5,0,0,20" Style="{StaticResource SubtitleTextBlockStyle}" />
+                <TextBlock Text="{Binding Path=LocalizedResources.ProjectAuthor, Source={StaticResource LocalizedStrings}}" Margin="5" TextWrapping="Wrap" />
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="{Binding Path=LocalizedResources.Blog, Source={StaticResource LocalizedStrings}}" Margin="0,0,5,0"
+                                VerticalAlignment="Top" />
+                    <HyperlinkButton Margin="0,-6" Grid.Column="1" VerticalAlignment="Top"
+                                     Command="{Binding GotoUrlCommand}" CommandParameter="{Binding BlogUrl}">
+                        <HyperlinkButton.Content>
+                            <TextBlock TextWrapping="Wrap">
+                                <Underline>
+                                    <Run Text="{Binding BlogUrl}" />
+                                </Underline>
+                            </TextBlock>
+                        </HyperlinkButton.Content>
+                    </HyperlinkButton>
+
+                    <TextBlock Grid.Row="1" Text="{Binding Path=LocalizedResources.Twitter, Source={StaticResource LocalizedStrings}}" Margin="0,0,5,0"
+                                VerticalAlignment="Top" />
+                    <HyperlinkButton Margin="0,-6" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"
+                                     Command="{Binding GotoUrlCommand}" CommandParameter="{Binding TwitterUrl}">
+                        <HyperlinkButton.Content>
+                            <TextBlock TextWrapping="Wrap">
+                                <Underline>
+                                    <Run Text="{Binding TwitterUrl}" />
+                                </Underline>
+                            </TextBlock>
+                        </HyperlinkButton.Content>
+                    </HyperlinkButton>
+
+                    <TextBlock Grid.Row="2" Text="{Binding Path=LocalizedResources.LinkedIn, Source={StaticResource LocalizedStrings}}" Margin="0,0,5,0"
+                                VerticalAlignment="Top" />
+                    <HyperlinkButton Margin="0,-6" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top"
+                                     Command="{Binding GotoUrlCommand}" CommandParameter="{Binding LinkedInUrl}">
+                        <HyperlinkButton.Content>
+                            <TextBlock TextWrapping="Wrap">
+                                <Underline>
+                                    <Run Text="{Binding LinkedInUrl}" />
+                                </Underline>
+                            </TextBlock>
+                        </HyperlinkButton.Content>
+                    </HyperlinkButton>
+                </Grid>
+
+                <HyperlinkButton Content="{Binding Path=LocalizedResources.GotoCognitiveServices, Source={StaticResource LocalizedStrings}}"
+                                 Command="{Binding GotoCognitiveServicesUrlCommand}" Margin="5,20,5,0" />
+
+                <HyperlinkButton Content="{Binding Path=LocalizedResources.GotoGitHub, Source={StaticResource LocalizedStrings}}"
+                                 Command="{Binding GotoGitHubCommand}" Margin="5,5,5,0" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -20,7 +20,7 @@ namespace See4Me.Extensions
             };
 
         public static string GetBestEmotion(this Scores scores)
-        {            
+        {
             var bestEmotion = scores.ToRankedList().FirstOrDefault().Key;
             if (bestEmotion != nameof(Scores.Neutral))
                 return bestEmotion;

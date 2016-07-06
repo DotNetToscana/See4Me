@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     DataContext="{Binding Source={StaticResource Locator}, Path=MainViewModel}"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
     xmlns:controls="using:Template10.Controls"
     xmlns:behaviors="using:See4Me.Behaviors"
@@ -14,38 +14,47 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
         <Grid>
-            <CaptureElement x:Name="video" Stretch="UniformToFill" Margin="0" />
-            <TextBlock Text="{Binding StatusMessage}" Style="{StaticResource SubheaderTextBlockStyle}" TextAlignment="Center"
+            <Grid>
+                <CaptureElement x:Name="video" Stretch="UniformToFill" Margin="0" />
+                <TextBlock Text="{Binding StatusMessage}" Style="{StaticResource SubheaderTextBlockStyle}" TextAlignment="Center"
                        HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="12" TextWrapping="Wrap" />
+                <Image x:Name="previewImage" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Opacity="0.75" />
 
-            <Interactivity:Interaction.Behaviors>
-                <Interactions:EventTriggerBehavior EventName="Tapped">
-                    <Interactions:InvokeCommandAction Command="{Binding VideoCommand}"  />
-                </Interactions:EventTriggerBehavior>
-                <behaviors:SwipeTriggerBehavior Direction="Left">
-                    <Interactions:InvokeCommandAction Command="{Binding SwipeCommand}" 
-                                                      InputConverter="{StaticResource SwipeDirectionConverter}" InputConverterParameter="Left" />
-                </behaviors:SwipeTriggerBehavior>
-                <behaviors:SwipeTriggerBehavior Direction="Right">
-                    <Interactions:InvokeCommandAction Command="{Binding SwipeCommand}"  
-                                                      InputConverter="{StaticResource SwipeDirectionConverter}" InputConverterParameter="Right" />
-                </behaviors:SwipeTriggerBehavior>
-                <behaviors:SwipeTriggerBehavior Direction="Up">
-                    <Interactions:InvokeCommandAction Command="{Binding GuessAgeCommand}" />
-                </behaviors:SwipeTriggerBehavior>
-                <behaviors:SwipeTriggerBehavior Direction="Down">
-                    <Interactions:InvokeCommandAction Command="{Binding GuessAgeCommand}" />
-                </behaviors:SwipeTriggerBehavior>
-            </Interactivity:Interaction.Behaviors>            
+                <!--<Interactivity:Interaction.Behaviors>
+                    <Interactions:EventTriggerBehavior EventName="Tapped">
+                        <Interactions:InvokeCommandAction Command="{Binding VideoCommand}"  />
+                    </Interactions:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>-->
+            </Grid>
+            <Button x:Name="changeCameraButton" Style="{StaticResource CircleButton}" VerticalAlignment="Top" HorizontalAlignment="Center">
+                <SymbolIcon Symbol="RotateCamera" Width="48" Height="48" />
+                <Interactivity:Interaction.Behaviors>
+                    <Interactions:EventTriggerBehavior EventName="Click">
+                        <Interactions:InvokeCommandAction Command="{Binding SwapCameraCommand}"  />
+                    </Interactions:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+            </Button>
+            <Button x:Name="settingsButton" Style="{StaticResource CircleButton}" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <SymbolIcon Symbol="Setting" Width="48" Height="48" />
+                <Interactivity:Interaction.Behaviors>
+                    <Interactions:EventTriggerBehavior EventName="Click">
+                        <Interactions:InvokeCommandAction Command="{Binding GotoSettingsCommand}"  />
+                    </Interactions:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+            </Button>
+            <Button x:Name="takePhotoButton" Style="{StaticResource CircleButton}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <SymbolIcon Symbol="Camera" Width="64" Height="64" />
+                <Interactivity:Interaction.Behaviors>
+                    <Interactions:EventTriggerBehavior EventName="Click">
+                        <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}"  />
+                    </Interactions:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+            </Button>
         </Grid>
 
         <MediaElement x:Name="shutter" Source="/Assets/Sounds/Shutter.mp3" AutoPlay="False" />
-        
+
         <Interactivity:Interaction.Behaviors>
             <behaviors:CameraPressedBehavior>
                 <Interactions:InvokeCommandAction Command="{Binding VideoCommand}"  />
@@ -64,8 +73,11 @@
                     <VisualState.Setters>
                         <Setter Target="video.Width" Value="640" />
                         <Setter Target="video.Height" Value="480" />
+                        <Setter Target="changeCameraButton.Visibility" Value="Collapsed" />
+                        <Setter Target="settingsButton.Visibility" Value="Collapsed" />
+                        <Setter Target="takePhotoButton.Visibility" Value="Collapsed" />
                     </VisualState.Setters>
-                </VisualState>                
+                </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </Grid>

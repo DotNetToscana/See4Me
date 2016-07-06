@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "See4Me.Windows", "src\See4Me.Windows\See4Me.Windows.csproj", "{0D590B16-EF65-40FB-9218-96E5F5D40F1C}"
 EndProject
@@ -19,10 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Src\See4Me.Shared\See4Me.Shared.projitems*{bb5e6ea7-347b-47eb-8abf-0c37a25ef101}*SharedItemsImports = 4
-		Src\See4Me.Shared\See4Me.Shared.projitems*{9e2cec20-3ea7-4627-a5fb-1f57f0716aa2}*SharedItemsImports = 13
 		Src\See4Me.Shared\See4Me.Shared.projitems*{07d2ce91-d4c3-4e01-88cc-9e40fe3f8d47}*SharedItemsImports = 4
 		Src\See4Me.Shared\See4Me.Shared.projitems*{0d590b16-ef65-40fb-9218-96e5f5d40f1c}*SharedItemsImports = 4
+		Src\See4Me.Shared\See4Me.Shared.projitems*{9e2cec20-3ea7-4627-a5fb-1f57f0716aa2}*SharedItemsImports = 13
+		Src\See4Me.Shared\See4Me.Shared.projitems*{bb5e6ea7-347b-47eb-8abf-0c37a25ef101}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
@@ -102,6 +102,8 @@ Global
 		{0D590B16-EF65-40FB-9218-96E5F5D40F1C}.Debug|x86.Build.0 = Debug|x86
 		{0D590B16-EF65-40FB-9218-96E5F5D40F1C}.Debug|x86.Deploy.0 = Debug|x86
 		{0D590B16-EF65-40FB-9218-96E5F5D40F1C}.Release|Any CPU.ActiveCfg = Release|x86
+		{0D590B16-EF65-40FB-9218-96E5F5D40F1C}.Release|Any CPU.Build.0 = Release|x86
+		{0D590B16-EF65-40FB-9218-96E5F5D40F1C}.Release|Any CPU.Deploy.0 = Release|x86
 		{0D590B16-EF65-40FB-9218-96E5F5D40F1C}.Release|ARM.ActiveCfg = Release|ARM
 		{0D590B16-EF65-40FB-9218-96E5F5D40F1C}.Release|ARM.Build.0 = Release|ARM
 		{0D590B16-EF65-40FB-9218-96E5F5D40F1C}.Release|ARM.Deploy.0 = Release|ARM

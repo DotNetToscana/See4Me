@@ -3,17 +3,22 @@ using Microsoft.Practices.ServiceLocation;
 using See4Me.Services;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using System.IO;
+using See4Me.Extensions;
+using Windows.System.Profile;
 
 namespace See4Me.Views
 {
     public sealed partial class MainPage : Page
     {
+        private static string deviceFamily;
+
         public MainPage()
         {
             this.InitializeComponent();
 
-            // Do not cache the state of the UI when suspending/navigating
-            NavigationCacheMode = NavigationCacheMode.Disabled;
+            NavigationCacheMode = NavigationCacheMode.Required;
+            deviceFamily = AnalyticsInfo.VersionInfo.DeviceFamily;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -38,8 +43,24 @@ namespace See4Me.Views
             {
                 switch (message.Notification)
                 {
-                    case Constants.TakePhoto:
-                        shutter.Play();
+                    case Constants.TakingPhoto:
+                        previewImage.Source = null;
+
+                        if (deviceFamily != "Windows.Mobile")
+                            shutter.Play();
+
+                        break;
+                }
+            });
+
+            Messenger.Default.Register<NotificationMessage<byte[]>>(this, async (message) =>
+            {
+                switch (message.Notification)
+                {
+                    case Constants.PhotoTaken:
+                        using (var ms = new MemoryStream(message.Content))
+                            previewImage.Source = await ms.AsImageSourceAsync();
+
                         break;
                 }
             });

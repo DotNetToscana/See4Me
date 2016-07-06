@@ -85,7 +85,7 @@ namespace See4Me.Android
 
         public bool OnSingleTapUp(MotionEvent e)
         {
-            ViewModel.VideoCommand.Execute(null);
+            ViewModel.DescribeImageCommand.Execute(null);
             return true;
         }
 
@@ -104,7 +104,7 @@ namespace See4Me.Android
         {
             if (keyCode == Keycode.VolumeDown || keyCode == Keycode.VolumeUp)
             {
-                ViewModel.VideoCommand.Execute(null);
+                ViewModel.DescribeImageCommand.Execute(null);
                 return true;
             }
 

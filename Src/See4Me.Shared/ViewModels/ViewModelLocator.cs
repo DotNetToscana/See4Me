@@ -19,8 +19,42 @@ namespace See4Me.ViewModels
 
         static ViewModelLocator()
         {
-            var language = GetLanguage();
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
+            InitializeServices();
+
+            SimpleIoc.Default.Register<ISpeechService>(() =>
+            {
+                var language = GetLanguage();
+                var service = new SpeechService { Language = language };
+                return service;
+            });
+
+            SimpleIoc.Default.Register<IStreamingService, StreamingService>();
+            SimpleIoc.Default.Register<ISettingsService, SettingsService>();
+            SimpleIoc.Default.Register<INetworkService, NetworkService>();
+            SimpleIoc.Default.Register<ILauncherService, LauncherService>();
+            SimpleIoc.Default.Register<IAppService, AppService>();
+
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<SettingsViewModel>();
+            SimpleIoc.Default.Register<AboutViewModel>();
+
+            OnInitialize();
+        }
+
+        public static void InitializeServices()
+        {
+            var language = GetLanguage();
+
+            if (SimpleIoc.Default.IsRegistered<ITranslatorService>())
+                SimpleIoc.Default.Unregister<ITranslatorService>();
+
+            if (SimpleIoc.Default.IsRegistered<VisionServiceClient>())
+                SimpleIoc.Default.Unregister<VisionServiceClient>();
+
+            if (SimpleIoc.Default.IsRegistered<EmotionServiceClient>())
+                SimpleIoc.Default.Unregister<EmotionServiceClient>();
 
             SimpleIoc.Default.Register<ITranslatorService>(() =>
             {
@@ -30,23 +64,19 @@ namespace See4Me.ViewModels
 
             SimpleIoc.Default.Register<VisionServiceClient>(() => new VisionServiceClient(ServiceKeys.VisionSubscriptionKey));
             SimpleIoc.Default.Register<EmotionServiceClient>(() => new EmotionServiceClient(ServiceKeys.EmotionSubscriptionKey));
-
-            SimpleIoc.Default.Register<ISpeechService>(() =>
-            {
-                var service = new SpeechService { Language = language };
-                return service;
-            });
-
-            SimpleIoc.Default.Register<IStreamingService, StreamingService>();
-            SimpleIoc.Default.Register<ISettingsService, SettingsService>();
-            SimpleIoc.Default.Register<INetworkService, NetworkService>();
-
-            SimpleIoc.Default.Register<MainViewModel>();
-
-            OnInitialize();
         }
 
         public MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
+
+        public SettingsViewModel SettingsViewModel => ServiceLocator.Current.GetInstance<SettingsViewModel>();
+
+        public AboutViewModel AboutViewModel => ServiceLocator.Current.GetInstance<AboutViewModel>();
+
+        public static VisionServiceClient VisionServiceClient => ServiceLocator.Current.GetInstance<VisionServiceClient>();
+
+        public static EmotionServiceClient EmotionServiceClient => ServiceLocator.Current.GetInstance<EmotionServiceClient>();
+
+        public static ITranslatorService TranslatorService => ServiceLocator.Current.GetInstance<ITranslatorService>();
 
         static partial void OnInitialize();
 

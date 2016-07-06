@@ -20,13 +20,12 @@ using Windows.Graphics.Display;
 using Windows.Devices.Sensors;
 using Windows.Storage.FileProperties;
 using Windows.Foundation;
+using Windows.Media.Devices;
 
 namespace See4Me.Services
 {
     public class StreamingService : IStreamingService
     {
-        private static string deviceFamily;
-
         /// <summary>
         /// Holds the current scenario state value.
         /// </summary>
@@ -40,11 +39,12 @@ namespace See4Me.Services
         private MediaCapture mediaCapture;
         private CaptureElement preview;
 
+
         // Information about the camera device
         private bool mirroringPreview;
         private bool externalCamera;
 
-        // Receive notifications about rotation of the device and UI and apply any necessary rotation to the preview stream and UI controls       
+        // Receive notifications about rotation of the device and UI and apply any necessary rotation to the preview stream and UI controls
         private readonly DisplayInformation displayInformation = DisplayInformation.GetForCurrentView();
         private readonly SimpleOrientationSensor orientationSensor = SimpleOrientationSensor.GetDefault();
         private SimpleOrientation deviceOrientation = SimpleOrientation.NotRotated;
@@ -58,25 +58,14 @@ namespace See4Me.Services
         private readonly DisplayRequest displayRequest = new DisplayRequest();
 
         /// <summary>
-        /// Cache of properties from the current MediaCapture device which is used for capturing the preview frame.
-        /// </summary>
-        private VideoEncodingProperties videoProperties;
-
-        /// <summary>
         /// Semaphore to ensure FaceTracking logic only executes one at a time
         /// </summary>
         private SemaphoreSlim frameProcessingSemaphore = new SemaphoreSlim(1);
 
-        static StreamingService()
-        {
-            deviceFamily = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
-        }
-
-
         public Task InitializeAsync()
         {
             // Attempt to lock page to landscape orientation to prevent the CaptureElement from rotating, as this gives a better experience
-            //DisplayInformation.AutoRotationPreferences = DisplayOrientations.Landscape;
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Landscape;
 
             // Populate orientation variables with the current state
             displayOrientation = displayInformation.CurrentOrientation;
@@ -179,14 +168,27 @@ namespace See4Me.Services
                 await this.mediaCapture.InitializeAsync(settings);
                 this.mediaCapture.Failed += this.MediaCapture_CameraStreamFailed;
 
-                // Cache the media properties as we'll need them later.
+                // Query all preview properties of the device.
                 var deviceController = this.mediaCapture.VideoDeviceController;
-                this.videoProperties = deviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview) as VideoEncodingProperties;
+                //var previewProperties = deviceController.GetAvailableMediaStreamProperties(MediaStreamType.VideoPreview).Select(x => new StreamResolution(x));
+                var photoProperties = deviceController.GetAvailableMediaStreamProperties(MediaStreamType.Photo).Select(x => new StreamResolution(x));
+
+                var defaultEncodingProperties = photoProperties.FirstOrDefault(x => x.Width == 640)?.EncodingProperties;
+                if (defaultEncodingProperties != null)
+                    await deviceController.SetMediaStreamPropertiesAsync(MediaStreamType.Photo, defaultEncodingProperties);
+
+                var focusControl = deviceController.FocusControl;
+                if (focusControl.Supported)
+                {
+                    var focusSettings = new FocusSettings { Mode = FocusMode.Continuous, AutoFocusRange = AutoFocusRange.Macro };
+                    focusControl.Configure(focusSettings);
+                    await focusControl.FocusAsync();
+                }
 
                 // Figure out where the camera is located
                 if (cameraDevice.EnclosureLocation == null || cameraDevice.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Unknown)
                 {
-                    // No information on the location of the camera, assume it's an external camera, not integrated on the device                    
+                    // No information on the location of the camera, assume it's an external camera, not integrated on the device
                     externalCamera = true;
                 }
                 else
@@ -244,7 +246,7 @@ namespace See4Me.Services
                 return;
 
             // Calculate which way and how far to rotate the preview
-            int rotationDegrees = ConvertDisplayOrientationToDegrees(displayOrientation);
+            int rotationDegrees = this.ConvertDisplayOrientationToDegrees(displayOrientation);
 
             // The rotation direction needs to be inverted if the preview is being mirrored
             if (mirroringPreview)
@@ -263,7 +265,7 @@ namespace See4Me.Services
         {
             if (this.mediaCapture != null)
             {
-                if (this.mediaCapture.CameraStreamState == Windows.Media.Devices.CameraStreamState.Streaming)
+                if (this.mediaCapture.CameraStreamState == CameraStreamState.Streaming)
                 {
                     try
                     {
@@ -365,33 +367,11 @@ namespace See4Me.Services
 
             try
             {
-                if (deviceFamily == "Windows.IoT")
-                {
-                    var stream = new InMemoryRandomAccessStream();
-                    await mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream);
+                var stream = new InMemoryRandomAccessStream();
+                await mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream);
 
-                    stream.Seek(0);
-                    return stream.AsStream();
-                }
-                else
-                {
-                    // Create a VideoFrame object specifying the pixel format we want our capture image to be.
-                    // GetPreviewFrame will convert the native webcam frame into this format.
-                    const BitmapPixelFormat InputPixelFormat = BitmapPixelFormat.Bgra8;
-                    using (var previewFrame = new VideoFrame(InputPixelFormat, 800, 600))   // (int)this.videoProperties.Width, (int)this.videoProperties.Height)
-                    {
-                        await this.mediaCapture.GetPreviewFrameAsync(previewFrame);
-
-                        // Create a WritableBitmap for our visualization display; copy the original bitmap pixels to wb's buffer.
-                        using (var convertedSource = SoftwareBitmap.Convert(previewFrame.SoftwareBitmap, InputPixelFormat))
-                        {
-                            var displaySource = new WriteableBitmap(convertedSource.PixelWidth, convertedSource.PixelHeight);
-                            convertedSource.CopyToBuffer(displaySource.PixelBuffer);
-
-                            return await this.ConvertToStreamAsync(displaySource);
-                        }
-                    }
-                }
+                stream.Seek(0);
+                return stream.AsStreamForRead();
             }
             catch
             { }
@@ -401,29 +381,6 @@ namespace See4Me.Services
             }
 
             return null;
-        }
-
-        private async Task<Stream> ConvertToStreamAsync(WriteableBitmap bitmap)
-        {
-            var stream = new InMemoryRandomAccessStream();
-            var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, stream);
-
-            // Get pixels of the WriteableBitmap object 
-            var pixelStream = bitmap.PixelBuffer.AsStream();
-            var pixels = new byte[pixelStream.Length];
-            await pixelStream.ReadAsync(pixels, 0, pixels.Length);
-
-            // Save the image file with jpg extension 
-            encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore, (uint)bitmap.PixelWidth, (uint)bitmap.PixelHeight, 96.0, 96.0, pixels);
-
-            var photoOrientation = this.ConvertOrientationToPhotoOrientation(this.GetCameraOrientation());
-            var properties = new BitmapPropertySet { { "System.Photo.Orientation", new BitmapTypedValue(photoOrientation, PropertyType.UInt16) } };
-            await encoder.BitmapProperties.SetPropertiesAsync(properties);
-
-            await encoder.FlushAsync();
-
-            stream.Seek(0);
-            return stream.AsStreamForRead();
         }
 
         /// <summary>
@@ -440,7 +397,7 @@ namespace See4Me.Services
             var desiredDevice = allVideoDevices.FirstOrDefault(x => x.EnclosureLocation?.Panel == desiredPanel);
 
             // If there is no device mounted on the desired panel, return the first device found
-            return desiredDevice ?? allVideoDevices.FirstOrDefault(x => x.EnclosureLocation == null || x.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Back) 
+            return desiredDevice ?? allVideoDevices.FirstOrDefault(x => x.EnclosureLocation == null || x.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Back)
                 ?? allVideoDevices.FirstOrDefault();
         }
 

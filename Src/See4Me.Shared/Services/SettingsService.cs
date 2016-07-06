@@ -12,6 +12,11 @@ namespace See4Me.Services
         private const string GUESS_AGE = "GuessAge";
         private const string SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION = "ShowOriginalDescriptionOnTranslation";
         private const string SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION = "ShowRawDescriptionOnInvalidRecognition";
+        private const string VISION_SUBSCRIPTION_KEY = "VisionSubscriptionKey";
+        private const string EMOTION_SUBSCRIPTION_KEY = "EmotionSubscriptionKey";
+        private const string TRANSLATOR_CLIENT_ID = "TranslatorClientId";
+        private const string TRANSLATOR_CLIENT_SECRET = "TranslatorClientSecret";
+        private const string IS_TEXT_TO_SPEECH_ENABLED = "IsTextToSpeechEnabled";
 
         private readonly ISettings settings;
 
@@ -32,32 +37,78 @@ namespace See4Me.Services
 
         public bool ShowDescriptionConfidence
         {
-            get { return settings.GetValueOrDefault(SHOW_DESCRIPTION_CONFIDENCE, true); }
+            get { return settings.GetValueOrDefault(SHOW_DESCRIPTION_CONFIDENCE, false); }
             set { settings.AddOrUpdateValue(SHOW_DESCRIPTION_CONFIDENCE, value); }
-        }
-
-        public bool ShowExceptionOnError
-        {
-            get { return settings.GetValueOrDefault(SHOW_EXCEPTION_ON_ERROR, false); }
-            set { settings.AddOrUpdateValue(SHOW_EXCEPTION_ON_ERROR, value); }
         }
 
         public bool GuessAge
         {
-            get { return settings.GetValueOrDefault(GUESS_AGE, false); }
+            get { return settings.GetValueOrDefault(GUESS_AGE, true); }
             set { settings.AddOrUpdateValue(GUESS_AGE, value); }
         }
 
         public bool ShowOriginalDescriptionOnTranslation
         {
-            get { return settings.GetValueOrDefault(SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION, true); }
+            get { return settings.GetValueOrDefault(SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION, false); }
             set { settings.AddOrUpdateValue(SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION, value); }
+        }
+
+        public bool ShowExceptionOnError
+        {
+            get
+            {
+#if DEBUG
+                var defaultValue = true;
+#else
+                var defaultValue = false;
+#endif
+                return settings.GetValueOrDefault(SHOW_EXCEPTION_ON_ERROR, defaultValue);
+            }
+            set { settings.AddOrUpdateValue(SHOW_EXCEPTION_ON_ERROR, value); }
         }
 
         public bool ShowRawDescriptionOnInvalidRecognition
         {
-            get { return settings.GetValueOrDefault(SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION, true); }
-            set { settings.AddOrUpdateValue(SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION, value); }
+            get
+            {
+#if DEBUG
+                var defaultValue = true;
+#else
+                var defaultValue = false;
+#endif
+                return settings.GetValueOrDefault(SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION, defaultValue);
+            }
+            set { settings.AddOrUpdateValue(SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION, value); }
+        }
+
+        public string VisionSubscriptionKey
+        {
+            get { return settings.GetValueOrDefault<string>(VISION_SUBSCRIPTION_KEY, null); }
+            set { settings.AddOrUpdateValue(VISION_SUBSCRIPTION_KEY, value); }
+        }
+
+        public string EmotionSubscriptionKey
+        {
+            get { return settings.GetValueOrDefault<string>(EMOTION_SUBSCRIPTION_KEY, null); }
+            set { settings.AddOrUpdateValue(EMOTION_SUBSCRIPTION_KEY, value); }
+        }
+
+        public string TranslatorClientId
+        {
+            get { return settings.GetValueOrDefault<string>(TRANSLATOR_CLIENT_ID, null); }
+            set { settings.AddOrUpdateValue(TRANSLATOR_CLIENT_ID, value); }
+        }
+
+        public string TranslatorClientSecret
+        {
+            get { return settings.GetValueOrDefault<string>(TRANSLATOR_CLIENT_SECRET, null); }
+            set { settings.AddOrUpdateValue(TRANSLATOR_CLIENT_SECRET, value); }
+        }
+
+        public bool IsTextToSpeechEnabled
+        {
+            get { return settings.GetValueOrDefault(IS_TEXT_TO_SPEECH_ENABLED, true); }
+            set { settings.AddOrUpdateValue(IS_TEXT_TO_SPEECH_ENABLED, value); }
         }
     }
 }

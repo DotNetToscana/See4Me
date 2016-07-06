@@ -30,7 +30,7 @@ namespace See4Me.Localization.Resources {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AppResources() {
+        public AppResources() {
         }
         
         /// <summary>
@@ -58,6 +58,33 @@ namespace See4Me.Localization.Resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About....
+        /// </summary>
+        public static string AboutCommand {
+            get {
+                return ResourceManager.GetString("AboutCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activate Translator Service.
+        /// </summary>
+        public static string ActivateTranslatorService {
+            get {
+                return ResourceManager.GetString("ActivateTranslatorService", resourceCulture);
             }
         }
         
@@ -94,6 +121,15 @@ namespace See4Me.Localization.Resources {
         public static string BackCameraReady {
             get {
                 return ResourceManager.GetString("BackCameraReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blog:.
+        /// </summary>
+        public static string Blog {
+            get {
+                return ResourceManager.GetString("Blog", resourceCulture);
             }
         }
         
@@ -152,6 +188,15 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create an app to get the keys.
+        /// </summary>
+        public static string CreateTranslatorApp {
+            get {
+                return ResourceManager.GetString("CreateTranslatorApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disgusted.
         /// </summary>
         public static string DisgustFemale {
@@ -175,6 +220,15 @@ namespace See4Me.Localization.Resources {
         public static string DontGuessAge {
             get {
                 return ResourceManager.GetString("DontGuessAge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Emotion Subscription Key.
+        /// </summary>
+        public static string EmotionSubscriptionKey {
+            get {
+                return ResourceManager.GetString("EmotionSubscriptionKey", resourceCulture);
             }
         }
         
@@ -224,11 +278,38 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Visit Cognitive Services Home Page.
+        /// </summary>
+        public static string GotoCognitiveServices {
+            get {
+                return ResourceManager.GetString("GotoCognitiveServices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Follow the project on GitHub.
+        /// </summary>
+        public static string GotoGitHub {
+            get {
+                return ResourceManager.GetString("GotoGitHub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I will try to guess age.
         /// </summary>
         public static string GuessAge {
             get {
                 return ResourceManager.GetString("GuessAge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Try to guess age upon face detection.
+        /// </summary>
+        public static string GuessAgeOption {
+            get {
+                return ResourceManager.GetString("GuessAgeOption", resourceCulture);
             }
         }
         
@@ -256,6 +337,15 @@ namespace See4Me.Localization.Resources {
         public static string InitializationError {
             get {
                 return ResourceManager.GetString("InitializationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linkedin:.
+        /// </summary>
+        public static string LinkedIn {
+            get {
+                return ResourceManager.GetString("LinkedIn", resourceCulture);
             }
         }
         
@@ -359,6 +449,15 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Developed by Marco Minerva - MVP Windows Development.
+        /// </summary>
+        public static string ProjectAuthor {
+            get {
+                return ResourceManager.GetString("ProjectAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analyzing the image....
         /// </summary>
         public static string QueryingVisionService {
@@ -422,11 +521,56 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Attention, the service is not registered.
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attention, the service is not registered. Go to Settings page to enter the required keys..
         /// </summary>
         public static string ServiceNotRegistered {
             get {
                 return ResourceManager.GetString("ServiceNotRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show description confidence.
+        /// </summary>
+        public static string ShowDescriptionConfidence {
+            get {
+                return ResourceManager.GetString("ShowDescriptionConfidence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show original description on translation.
+        /// </summary>
+        public static string ShowOriginalDescriptionOnTranslation {
+            get {
+                return ResourceManager.GetString("ShowOriginalDescriptionOnTranslation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subscribe to get the key.
+        /// </summary>
+        public static string SubscribeCognitiveServices {
+            get {
+                return ResourceManager.GetString("SubscribeCognitiveServices", resourceCulture);
             }
         }
         
@@ -449,11 +593,56 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Text-To-Speech.
+        /// </summary>
+        public static string TextToSpeech {
+            get {
+                return ResourceManager.GetString("TextToSpeech", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Translating....
         /// </summary>
         public static string Translating {
             get {
                 return ResourceManager.GetString("Translating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Translator Client ID.
+        /// </summary>
+        public static string TranslatorClientId {
+            get {
+                return ResourceManager.GetString("TranslatorClientId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Translator Client Secret.
+        /// </summary>
+        public static string TranslatorClientSecret {
+            get {
+                return ResourceManager.GetString("TranslatorClientSecret", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twitter:.
+        /// </summary>
+        public static string Twitter {
+            get {
+                return ResourceManager.GetString("Twitter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to access the service. Ensure that registration keys are correct.
+        /// </summary>
+        public static string UnableToAccessService {
+            get {
+                return ResourceManager.GetString("UnableToAccessService", resourceCulture);
             }
         }
         
@@ -467,11 +656,11 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Imaged successfully analyzed.
+        ///   Looks up a localized string similar to Vision Subscription Key.
         /// </summary>
-        public static string VisionServiceQueried {
+        public static string VisionSubscriptionKey {
             get {
-                return ResourceManager.GetString("VisionServiceQueried", resourceCulture);
+                return ResourceManager.GetString("VisionSubscriptionKey", resourceCulture);
             }
         }
     }

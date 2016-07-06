@@ -23,14 +23,18 @@ namespace See4Me.ViewModels
     public partial class MainViewModel : ViewModelBase
     {
         private readonly IStreamingService streamingService;
-        private readonly EmotionServiceClient emotionService;
-        private readonly VisionServiceClient visionService;
-        private readonly ITranslatorService translatorService;
         private readonly ISpeechService speechService;
 
-        public bool IsServiceRegistered
-            => !string.IsNullOrWhiteSpace(ServiceKeys.VisionSubscriptionKey) && !string.IsNullOrWhiteSpace(ServiceKeys.EmotionSubscriptionKey)
-            && !string.IsNullOrWhiteSpace(ServiceKeys.TranslatorClientId) && !string.IsNullOrWhiteSpace(ServiceKeys.TranslatorClientSecret);
+        private EmotionServiceClient emotionService;
+        private VisionServiceClient visionService;
+        private ITranslatorService translatorService;
+
+        public bool IsVisionServiceRegistered => !string.IsNullOrWhiteSpace(ServiceKeys.VisionSubscriptionKey);
+
+        public bool IsEmotionServiceRegistered => !string.IsNullOrWhiteSpace(ServiceKeys.EmotionSubscriptionKey);
+
+        public bool IsTranslatorServiceRegistered
+            => !string.IsNullOrWhiteSpace(ServiceKeys.TranslatorClientId) && !string.IsNullOrWhiteSpace(ServiceKeys.TranslatorClientSecret);
 
         private string statusMessage;
         public string StatusMessage
@@ -39,36 +43,44 @@ namespace See4Me.ViewModels
             set { this.Set(ref statusMessage, value); }
         }
 
-        public AutoRelayCommand VideoCommand { get; set; }
+        public AutoRelayCommand DescribeImageCommand { get; set; }
 
-        public AutoRelayCommand<SwipeDirection> SwipeCommand { get; set; }
+        public AutoRelayCommand SwapCameraCommand { get; set; }
 
         public AutoRelayCommand GuessAgeCommand { get; set; }
 
         private CameraPanel lastCameraPanel = CameraPanel.Unknown;
 
-        public MainViewModel(IStreamingService streamingService, VisionServiceClient visionService, EmotionServiceClient emotionService,
-            ITranslatorService translatorService, ISpeechService speechService)
+        public MainViewModel(IStreamingService streamingService, ISpeechService speechService)
         {
             this.streamingService = streamingService;
-            this.visionService = visionService;
-            this.emotionService = emotionService;
-            this.translatorService = translatorService;
             this.speechService = speechService;
+            this.InitializeServices();
 
             this.CreateCommands();
         }
 
+        private void InitializeServices()
+        {
+            this.visionService = ViewModelLocator.VisionServiceClient;
+            this.emotionService = ViewModelLocator.EmotionServiceClient;
+            this.translatorService = ViewModelLocator.TranslatorService;
+        }
+
         private void CreateCommands()
         {
-            VideoCommand = new AutoRelayCommand(async () => await DescribeImageAsync(), () => IsServiceRegistered && !IsBusy)
+            DescribeImageCommand = new AutoRelayCommand(async () => await DescribeImageAsync(), () => IsVisionServiceRegistered && !IsBusy)
                 .DependsOn(() => IsBusy);
 
-            SwipeCommand = new AutoRelayCommand<SwipeDirection>(async (direction) => await SwapCameraAsync(direction), (direction) => !IsBusy).
-                DependsOn(() => IsBusy);
+            SwapCameraCommand = new AutoRelayCommand(async () => await SwapCameraAsync(), () => IsVisionServiceRegistered && !IsBusy)
+                .DependsOn(() => IsBusy);
 
-            GuessAgeCommand = new AutoRelayCommand(async () => await SetGuessAgeAsync());
+            GuessAgeCommand = new AutoRelayCommand(async () => await SetGuessAgeAsync(), () => IsVisionServiceRegistered);
+
+            OnCreateCommands();
         }
+
+        partial void OnCreateCommands();
 
         public async Task InitializeAsync()
         {
@@ -76,7 +88,7 @@ namespace See4Me.ViewModels
 
             try
             {
-                if (IsConnected && Language != Constants.DefaultLanguge)
+                if (IsTranslatorServiceRegistered && IsConnected && Language != Constants.DefaultLanguge && !translatorService.IsInitialized)
                 {
                     // Retrieves tha authorization token for the translator service.
                     // This is necessary only if the app language is different from the default language,
@@ -100,10 +112,10 @@ namespace See4Me.ViewModels
                     { }
                     finally
                     {
-                        if (!IsServiceRegistered)
+                        if (!IsVisionServiceRegistered)
                         {
                             StatusMessage = AppResources.ServiceNotRegistered;
-                            await speechService.SpeechAsync(AppResources.ServiceNotRegistered);
+                            await this.TrySpeechAsync(AppResources.ServiceNotRegistered);
                         }
                         else if (successful)
                         {
@@ -137,22 +149,26 @@ namespace See4Me.ViewModels
         public async Task DescribeImageAsync()
         {
             IsBusy = true;
-            StatusMessage = AppResources.QueryingVisionService;
+            StatusMessage = null;
 
             string baseDescription = null;
             string facesRecognizedDescription = null;
             string emotionDescription = null;
 
-            MessengerInstance.Send(new NotificationMessage(Constants.TakePhoto));
+            MessengerInstance.Send(new NotificationMessage(Constants.TakingPhoto));
 
-            if (IsConnected && await Network.GetIsInternetAvailableAsync())
+            try
             {
-                try
+                using (var stream = await streamingService.GetCurrentFrameAsync())
                 {
-                    using (var stream = await streamingService.GetCurrentFrameAsync())
+                    StatusMessage = AppResources.QueryingVisionService;
+                    if (stream != null)
                     {
-                        if (stream != null)
+                        if (IsConnected && await Network.GetIsInternetAvailableAsync())
                         {
+                            var imageBytes = await stream.ToArrayAsync();
+                            MessengerInstance.Send(new NotificationMessage<byte[]>(imageBytes, Constants.PhotoTaken));
+
                             var visualFeatures = new VisualFeature[] { VisualFeature.Description, VisualFeature.Faces };
                             var result = await visionService.AnalyzeImageAsync(stream, visualFeatures);
 
@@ -163,22 +179,19 @@ namespace See4Me.ViewModels
                             {
                                 baseDescription = filteredDescription.Text;
 
-                                if (Language != Constants.DefaultLanguge)
+                                if (Language != Constants.DefaultLanguge && IsTranslatorServiceRegistered)
                                 {
                                     // The description needs to be translated.
-                                    if (!translatorService.IsInitialized && IsConnected)
+                                    if (!translatorService.IsInitialized)
                                         await this.translatorService.InitializeAsync();
 
-                                    if (translatorService.IsInitialized)
-                                    {
-                                        StatusMessage = AppResources.Translating;
-                                        var translation = await translatorService.TranslateAsync(filteredDescription.Text);
+                                    StatusMessage = AppResources.Translating;
+                                    var translation = await translatorService.TranslateAsync(filteredDescription.Text, Constants.DefaultLanguge, Language);
 
-                                        if (Settings.ShowOriginalDescriptionOnTranslation)
-                                            baseDescription = $"{translation} ({filteredDescription.Text})";
-                                        else
-                                            baseDescription = translation;
-                                    }
+                                    if (Settings.ShowOriginalDescriptionOnTranslation)
+                                        baseDescription = $"{translation} ({filteredDescription.Text})";
+                                    else
+                                        baseDescription = translation;
                                 }
 
                                 if (Settings.ShowDescriptionConfidence)
@@ -187,12 +200,10 @@ namespace See4Me.ViewModels
                                 try
                                 {
                                     // If there is one or more faces, asks the service information about them.
-                                    if (result.Faces?.Count() > 0)
+                                    if (IsEmotionServiceRegistered && result.Faces?.Count() > 0)
                                     {
                                         StatusMessage = AppResources.RecognizingFaces;
-
                                         var messages = new StringBuilder();
-                                        var imageBytes = await stream.ToArrayAsync();
 
                                         foreach (var face in result.Faces)
                                         {
@@ -221,7 +232,13 @@ namespace See4Me.ViewModels
                                         }
                                     }
                                 }
-                                catch { }
+                                catch (Microsoft.ProjectOxford.Common.ClientException ex) when (ex.Error.Code.ToLower() == "unauthorized")
+                                {
+                                    // Unable to access the service (tipically, due to invalid registration keys).
+                                    baseDescription = AppResources.UnableToAccessService;
+                                }
+                                catch
+                                { }
                             }
                             else
                             {
@@ -233,41 +250,46 @@ namespace See4Me.ViewModels
                         }
                         else
                         {
-                            baseDescription = AppResources.UnableToGetImage;
+                            // Internet isn't available, the service cannot be reached.
+                            baseDescription = AppResources.NoConnection;
                         }
                     }
-                }
-                catch (WebException)
-                {
-                    // Internet isn't available, the service cannot be reached.
-                    baseDescription = AppResources.NoConnection;
-                }
-                catch (Exception ex)
-                {
-                    var error = AppResources.RecognitionError;
-
-                    if (Settings.ShowExceptionOnError)
-                        error = $"{error} ({ex.Message})";
-
-                    baseDescription = error;
+                    else
+                    {
+                        baseDescription = AppResources.UnableToGetImage;
+                    }
                 }
             }
-            else
+            catch (WebException)
             {
-                // Internet isn't available, to service cannot be reached.
+                // Internet isn't available, the service cannot be reached.
                 baseDescription = AppResources.NoConnection;
+            }
+            catch (ClientException)
+            {
+                // Unable to access the service (tipically, due to invalid registration keys).
+                baseDescription = AppResources.UnableToAccessService;
+            }
+            catch (Exception ex)
+            {
+                var error = AppResources.RecognitionError;
+
+                if (Settings.ShowExceptionOnError)
+                    error = $"{error} ({ex.Message})";
+
+                baseDescription = error;
             }
 
             // Speaks the result.
             var message = $"{baseDescription}{Constants.SentenceEnd} {facesRecognizedDescription} {emotionDescription}";
             StatusMessage = this.GetNormalizedMessage(message);
             message = this.GetSpeechMessage(message);
-            await speechService.SpeechAsync(message);
+            await this.TrySpeechAsync(message);
 
             IsBusy = false;
         }
 
-        public async Task SwapCameraAsync(SwipeDirection direction)
+        public async Task SwapCameraAsync()
         {
             IsBusy = true;
             var successful = false;
@@ -299,7 +321,7 @@ namespace See4Me.ViewModels
             var message = Settings.GuessAge ? AppResources.GuessAge : AppResources.DontGuessAge;
             StatusMessage = message;
 
-            await speechService.SpeechAsync(message);
+            await this.TrySpeechAsync(message);
         }
 
         private async Task NotifyCameraPanelAsync()
@@ -310,16 +332,26 @@ namespace See4Me.ViewModels
                 var message = streamingService.CameraPanel == CameraPanel.Front ? AppResources.FrontCameraReady : AppResources.BackCameraReady;
                 StatusMessage = message;
 
-                await speechService.SpeechAsync(message);
-
+                await this.TrySpeechAsync(message);
                 lastCameraPanel = streamingService.CameraPanel;
             }
         }
 
-        private async Task NotifyInitializationErrorAsync()
+        private async Task NotifyInitializationErrorAsync(Exception error = null)
         {
-            StatusMessage = AppResources.InitializationError;
-            await speechService.SpeechAsync(StatusMessage);
+            var errorMessage = AppResources.InitializationError;
+
+            if (error != null && Settings.ShowExceptionOnError)
+                errorMessage = $"{errorMessage} ({error.Message})";
+
+            StatusMessage = errorMessage;
+            await this.TrySpeechAsync(errorMessage);
+        }
+
+        private async Task TrySpeechAsync(string message)
+        {
+            if (Settings.IsTextToSpeechEnabled)
+                await speechService.SpeechAsync(message);
         }
 
         private string GetNormalizedMessage(string message)

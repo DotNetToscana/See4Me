@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Navigation;
 namespace See4Me.ViewModels
 {
     public abstract partial class ViewModelBase : INavigable
-    {       
+    {
         public virtual Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
             => Task.CompletedTask;
 

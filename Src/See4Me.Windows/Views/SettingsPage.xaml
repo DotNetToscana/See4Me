@@ -1,0 +1,79 @@
+﻿<Page
+    x:Class="See4Me.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:See4Me"
+    DataContext="{Binding Source={StaticResource Locator}, Path=SettingsViewModel}"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:behaviors="using:See4Me.Behaviors"
+    xmlns:triggers="using:WindowsStateTriggers"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controls:PageHeader Frame="{x:Bind Frame}" Text="{Binding Path=LocalizedResources.Settings, Source={StaticResource LocalizedStrings}}"
+                             EllipsisVisibility="Collapsed">
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton
+                    Icon="Save"
+                    Label="{Binding Path=LocalizedResources.Save, Source={StaticResource LocalizedStrings}}"
+                    Command="{Binding SaveCommand}" />
+            </controls:PageHeader.PrimaryCommands>
+        </controls:PageHeader>
+
+        <ScrollViewer Grid.Row="1" Margin="12" Padding="0,0,12,0">
+            <StackPanel>
+                <TextBox Header="{Binding Path=LocalizedResources.VisionSubscriptionKey, Source={StaticResource LocalizedStrings}}"
+                         Text="{Binding VisionSubscriptionKey, Mode=TwoWay}" Margin="5" />
+                <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.SubscribeCognitiveServices, Source={StaticResource LocalizedStrings}}"
+                                 Margin="0,-5,5,0" Command="{Binding SubscribeCognitiveServicesCommand}" />
+
+                <TextBox Header="{Binding Path=LocalizedResources.EmotionSubscriptionKey, Source={StaticResource LocalizedStrings}}"
+                         Text="{Binding EmotionSubscriptionKey, Mode=TwoWay}" Margin="5" />
+                <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.SubscribeCognitiveServices, Source={StaticResource LocalizedStrings}}"
+                                 Margin="0,-5,5,0" Command="{Binding SubscribeCognitiveServicesCommand}" />
+
+                <TextBox Header="{Binding Path=LocalizedResources.TranslatorClientId, Source={StaticResource LocalizedStrings}}"
+                         Text="{Binding TranslatorClientId, Mode=TwoWay}" Margin="5" />
+                <TextBox Header="{Binding Path=LocalizedResources.TranslatorClientSecret, Source={StaticResource LocalizedStrings}}"
+                         Text="{Binding TranslatorClientSecret, Mode=TwoWay}" Margin="5" />
+                <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.ActivateTranslatorService, Source={StaticResource LocalizedStrings}}"
+                                 Command="{Binding ActivateTranslatorServiceCommand}" Margin="0,-5,5,0" />
+                <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.CreateTranslatorApp, Source={StaticResource LocalizedStrings}}"
+                                 Command="{Binding CreateTranslatorAppCommand}" Margin="0,-5,5,10" />
+
+                <ToggleSwitch Header="{Binding Path=LocalizedResources.TextToSpeech, Source={StaticResource LocalizedStrings}}"
+                         IsOn="{Binding IsTextToSpeechEnabled, Mode=TwoWay}" Margin="5" />
+                <ToggleSwitch Header="{Binding Path=LocalizedResources.ShowDescriptionConfidence, Source={StaticResource LocalizedStrings}}"
+                              IsOn="{Binding ShowDescriptionConfidence, Mode=TwoWay}" Margin="5" />
+                <ToggleSwitch IsOn="{Binding GuessAge, Mode=TwoWay}" Margin="5">
+                    <ToggleSwitch.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=LocalizedResources.GuessAgeOption, Source={StaticResource LocalizedStrings}}"
+                                       TextWrapping="Wrap" />
+                        </DataTemplate>
+                    </ToggleSwitch.HeaderTemplate>
+                </ToggleSwitch>
+                <ToggleSwitch IsOn="{Binding ShowOriginalDescriptionOnTranslation, Mode=TwoWay}" Margin="5">
+                    <ToggleSwitch.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=LocalizedResources.ShowOriginalDescriptionOnTranslation, Source={StaticResource LocalizedStrings}}"
+                                       TextWrapping="Wrap" />
+                        </DataTemplate>
+                    </ToggleSwitch.HeaderTemplate>
+                </ToggleSwitch>
+
+                <Button Content="{Binding Path=LocalizedResources.AboutCommand, Source={StaticResource LocalizedStrings}}" Margin="0,20"
+                        Command="{Binding GotoAboutCommand}" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

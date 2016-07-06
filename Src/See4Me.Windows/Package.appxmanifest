@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="22a2869c-479e-4a02-9ea0-937d6ccde2f0" Publisher="CN=Marco" Version="1.0.0.0" />
+  <Identity Name="53365MarcoMinerva.See4Me" Publisher="CN=7503DEF5-0940-4AA4-A3E8-7594769D17D0" Version="1.0.6.0" />
   <mp:PhoneIdentity PhoneProductId="22a2869c-479e-4a02-9ea0-937d6ccde2f0" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>See4Me</DisplayName>
-    <PublisherDisplayName>Marco</PublisherDisplayName>
+    <PublisherDisplayName>Marco Minerva</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -15,8 +15,8 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="See4Me.App">
-      <uap:VisualElements DisplayName="See4Me" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="See4Me" BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="See 4 Me" Square71x71Logo="Assets\Square71x71Logo.png" Square310x310Logo="Assets\Square310x310Logo.png">
+      <uap:VisualElements DisplayName="ms-resource:AppName" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="ms-resource:AppDescription" BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="See4Me" Square71x71Logo="Assets\Square71x71Logo.png" Square310x310Logo="Assets\Square310x310Logo.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
             <uap:ShowOn Tile="wide310x150Logo" />
@@ -29,8 +29,6 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
-    <uap:Capability Name="videosLibrary" />
-    <uap:Capability Name="picturesLibrary" />
     <uap:Capability Name="userAccountInformation" />
     <DeviceCapability Name="webcam" />
   </Capabilities>

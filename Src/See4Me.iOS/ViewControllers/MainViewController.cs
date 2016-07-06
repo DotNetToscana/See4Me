@@ -66,7 +66,7 @@ namespace See4Me.iOS
             };
 
             // TAP
-            View.AddGestureRecognizer(new UITapGestureRecognizer(tap => ViewModel.VideoCommand.Execute(null)));
+            View.AddGestureRecognizer(new UITapGestureRecognizer(tap => ViewModel.DescribeImageCommand.Execute(null)));
 
             // Swipe UP & Down
             var swipeUp = new UISwipeGestureRecognizer(() => ViewModel.GuessAgeCommand.Execute(null))
@@ -85,13 +85,13 @@ namespace See4Me.iOS
             View.AddGestureRecognizer(swipeDown);
 
             // Swipe Left & Right
-            var swipeLeft = new UISwipeGestureRecognizer(() => ViewModel.SwipeCommand.Execute(null))
+            var swipeLeft = new UISwipeGestureRecognizer(() => ViewModel.SwapCameraCommand.Execute(null))
             {
                 Direction = UISwipeGestureRecognizerDirection.Left,
                 Enabled = true
             };
 
-            var swipeRight = new UISwipeGestureRecognizer(() => ViewModel.SwipeCommand.Execute(null))
+            var swipeRight = new UISwipeGestureRecognizer(() => ViewModel.SwapCameraCommand.Execute(null))
             {
                 Direction = UISwipeGestureRecognizerDirection.Right,
                 Enabled = true
@@ -169,7 +169,7 @@ namespace See4Me.iOS
             {
                 switch (message.Notification)
                 {
-                    case Constants.TakePhoto:
+                    case Constants.TakingPhoto:
                         SoundTools.TriggerSoundAndViber();
                         break;
                 }

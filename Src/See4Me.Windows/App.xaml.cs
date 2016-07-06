@@ -11,7 +11,7 @@ using Template10.Common;
 
 namespace See4Me
 {
-    public enum Pages { MainPage }
+    public enum Pages { MainPage, SettingsPage, AboutPage }
 
     sealed partial class App : BootStrapper
     {
@@ -22,7 +22,7 @@ namespace See4Me
         public App()
         {
             this.InitializeComponent();
-        }        
+        }
 
         public override Task OnInitializeAsync(IActivatedEventArgs args)
         {
@@ -30,6 +30,8 @@ namespace See4Me
 
             var keys = PageKeys<Pages>();
             keys.Add(Pages.MainPage, typeof(MainPage));
+            keys.Add(Pages.SettingsPage, typeof(SettingsPage));
+            keys.Add(Pages.AboutPage, typeof(AboutPage));
 
             DispatcherHelper.Initialize();
 
@@ -44,7 +46,7 @@ namespace See4Me
 
         public override async void OnResuming(object s, object e, AppExecutionState previousExecutionState)
         {
-            // Resumes the camera streaming.           
+            // Resumes the camera streaming.
             await ViewModelLocator.ResumeAsync();
 
             base.OnResuming(s, e, previousExecutionState);

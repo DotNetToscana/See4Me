@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AboutCommand" xml:space="preserve">
+    <value>About...</value>
+  </data>
+  <data name="ActivateTranslatorService" xml:space="preserve">
+    <value>Activate Translator Service</value>
+  </data>
   <data name="AngerFemale" xml:space="preserve">
     <value>Angry</value>
   </data>
@@ -128,6 +137,9 @@
   </data>
   <data name="BackCameraReady" xml:space="preserve">
     <value>Back camera ready</value>
+  </data>
+  <data name="Blog" xml:space="preserve">
+    <value>Blog:</value>
   </data>
   <data name="BoyFemale" xml:space="preserve">
     <value>Girl</value>
@@ -147,6 +159,9 @@
   <data name="ContemptMale" xml:space="preserve">
     <value>To show contempt</value>
   </data>
+  <data name="CreateTranslatorApp" xml:space="preserve">
+    <value>Create an app to get the keys</value>
+  </data>
   <data name="DisgustFemale" xml:space="preserve">
     <value>Disgusted</value>
   </data>
@@ -155,6 +170,9 @@
   </data>
   <data name="DontGuessAge" xml:space="preserve">
     <value>I will not try to guess age anymore</value>
+  </data>
+  <data name="EmotionSubscriptionKey" xml:space="preserve">
+    <value>Emotion Subscription Key</value>
   </data>
   <data name="FaceRecognizedSingular" xml:space="preserve">
     <value>I see</value>
@@ -171,8 +189,17 @@
   <data name="FrontCameraReady" xml:space="preserve">
     <value>Front camera ready</value>
   </data>
+  <data name="GotoCognitiveServices" xml:space="preserve">
+    <value>Visit Cognitive Services Home Page</value>
+  </data>
+  <data name="GotoGitHub" xml:space="preserve">
+    <value>Follow the project on GitHub</value>
+  </data>
   <data name="GuessAge" xml:space="preserve">
     <value>I will try to guess age</value>
+  </data>
+  <data name="GuessAgeOption" xml:space="preserve">
+    <value>Try to guess age upon face detection</value>
   </data>
   <data name="HappinessFemale" xml:space="preserve">
     <value>Happy</value>
@@ -182,6 +209,9 @@
   </data>
   <data name="InitializationError" xml:space="preserve">
     <value>Error during app initialization</value>
+  </data>
+  <data name="LinkedIn" xml:space="preserve">
+    <value>Linkedin:</value>
   </data>
   <data name="LookingFemale" xml:space="preserve">
     <value>looking {0}</value>
@@ -216,6 +246,9 @@
   <data name="PersonMessageMale" xml:space="preserve">
     <value>A {0}</value>
   </data>
+  <data name="ProjectAuthor" xml:space="preserve">
+    <value>Developed by Marco Minerva - MVP Windows Development</value>
+  </data>
   <data name="QueryingVisionService" xml:space="preserve">
     <value>Analyzing the image...</value>
   </data>
@@ -237,8 +270,23 @@
   <data name="SadnessMale" xml:space="preserve">
     <value>Sad</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="ServiceNotRegistered" xml:space="preserve">
-    <value>Attention, the service is not registered</value>
+    <value>Attention, the service is not registered. Go to Settings page to enter the required keys.</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="ShowDescriptionConfidence" xml:space="preserve">
+    <value>Show description confidence</value>
+  </data>
+  <data name="ShowOriginalDescriptionOnTranslation" xml:space="preserve">
+    <value>Show original description on translation</value>
+  </data>
+  <data name="SubscribeCognitiveServices" xml:space="preserve">
+    <value>Subscribe to get the key</value>
   </data>
   <data name="SurpriseFemale" xml:space="preserve">
     <value>Surprised</value>
@@ -246,13 +294,28 @@
   <data name="SurpriseMale" xml:space="preserve">
     <value>Surprised</value>
   </data>
+  <data name="TextToSpeech" xml:space="preserve">
+    <value>Text-To-Speech</value>
+  </data>
   <data name="Translating" xml:space="preserve">
     <value>Translating...</value>
+  </data>
+  <data name="TranslatorClientId" xml:space="preserve">
+    <value>Translator Client ID</value>
+  </data>
+  <data name="TranslatorClientSecret" xml:space="preserve">
+    <value>Translator Client Secret</value>
+  </data>
+  <data name="Twitter" xml:space="preserve">
+    <value>Twitter:</value>
+  </data>
+  <data name="UnableToAccessService" xml:space="preserve">
+    <value>Unable to access the service. Ensure that registration keys are correct</value>
   </data>
   <data name="UnableToGetImage" xml:space="preserve">
     <value>I'm sorry, I can't get the image</value>
   </data>
-  <data name="VisionServiceQueried" xml:space="preserve">
-    <value>Imaged successfully analyzed</value>
+  <data name="VisionSubscriptionKey" xml:space="preserve">
+    <value>Vision Subscription Key</value>
   </data>
 </root>
