@@ -66,7 +66,7 @@
         public static string TranslatorClientSecret = "TranslatorClientSecret";
         public static string Twitter = "Twitter";
         public static string UnableToAccessService = "UnableToAccessService";
-        public static string UnableToGetImage = "UnableToGetImage";
+        public static string UnableToTakePhoto = "UnableToTakePhoto";
         public static string VisionSubscriptionKey = "VisionSubscriptionKey";
     }
 }

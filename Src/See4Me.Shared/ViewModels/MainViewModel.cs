@@ -254,7 +254,7 @@ namespace See4Me.ViewModels
                     }
                     else
                     {
-                        baseDescription = AppResources.UnableToGetImage;
+                        baseDescription = AppResources.UnableToTakePhoto;
                     }
                 }
             }

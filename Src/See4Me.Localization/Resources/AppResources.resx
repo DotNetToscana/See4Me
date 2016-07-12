@@ -309,8 +309,8 @@
   <data name="UnableToAccessService" xml:space="preserve">
     <value>Unable to access the service. Ensure that registration keys are correct</value>
   </data>
-  <data name="UnableToGetImage" xml:space="preserve">
-    <value>I'm sorry, I can't get the image</value>
+  <data name="UnableToTakePhoto" xml:space="preserve">
+    <value>I'm sorry, I can't take the photo. Try restarting the app</value>
   </data>
   <data name="VisionSubscriptionKey" xml:space="preserve">
     <value>Vision Subscription Key</value>

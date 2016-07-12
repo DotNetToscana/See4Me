@@ -638,11 +638,11 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I&apos;m sorry, I can&apos;t get the image.
+        ///   Looks up a localized string similar to I&apos;m sorry, I can&apos;t take the photo. Try restarting the app.
         /// </summary>
-        public static string UnableToGetImage {
+        public static string UnableToTakePhoto {
             get {
-                return ResourceManager.GetString("UnableToGetImage", resourceCulture);
+                return ResourceManager.GetString("UnableToTakePhoto", resourceCulture);
             }
         }
         
