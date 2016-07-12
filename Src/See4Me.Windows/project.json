@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.1",
     "Microsoft.ProjectOxford.Common": "1.0.308",
     "Microsoft.ProjectOxford.Emotion": "1.0.310",
     "Microsoft.ProjectOxford.Vision": "1.0.354",

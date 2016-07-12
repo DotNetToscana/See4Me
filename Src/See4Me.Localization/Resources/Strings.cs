@@ -19,15 +19,14 @@
         public static string CreateTranslatorApp = "CreateTranslatorApp";
         public static string DisgustFemale = "DisgustFemale";
         public static string DisgustMale = "DisgustMale";
-        public static string DontGuessAge = "DontGuessAge";
         public static string EmotionSubscriptionKey = "EmotionSubscriptionKey";
         public static string FaceRecognizedSingular = "FaceRecognizedSingular";
         public static string FacesRecognizedPlural = "FacesRecognizedPlural";
         public static string FearFemale = "FearFemale";
         public static string FearMale = "FearMale";
         public static string FrontCameraReady = "FrontCameraReady";
+        public static string GotoCognitiveServices = "GotoCognitiveServices";
         public static string GotoGitHub = "GotoGitHub";
-        public static string GuessAge = "GuessAge";
         public static string GuessAgeOption = "GuessAgeOption";
         public static string HappinessFemale = "HappinessFemale";
         public static string HappinessMale = "HappinessMale";
@@ -60,6 +59,7 @@
         public static string SubscribeCognitiveServices = "SubscribeCognitiveServices";
         public static string SurpriseFemale = "SurpriseFemale";
         public static string SurpriseMale = "SurpriseMale";
+        public static string SwapCameraError = "SwapCameraError";
         public static string TextToSpeech = "TextToSpeech";
         public static string Translating = "Translating";
         public static string TranslatorClientId = "TranslatorClientId";

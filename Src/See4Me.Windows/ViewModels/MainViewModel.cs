@@ -26,7 +26,6 @@ namespace See4Me.ViewModels
 
             DescribeImageCommand.RaiseCanExecuteChanged();
             SwapCameraCommand.RaiseCanExecuteChanged();
-            GuessAgeCommand.RaiseCanExecuteChanged();
 
             await base.OnNavigatedToAsync(parameter, mode, state);
         }

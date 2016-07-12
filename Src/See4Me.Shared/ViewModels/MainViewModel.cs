@@ -29,6 +29,9 @@ namespace See4Me.ViewModels
         private VisionServiceClient visionService;
         private ITranslatorService translatorService;
 
+        private CameraPanel lastCameraPanel = CameraPanel.Unknown;
+        private bool initialized = false;
+
         public bool IsVisionServiceRegistered => !string.IsNullOrWhiteSpace(ServiceKeys.VisionSubscriptionKey);
 
         public bool IsEmotionServiceRegistered => !string.IsNullOrWhiteSpace(ServiceKeys.EmotionSubscriptionKey);
@@ -46,10 +49,6 @@ namespace See4Me.ViewModels
         public AutoRelayCommand DescribeImageCommand { get; set; }
 
         public AutoRelayCommand SwapCameraCommand { get; set; }
-
-        public AutoRelayCommand GuessAgeCommand { get; set; }
-
-        private CameraPanel lastCameraPanel = CameraPanel.Unknown;
 
         public MainViewModel(IStreamingService streamingService, ISpeechService speechService)
         {
@@ -74,8 +73,6 @@ namespace See4Me.ViewModels
 
             SwapCameraCommand = new AutoRelayCommand(async () => await SwapCameraAsync(), () => IsVisionServiceRegistered && !IsBusy)
                 .DependsOn(() => IsBusy);
-
-            GuessAgeCommand = new AutoRelayCommand(async () => await SetGuessAgeAsync(), () => IsVisionServiceRegistered);
 
             OnCreateCommands();
         }
@@ -133,6 +130,7 @@ namespace See4Me.ViewModels
                 await this.NotifyInitializationErrorAsync();
             }
 
+            initialized = true;
             IsBusy = false;
         }
 
@@ -186,7 +184,7 @@ namespace See4Me.ViewModels
                                         await this.translatorService.InitializeAsync();
 
                                     StatusMessage = AppResources.Translating;
-                                    var translation = await translatorService.TranslateAsync(filteredDescription.Text, Constants.DefaultLanguge, Language);
+                                    var translation = await translatorService.TranslateAsync(filteredDescription.Text, from: Constants.DefaultLanguge, to: Language);
 
                                     if (Settings.ShowOriginalDescriptionOnTranslation)
                                         baseDescription = $"{translation} ({filteredDescription.Text})";
@@ -280,11 +278,12 @@ namespace See4Me.ViewModels
                 baseDescription = error;
             }
 
-            // Speaks the result.
+            // Shows and speaks the result.
             var message = $"{baseDescription}{Constants.SentenceEnd} {facesRecognizedDescription} {emotionDescription}";
             StatusMessage = this.GetNormalizedMessage(message);
-            message = this.GetSpeechMessage(message);
-            await this.TrySpeechAsync(message);
+
+            var speechMessage = this.GetSpeechMessage(message);
+            await this.TrySpeechAsync(speechMessage);
 
             IsBusy = false;
         }
@@ -308,20 +307,10 @@ namespace See4Me.ViewModels
                 if (successful)
                     await this.NotifyCameraPanelAsync();
                 else
-                    await this.NotifyInitializationErrorAsync();
+                    await this.NotifySwapCameraErrorAsync();
             }
 
             IsBusy = false;
-        }
-
-        private async Task SetGuessAgeAsync()
-        {
-            Settings.GuessAge = !Settings.GuessAge;
-
-            var message = Settings.GuessAge ? AppResources.GuessAge : AppResources.DontGuessAge;
-            StatusMessage = message;
-
-            await this.TrySpeechAsync(message);
         }
 
         private async Task NotifyCameraPanelAsync()
@@ -339,13 +328,24 @@ namespace See4Me.ViewModels
 
         private async Task NotifyInitializationErrorAsync(Exception error = null)
         {
-            var errorMessage = AppResources.InitializationError;
+            // If the app is already initialized, skips the notification error.
+            if (!initialized)
+            {
+                var errorMessage = AppResources.InitializationError;
+                if (error != null && Settings.ShowExceptionOnError)
+                    errorMessage = $"{errorMessage} ({error.Message})";
 
-            if (error != null && Settings.ShowExceptionOnError)
-                errorMessage = $"{errorMessage} ({error.Message})";
+                StatusMessage = errorMessage;
 
-            StatusMessage = errorMessage;
-            await this.TrySpeechAsync(errorMessage);
+                var speechMessage = this.GetSpeechMessage(errorMessage);
+                await this.TrySpeechAsync(speechMessage);
+            }
+        }
+
+        private async Task NotifySwapCameraErrorAsync()
+        {
+            StatusMessage = AppResources.SwapCameraError;
+            await this.TrySpeechAsync(StatusMessage);
         }
 
         private async Task TrySpeechAsync(string message)

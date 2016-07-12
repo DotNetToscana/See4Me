@@ -215,15 +215,6 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I will not try to guess age anymore.
-        /// </summary>
-        public static string DontGuessAge {
-            get {
-                return ResourceManager.GetString("DontGuessAge", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Emotion Subscription Key.
         /// </summary>
         public static string EmotionSubscriptionKey {
@@ -292,15 +283,6 @@ namespace See4Me.Localization.Resources {
         public static string GotoGitHub {
             get {
                 return ResourceManager.GetString("GotoGitHub", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to I will try to guess age.
-        /// </summary>
-        public static string GuessAge {
-            get {
-                return ResourceManager.GetString("GuessAge", resourceCulture);
             }
         }
         
@@ -589,6 +571,15 @@ namespace See4Me.Localization.Resources {
         public static string SurpriseMale {
             get {
                 return ResourceManager.GetString("SurpriseMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I&apos;m sorry, I&apos;m unable to swap camera.
+        /// </summary>
+        public static string SwapCameraError {
+            get {
+                return ResourceManager.GetString("SwapCameraError", resourceCulture);
             }
         }
         

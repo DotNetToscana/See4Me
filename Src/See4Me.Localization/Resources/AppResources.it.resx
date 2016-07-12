@@ -168,9 +168,6 @@
   <data name="DisgustMale" xml:space="preserve">
     <value>Disgustato</value>
   </data>
-  <data name="DontGuessAge" xml:space="preserve">
-    <value>Non proverò più ad indovinare le età</value>
-  </data>
   <data name="EmotionSubscriptionKey" xml:space="preserve">
     <value>Chiave di sottoscrizione servizio Emotion</value>
   </data>
@@ -194,9 +191,6 @@
   </data>
   <data name="GotoGitHub" xml:space="preserve">
     <value>Segui il progetto su GitHub</value>
-  </data>
-  <data name="GuessAge" xml:space="preserve">
-    <value>Ora proverò ad indovinare le età</value>
   </data>
   <data name="GuessAgeOption" xml:space="preserve">
     <value>Prova a determinare l'età quando viene riconosciuta una persona</value>
@@ -293,6 +287,9 @@
   </data>
   <data name="SurpriseMale" xml:space="preserve">
     <value>Sorpreso</value>
+  </data>
+  <data name="SwapCameraError" xml:space="preserve">
+    <value>Mi dispiace, non riesco a cambiare la camera</value>
   </data>
   <data name="TextToSpeech" xml:space="preserve">
     <value>Leggi i messaggi</value>

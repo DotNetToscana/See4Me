@@ -65,24 +65,8 @@ namespace See4Me.iOS
                 this.SetBinding(() => ViewModel.StatusMessage, () => MessageLabel.Text, BindingMode.OneWay)
             };
 
-            // TAP
+            // Tap
             View.AddGestureRecognizer(new UITapGestureRecognizer(tap => ViewModel.DescribeImageCommand.Execute(null)));
-
-            // Swipe UP & Down
-            var swipeUp = new UISwipeGestureRecognizer(() => ViewModel.GuessAgeCommand.Execute(null))
-            {
-                Direction = UISwipeGestureRecognizerDirection.Up,
-                Enabled = true
-            };
-
-            var swipeDown = new UISwipeGestureRecognizer(() => ViewModel.GuessAgeCommand.Execute(null))
-            {
-                Direction = UISwipeGestureRecognizerDirection.Down,
-                Enabled = true
-            };
-
-            View.AddGestureRecognizer(swipeUp);
-            View.AddGestureRecognizer(swipeDown);
 
             // Swipe Left & Right
             var swipeLeft = new UISwipeGestureRecognizer(() => ViewModel.SwapCameraCommand.Execute(null))

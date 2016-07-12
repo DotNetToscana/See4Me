@@ -168,9 +168,6 @@
   <data name="DisgustMale" xml:space="preserve">
     <value>Disgusted</value>
   </data>
-  <data name="DontGuessAge" xml:space="preserve">
-    <value>I will not try to guess age anymore</value>
-  </data>
   <data name="EmotionSubscriptionKey" xml:space="preserve">
     <value>Emotion Subscription Key</value>
   </data>
@@ -194,9 +191,6 @@
   </data>
   <data name="GotoGitHub" xml:space="preserve">
     <value>Follow the project on GitHub</value>
-  </data>
-  <data name="GuessAge" xml:space="preserve">
-    <value>I will try to guess age</value>
   </data>
   <data name="GuessAgeOption" xml:space="preserve">
     <value>Try to guess age upon face detection</value>
@@ -293,6 +287,9 @@
   </data>
   <data name="SurpriseMale" xml:space="preserve">
     <value>Surprised</value>
+  </data>
+  <data name="SwapCameraError" xml:space="preserve">
+    <value>I'm sorry, I'm unable to swap camera</value>
   </data>
   <data name="TextToSpeech" xml:space="preserve">
     <value>Text-To-Speech</value>

@@ -11,7 +11,7 @@ namespace See4Me.Extensions
         private const double MINIMUM_CONFIDENCE = 0.16d;
 
         // Somes strings represents a description that is actually invalid
-        // or need to be temporaly removed (the latter will be probably added
+        // or need to be temporaly removed (they will be probably added
         // again in a future release).
         private static List<string> InvalidDescriptions = new List<string>
         {
@@ -75,7 +75,9 @@ namespace See4Me.Extensions
             "a man flying through",
             "a plane that is flying in",
             "a bird flying over",
-            "the air while riding a skateboard on"
+            "the air while riding a skateboard on",
+            "a dog that is laying down in",
+            "a cat that is laying down in"
         };
 
         public static bool IsValid(this AnalysisResult result, out Caption rawDescription, out Caption filteredDescription)
