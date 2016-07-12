@@ -27,29 +27,17 @@
                     </Interactions:EventTriggerBehavior>
                 </Interactivity:Interaction.Behaviors>-->
             </Grid>
-            <Button x:Name="changeCameraButton" Style="{StaticResource CircleButton}" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Button x:Name="changeCameraButton" Style="{StaticResource CircleButton}" VerticalAlignment="Top" HorizontalAlignment="Center"
+                    Command="{Binding SwapCameraCommand}">
                 <SymbolIcon Symbol="RotateCamera" Width="48" Height="48" />
-                <Interactivity:Interaction.Behaviors>
-                    <Interactions:EventTriggerBehavior EventName="Click">
-                        <Interactions:InvokeCommandAction Command="{Binding SwapCameraCommand}"  />
-                    </Interactions:EventTriggerBehavior>
-                </Interactivity:Interaction.Behaviors>
             </Button>
-            <Button x:Name="settingsButton" Style="{StaticResource CircleButton}" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Button x:Name="settingsButton" Style="{StaticResource CircleButton}" VerticalAlignment="Top" HorizontalAlignment="Right"
+                    Command="{Binding GotoSettingsCommand}">
                 <SymbolIcon Symbol="Setting" Width="48" Height="48" />
-                <Interactivity:Interaction.Behaviors>
-                    <Interactions:EventTriggerBehavior EventName="Click">
-                        <Interactions:InvokeCommandAction Command="{Binding GotoSettingsCommand}"  />
-                    </Interactions:EventTriggerBehavior>
-                </Interactivity:Interaction.Behaviors>
             </Button>
-            <Button x:Name="takePhotoButton" Style="{StaticResource CircleButton}" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Button x:Name="takePhotoButton" Style="{StaticResource CircleButton}" VerticalAlignment="Center" HorizontalAlignment="Right"
+                    Command="{Binding DescribeImageCommand}">
                 <SymbolIcon Symbol="Camera" Width="64" Height="64" />
-                <Interactivity:Interaction.Behaviors>
-                    <Interactions:EventTriggerBehavior EventName="Click">
-                        <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}"  />
-                    </Interactions:EventTriggerBehavior>
-                </Interactivity:Interaction.Behaviors>
             </Button>
         </Grid>
 
