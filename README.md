@@ -8,6 +8,13 @@ First, you must obtain a Cognitive API subscription keys by following instructio
 
 You need to insert these service keys (Subscription Key for Vision and Emotion, ClientId and ClientSecret for Translator Service) in the *Src/See4Me.Shared/ServiceKeys.cs* file.
 
+**Screenshots**
+
+*Windows 10 version*
+
+<img src="https://raw.githubusercontent.com/DotNetToscana/See4Me/master/Screenshots/Windows/DescribeImage01.png" width="400" height="225">
+<img src="https://raw.githubusercontent.com/DotNetToscana/See4Me/master/Screenshots/Windows/DescribeImage02.png" width="400" height="225">
+
 **Contribute**
 
 The project is continually evolving. If you want to contribute, feel free make to pull requests or get in touch with us!
