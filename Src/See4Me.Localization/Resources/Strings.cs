@@ -39,6 +39,7 @@
         public static string NeutralFemale = "NeutralFemale";
         public static string NeutralMale = "NeutralMale";
         public static string NoConnection = "NoConnection";
+        public static string OpenSettings = "OpenSettings";
         public static string PersonAgeMessageFemale = "PersonAgeMessageFemale";
         public static string PersonAgeMessageMale = "PersonAgeMessageMale";
         public static string PersonMessageFemale = "PersonMessageFemale";
@@ -47,6 +48,7 @@
         public static string QueryingVisionService = "QueryingVisionService";
         public static string RecognitionError = "RecognitionError";
         public static string RecognitionFailed = "RecognitionFailed";
+        public static string RecognizeText = "RecognizeText";
         public static string RecognizingFaces = "RecognizingFaces";
         public static string ResourceLanguage = "ResourceLanguage";
         public static string SadnessFemale = "SadnessFemale";
@@ -59,7 +61,9 @@
         public static string SubscribeCognitiveServices = "SubscribeCognitiveServices";
         public static string SurpriseFemale = "SurpriseFemale";
         public static string SurpriseMale = "SurpriseMale";
+        public static string SwapCamera = "SwapCamera";
         public static string SwapCameraError = "SwapCameraError";
+        public static string TakePhoto = "TakePhoto";
         public static string TextToSpeech = "TextToSpeech";
         public static string Translating = "Translating";
         public static string TranslatorClientId = "TranslatorClientId";

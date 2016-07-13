@@ -112,12 +112,18 @@
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Services\AppService.cs" />
     <Compile Include="Services\LauncherService.cs" />
+    <Compile Include="Services\MediaPicker.cs" />
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\StreamingService.cs" />
     <Compile Include="Services\StreamResolution.cs" />
+    <Compile Include="ViewModels\RecognizeTextViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\RecognizeTextPage.xaml.cs">
+      <DependentUpon>RecognizeTextPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
@@ -193,6 +199,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\RecognizeTextPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AboutPage.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -395,6 +395,15 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go to Settings.
+        /// </summary>
+        public static string OpenSettings {
+            get {
+                return ResourceManager.GetString("OpenSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A {1} years old {0}.
         /// </summary>
         public static string PersonAgeMessageFemale {
@@ -463,6 +472,15 @@ namespace See4Me.Localization.Resources {
         public static string RecognitionFailed {
             get {
                 return ResourceManager.GetString("RecognitionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recognize Text.
+        /// </summary>
+        public static string RecognizeText {
+            get {
+                return ResourceManager.GetString("RecognizeText", resourceCulture);
             }
         }
         
@@ -575,11 +593,29 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Swap camera.
+        /// </summary>
+        public static string SwapCamera {
+            get {
+                return ResourceManager.GetString("SwapCamera", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I&apos;m sorry, I&apos;m unable to swap camera.
         /// </summary>
         public static string SwapCameraError {
             get {
                 return ResourceManager.GetString("SwapCameraError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Take a photo.
+        /// </summary>
+        public static string TakePhoto {
+            get {
+                return ResourceManager.GetString("TakePhoto", resourceCulture);
             }
         }
         
@@ -634,6 +670,15 @@ namespace See4Me.Localization.Resources {
         public static string UnableToAccessService {
             get {
                 return ResourceManager.GetString("UnableToAccessService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I&apos;m sorry, I can&apos;t recognize text inside the photo.
+        /// </summary>
+        public static string UnableToRecognizeText {
+            get {
+                return ResourceManager.GetString("UnableToRecognizeText", resourceCulture);
             }
         }
         

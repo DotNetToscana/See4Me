@@ -127,6 +127,8 @@
     <Compile Include="Services\AppService.cs" />
     <Compile Include="Services\ImageTools.cs" />
     <Compile Include="Services\LauncherService.cs" />
+    <Compile Include="Services\MediaPicker.cs" />
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\OutputRecorder.cs" />
     <Compile Include="Services\SoundTools.cs" />
     <Compile Include="Extensions\LocalizationExtensions.cs" />

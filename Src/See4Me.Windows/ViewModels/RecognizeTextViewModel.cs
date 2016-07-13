@@ -14,25 +14,20 @@ using Microsoft.Practices.ServiceLocation;
 
 namespace See4Me.ViewModels
 {
-    public partial class MainViewModel : ViewModelBase
+    public partial class RecognizeTextViewModel : ViewModelBase
     {
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            // Calls methods to initialize the app.
+            // Calls method to initialize services.
             this.InitializeServices();
-            await this.InitializeAsync();
-
-            DescribeImageCommand.RaiseCanExecuteChanged();
-            SwapCameraCommand.RaiseCanExecuteChanged();
-            GotoRecognizeTextCommand.RaiseCanExecuteChanged();
+            TakePhotoCommand.Execute(null);
 
             await base.OnNavigatedToAsync(parameter, mode, state);
         }
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
         {
-            // When navigating away from this page (even for suspending), cleanup the associated resources.
-            await this.CleanupAsync();
+            Message = null;
 
             await base.OnNavigatedFromAsync(state, suspending);
         }

@@ -12,18 +12,14 @@ namespace See4Me.ViewModels
 
         protected INetworkService Network { get; }
 
-#if __ANDROID__ || __IOS__
-        protected INavigationService NavigationService { get; }
-#endif
+        protected Services.INavigationService Navigator { get; }
 
         public ViewModelBase()
         {
             Settings = ServiceLocator.Current.GetInstance<ISettingsService>();
             Network = ServiceLocator.Current.GetInstance<INetworkService>();
 
-#if __ANDROID__ || __IOS__
-            NavigationService = ServiceLocator.Current.GetInstance<INavigationService>();
-#endif
+            Navigator = ServiceLocator.Current.GetInstance<Services.INavigationService>();
 
             IsConnected = Network.IsConnected;
             Network.ConnectivityChanged += (s, e) =>

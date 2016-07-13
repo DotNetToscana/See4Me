@@ -1,13 +1,26 @@
-﻿using Microsoft.ProjectOxford.Vision.Contract;
+﻿using Microsoft.Practices.ServiceLocation;
+using Microsoft.ProjectOxford.Vision.Contract;
 using See4Me.Localization.Resources;
+using See4Me.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace See4Me.Extensions
 {
     public static class SpeechHelper
     {
+        private static readonly ISettingsService settings;
+        private static readonly ISpeechService speechService;
+
+        static SpeechHelper()
+        {
+            settings = ServiceLocator.Current.GetInstance<ISettingsService>();
+            speechService = ServiceLocator.Current.GetInstance<ISpeechService>();
+        }
+
         public static string GetEmotionMessage(Face face, string bestEmotion, bool includeAge)
         {
             //if (bestEmotion == null && !includeAge)
@@ -60,5 +73,14 @@ namespace See4Me.Extensions
 
         private static string GetString(string key, string gender)
             => AppResources.ResourceManager.GetString(key + gender);
+
+        public static async Task TrySpeechAsync(string message)
+        {
+            if (settings.IsTextToSpeechEnabled)
+            {
+                var speechMessage = Regex.Replace(message, @" ?\(.*?\)", string.Empty);
+                await speechService.SpeechAsync(speechMessage);
+            }
+        }
     }
 }

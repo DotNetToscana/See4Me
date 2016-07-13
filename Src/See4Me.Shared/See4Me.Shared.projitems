@@ -20,12 +20,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\SwipeDirection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EmotionExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\OcrResultExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\SpeechHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StreamExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\VisionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ServiceKeys.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IAppService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ILauncherService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IMediaPicker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\INavigationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\INetworkService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ISettingsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ISpeechService.cs" />
@@ -36,6 +39,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Translator\AdmAuthentication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Translator\ITranslatorService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Translator\TranslatorService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\RecognizeTextViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AboutViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainViewModel.cs" />

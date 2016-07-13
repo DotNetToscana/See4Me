@@ -5,6 +5,7 @@ using Android.Runtime;
 using See4Me.ViewModels;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Views;
+using See4Me.Services;
 
 namespace See4Me.Android
 {
@@ -35,8 +36,8 @@ namespace See4Me.Android
         private void Initialize()
         {
             // Page navigation
-            var navigationService = new NavigationService();
-            navigationService.Configure(Constants.MainPage, typeof(MainActivity));
+            var navigationService = new Services.NavigationService();
+            navigationService.Configure(Pages.MainPage.ToString(), typeof(MainActivity));
 
             this.Locator = new ViewModelLocator();
             Locator.Initialize(navigationService);

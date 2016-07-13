@@ -11,10 +11,10 @@ namespace See4Me.ViewModels
 {
     public partial class ViewModelLocator
     {
-        public void Initialize(INavigationService navigationService = null)
+        public void Initialize(Services.INavigationService navigationService = null)
         {
             if (navigationService != null)
-                SimpleIoc.Default.Register<INavigationService>(() => navigationService);
+                SimpleIoc.Default.Register<Services.INavigationService>(() => navigationService);
         }
 
         static ViewModelLocator()
@@ -35,10 +35,12 @@ namespace See4Me.ViewModels
             SimpleIoc.Default.Register<INetworkService, NetworkService>();
             SimpleIoc.Default.Register<ILauncherService, LauncherService>();
             SimpleIoc.Default.Register<IAppService, AppService>();
+            SimpleIoc.Default.Register<IMediaPicker, MediaPicker>();
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
             SimpleIoc.Default.Register<AboutViewModel>();
+            SimpleIoc.Default.Register<RecognizeTextViewModel>();
 
             OnInitialize();
         }
@@ -71,6 +73,8 @@ namespace See4Me.ViewModels
         public SettingsViewModel SettingsViewModel => ServiceLocator.Current.GetInstance<SettingsViewModel>();
 
         public AboutViewModel AboutViewModel => ServiceLocator.Current.GetInstance<AboutViewModel>();
+
+        public RecognizeTextViewModel RecognizeTextViewModel => ServiceLocator.Current.GetInstance<RecognizeTextViewModel>();
 
         public static VisionServiceClient VisionServiceClient => ServiceLocator.Current.GetInstance<VisionServiceClient>();
 

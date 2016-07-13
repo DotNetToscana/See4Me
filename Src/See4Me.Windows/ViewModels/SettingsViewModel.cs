@@ -26,11 +26,9 @@ namespace See4Me.ViewModels
         private const string TRANSLATOR_CLIENT_SECRET = "TranslatorClientSecret";
         private const string IS_TEXT_TO_SPEECH_ENABLED = "IsTextToSpeechEnabled";
 
-        public AutoRelayCommand GotoAboutCommand { get; set; }
-
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            if (NavigationService.CurrentPageType?.Name.Contains("Settings") ?? false && mode != NavigationMode.Back)
+            if (mode != NavigationMode.Back)
             {
                 this.Initialize();
             }
@@ -65,11 +63,6 @@ namespace See4Me.ViewModels
             }
 
             return base.OnNavigatedFromAsync(state, suspending);
-        }
-
-        partial void OnCreateCommands()
-        {
-            GotoAboutCommand = new AutoRelayCommand(() => NavigationService.Navigate(Pages.AboutPage));
         }
 
         private void Restore(IDictionary<string, object> state)

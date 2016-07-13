@@ -23,32 +23,39 @@
 
                 <!--<Interactivity:Interaction.Behaviors>
                     <Interactions:EventTriggerBehavior EventName="Tapped">
-                        <Interactions:InvokeCommandAction Command="{Binding VideoCommand}"  />
+                        <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}"  />
                     </Interactions:EventTriggerBehavior>
                 </Interactivity:Interaction.Behaviors>-->
             </Grid>
             <Button x:Name="changeCameraButton" Style="{StaticResource CircleButton}" VerticalAlignment="Top" HorizontalAlignment="Center"
-                    Command="{Binding SwapCameraCommand}">
+                    Command="{Binding SwapCameraCommand}" AutomationProperties.Name="{Binding Path=LocalizedResources.SwapCamera, Source={StaticResource LocalizedStrings}}">
                 <SymbolIcon Symbol="RotateCamera" Width="48" Height="48" />
             </Button>
             <Button x:Name="settingsButton" Style="{StaticResource CircleButton}" VerticalAlignment="Top" HorizontalAlignment="Right"
-                    Command="{Binding GotoSettingsCommand}">
+                    Command="{Binding GotoSettingsCommand}" AutomationProperties.Name="{Binding Path=LocalizedResources.OpenSettings, Source={StaticResource LocalizedStrings}}">
                 <SymbolIcon Symbol="Setting" Width="48" Height="48" />
             </Button>
-            <Button x:Name="takePhotoButton" Style="{StaticResource CircleButton}" VerticalAlignment="Center" HorizontalAlignment="Right"
-                    Command="{Binding DescribeImageCommand}">
-                <SymbolIcon Symbol="Camera" Width="64" Height="64" />
-            </Button>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button x:Name="takePhotoButton" Style="{StaticResource CircleButton}" Command="{Binding DescribeImageCommand}"
+                        AutomationProperties.Name="{Binding Path=LocalizedResources.TakePhoto, Source={StaticResource LocalizedStrings}}">
+                    <SymbolIcon Symbol="Camera" Width="64" Height="64" />
+                </Button>
+                <Button x:Name="recognizeTextButton" Style="{StaticResource CircleButton}"
+                        HorizontalAlignment="Center"
+                        Command="{Binding GotoRecognizeTextCommand}" AutomationProperties.Name="{Binding Path=LocalizedResources.RecognizeText, Source={StaticResource LocalizedStrings}}">
+                    <SymbolIcon Symbol="Character" Width="48" Height="48" />
+                </Button>
+            </StackPanel>
         </Grid>
 
         <MediaElement x:Name="shutter" Source="/Assets/Sounds/Shutter.mp3" AutoPlay="False" />
 
         <Interactivity:Interaction.Behaviors>
             <behaviors:CameraPressedBehavior>
-                <Interactions:InvokeCommandAction Command="{Binding VideoCommand}"  />
+                <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}"  />
             </behaviors:CameraPressedBehavior>
             <behaviors:PushButtonPressedBehavior PinNumber="27" ButtonType="PullDown">
-                <Interactions:InvokeCommandAction Command="{Binding VideoCommand}"  />
+                <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}"  />
             </behaviors:PushButtonPressedBehavior>
         </Interactivity:Interaction.Behaviors>
 
@@ -64,6 +71,7 @@
                         <Setter Target="changeCameraButton.Visibility" Value="Collapsed" />
                         <Setter Target="settingsButton.Visibility" Value="Collapsed" />
                         <Setter Target="takePhotoButton.Visibility" Value="Collapsed" />
+                        <Setter Target="recognizeTextButton.Visibility" Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

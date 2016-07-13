@@ -30,23 +30,25 @@ namespace See4Me.Services
             ConnectivityChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        public async Task<bool> GetIsInternetAvailableAsync()
+        public async Task<bool> IsInternetAvailableAsync()
         {
             try
             {
-                using (var client = new HttpClient())
+                if (IsConnected)
                 {
-                    client.Timeout = TimeSpan.FromSeconds(CONNECTION_TEST_TIMEOUT_SECONDS);
-                    var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, CONNECTION_TEST_URL));
-                    response.EnsureSuccessStatusCode();
+                    using (var client = new HttpClient())
+                    {
+                        client.Timeout = TimeSpan.FromSeconds(CONNECTION_TEST_TIMEOUT_SECONDS);
+                        var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, CONNECTION_TEST_URL));
+                        response.EnsureSuccessStatusCode();
 
-                    return true;
+                        return true;
+                    }
                 }
             }
-            catch(Exception)
-            {
-                return false;
-            }
+            catch { }
+
+            return false;
         }
 
         public void Dispose()

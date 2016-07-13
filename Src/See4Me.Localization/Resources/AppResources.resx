@@ -228,6 +228,9 @@
   <data name="NoConnection" xml:space="preserve">
     <value>I'm sorry, there is no Internet connection</value>
   </data>
+  <data name="OpenSettings" xml:space="preserve">
+    <value>Go to Settings</value>
+  </data>
   <data name="PersonAgeMessageFemale" xml:space="preserve">
     <value>A {1} years old {0}</value>
   </data>
@@ -251,6 +254,9 @@
   </data>
   <data name="RecognitionFailed" xml:space="preserve">
     <value>I'm sorry, I don't recognize the image</value>
+  </data>
+  <data name="RecognizeText" xml:space="preserve">
+    <value>Recognize Text</value>
   </data>
   <data name="RecognizingFaces" xml:space="preserve">
     <value>Recognizing faces and emotions...</value>
@@ -288,8 +294,14 @@
   <data name="SurpriseMale" xml:space="preserve">
     <value>Surprised</value>
   </data>
+  <data name="SwapCamera" xml:space="preserve">
+    <value>Swap camera</value>
+  </data>
   <data name="SwapCameraError" xml:space="preserve">
     <value>I'm sorry, I'm unable to swap camera</value>
+  </data>
+  <data name="TakePhoto" xml:space="preserve">
+    <value>Take a photo</value>
   </data>
   <data name="TextToSpeech" xml:space="preserve">
     <value>Text-To-Speech</value>
@@ -308,6 +320,9 @@
   </data>
   <data name="UnableToAccessService" xml:space="preserve">
     <value>Unable to access the service. Ensure that registration keys are correct</value>
+  </data>
+  <data name="UnableToRecognizeText" xml:space="preserve">
+    <value>I'm sorry, I can't recognize text inside the photo</value>
   </data>
   <data name="UnableToTakePhoto" xml:space="preserve">
     <value>I'm sorry, I can't take the photo. Try restarting the app</value>

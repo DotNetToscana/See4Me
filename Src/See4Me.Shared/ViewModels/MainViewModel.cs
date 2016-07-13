@@ -50,6 +50,10 @@ namespace See4Me.ViewModels
 
         public AutoRelayCommand SwapCameraCommand { get; set; }
 
+        public AutoRelayCommand GotoSettingsCommand { get; set; }
+
+        public AutoRelayCommand GotoRecognizeTextCommand { get; set; }
+
         public MainViewModel(IStreamingService streamingService, ISpeechService speechService)
         {
             this.streamingService = streamingService;
@@ -74,10 +78,11 @@ namespace See4Me.ViewModels
             SwapCameraCommand = new AutoRelayCommand(async () => await SwapCameraAsync(), () => IsVisionServiceRegistered && !IsBusy)
                 .DependsOn(() => IsBusy);
 
-            OnCreateCommands();
-        }
+            GotoSettingsCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.SettingsPage.ToString()));
 
-        partial void OnCreateCommands();
+            GotoRecognizeTextCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.RecognizeTextPage.ToString()), () => IsVisionServiceRegistered && !IsBusy)
+                .DependsOn(() => IsBusy);
+        }
 
         public async Task InitializeAsync()
         {
@@ -112,7 +117,7 @@ namespace See4Me.ViewModels
                         if (!IsVisionServiceRegistered)
                         {
                             StatusMessage = AppResources.ServiceNotRegistered;
-                            await this.TrySpeechAsync(AppResources.ServiceNotRegistered);
+                            await SpeechHelper.TrySpeechAsync(AppResources.ServiceNotRegistered);
                         }
                         else if (successful)
                         {
@@ -162,7 +167,7 @@ namespace See4Me.ViewModels
                     StatusMessage = AppResources.QueryingVisionService;
                     if (stream != null)
                     {
-                        if (IsConnected && await Network.GetIsInternetAvailableAsync())
+                        if (await Network.IsInternetAvailableAsync())
                         {
                             var imageBytes = await stream.ToArrayAsync();
                             MessengerInstance.Send(new NotificationMessage<byte[]>(imageBytes, Constants.PhotoTaken));
@@ -180,9 +185,6 @@ namespace See4Me.ViewModels
                                 if (Language != Constants.DefaultLanguge && IsTranslatorServiceRegistered)
                                 {
                                     // The description needs to be translated.
-                                    if (!translatorService.IsInitialized)
-                                        await this.translatorService.InitializeAsync();
-
                                     StatusMessage = AppResources.Translating;
                                     var translation = await translatorService.TranslateAsync(filteredDescription.Text, from: Constants.DefaultLanguge, to: Language);
 
@@ -282,8 +284,7 @@ namespace See4Me.ViewModels
             var message = $"{baseDescription}{Constants.SentenceEnd} {facesRecognizedDescription} {emotionDescription}";
             StatusMessage = this.GetNormalizedMessage(message);
 
-            var speechMessage = this.GetSpeechMessage(message);
-            await this.TrySpeechAsync(speechMessage);
+            await SpeechHelper.TrySpeechAsync(message);
 
             IsBusy = false;
         }
@@ -321,7 +322,7 @@ namespace See4Me.ViewModels
                 var message = streamingService.CameraPanel == CameraPanel.Front ? AppResources.FrontCameraReady : AppResources.BackCameraReady;
                 StatusMessage = message;
 
-                await this.TrySpeechAsync(message);
+                await SpeechHelper.TrySpeechAsync(message);
                 lastCameraPanel = streamingService.CameraPanel;
             }
         }
@@ -337,27 +338,17 @@ namespace See4Me.ViewModels
 
                 StatusMessage = errorMessage;
 
-                var speechMessage = this.GetSpeechMessage(errorMessage);
-                await this.TrySpeechAsync(speechMessage);
+                await SpeechHelper.TrySpeechAsync(errorMessage);
             }
         }
 
         private async Task NotifySwapCameraErrorAsync()
         {
             StatusMessage = AppResources.SwapCameraError;
-            await this.TrySpeechAsync(StatusMessage);
-        }
-
-        private async Task TrySpeechAsync(string message)
-        {
-            if (Settings.IsTextToSpeechEnabled)
-                await speechService.SpeechAsync(message);
+            await SpeechHelper.TrySpeechAsync(StatusMessage);
         }
 
         private string GetNormalizedMessage(string message)
             => message.Replace(Constants.SentenceEnd, ". ").TrimEnd('.').Trim().Replace("  ", " ").Replace(" .", ".").Replace("..", ".");
-
-        private string GetSpeechMessage(string message)
-            => Regex.Replace(message, @" ?\(.*?\)", string.Empty);
     }
 }

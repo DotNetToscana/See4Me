@@ -25,7 +25,8 @@
                 <AppBarButton
                     Icon="Save"
                     Label="{Binding Path=LocalizedResources.Save, Source={StaticResource LocalizedStrings}}"
-                    Command="{Binding SaveCommand}" />
+                    Command="{Binding SaveCommand}"
+                    AutomationProperties.Name="{Binding Path=LocalizedResources.Save, Source={StaticResource LocalizedStrings}}" />
             </controls:PageHeader.PrimaryCommands>
         </controls:PageHeader>
 

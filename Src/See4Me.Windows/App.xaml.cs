@@ -11,8 +11,6 @@ using Template10.Common;
 
 namespace See4Me
 {
-    public enum Pages { MainPage, SettingsPage, AboutPage }
-
     sealed partial class App : BootStrapper
     {
         /// <summary>
@@ -32,6 +30,11 @@ namespace See4Me
             keys.Add(Pages.MainPage, typeof(MainPage));
             keys.Add(Pages.SettingsPage, typeof(SettingsPage));
             keys.Add(Pages.AboutPage, typeof(AboutPage));
+            keys.Add(Pages.RecognizeTextPage, typeof(RecognizeTextPage));
+
+            var navigationService = new NavigationService();
+            var locator = Resources["Locator"] as ViewModelLocator;
+            locator.Initialize(navigationService);
 
             DispatcherHelper.Initialize();
 

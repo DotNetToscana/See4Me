@@ -54,10 +54,6 @@ namespace See4Me.ViewModels
             GotoCognitiveServicesUrlCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.CognitiveServicesUrl));
             GotoGitHubCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.GitHubProjectUrl));
             GotoUrlCommand = new AutoRelayCommand<string>((url) => launcherService.LaunchUriAsync(url));
-
-            OnCreateCommands();
         }
-
-        partial void OnCreateCommands();
     }
 }

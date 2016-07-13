@@ -32,6 +32,8 @@ namespace See4Me.ViewModels
 
         public AutoRelayCommand CreateTranslatorAppCommand { get; set; }
 
+        public AutoRelayCommand GotoAboutCommand { get; set; }
+
         public AutoRelayCommand SaveCommand { get; set; }
 
         private string visionSubscriptionKey;
@@ -117,8 +119,7 @@ namespace See4Me.ViewModels
             SubscribeCognitiveServicesCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.CognitiveServicesSubscriptionUrl));
             ActivateTranslatorServiceCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.ActivateTranslatorServiceUrl));
             CreateTranslatorAppCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.TranslatorServiceCreateAppUrl));
-
-            OnCreateCommands();
+            GotoAboutCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.AboutPage.ToString()));
         }
 
         public void Save()
@@ -136,9 +137,7 @@ namespace See4Me.ViewModels
             // Reinitializes services.
             ViewModelLocator.InitializeServices();
 
-            NavigationService.GoBack();
+            Navigator.GoBack();
         }
-
-        partial void OnCreateCommands();
     }
 }

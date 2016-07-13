@@ -1,0 +1,59 @@
+﻿<Page
+    x:Class="See4Me.Views.RecognizeTextPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:See4Me"
+    DataContext="{Binding Source={StaticResource Locator}, Path=RecognizeTextViewModel}"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:behaviors="using:See4Me.Behaviors"
+    xmlns:triggers="using:WindowsStateTriggers"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controls:PageHeader Frame="{x:Bind Frame}" Text="{Binding Path=LocalizedResources.RecognizeText, Source={StaticResource LocalizedStrings}}"
+                             EllipsisVisibility="Collapsed">
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton
+                    Icon="Camera"
+                    Label="{Binding Path=LocalizedResources.TakePhoto, Source={StaticResource LocalizedStrings}}"
+                    Command="{Binding TakePhotoCommand}"
+                    AutomationProperties.Name="{Binding Path=LocalizedResources.TakePhoto, Source={StaticResource LocalizedStrings}}" />
+            </controls:PageHeader.PrimaryCommands>
+        </controls:PageHeader>
+
+        <ProgressBar Grid.Row="1" IsIndeterminate="{Binding IsBusy}"  VerticalAlignment="Top" Background="Transparent" />
+
+        <RelativePanel Margin="12" Grid.Row="1">
+            <Image x:Name="photo" Width="240" MaxHeight="240" Stretch="Uniform" />
+            <ScrollViewer x:Name="description" Padding="0,0,12,0" Margin="20,-5,5,5" RelativePanel.RightOf="photo">
+                <TextBlock Text="{Binding Message}"
+                       TextWrapping="Wrap" Style="{StaticResource SubtitleTextBlockStyle}" />
+            </ScrollViewer>
+        </RelativePanel>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <triggers:OrientationStateTrigger Orientation="Portrait" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="description.(RelativePanel.Below)" Value="photo" />
+                        <Setter Target="description.(RelativePanel.AlignLeftWith)" Value="photo" />
+                        <Setter Target="description.Margin" Value="0,20,5,5" />
+                        <Setter Target="photo.Width" Value="400" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</Page>

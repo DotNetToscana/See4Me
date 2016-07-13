@@ -11,6 +11,6 @@ namespace See4Me.Services
 
         event EventHandler ConnectivityChanged;
 
-        Task<bool> GetIsInternetAvailableAsync();
+        Task<bool> IsInternetAvailableAsync();
     }
 }
