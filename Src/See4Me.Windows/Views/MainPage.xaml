@@ -36,12 +36,14 @@
                 <SymbolIcon Symbol="Setting" Width="48" Height="48" />
             </Button>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Button x:Name="takePhotoButton" Style="{StaticResource CircleButton}" Command="{Binding DescribeImageCommand}"
+                <Button x:Name="takePhotoButton" Style="{StaticResource CircleButton}"
+                        HorizontalAlignment="Right"
+                        Command="{Binding DescribeImageCommand}"
                         AutomationProperties.Name="{Binding Path=LocalizedResources.TakePhoto, Source={StaticResource LocalizedStrings}}">
                     <SymbolIcon Symbol="Camera" Width="64" Height="64" />
                 </Button>
                 <Button x:Name="recognizeTextButton" Style="{StaticResource CircleButton}"
-                        HorizontalAlignment="Center"
+                        HorizontalAlignment="Center" Margin="10,5,0,0"
                         Command="{Binding GotoRecognizeTextCommand}" AutomationProperties.Name="{Binding Path=LocalizedResources.RecognizeText, Source={StaticResource LocalizedStrings}}">
                     <SymbolIcon Symbol="Character" Width="48" Height="48" />
                 </Button>

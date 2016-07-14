@@ -16,7 +16,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid>
+                    <Grid Margin="{TemplateBinding Margin}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Disabled"/>
@@ -40,7 +40,7 @@
                                 <ScaleTransform ScaleY="1" x:Name="Outer"/>
                             </Ellipse.RenderTransform>
                         </Ellipse>
-                        <ContentPresenter Padding="{TemplateBinding Padding}" Margin="{TemplateBinding Margin}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <ContentPresenter Padding="{TemplateBinding Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
