@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.1",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "Microsoft.ProjectOxford.Common": "1.0.308",
     "Microsoft.ProjectOxford.Emotion": "1.0.310",
     "Microsoft.ProjectOxford.Vision": "1.0.354",
@@ -10,7 +10,7 @@
     "PlatformSpecific.Analyzer": "2.0.3",
     "Template10": "1.1.11",
     "WindowsStateTriggers": "1.1.0",
-    "Xam.Plugin.Connectivity": "2.2.2",
+    "Xam.Plugin.Connectivity": "2.2.12",
     "Xam.Plugins.Settings": "2.1.0",
     "Xam.Plugins.TextToSpeech": "2.0.0"
   },
