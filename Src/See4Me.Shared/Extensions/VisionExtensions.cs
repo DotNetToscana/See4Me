@@ -77,7 +77,11 @@ namespace See4Me.Extensions
             "a bird flying over",
             "the air while riding a skateboard on",
             "a dog that is laying down in",
-            "a cat that is laying down in"
+            "a cat that is laying down in",
+            "a bird walking on",
+            "a clock tower in front of",
+            "a clock sitting in front of",
+            "a sign with a clock on"
         };
 
         public static bool IsValid(this AnalysisResult result, out Caption rawDescription, out Caption filteredDescription)
