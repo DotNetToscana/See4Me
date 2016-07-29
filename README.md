@@ -17,4 +17,8 @@ You need to insert these service keys (Subscription Key for Vision and Emotion, 
 
 **Contribute**
 
-The project is continually evolving. If you want to contribute, feel free make to pull requests or get in touch with us!
+The project is continually evolving. If you want to contribute, feel free make to pull requests or get in touch with us! 
+
+**Code of Conduct**
+
+See4Me uses the Microsoft Cognitive Services, see https://www.microsoft.com/cognitive-services/. Developers using this project are expected to follow the “Developer Code of Conduct for Microsoft Cognitive Services” at http://go.microsoft.com/fwlink/?LinkId=698895. 
