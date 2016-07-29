@@ -17,6 +17,7 @@
         public const string EmotionMessage = "EmotionMessage";
 
         public const string CognitiveServicesUrl = "https://www.microsoft.com/cognitive-services";
+        public const string MicrosoftPrivacyPoliciesUrl = "https://go.microsoft.com/fwlink/?LinkId=521839";
         public const string GitHubProjectUrl = "https://github.com/DotNetToscana/see4me";
         public const string CognitiveServicesSubscriptionUrl = "https://www.microsoft.com/cognitive-services/en-us/sign-up";
         public const string ActivateTranslatorServiceUrl = "https://datamarket.azure.com/dataset/bing/microsofttranslator";

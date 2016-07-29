@@ -30,6 +30,7 @@ namespace See4Me.ViewModels
                 return service;
             });
 
+            SimpleIoc.Default.Register<Services.IDialogService, Services.DialogService>();
             SimpleIoc.Default.Register<IStreamingService, StreamingService>();
             SimpleIoc.Default.Register<ISettingsService, SettingsService>();
             SimpleIoc.Default.Register<INetworkService, NetworkService>();
@@ -41,6 +42,7 @@ namespace See4Me.ViewModels
             SimpleIoc.Default.Register<SettingsViewModel>();
             SimpleIoc.Default.Register<AboutViewModel>();
             SimpleIoc.Default.Register<RecognizeTextViewModel>();
+            SimpleIoc.Default.Register<PrivacyViewModel>();
 
             OnInitialize();
         }
@@ -75,6 +77,8 @@ namespace See4Me.ViewModels
         public AboutViewModel AboutViewModel => ServiceLocator.Current.GetInstance<AboutViewModel>();
 
         public RecognizeTextViewModel RecognizeTextViewModel => ServiceLocator.Current.GetInstance<RecognizeTextViewModel>();
+
+        public PrivacyViewModel PrivacyViewModel => ServiceLocator.Current.GetInstance<PrivacyViewModel>();
 
         public static VisionServiceClient VisionServiceClient => ServiceLocator.Current.GetInstance<VisionServiceClient>();
 

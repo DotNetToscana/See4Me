@@ -7,6 +7,7 @@
         public static string ActivateTranslatorService = "ActivateTranslatorService";
         public static string AngerFemale = "AngerFemale";
         public static string AngerMale = "AngerMale";
+        public static string ApplicationTitle = "ApplicationTitle";
         public static string AppName = "AppName";
         public static string BackCameraReady = "BackCameraReady";
         public static string Blog = "Blog";
@@ -38,7 +39,9 @@
         public static string ManMale = "ManMale";
         public static string NeutralFemale = "NeutralFemale";
         public static string NeutralMale = "NeutralMale";
+        public static string No = "No";
         public static string NoConnection = "NoConnection";
+        public static string OK = "OK";
         public static string OpenSettings = "OpenSettings";
         public static string PersonAgeMessageFemale = "PersonAgeMessageFemale";
         public static string PersonAgeMessageMale = "PersonAgeMessageMale";
@@ -70,7 +73,16 @@
         public static string TranslatorClientSecret = "TranslatorClientSecret";
         public static string Twitter = "Twitter";
         public static string UnableToAccessService = "UnableToAccessService";
+        public static string UnableToRecognizeText = "UnableToRecognizeText";
         public static string UnableToTakePhoto = "UnableToTakePhoto";
         public static string VisionSubscriptionKey = "VisionSubscriptionKey";
+        public static string Yes = "Yes";
+        public static string ConsentRequiredMessage = "ConsentRequiredMessage";
+        public static string ConsentRequiredTitle = "ConsentRequiredTitle";
+        public static string PrivacyPolicy = "PrivacyPolicy";
+        public static string PrivacyPolicyCommand = "PrivacyPolicyCommand";
+        public static string PrivacyStatement = "PrivacyStatement";
+        public static string MicrosoftPrivacyPolicies = "MicrosoftPrivacyPolicies";
+        public static string PoweredByCognitiveServices = "PoweredByCognitiveServices";
     }
 }

@@ -23,5 +23,7 @@
         string TranslatorClientSecret { get; set; }
 
         bool IsTextToSpeechEnabled { get; set; }
+
+        bool IsConsentGiven { get; set; }
     }
 }

@@ -33,9 +33,11 @@ namespace See4Me.ViewModels
 
         public string LinkedInUrl => Constants.LinkedInUrl;
 
-        public AutoRelayCommand GotoCognitiveServicesUrlCommand { get; set; }
+        public string CognitiveServicesUrl => Constants.CognitiveServicesUrl;
 
         public AutoRelayCommand GotoGitHubCommand { get; set; }
+
+        public AutoRelayCommand GotoPrivacyPolicyCommand { get; set; }
 
         public AutoRelayCommand<string> GotoUrlCommand { get; set; }
 
@@ -51,9 +53,9 @@ namespace See4Me.ViewModels
 
         private void CreateCommands()
         {
-            GotoCognitiveServicesUrlCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.CognitiveServicesUrl));
             GotoGitHubCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.GitHubProjectUrl));
             GotoUrlCommand = new AutoRelayCommand<string>((url) => launcherService.LaunchUriAsync(url));
+            GotoPrivacyPolicyCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.PrivacyPolicyPage.ToString()));
         }
     }
 }

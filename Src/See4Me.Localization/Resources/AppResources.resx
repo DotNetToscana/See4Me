@@ -132,6 +132,9 @@
   <data name="AngerMale" xml:space="preserve">
     <value>Angry</value>
   </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>See4Me</value>
+  </data>
   <data name="AppName" xml:space="preserve">
     <value>See4Me</value>
   </data>
@@ -225,8 +228,14 @@
   <data name="NeutralMale" xml:space="preserve">
     <value>Neutral</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="NoConnection" xml:space="preserve">
     <value>I'm sorry, there is no Internet connection</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="OpenSettings" xml:space="preserve">
     <value>Go to Settings</value>
@@ -329,5 +338,29 @@
   </data>
   <data name="VisionSubscriptionKey" xml:space="preserve">
     <value>Vision Subscription Key</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="ConsentRequiredMessage" xml:space="preserve">
+    <value>You must have the consent of the people whose data (such as images, voices, video or text) are being processed by See4Me. Consent is required to use the app. See4Me adheres to all applicable privacy regulations. By proceding, you confirm you have the consent.</value>
+  </data>
+  <data name="ConsentRequiredTitle" xml:space="preserve">
+    <value>Consent required</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="PrivacyPolicyCommand" xml:space="preserve">
+    <value>Privacy Policy...</value>
+  </data>
+  <data name="PrivacyStatement" xml:space="preserve">
+    <value>The image, voice, video or text understanding capabilities of See4Me app uses Microsoft Cognitive Services. Microsoft will receive the images, audio, video, and other data that you upload (via this app) for service improvement purposes. To report abuse of the Microsoft Cognitive Services to Microsoft, please visit the Microsoft Cognitive Services website at https://www.microsoft.com/cognitive-services, and use the "Report Abuse" link at the bottom of the page to contact Microsoft. For more information about Microsoft privacy policies please see their privacy statement here: https://go.microsoft.com/fwlink/?LinkId=521839.</value>
+  </data>
+  <data name="MicrosoftPrivacyPolicies" xml:space="preserve">
+    <value>Microsoft privacy policies</value>
+  </data>
+  <data name="PoweredByCognitiveServices" xml:space="preserve">
+    <value>Powered by Microsoft’s Cognitive Services:</value>
   </data>
 </root>

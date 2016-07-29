@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace See4Me.Services
 {
-    public enum Pages { MainPage, SettingsPage, AboutPage, RecognizeTextPage }
+    public enum Pages { MainPage, SettingsPage, AboutPage, PrivacyPolicyPage, RecognizeTextPage }
 
     public interface INavigationService
     {

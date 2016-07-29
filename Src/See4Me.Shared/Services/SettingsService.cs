@@ -17,6 +17,7 @@ namespace See4Me.Services
         private const string TRANSLATOR_CLIENT_ID = "TranslatorClientId";
         private const string TRANSLATOR_CLIENT_SECRET = "TranslatorClientSecret";
         private const string IS_TEXT_TO_SPEECH_ENABLED = "IsTextToSpeechEnabled";
+        private const string IS_CONSENT_GIVEN = "IsConsentGiven";
 
         private readonly ISettings settings;
 
@@ -72,11 +73,10 @@ namespace See4Me.Services
             get
             {
 #if DEBUG
-                var defaultValue = true;
+                return true;
 #else
-                var defaultValue = false;
+                return settings.GetValueOrDefault(SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION, false);
 #endif
-                return settings.GetValueOrDefault(SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION, defaultValue);
             }
             set { settings.AddOrUpdateValue(SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION, value); }
         }
@@ -109,6 +109,19 @@ namespace See4Me.Services
         {
             get { return settings.GetValueOrDefault(IS_TEXT_TO_SPEECH_ENABLED, true); }
             set { settings.AddOrUpdateValue(IS_TEXT_TO_SPEECH_ENABLED, value); }
+        }
+
+        public bool IsConsentGiven
+        {
+            get {
+#if DEBUG
+                // When in debug mode, the consent is implicitly given.
+                return true;
+#else
+                return settings.GetValueOrDefault(IS_CONSENT_GIVEN, false);
+#endif
+            }
+            set { settings.AddOrUpdateValue(IS_CONSENT_GIVEN, value); }
         }
     }
 }

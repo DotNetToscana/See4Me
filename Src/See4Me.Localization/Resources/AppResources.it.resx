@@ -132,6 +132,9 @@
   <data name="AngerMale" xml:space="preserve">
     <value>Arrabbiato</value>
   </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>See4Me</value>
+  </data>
   <data name="AppName" xml:space="preserve">
     <value>See4Me</value>
   </data>
@@ -225,8 +228,14 @@
   <data name="NeutralMale" xml:space="preserve">
     <value>Neutro</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="NoConnection" xml:space="preserve">
     <value>Mi dispiace, non hai connessione ad Internet</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="OpenSettings" xml:space="preserve">
     <value>Vai alle Impostazioni</value>
@@ -329,5 +338,29 @@
   </data>
   <data name="VisionSubscriptionKey" xml:space="preserve">
     <value>Chiave di sottoscrizione servizio Vision</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Sì</value>
+  </data>
+  <data name="ConsentRequiredMessage" xml:space="preserve">
+    <value>Devi avere il consenso delle persone le cui informazioni (come immagini, voce, video o testi) verranno elaborate da See4Me. Il consenso è richiesto per utilizzare l'app. See4Me rispetta tutte le normative sulle privacy applicabili in questo contesto. Procedendo, confermi di possedere questo consenso.</value>
+  </data>
+  <data name="ConsentRequiredTitle" xml:space="preserve">
+    <value>Richiesta consenso</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Informativa sulla privacy</value>
+  </data>
+  <data name="PrivacyPolicyCommand" xml:space="preserve">
+    <value>Informativa sulla privacy...</value>
+  </data>
+  <data name="PrivacyStatement" xml:space="preserve">
+    <value>Le funzionalità di riconoscimento di immagini, voce, video e testo di See4Me sono basate sui Microsoft Cognitive Services. Microsoft riceverà le immagini, l'audio, il video e gli altri dati che verranno inviati attraverso questa app per migliorare il servizio. Per segnalare a Microsoft abusi relativi ai Microsoft Cognitive Services, visita il sito dei Microsoft Cognitive Services all'indirizzo https://www.microsoft.com/cognitive-services, e usa il link "Report Abuse" in fondo alla pagina per contattare Microsoft. Per maggiori informazioni sulle normative della privacy di Microsoft visualizza l'informativa disponibile qui: https://go.microsoft.com/fwlink/?LinkId=521839.</value>
+  </data>
+  <data name="MicrosoftPrivacyPolicies" xml:space="preserve">
+    <value>Informativa sulla privacy Microsoft</value>
+  </data>
+  <data name="PoweredByCognitiveServices" xml:space="preserve">
+    <value>Powered by Microsoft’s Cognitive Services:</value>
   </data>
 </root>

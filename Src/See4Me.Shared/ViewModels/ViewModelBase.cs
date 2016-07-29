@@ -14,12 +14,15 @@ namespace See4Me.ViewModels
 
         protected Services.INavigationService Navigator { get; }
 
+        protected Services.IDialogService DialogService { get; }
+
         public ViewModelBase()
         {
             Settings = ServiceLocator.Current.GetInstance<ISettingsService>();
             Network = ServiceLocator.Current.GetInstance<INetworkService>();
 
             Navigator = ServiceLocator.Current.GetInstance<Services.INavigationService>();
+            DialogService = ServiceLocator.Current.GetInstance<Services.IDialogService>();
 
             IsConnected = Network.IsConnected;
             Network.ConnectivityChanged += (s, e) =>

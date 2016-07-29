@@ -34,6 +34,8 @@ namespace See4Me.ViewModels
 
         public AutoRelayCommand GotoAboutCommand { get; set; }
 
+        public AutoRelayCommand GotoPrivacyPolicyCommand { get; set; }
+
         public AutoRelayCommand SaveCommand { get; set; }
 
         private string visionSubscriptionKey;
@@ -120,6 +122,7 @@ namespace See4Me.ViewModels
             ActivateTranslatorServiceCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.ActivateTranslatorServiceUrl));
             CreateTranslatorAppCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.TranslatorServiceCreateAppUrl));
             GotoAboutCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.AboutPage.ToString()));
+            GotoPrivacyPolicyCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.PrivacyPolicyPage.ToString()));
         }
 
         public void Save()

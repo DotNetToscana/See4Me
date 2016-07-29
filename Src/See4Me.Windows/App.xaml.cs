@@ -31,6 +31,7 @@ namespace See4Me
             keys.Add(Pages.SettingsPage, typeof(SettingsPage));
             keys.Add(Pages.AboutPage, typeof(AboutPage));
             keys.Add(Pages.RecognizeTextPage, typeof(RecognizeTextPage));
+            keys.Add(Pages.PrivacyPolicyPage, typeof(PrivacyPolicyPage));
 
             var navigationService = new NavigationService();
             var locator = Resources["Locator"] as ViewModelLocator;

@@ -72,8 +72,11 @@
                     </ToggleSwitch.HeaderTemplate>
                 </ToggleSwitch>
 
-                <Button Content="{Binding Path=LocalizedResources.AboutCommand, Source={StaticResource LocalizedStrings}}" Margin="0,20"
+                <Button Content="{Binding Path=LocalizedResources.AboutCommand, Source={StaticResource LocalizedStrings}}" Margin="0,20,0,0"
                         Command="{Binding GotoAboutCommand}" />
+
+                <Button Content="{Binding Path=LocalizedResources.PrivacyPolicyCommand, Source={StaticResource LocalizedStrings}}" Margin="0,30,0,0"
+                        Command="{Binding GotoPrivacyPolicyCommand}" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

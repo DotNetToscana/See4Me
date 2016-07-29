@@ -109,6 +109,15 @@ namespace See4Me.Localization.Resources {
         /// <summary>
         ///   Looks up a localized string similar to See4Me.
         /// </summary>
+        public static string ApplicationTitle {
+            get {
+                return ResourceManager.GetString("ApplicationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See4Me.
+        /// </summary>
         public static string AppName {
             get {
                 return ResourceManager.GetString("AppName", resourceCulture);
@@ -166,6 +175,24 @@ namespace See4Me.Localization.Resources {
         public static string ChildMale {
             get {
                 return ResourceManager.GetString("ChildMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must have the consent of the people whose data (such as images, voices, video or text) are being processed by See4Me. Consent is required to use the app. See4Me adheres to all applicable privacy regulations. By proceding, you confirm you have the consent..
+        /// </summary>
+        public static string ConsentRequiredMessage {
+            get {
+                return ResourceManager.GetString("ConsentRequiredMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consent required.
+        /// </summary>
+        public static string ConsentRequiredTitle {
+            get {
+                return ResourceManager.GetString("ConsentRequiredTitle", resourceCulture);
             }
         }
         
@@ -368,6 +395,15 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Microsoft privacy policies.
+        /// </summary>
+        public static string MicrosoftPrivacyPolicies {
+            get {
+                return ResourceManager.GetString("MicrosoftPrivacyPolicies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Neutral.
         /// </summary>
         public static string NeutralFemale {
@@ -386,11 +422,29 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I&apos;m sorry, there is no Internet connection.
         /// </summary>
         public static string NoConnection {
             get {
                 return ResourceManager.GetString("NoConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
             }
         }
         
@@ -436,6 +490,42 @@ namespace See4Me.Localization.Resources {
         public static string PersonMessageMale {
             get {
                 return ResourceManager.GetString("PersonMessageMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Powered by Microsoft’s Cognitive Services:.
+        /// </summary>
+        public static string PoweredByCognitiveServices {
+            get {
+                return ResourceManager.GetString("PoweredByCognitiveServices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Privacy Policy.
+        /// </summary>
+        public static string PrivacyPolicy {
+            get {
+                return ResourceManager.GetString("PrivacyPolicy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Privacy Policy....
+        /// </summary>
+        public static string PrivacyPolicyCommand {
+            get {
+                return ResourceManager.GetString("PrivacyPolicyCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The image, voice, video or text understanding capabilities of See4Me app uses Microsoft Cognitive Services. Microsoft will receive the images, audio, video, and other data that you upload (via this app) for service improvement purposes. To report abuse of the Microsoft Cognitive Services to Microsoft, please visit the Microsoft Cognitive Services website at https://www.microsoft.com/cognitive-services, and use the &quot;Report Abuse&quot; link at the bottom of the page to contact Microsoft. For more information about [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string PrivacyStatement {
+            get {
+                return ResourceManager.GetString("PrivacyStatement", resourceCulture);
             }
         }
         
@@ -697,6 +787,15 @@ namespace See4Me.Localization.Resources {
         public static string VisionSubscriptionKey {
             get {
                 return ResourceManager.GetString("VisionSubscriptionKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

@@ -78,11 +78,23 @@
                     </HyperlinkButton>
                 </Grid>
 
-                <HyperlinkButton Content="{Binding Path=LocalizedResources.GotoCognitiveServices, Source={StaticResource LocalizedStrings}}"
-                                 Command="{Binding GotoCognitiveServicesUrlCommand}" Margin="5,20,5,0" />
+                <HyperlinkButton Margin="5,5,5,0" VerticalAlignment="Top"
+                                    Command="{Binding GotoUrlCommand}" CommandParameter="{Binding CognitiveServicesUrl}">
+                    <HyperlinkButton.Content>
+                        <TextBlock TextWrapping="Wrap">
+                            <Run Text="{Binding Path=LocalizedResources.PoweredByCognitiveServices, Source={StaticResource LocalizedStrings}}" />
+                            <Underline>
+                                <Run Text="{Binding CognitiveServicesUrl}" />
+                            </Underline>
+                        </TextBlock>
+                    </HyperlinkButton.Content>
+                </HyperlinkButton>
 
                 <HyperlinkButton Content="{Binding Path=LocalizedResources.GotoGitHub, Source={StaticResource LocalizedStrings}}"
                                  Command="{Binding GotoGitHubCommand}" Margin="5,5,5,0" />
+
+                <Button Content="{Binding Path=LocalizedResources.PrivacyPolicyCommand, Source={StaticResource LocalizedStrings}}" Margin="0,30"
+                        Command="{Binding GotoPrivacyPolicyCommand}" />
             </StackPanel>
         </ScrollViewer>
     </Grid>
