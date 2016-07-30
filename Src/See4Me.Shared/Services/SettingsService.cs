@@ -59,11 +59,10 @@ namespace See4Me.Services
             get
             {
 #if DEBUG
-                var defaultValue = true;
+                return true;
 #else
-                var defaultValue = false;
+                return settings.GetValueOrDefault(SHOW_EXCEPTION_ON_ERROR, false);
 #endif
-                return settings.GetValueOrDefault(SHOW_EXCEPTION_ON_ERROR, defaultValue);
             }
             set { settings.AddOrUpdateValue(SHOW_EXCEPTION_ON_ERROR, value); }
         }
