@@ -10,9 +10,11 @@ namespace See4Me.Extensions
     {
         private const double MINIMUM_CONFIDENCE = 0.16d;
 
-        // Somes strings represents a description that is actually invalid
-        // or need to be temporaly removed (they will be probably added
-        // again in a future release).
+        /* Somes strings are actually invalid or need to be temporaly removed
+           because very often they aren't so accurate
+           (they will be probably added again in a future release).
+        */
+
         private static List<string> InvalidDescriptions = new List<string>
         {
             "a bird that is lit up at night",
@@ -50,7 +52,6 @@ namespace See4Me.Extensions
             "the airplane is parked on the side of",
             "a picture of",
             "a view of",
-            "a dog is sitting in front of",
             "a blurry photo of",
             "a blurry picture of",
             "a bird flying in",
@@ -62,10 +63,7 @@ namespace See4Me.Extensions
             "a plane flying in",
             "a close up of",
             "a bird walikng on",
-            "a cat is laying on",
-            "a cat laying on",
             "a man laying on",
-            "a black cat laying on",
             "a white toilet sitting in",
             "a man riding a skateboard up",
             "a hot dog in",
@@ -76,8 +74,6 @@ namespace See4Me.Extensions
             "a plane that is flying in",
             "a bird flying over",
             "the air while riding a skateboard on",
-            "a dog that is laying down in",
-            "a cat that is laying down in",
             "a bird walking on",
             "a clock tower in front of",
             "a clock sitting in front of",

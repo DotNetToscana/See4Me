@@ -162,9 +162,9 @@ namespace See4Me.ViewModels
 
             try
             {
+                StatusMessage = AppResources.QueryingVisionService;
                 using (var stream = await streamingService.GetCurrentFrameAsync())
                 {
-                    StatusMessage = AppResources.QueryingVisionService;
                     if (stream != null)
                     {
                         if (await Network.IsInternetAvailableAsync())
