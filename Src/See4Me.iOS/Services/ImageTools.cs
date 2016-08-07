@@ -8,7 +8,7 @@ namespace See4Me.Services
 {
     public static class ImageTools
     {
-        public static UIImage MaxResizeImage(UIImage sourceImage)
+        public static UIImage MaxResizeImage(this UIImage sourceImage)
         {
             float h = 640.0f, w = 480.0f;
 
@@ -25,7 +25,7 @@ namespace See4Me.Services
             return MaxResizeImage(sourceImage,w,h);
         }
 
-        public static UIImage MaxResizeImage(UIImage sourceImage, float maxWidth, float maxHeight)
+        public static UIImage MaxResizeImage(this UIImage sourceImage, float maxWidth, float maxHeight)
         {
             var sourceSize = sourceImage.Size;
             var maxResizeFactor = Math.Max(maxWidth / sourceSize.Width, maxHeight / sourceSize.Height);
@@ -45,7 +45,7 @@ namespace See4Me.Services
         }
 
         // resize the image (without trying to maintain aspect ratio)
-        public static UIImage ResizeImage(UIImage sourceImage, float width, float height)
+        public static UIImage ResizeImage(this UIImage sourceImage, float width, float height)
         {
             UIGraphics.BeginImageContext(new SizeF(width, height));
             sourceImage.Draw(new RectangleF(0, 0, width, height));
@@ -56,7 +56,7 @@ namespace See4Me.Services
         }
 
         // crop the image, without resizing
-        private static UIImage CropImage(UIImage sourceImage, int cropX, int cropY, int width, int height)
+        private static UIImage CropImage(this UIImage sourceImage, int cropX, int cropY, int width, int height)
         {
             var imgSize = sourceImage.Size;
             UIGraphics.BeginImageContext(new SizeF(width, height));

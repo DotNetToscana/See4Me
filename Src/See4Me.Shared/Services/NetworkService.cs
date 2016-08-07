@@ -11,7 +11,9 @@ namespace See4Me.Services
 {
     public class NetworkService : INetworkService, IDisposable
     {
-        private const string CONNECTION_TEST_URL = "http://www.google.com";
+        private readonly HttpClient client;
+
+        private const string CONNECTION_TEST_URL = "https://www.google.com";
         private const int CONNECTION_TEST_TIMEOUT_SECONDS = 3;
 
         public bool IsConnected { get; private set; }
@@ -22,6 +24,11 @@ namespace See4Me.Services
         {
             IsConnected = CrossConnectivity.Current.IsConnected;
             CrossConnectivity.Current.ConnectivityChanged += OnConnectivityChanged;
+
+            client = new HttpClient
+            {
+                Timeout = TimeSpan.FromSeconds(CONNECTION_TEST_TIMEOUT_SECONDS)
+            };
         }
 
         private void OnConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
@@ -36,14 +43,8 @@ namespace See4Me.Services
             {
                 if (IsConnected)
                 {
-                    using (var client = new HttpClient())
-                    {
-                        client.Timeout = TimeSpan.FromSeconds(CONNECTION_TEST_TIMEOUT_SECONDS);
-                        var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, CONNECTION_TEST_URL));
-                        response.EnsureSuccessStatusCode();
-
-                        return true;
-                    }
+                    var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, CONNECTION_TEST_URL));
+                    return response.IsSuccessStatusCode;
                 }
             }
             catch { }
@@ -54,6 +55,7 @@ namespace See4Me.Services
         public void Dispose()
         {
             CrossConnectivity.Current.ConnectivityChanged -= OnConnectivityChanged;
+            client.Dispose();
         }
     }
 }

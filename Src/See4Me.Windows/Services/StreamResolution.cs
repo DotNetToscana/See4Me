@@ -21,10 +21,7 @@ namespace See4Me.Services
 
             // Only handle ImageEncodingProperties and VideoEncodingProperties, which are the two types that GetAvailableMediaStreamProperties can return
             if (!(properties is ImageEncodingProperties) && !(properties is VideoEncodingProperties))
-            {
-                throw new ArgumentException("Argument is of the wrong type. Required: " + typeof(ImageEncodingProperties).Name
-                    + " or " + typeof(VideoEncodingProperties).Name + ".", nameof(properties));
-            }
+                throw new ArgumentException($"Argument is of the wrong type. Required: {typeof(ImageEncodingProperties).Name} or {typeof(VideoEncodingProperties).Name}.", nameof(properties));
 
             // Store the actual instance of the IMediaEncodingProperties for setting them later
             this.properties = properties;
@@ -84,10 +81,10 @@ namespace See4Me.Services
         public string GetFriendlyName(bool showFrameRate = true)
         {
             if (properties is ImageEncodingProperties || !showFrameRate)
-                return Width + "x" + Height + " [" + AspectRatio + "] " + properties.Subtype;
+                return $"{Width}x{Height} [{AspectRatio}] {properties.Subtype}";
 
             if (properties is VideoEncodingProperties)
-                return Width + "x" + Height + " [" + AspectRatio + "] " + FrameRate + "FPS " + properties.Subtype;
+                return $"{Width}x{Height} [{AspectRatio}] {FrameRate} FPS {properties.Subtype}";
 
             return string.Empty;
         }

@@ -15,7 +15,6 @@ using See4Me.Extensions;
 using System.IO;
 using System.Text;
 using System.Net;
-using System.Text.RegularExpressions;
 using Microsoft.ProjectOxford.Vision.Contract;
 
 namespace See4Me.ViewModels
@@ -95,8 +94,11 @@ namespace See4Me.ViewModels
                     // Retrieves tha authorization token for the translator service.
                     // This is necessary only if the app language is different from the default language,
                     // otherwise no translation will be performed.
-                    var task = translatorService.InitializeAsync();
+                    var translatorInitializeTask = translatorService.InitializeAsync();
                 }
+
+                // Initializes vision extensions.
+                var visionInitializeTask = VisionExtensions.InitializeAsync();
 
                 // Asks the view the UI element in which to start camera streaming.
                 Messenger.Default.Send(new NotificationMessageAction<object>(Constants.InitializeStreaming, async (video) =>

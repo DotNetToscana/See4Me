@@ -22,9 +22,6 @@ namespace See4Me.Services
 
         private static object syncObject = new object();
 
-        public OutputRecorder()
-        { }
-
         public override void DidOutputSampleBuffer(AVCaptureOutput captureOutput, CMSampleBuffer sampleBuffer, AVCaptureConnection connection)
         {
             try
@@ -45,8 +42,8 @@ namespace See4Me.Services
                 // Although this looks innocent "Oh, he is just optimizing this case away"
                 // this is incredibly important to call on this callback, because the AVFoundation
                 // has a fixed number of buffers and if it runs out of free buffers, it will stop
-                // delivering frames. 
-                //  
+                // delivering frames.
+                //
                 sampleBuffer.Dispose();
             }
         }

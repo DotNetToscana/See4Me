@@ -140,9 +140,9 @@ namespace See4Me.Services
         public Task<Stream> GetCurrentFrameAsync()
         {
             var image = outputRecorder.GetImage();
-            image = ImageTools.MaxResizeImage(image);
+            var resizedImage = image.MaxResizeImage();
 
-            return Task.FromResult(image.AsJPEG(1.0f).AsStream());
+            return Task.FromResult(resizedImage.AsJPEG(1.0f).AsStream());
         }
     }
 }

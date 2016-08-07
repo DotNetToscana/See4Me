@@ -4,6 +4,7 @@ using Microsoft.Practices.ServiceLocation;
 using Microsoft.ProjectOxford.Emotion;
 using Microsoft.ProjectOxford.Vision;
 using See4Me.Services;
+using See4Me.Services.ServiceSettings;
 using See4Me.Services.Translator;
 using System.Globalization;
 
@@ -37,6 +38,7 @@ namespace See4Me.ViewModels
             SimpleIoc.Default.Register<ILauncherService, LauncherService>();
             SimpleIoc.Default.Register<IAppService, AppService>();
             SimpleIoc.Default.Register<IMediaPicker, MediaPicker>();
+            SimpleIoc.Default.Register<IVisionSettingsProvider, LocalVisionSettingsProvider>();
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();

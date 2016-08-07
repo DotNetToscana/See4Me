@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("See4Me.Android.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("See4Me.Resource", IsApplication=true)]
 
-namespace See4Me.Android
+namespace See4Me
 {
 	
 	
@@ -26,8 +26,8 @@ namespace See4Me.Android
 		
 		public static void UpdateIdValues()
 		{
-			global::Plugin.TextToSpeech.Resource.String.ApplicationName = global::See4Me.Android.Resource.String.ApplicationName;
-			global::Plugin.TextToSpeech.Resource.String.Hello = global::See4Me.Android.Resource.String.Hello;
+			global::Plugin.TextToSpeech.Resource.String.ApplicationName = global::See4Me.Resource.String.ApplicationName;
+			global::Plugin.TextToSpeech.Resource.String.Hello = global::See4Me.Resource.String.Hello;
 		}
 		
 		public partial class Attribute

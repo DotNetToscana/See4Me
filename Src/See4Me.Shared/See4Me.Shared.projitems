@@ -35,11 +35,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\ISpeechService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IStreamingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\NetworkService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ServiceSettings\IVisionSettingsProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ServiceSettings\LocalVisionSettingsProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SpeechService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Translator\AdmAuthentication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Translator\ITranslatorService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Translator\TranslatorService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ServiceSettings\VisionSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PrivacyViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\RecognizeTextViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AboutViewModel.cs" />
@@ -47,5 +50,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelLocator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Common\VisionSettings.json" />
   </ItemGroup>
 </Project>

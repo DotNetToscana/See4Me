@@ -16,6 +16,5 @@ namespace See4Me.Services
         }
 
         public Task LaunchMailAsync(string mailAddress) => this.LaunchUriAsync($"mailto:{mailAddress}");
-
     }
 }
