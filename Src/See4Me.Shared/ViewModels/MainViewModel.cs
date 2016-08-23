@@ -57,12 +57,15 @@ namespace See4Me.ViewModels
         {
             this.streamingService = streamingService;
             this.speechService = speechService;
-            this.InitializeServices();
 
+            this.LoadServices();
             this.CreateCommands();
+
+            // Initializes vision extensions.
+            var visionInitializeTask = VisionExtensions.InitializeAsync();
         }
 
-        private void InitializeServices()
+        private void LoadServices()
         {
             this.visionService = ViewModelLocator.VisionServiceClient;
             this.emotionService = ViewModelLocator.EmotionServiceClient;
@@ -83,23 +86,12 @@ namespace See4Me.ViewModels
                 .DependsOn(() => IsBusy);
         }
 
-        public async Task InitializeAsync()
+        public async Task InitializeStreamingAsync()
         {
             IsBusy = true;
 
             try
             {
-                if (IsTranslatorServiceRegistered && IsConnected && Language != Constants.DefaultLanguge && !translatorService.IsInitialized)
-                {
-                    // Retrieves tha authorization token for the translator service.
-                    // This is necessary only if the app language is different from the default language,
-                    // otherwise no translation will be performed.
-                    var translatorInitializeTask = translatorService.InitializeAsync();
-                }
-
-                // Initializes vision extensions.
-                var visionInitializeTask = VisionExtensions.InitializeAsync();
-
                 // Asks the view the UI element in which to start camera streaming.
                 Messenger.Default.Send(new NotificationMessageAction<object>(Constants.InitializeStreaming, async (video) =>
                 {

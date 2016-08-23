@@ -13,7 +13,7 @@ namespace See4Me.ViewModels
         public static async Task ResumeAsync()
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
-            await mainViewModel.InitializeAsync();
+            await mainViewModel.InitializeStreamingAsync();
         }
     }
 }

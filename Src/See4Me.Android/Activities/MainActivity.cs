@@ -73,7 +73,7 @@ namespace See4Me.Android
         {
             base.OnResume();
 
-            await ViewModel.InitializeAsync();
+            await ViewModel.InitializeStreamingAsync();
         }
 
         protected override async void OnPause()

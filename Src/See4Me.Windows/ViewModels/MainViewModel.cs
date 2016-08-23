@@ -20,8 +20,8 @@ namespace See4Me.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             // Calls methods to initialize the app.
-            this.InitializeServices();
-            await this.InitializeAsync();
+            this.LoadServices();
+            await this.InitializeStreamingAsync();
 
             // If not given, asks the user for the consent to use the app.
             if (!Settings.IsConsentGiven)

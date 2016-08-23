@@ -84,7 +84,7 @@ namespace See4Me.iOS
             View.AddGestureRecognizer(swipeLeft);
             View.AddGestureRecognizer(swipeRight);
 
-            await ViewModel.InitializeAsync();
+            await ViewModel.InitializeStreamingAsync();
         }
 
         public override async void ViewWillDisappear(bool animated)

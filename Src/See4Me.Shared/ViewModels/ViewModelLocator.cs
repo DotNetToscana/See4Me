@@ -98,7 +98,7 @@ namespace See4Me.ViewModels
 #if __ANDROID__ || __IOS__
                 var language = Localization.Resources.AppResources.ResourceLanguage;
 #else
-                var language = global::Windows.System.UserProfile.GlobalizationPreferences.Languages[0];
+                var language = Windows.System.UserProfile.GlobalizationPreferences.Languages[0];
 #endif
 
                 culture = new CultureInfo(language);
