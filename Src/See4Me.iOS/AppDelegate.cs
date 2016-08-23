@@ -29,8 +29,10 @@ namespace See4Me.iOS
 
         private void Initialize(UIApplication application)
         {
+            var navigationService = new See4Me.Services.NavigationService();
+
             this.Locator = new ViewModelLocator();
-            this.Locator.Initialize();
+            this.Locator.Initialize(navigationService);
 
             // MVVM Light's DispatcherHelper for cross-thread handling.
             DispatcherHelper.Initialize(application);
