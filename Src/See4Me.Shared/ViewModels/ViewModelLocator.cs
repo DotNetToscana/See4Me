@@ -12,10 +12,9 @@ namespace See4Me.ViewModels
 {
     public partial class ViewModelLocator
     {
-        public void Initialize(Services.INavigationService navigationService = null)
+        public void Initialize(Services.INavigationService navigationService)
         {
-            if (navigationService != null)
-                SimpleIoc.Default.Register<Services.INavigationService>(() => navigationService);
+            SimpleIoc.Default.Register<Services.INavigationService>(() => navigationService);
         }
 
         static ViewModelLocator()

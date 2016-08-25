@@ -42,6 +42,7 @@ namespace See4Me.Android
             this.Locator = new ViewModelLocator();
             Locator.Initialize(navigationService);
 
+            // MVVM Light's DispatcherHelper for cross-thread handling.
             DispatcherHelper.Initialize();
         }
 

@@ -37,6 +37,7 @@ namespace See4Me
             var locator = Resources["Locator"] as ViewModelLocator;
             locator.Initialize(navigationService);
 
+            // MVVM Light's DispatcherHelper for cross-thread handling.
             DispatcherHelper.Initialize();
 
             return base.OnInitializeAsync(args);

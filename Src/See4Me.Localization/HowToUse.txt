@@ -1,13 +1,15 @@
-﻿La funzionalità della PCL è stata ripresa da questo articolo: http://blog.giovannimodica.com/post/internationalization-of-a-cross-platform-application
+﻿This PCL has been developed following this article: http://blog.giovannimodica.com/post/internationalization-of-a-cross-platform-application
 
-Per prima cosa scaricare da GitHub (Extension)  Scarica T4 Toolbox for Visual Studio 2015
+First of all, you need to download the T4 Toolbox for Visual Studio 2015 Extensions.
 
-E' necessario inserire le coppie chiave-valore modificando il file AppResources.resx (e le relative localizzazioni)
-Successivamente va lanciato il custom tool sul file RES2OTHERS.TT che genererà i relativi file nel progetto DROID e IOS
+Then, insert translations in AppResources.resx (and relative localizations) and launch the custom tool RES2OTHERS.TT, that in turns will
+generate the necessary files for Android e iOS.
 
-Come usare le traduzioni:
+How to use translations:
+
 - ANDROID
--   in text 
+
+-   in text
 
 <TextView
     android:text="@string/users"
@@ -20,6 +22,7 @@ Come usare le traduzioni:
 	label.Text = Resources.GetString(Resource.String.users);
 
 - IOS
+
 -	in code
 
 	label.Text = NSBundle.MainBundle.LocalizedString(Strings.users, Strings.users);

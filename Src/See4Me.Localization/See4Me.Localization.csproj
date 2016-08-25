@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="HowToUse.txt" />
+    <Content Include="HowToUse.it.txt" />
     <Content Include="Resources\Resx2Others.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Resx2Others.log</LastGenOutput>
