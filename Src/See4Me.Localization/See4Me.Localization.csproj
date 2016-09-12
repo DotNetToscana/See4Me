@@ -63,10 +63,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\AppResources.it.resx" />
+    <EmbeddedResource Include="Resources\AppResources.it.resx">
+      <LogicalName>See4Me.AppResources.it.resources</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput> 
+      <LogicalName>See4Me.AppResources.resources</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
