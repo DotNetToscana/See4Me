@@ -18,8 +18,6 @@ namespace See4Me.ViewModels
     {
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            // Calls method to initialize services.
-            this.InitializeServices();
             TakePhotoCommand.Execute(null);
 
             await base.OnNavigatedToAsync(parameter, mode, state);
@@ -27,8 +25,6 @@ namespace See4Me.ViewModels
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
         {
-            Message = null;
-
             await base.OnNavigatedFromAsync(state, suspending);
         }
     }

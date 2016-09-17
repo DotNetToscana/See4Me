@@ -74,6 +74,7 @@ namespace See4Me.Android
             base.OnResume();
 
             await ViewModel.InitializeStreamingAsync();
+            await ViewModel.CheckShowConsentAsync();
         }
 
         protected override async void OnPause()

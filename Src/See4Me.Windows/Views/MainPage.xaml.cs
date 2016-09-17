@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Navigation;
 using System.IO;
 using See4Me.Extensions;
 using Windows.System.Profile;
+using See4Me.Common;
 
 namespace See4Me.Views
 {
@@ -46,7 +47,7 @@ namespace See4Me.Views
                     case Constants.TakingPhoto:
                         previewImage.Source = null;
 
-                        if (deviceFamily != "Windows.Mobile")
+                        if (deviceFamily != Constants.WindowsMobileFamily)
                             shutter.Play();
 
                         break;

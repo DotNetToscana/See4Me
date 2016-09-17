@@ -27,9 +27,6 @@ namespace See4Me.ViewModels
         private readonly IMediaPicker mediaPicker;
         private readonly ISpeechService speechService;
 
-        private VisionServiceClient visionService;
-        private ITranslatorService translatorService;
-
         public AutoRelayCommand TakePhotoCommand { get; set; }
 
         public string message;
@@ -46,15 +43,8 @@ namespace See4Me.ViewModels
         {
             this.mediaPicker = mediaPicker;
             this.speechService = speechService;
-            this.InitializeServices();
 
             this.CreateCommands();
-        }
-
-        private void InitializeServices()
-        {
-            this.visionService = ViewModelLocator.VisionServiceClient;
-            this.translatorService = ViewModelLocator.TranslatorService;
         }
 
         private void CreateCommands()
@@ -65,6 +55,9 @@ namespace See4Me.ViewModels
         private async Task TakePhotoAsync()
         {
             IsBusy = true;
+
+            var visionService = ViewModelLocator.VisionServiceClient;
+            var translatorService = ViewModelLocator.TranslatorService;
 
             string recognizeText = null;
 
@@ -93,6 +86,16 @@ namespace See4Me.ViewModels
                             // Internet isn't available, the service cannot be reached.
                             recognizeText = AppResources.NoConnection;
                         }
+                    }
+                    else
+                    {
+                        // If message is null at this point, this is the first request. If we cancel it, turns automatically to the
+                        // previous page.
+                        if (message == null)
+                            Navigator.GoBack();
+
+                        IsBusy = false;
+                        return;
                     }
                 }
             }

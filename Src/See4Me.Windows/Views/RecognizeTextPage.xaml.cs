@@ -13,6 +13,7 @@ namespace See4Me.Views
         public RecognizeTextPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

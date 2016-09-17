@@ -24,10 +24,6 @@ namespace See4Me.ViewModels
         private readonly IStreamingService streamingService;
         private readonly ISpeechService speechService;
 
-        private EmotionServiceClient emotionService;
-        private VisionServiceClient visionService;
-        private ITranslatorService translatorService;
-
         private CameraPanel lastCameraPanel = CameraPanel.Unknown;
         private bool initialized = false;
 
@@ -58,18 +54,10 @@ namespace See4Me.ViewModels
             this.streamingService = streamingService;
             this.speechService = speechService;
 
-            this.LoadServices();
             this.CreateCommands();
 
             // Initializes vision extensions.
             var visionInitializeTask = VisionExtensions.InitializeAsync();
-        }
-
-        private void LoadServices()
-        {
-            this.visionService = ViewModelLocator.VisionServiceClient;
-            this.emotionService = ViewModelLocator.EmotionServiceClient;
-            this.translatorService = ViewModelLocator.TranslatorService;
         }
 
         private void CreateCommands()
@@ -84,6 +72,16 @@ namespace See4Me.ViewModels
 
             GotoRecognizeTextCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.RecognizeTextPage.ToString()), () => IsVisionServiceRegistered && !IsBusy)
                 .DependsOn(() => IsBusy);
+        }
+
+        public async Task CheckShowConsentAsync()
+        {
+            // If not given, asks the user for the consent to use the app.
+            if (!Settings.IsConsentGiven)
+            {
+                await DialogService.ShowAsync(AppResources.ConsentRequiredMessage, AppResources.ConsentRequiredTitle);
+                Settings.IsConsentGiven = true;
+            }
         }
 
         public async Task InitializeStreamingAsync()
@@ -147,6 +145,10 @@ namespace See4Me.ViewModels
         {
             IsBusy = true;
             StatusMessage = null;
+
+            var visionService = ViewModelLocator.VisionServiceClient;
+            var emotionService = ViewModelLocator.EmotionServiceClient;
+            var translatorService = ViewModelLocator.TranslatorService;
 
             string baseDescription = null;
             string facesRecognizedDescription = null;

@@ -108,6 +108,7 @@
     </Compile>
     <Compile Include="Behaviors\PushButtonPressedBehavior.cs" />
     <Compile Include="Behaviors\CameraPressedBehavior.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Services\AppService.cs" />
