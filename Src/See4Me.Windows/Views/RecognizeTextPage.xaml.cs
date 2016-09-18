@@ -30,9 +30,7 @@ namespace See4Me.Views
                 {
                     case Constants.PhotoTaken:
                         photo.Source = null;
-
-                        using (var ms = new MemoryStream(message.Content))
-                            photo.Source = await ms.AsImageSourceAsync();
+                        await photo.SetSourceAsync(message.Content);
 
                         break;
                 }

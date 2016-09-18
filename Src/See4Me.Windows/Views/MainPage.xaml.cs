@@ -59,8 +59,7 @@ namespace See4Me.Views
                 switch (message.Notification)
                 {
                     case Constants.PhotoTaken:
-                        using (var ms = new MemoryStream(message.Content))
-                            previewImage.Source = await ms.AsImageSourceAsync();
+                        await previewImage.SetSourceAsync(message.Content);
 
                         break;
                 }

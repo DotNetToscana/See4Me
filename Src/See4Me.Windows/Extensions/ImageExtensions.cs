@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
+using Windows.Storage.Streams;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -35,6 +38,23 @@ namespace See4Me.Extensions
             var bitmapSource = await softwareBitmap.AsImageSourceAsync();
 
             return bitmapSource;
+        }
+
+        public static async Task SetSourceAsync(this BitmapImage image, byte[] buffer)
+        {
+            using (var stream = new InMemoryRandomAccessStream())
+            {
+                await stream.WriteAsync(buffer.AsBuffer());
+                stream.Seek(0);
+
+                await image.SetSourceAsync(stream);
+            }
+        }
+
+        public static async Task SetSourceAsync(this Image image, byte[] buffer)
+        {
+            using (var ms = new MemoryStream(buffer))
+                image.Source = await ms.AsImageSourceAsync();
         }
     }
 }
