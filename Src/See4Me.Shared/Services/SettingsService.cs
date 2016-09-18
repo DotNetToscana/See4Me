@@ -112,15 +112,8 @@ namespace See4Me.Services
 
         public bool IsConsentGiven
         {
-            get {
-#if DEBUG
-                // When in debug mode, the consent is implicitly given.
-                return true;
-#else
-                return settings.GetValueOrDefault(IS_CONSENT_GIVEN, false);
-#endif
-            }
+            get { return settings.GetValueOrDefault(IS_CONSENT_GIVEN, false); }
             set { settings.AddOrUpdateValue(IS_CONSENT_GIVEN, value); }
-        }
+        }        
     }
 }

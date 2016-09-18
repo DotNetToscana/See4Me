@@ -30,26 +30,34 @@ namespace See4Me
 
         public static string VisionSubscriptionKey
         {
-            get { return settings.VisionSubscriptionKey ?? visionSubscriptionKey; }
+            get { return GetValue(settings.VisionSubscriptionKey) ?? visionSubscriptionKey; }
             set { settings.VisionSubscriptionKey = value; }
         }
 
         public static string EmotionSubscriptionKey
         {
-            get { return settings.EmotionSubscriptionKey ?? emotionSubscriptionKey; }
+            get { return GetValue(settings.EmotionSubscriptionKey) ?? emotionSubscriptionKey; }
             set { settings.EmotionSubscriptionKey = value; }
         }
 
         public static string TranslatorClientId
         {
-            get { return settings.TranslatorClientId ?? translatorClientId; }
+            get { return GetValue(settings.TranslatorClientId) ?? translatorClientId; }
             set { settings.TranslatorClientId = value; }
         }
 
         public static string TranslatorClientSecret
         {
-            get { return settings.TranslatorClientSecret ?? translatorClientSecret; }
+            get { return GetValue(settings.TranslatorClientSecret) ?? translatorClientSecret; }
             set { settings.TranslatorClientSecret = value; }
+        }
+
+        private static string GetValue(string value)
+        {
+            if (!string.IsNullOrWhiteSpace(value))
+                return value;
+
+            return null;
         }
     }
 }

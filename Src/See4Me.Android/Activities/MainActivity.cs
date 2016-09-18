@@ -100,7 +100,7 @@ namespace See4Me.Android
         {
             if (keyCode == Keycode.VolumeDown || keyCode == Keycode.VolumeUp)
             {
-                ViewModel.DescribeImageCommand.Execute(null);
+                ViewModel.DescribeImageCommand.Execute(null);                
                 return true;
             }
 
