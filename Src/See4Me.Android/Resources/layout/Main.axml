@@ -20,5 +20,19 @@
             android:padding="16dp"
             android:text="See4Me"
             android:textColor="@android:color/white" />
+        <ImageButton
+            android:id="@+id/takePhotoButton"
+            android:background="@drawable/roundedbutton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="12dip"
+            android:layout_gravity="center|right"
+            android:src="@drawable/camera"
+            android:paddingBottom="30dp"
+            android:paddingTop="30dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:alpha="0.8"
+            android:clickable="true" />
     </FrameLayout>
 </LinearLayout>

@@ -47,10 +47,16 @@ namespace See4Me
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int camera = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int splash_screen = 2130837505;
+			public const int Icon = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int roundedbutton = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int splash_screen = 2130837507;
 			
 			static Drawable()
 			{
@@ -64,6 +70,9 @@ namespace See4Me
 		
 		public partial class Id
 		{
+			
+			// aapt resource value: 0x7f060002
+			public const int takePhotoButton = 2131099650;
 			
 			// aapt resource value: 0x7f060001
 			public const int textViewMessage = 2131099649;

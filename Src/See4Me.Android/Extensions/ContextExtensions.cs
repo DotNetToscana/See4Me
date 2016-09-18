@@ -34,6 +34,9 @@ namespace See4Me.Android.Extensions
             view.Click += (s, e) => { };
             view.SetCommand(Events.Click, command);
 
+            //view.Enabled = command.CanExecute(null);
+            //command.CanExecuteChanged += (s, args) => view.Enabled = command.CanExecute(null);
+
             return view;
         }
     }

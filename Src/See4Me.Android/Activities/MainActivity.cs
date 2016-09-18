@@ -25,15 +25,17 @@ namespace See4Me.Android
 {
     [Activity(Label = "@string/ApplicationName", Icon = "@drawable/icon", ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize,
          ScreenOrientation = ScreenOrientation.Landscape, Theme = "@style/See4Me")]
-    public class MainActivity : ActivityBase<MainViewModel>, GestureDetector.IOnGestureListener
+    public class MainActivity : ActivityBase<MainViewModel>
     {
         private List<Binding> bindings;
 
         private TextureView textureView;
         private TextView statusMessage;
-        private GestureDetector gestureDetector;
+        private ImageButton takePhotoButton;
 
         public TextView StatusMessage => statusMessage ?? (statusMessage = FindViewById<TextView>(Resource.Id.textViewMessage));
+
+        public ImageButton TakePhotoButton => takePhotoButton ?? (takePhotoButton = FindViewById<ImageButton>(Resource.Id.takePhotoButton));
 
         public TextureView TextureView => textureView ?? (textureView = FindViewById<TextureView>(Resource.Id.textureViewMain));
 
@@ -44,14 +46,14 @@ namespace See4Me.Android
             this.RegisterMessages();
             this.bindings = new List<Binding>()
             {
-                this.SetBinding(() => ViewModel.StatusMessage, () => StatusMessage.Text, BindingMode.OneWay).RegisterHandler(StatusMessage)
+                this.SetBinding(() => ViewModel.StatusMessage, () => StatusMessage.Text, BindingMode.OneWay).RegisterHandler(StatusMessage),
             };
+
+            this.TakePhotoButton.SetCommand(this.ViewModel.DescribeImageCommand);
 
             // Initializes camera streaming.
             var streamingService = ServiceLocator.Current.GetInstance<IStreamingService>() as TextureView.ISurfaceTextureListener;
             TextureView.SurfaceTextureListener = streamingService;
-
-            gestureDetector = new GestureDetector(this);
 
             base.OnInitialize(bundle);
         }
@@ -84,42 +86,16 @@ namespace See4Me.Android
             await ViewModel.CleanupAsync();
         }
 
-        public bool OnSingleTapUp(MotionEvent e)
-        {
-            ViewModel.DescribeImageCommand.Execute(null);
-            return true;
-        }
-
-        public override bool OnTouchEvent(MotionEvent e)
-        {
-            gestureDetector.OnTouchEvent(e);
-            return false;
-        }
-
         public override bool OnKeyDown([GeneratedEnum] Keycode keyCode, KeyEvent e)
         {
             if (keyCode == Keycode.VolumeDown || keyCode == Keycode.VolumeUp)
             {
-                ViewModel.DescribeImageCommand.Execute(null);                
+                ViewModel.DescribeImageCommand.Execute(null);
                 return true;
             }
 
             return base.OnKeyDown(keyCode, e);
         }
-
-        #region Unused Gesture methods
-
-        public bool OnDown(MotionEvent e) => false;
-
-        public bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) => false;
-
-        public bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) => false;
-
-        public void OnShowPress(MotionEvent e) { }
-
-        public void OnLongPress(MotionEvent e) { }
-
-        #endregion
     }
 }
 
