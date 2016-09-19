@@ -17,7 +17,7 @@ You need to insert these service keys (Subscription Key for Vision and Emotion, 
 
 **Contribute**
 
-The project is continually evolving. If you want to contribute, feel free make to pull requests or get in touch with us! 
+The project is continually evolving. We welcome contributions. Feel free to file issues and pull requests on the repo and we'll address them as we can. 
 
 **Developer Code of Conduct**
 
