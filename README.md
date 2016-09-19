@@ -1,6 +1,6 @@
 # Introducing See4Me
 
-*See4Me* is a cross-platform app that shows how [Microsoft Cognitive Services](https://www.microsoft.com/cognitive-services) work. Just start the app, point the smartphone to a subject and tap: in a few instants, the app will describe and speech what it sees. Moreover, if it recognizes one or more people, it tries to detect their ages and emotions. The app is also able to automatically translate descriptions using [Microsoft Bing Translator](https://www.microsoft.com/en-us/translator/products.aspx).
+*See4Me* A cross-platform app to 'see' the world using [Microsoft Cognitive Services](https://www.microsoft.com/cognitive-services). Simply point the smartphone and tap: in a few instants the app will describe and speak what it sees -- from scenes to objects to people with age and emotion. The app is also able to automatically translate descriptions using [Microsoft Bing Translator](https://www.microsoft.com/en-us/translator/products.aspx).
 
 **Getting started**
 
@@ -19,6 +19,7 @@ You need to insert these service keys (Subscription Key for Vision and Emotion, 
 
 The project is continually evolving. If you want to contribute, feel free make to pull requests or get in touch with us! 
 
-**Code of Conduct**
+**Developer Code of Conduct**
+The image, voice, video or text understanding capabilities of See4Me use Microsoft Cognitive Services. Microsoft will receive the images, audio, video, and other data that you upload (via this app) for service improvement purposes. To report abuse of the Microsoft Cognitive Services to Microsoft, please visit the Microsoft Cognitive Services website at https://www.microsoft.com/cognitive-services, and use the "Report Abuse" link at the bottom of the page to contact Microsoft. For more information about Microsoft privacy policies please see their privacy statement here: https://go.microsoft.com/fwlink/?LinkId=521839.
 
 See4Me uses the Microsoft Cognitive Services, see https://www.microsoft.com/cognitive-services/. Developers using this project are expected to follow the “Developer Code of Conduct for Microsoft Cognitive Services” at http://go.microsoft.com/fwlink/?LinkId=698895. 
