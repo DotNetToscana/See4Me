@@ -248,3 +248,5 @@ _Pvt_Extensions
 /Src/See4Me.Windows/_pkginfo.txt
 /Src/See4Me.Windows/_language-it.appx
 /Src/See4Me.Windows/Package.StoreAssociation.xml
+
+.DS_Store

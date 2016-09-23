@@ -139,8 +139,19 @@ namespace See4Me.Services
 
         public Task<Stream> GetCurrentFrameAsync()
         {
-            var image = outputRecorder.GetImage();
-            var resizedImage = image.MaxResizeImage();
+			var image = outputRecorder.GetImage();
+
+			var previewLayerConnection = contentLayer.Connection;
+			if (previewLayerConnection.SupportsVideoOrientation &&
+			    previewLayerConnection.VideoOrientation == AVCaptureVideoOrientation.LandscapeLeft &&
+			    session?.Inputs[0].GetPosition() == AVCaptureDevicePosition.Back)
+				image = UIImage.FromImage(image.CGImage, 1f, UIImageOrientation.Down);
+			else if( previewLayerConnection.SupportsVideoOrientation &&
+				previewLayerConnection.VideoOrientation == AVCaptureVideoOrientation.LandscapeRight &&
+			        session?.Inputs[0].GetPosition() == AVCaptureDevicePosition.Front)
+				image = UIImage.FromImage(image.CGImage, 1f, UIImageOrientation.Down);
+
+			var resizedImage = image.MaxResizeImage();
 
             return Task.FromResult(resizedImage.AsJPEG(1.0f).AsStream());
         }

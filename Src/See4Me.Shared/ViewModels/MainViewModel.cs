@@ -38,7 +38,7 @@ namespace See4Me.ViewModels
         public string StatusMessage
         {
             get { return statusMessage; }
-            set { this.Set(ref statusMessage, value); }
+			set { this.Set(ref statusMessage, value, true); }
         }
 
         public AutoRelayCommand DescribeImageCommand { get; set; }

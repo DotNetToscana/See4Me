@@ -9,7 +9,5 @@ namespace See4Me.iOS.Extensions
     {
         public static AVCaptureDevicePosition GetPosition(this AVCaptureInput avCaptureInput)
             => ((AVCaptureDeviceInput) avCaptureInput).Device.Position;
-
-
     }
 }

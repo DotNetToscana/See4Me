@@ -8,7 +8,7 @@
         public const string PhotoTaken = "PhotoTaken";
         public const string InitializeStreaming = "InitializeStreaming";
 
-        public const string Child = "Child";
+		public const string Child = "Child";
         public const string Boy = "Boy";
         public const string Man = "Man";
         public const string LookingMessage = "Looking";
