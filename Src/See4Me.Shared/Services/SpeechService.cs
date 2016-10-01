@@ -22,13 +22,10 @@ namespace See4Me.Services
         public Task SpeechAsync(string text, string language = null)
         {
             CrossLocale? locale = null;
-
             language = language ?? Language;
+
             if (language != null)
-            {
-                locale = synthesizer.GetInstalledLanguages().FirstOrDefault(l => l.Language.StartsWith(language));
-                locale = locale.Value.Language != null ? locale : null;
-            }
+                locale = new CrossLocale { Language = language, Country = language };
 
             synthesizer.Speak(text, crossLocale: locale);
             return Task.FromResult<object>(null);
