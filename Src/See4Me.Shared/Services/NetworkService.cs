@@ -14,7 +14,7 @@ namespace See4Me.Services
         private readonly HttpClient client;
 
         private const string CONNECTION_TEST_URL = "https://www.google.com";
-        private const int CONNECTION_TEST_TIMEOUT_SECONDS = 3;
+        private const int CONNECTION_TEST_TIMEOUT_SECONDS = 5;
 
         public bool IsConnected { get; private set; }
 

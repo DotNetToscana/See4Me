@@ -69,14 +69,7 @@ namespace See4Me.Services
 
         public bool ShowRawDescriptionOnInvalidRecognition
         {
-            get
-            {
-#if DEBUG
-                return true;
-#else
-                return settings.GetValueOrDefault(SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION, false);
-#endif
-            }
+            get { return settings.GetValueOrDefault(SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION, false); }
             set { settings.AddOrUpdateValue(SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION, value); }
         }
 
