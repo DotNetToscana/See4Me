@@ -20,8 +20,6 @@ namespace See4Me.Engine
         public IVisionSettingsProvider VisionSettingsProvider { get; set; }
 
         private ITranslatorService translatorService;
-        private IVisionServiceClient visionService;
-        private EmotionServiceClient emotionService;
 
         private const string DefaultLanguge = "en";
 
@@ -44,12 +42,11 @@ namespace See4Me.Engine
         {
             await this.RaiseOnProgressAsync(onProgress, RecognitionPhase.QueryingService);
 
+            var visionService = new VisionServiceClient(Settings.VisionSubscriptionKey);
             var result = new CognitiveResult();
 
             if (recognitionType.HasFlag(RecognitionType.Vision) || recognitionType.HasFlag(RecognitionType.Emotion))
             {
-                visionService = new VisionServiceClient(Settings.VisionSubscriptionKey);
-
                 var imageBytes = await stream.ToArrayAsync();
 
                 var features = new HashSet<VisualFeature>();
@@ -99,7 +96,7 @@ namespace See4Me.Engine
                     {
                         await this.RaiseOnProgressAsync(onProgress, RecognitionPhase.RecognizingFaces);
 
-                        emotionService = new EmotionServiceClient(Settings.EmotionSubscriptionKey);
+                        var emotionService = new EmotionServiceClient(Settings.EmotionSubscriptionKey);
 
                         foreach (var face in analyzeImageResult.Faces)
                         {
