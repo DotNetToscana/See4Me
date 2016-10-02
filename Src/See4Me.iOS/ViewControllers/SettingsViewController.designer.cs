@@ -9,10 +9,10 @@ using System;
 using System.CodeDom.Compiler;
 using UIKit;
 
-namespace See4Me.iOS
+namespace See4Me
 {
-    [Register ("MainViewController")]
-    partial class MainViewController
+    [Register ("SettingsViewController")]
+    partial class SettingsViewController
     {
         void ReleaseDesignerOutlets ()
         {

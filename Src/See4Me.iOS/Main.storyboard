@@ -1,26 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="14">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
     </dependencies>
     <scenes>
-        <scene sceneID="4">
+        <scene sceneID="13">
             <objects>
-                <viewController id="5" sceneMemberID="viewController" customClass="MainViewController">
+                <navigationController definesPresentationContext="YES" id="14" sceneMemberID="viewController" title="See4Me">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="17">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="16" kind="relationship" relationship="rootViewController" id="15"/>
+                    </connections>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="18" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-485" y="601"/>
+        </scene>
+        <scene sceneID="19">
+            <objects>
+                <viewController id="16" sceneMemberID="viewController" customClass="MainViewController" storyboardIdentifier="MainPage">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2"/>
-                        <viewControllerLayoutGuide type="bottom" id="3"/>
+                        <viewControllerLayoutGuide type="top" id="11"/>
+                        <viewControllerLayoutGuide type="bottom" id="12"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6">
+                    <view key="view" contentMode="scaleToFill" id="21">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <subviews/>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="22" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-289" y="45"/>
+            <point key="canvasLocation" x="247" y="602"/>
         </scene>
     </scenes>
     <resources>
@@ -28,5 +49,12 @@
         <image name="Icon-60.png" width="60" height="60"/>
         <image name="Icon-Small.png" width="29" height="29"/>
         <image name="Icon-Small-40.png" width="40" height="40"/>
+        <image name="Icon-72.png" width="72" height="72"/>
+        <image name="Icon-76.png" width="76" height="76"/>
+        <image name="Icon-Small-50.png" width="50" height="50"/>
+        <image name="Images/Eye.png" width="512" height="512"/>
+        <image name="Images/Camera.png" width="36" height="36"/>
+        <image name="Images/SwitchCamera.png" width="36" height="36"/>
+        <image name="Images/Settings.png" width="36" height="36"/>
     </resources>
 </document>
