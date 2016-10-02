@@ -77,7 +77,7 @@
 "ConsentRequiredTitle"="Richiesta consenso";
 "PrivacyPolicy"="Informativa sulla privacy";
 "PrivacyPolicyCommand"="Informativa sulla privacy...";
-"PrivacyStatement"="Le funzionalità di riconoscimento di immagini, voce, video e testo di See4Me sono basate sui Microsoft Cognitive Services. Microsoft riceverà le immagini, l\'audio, il video e gli altri dati che verranno inviati attraverso questa app per migliorare il servizio. Per segnalare a Microsoft abusi relativi ai Microsoft Cognitive Services, visita il sito dei Microsoft Cognitive Services all\'indirizzo https://www.microsoft.com/cognitive-services, e usa il link "Report Abuse" in fondo alla pagina per contattare Microsoft. Per maggiori informazioni sulle normative della privacy di Microsoft visualizza l\'informativa disponibile qui: https://go.microsoft.com/fwlink/?LinkId=521839.";
+"PrivacyStatement"="Le funzionalità di riconoscimento di immagini, voce, video e testo di See4Me sono basate sui Microsoft Cognitive Services. Microsoft riceverà le immagini, l\'audio, il video e gli altri dati che verranno inviati attraverso questa app per migliorare il servizio. Per segnalare a Microsoft abusi relativi ai Microsoft Cognitive Services, visita il sito dei Microsoft Cognitive Services all\'indirizzo https://www.microsoft.com/cognitive-services, e usa il link \"Report Abuse\" in fondo alla pagina per contattare Microsoft. Per maggiori informazioni sulle normative della privacy di Microsoft visualizza l\'informativa disponibile qui: https://go.microsoft.com/fwlink/?LinkId=521839.";
 "MicrosoftPrivacyPolicies"="Informativa sulla privacy Microsoft";
 "PoweredByCognitiveServices"="Powered by Microsoft’s Cognitive Services:";
 "RecognizingText"="Riconoscimento del testo...";
