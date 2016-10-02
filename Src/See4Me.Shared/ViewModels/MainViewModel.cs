@@ -153,11 +153,11 @@ namespace See4Me.ViewModels
                 {
                     if (stream != null)
                     {
+                        var imageBytes = await stream.ToArrayAsync();
+                        MessengerInstance.Send(new NotificationMessage<byte[]>(imageBytes, Constants.PhotoTaken));
+
                         if (await Network.IsInternetAvailableAsync())
                         {
-                            var imageBytes = await stream.ToArrayAsync();
-                            MessengerInstance.Send(new NotificationMessage<byte[]>(imageBytes, Constants.PhotoTaken));
-
                             var result = await cognitiveClient.RecognizeAsync(stream, Language, RecognitionType.Vision | RecognitionType.Emotion, OnRecognitionProgress);
                             var visionResult = result.VisionResult;
 
