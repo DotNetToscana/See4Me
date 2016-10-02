@@ -162,7 +162,7 @@ public class Resx2iOSTemplate : Template
 
         foreach(KeyValuePair<string, string> pair in items)
         {
-            WriteLine(String.Format("\"{0}\"=\"{1}\";", pair.Key, pair.Value));
+            WriteLine(String.Format("\"{0}\"=\"{1}\";", pair.Key, pair.Value.Replace("\"", "\\\"")));
         }
 
         return this.GenerationEnvironment.ToString();
