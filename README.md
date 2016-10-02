@@ -1,6 +1,6 @@
 # Introducing See4Me
 
-*See4Me* A cross-platform app to 'see' the world using [Microsoft Cognitive Services](https://www.microsoft.com/cognitive-services). Simply point the smartphone and tap: in a few instants the app will describe and speak what it sees -- from scenes to objects to people with age and emotion. The app is also able to automatically translate descriptions using [Microsoft Bing Translator](https://www.microsoft.com/en-us/translator/products.aspx).
+*See4Me* is a cross-platform app to 'see' the world using [Microsoft Cognitive Services](https://www.microsoft.com/cognitive-services). Simply point the smartphone and tap: in a few instants the app will describe and speak what it sees -- from scenes to objects to people with age and emotion. The app is also able to automatically translate descriptions using [Microsoft Bing Translator](https://www.microsoft.com/en-us/translator/products.aspx).
 
 **Getting started**
 
