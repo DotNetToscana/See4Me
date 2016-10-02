@@ -8,53 +8,72 @@
 <#@ import namespace="System.Diagnostics" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections" #>
-<#@ import namespace="System.Collections.Generic" #> 
+<#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Text.RegularExpressions" #>
 <#@ import namespace="System.Xml" #>
 <#@ import namespace="System.Xml.Linq" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
-<#+ 
- 
+<#@ assembly name="EnvDTE" #>
+<#+
+
 public static class ResxUtilities
 {
+	public static IEnumerable<EnvDTE.Project> GetSolutionFolderProjects(EnvDTE.Project project)
+	{
+		var projects = new List<EnvDTE.Project>();
+		var y = (project.ProjectItems as EnvDTE.ProjectItems).Count;
+		for(var i = 1; i <= y; i++)
+		{
+			var x = project.ProjectItems.Item(i).SubProject;
+			var subProject = x as EnvDTE.Project;
+			if (subProject != null)
+			{
+			  //Carried out work and added projects as appropriate
+			  projects.Add(subProject);
+			}
+		}
+
+		return projects;
+	}
+
     public static Dictionary<string, string> GenerateResources(string resourceName)
     {
         Dictionary<string, string> items = new Dictionary<string, string>();
         string locale = GetLocale(resourceName);
- 
+
         if (locale != "")
         {
             locale = "_" + locale;
         }
- 
+
         // Read in the .resx file and collect the data elements
         if (File.Exists(resourceName))
         {
             XDocument document = XDocument.Parse(File.ReadAllText(resourceName));
- 
-            foreach(var item in document.Element("root").Elements("data")) 
-            { 
+
+            foreach(var item in document.Element("root").Elements("data"))
+            {
                 string Name = EscapeName(item);
                 string Value = EscapeValue(item);
- 
+
                 items.Add(Name, Value);
             }
         }
- 
+
         return items;
     }
- 
+
     public static string GetNameSpace(string filename)
     {
         string [] words = filename.Replace(".\\", "").Split(new char[] {'.'});
         return words[0];
     }
- 
+
     public static string GetLocale(string filename)
     {
         filename = Path.GetFileName(filename);
         string [] words = filename.Replace(".\\", "").Split(new char[] {'.'});
- 
+
         if (words.Length > 2)
         {
             return words[1];
@@ -63,15 +82,15 @@ public static class ResxUtilities
         {
             return "";
         }
- 
+
     }
- 
+
     public static string EscapeName(XElement item)
     {
         string name = item.Attribute("name").Value;
         return Regex.Replace(name, "[^a-zA-Z0-9_]{1,1}", "_");
     }
- 
+
     public static string EscapeValue(XElement item)
     {
         XElement vitem = item.Descendants().FirstOrDefault();
@@ -79,13 +98,13 @@ public static class ResxUtilities
         name = name.Replace("'", "\\'");
         return name;
     }
- 
+
     public static string GetLanguage(string filename)
     {
         string lang = null;
         var f = Path.GetFileName(filename);
         var foo = f.Split('.');
-     
+
         if (foo.Count() > 2)
         {
             if (foo[1].Length == 2)
@@ -97,25 +116,25 @@ public static class ResxUtilities
         {
             lang = "en";
         }
-     
+
         return lang;
     }
 }
- 
+
 public class Resx2AndroidTemplate : Template
 {
     public string ResxFileName {get; set;}
- 
+
     public override string TransformText()
     {
         string fullname = this.Context.Host.ResolvePath(ResxFileName);
         Dictionary<string, string> items = ResxUtilities.GenerateResources(fullname);
- 
+
         int l = items.Count;
- 
+
         WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
         WriteLine("<resources>");
- 
+
         foreach(KeyValuePair<string, string> pair in items)
         {
             Write("  <string name=\"");
@@ -125,35 +144,35 @@ public class Resx2AndroidTemplate : Template
             WriteLine("</string>");
         }
         WriteLine("</resources>");
- 
+
         return this.GenerationEnvironment.ToString();
     }
 }
- 
+
 public class Resx2iOSTemplate : Template
 {
     public string ResxFileName {get; set;}
- 
+
     public override string TransformText()
     {
         string fullname = this.Context.Host.ResolvePath(ResxFileName);
         Dictionary<string, string> items = ResxUtilities.GenerateResources(fullname);
- 
+
         int l = items.Count;
- 
+
         foreach(KeyValuePair<string, string> pair in items)
         {
             WriteLine(String.Format("\"{0}\"=\"{1}\";", pair.Key, pair.Value));
         }
- 
+
         return this.GenerationEnvironment.ToString();
-    }    
+    }
 }
- 
+
 public class Resx2ClassTemplate : CSharpTemplate
 {
     public string ResxFileName {get; set;}
- 
+
     public override string TransformText()
     {
         #>
@@ -164,7 +183,7 @@ namespace <#= DefaultNamespace #>
 <#+
         string fullname = this.Context.Host.ResolvePath(ResxFileName);
         Dictionary<string, string> items = ResxUtilities.GenerateResources(fullname);
- 
+
         foreach(KeyValuePair<string, string> pair in items)
         {
 #>
@@ -176,6 +195,6 @@ namespace <#= DefaultNamespace #>
 }
 <#+
         return this.GenerationEnvironment.ToString();
-    }    
+    }
 }
 #>

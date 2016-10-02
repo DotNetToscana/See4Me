@@ -147,11 +147,13 @@
     <BundleResource Include="Resources\Icon-Small-40.png" />
     <BundleResource Include="Resources\Images\Eye.png" />
     <None Include="app.config" />
+    <Content Include="en.lproj\Localizable.strings" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <InterfaceDefinition Include="Main.storyboard">
       <SubType>Designer</SubType>
     </InterfaceDefinition>
+    <Content Include="it.lproj\Localizable.strings" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
