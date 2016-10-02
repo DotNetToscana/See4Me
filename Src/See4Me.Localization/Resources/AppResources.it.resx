@@ -363,4 +363,7 @@
   <data name="PoweredByCognitiveServices" xml:space="preserve">
     <value>Powered by Microsoft’s Cognitive Services:</value>
   </data>
+  <data name="RecognizingText" xml:space="preserve">
+    <value>Riconoscimento del testo...</value>
+  </data>
 </root>

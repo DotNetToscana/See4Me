@@ -159,6 +159,10 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\See4Me.Engine\See4Me.Engine.csproj">
+      <Project>{995009d6-ade7-4102-b6a6-1ab667cbe848}</Project>
+      <Name>See4Me.Engine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\See4Me.Localization\See4Me.Localization.csproj">
       <Project>{10463b05-995d-4730-b617-d2ca57d95c65}</Project>
       <Name>See4Me.Localization</Name>

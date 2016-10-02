@@ -584,6 +584,15 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recognizing text....
+        /// </summary>
+        public static string RecognizingText {
+            get {
+                return ResourceManager.GetString("RecognizingText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to en.
         /// </summary>
         public static string ResourceLanguage {

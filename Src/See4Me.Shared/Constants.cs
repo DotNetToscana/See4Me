@@ -2,8 +2,6 @@
 {
     public static partial class Constants
     {
-        public const string DefaultLanguge = "en";
-
         public const string TakingPhoto = "TakingPhoto";
         public const string PhotoTaken = "PhotoTaken";
         public const string InitializeStreaming = "InitializeStreaming";

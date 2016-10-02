@@ -2,7 +2,6 @@
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.ProjectOxford.Vision;
 using See4Me.Services;
-using See4Me.Services.Translator;
 using System.Globalization;
 using System.Threading.Tasks;
 

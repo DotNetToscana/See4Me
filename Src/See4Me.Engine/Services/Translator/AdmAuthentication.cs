@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
 
-namespace See4Me.Services.Translator
+namespace See4Me.Engine.Services.Translator
 {
     internal class AdmAccessToken
     {
@@ -46,7 +46,7 @@ namespace See4Me.Services.Translator
                         new KeyValuePair<string, string>("client_id", clientId),
                         new KeyValuePair<string, string>("client_secret", clientSecret),
                         new KeyValuePair<string, string>("scope", AzureScope),
-                    }));
+                    })).ConfigureAwait(false);
 
                 response.EnsureSuccessStatusCode();
 

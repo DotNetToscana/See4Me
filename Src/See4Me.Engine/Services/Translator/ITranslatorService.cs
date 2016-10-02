@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace See4Me.Services.Translator
+namespace See4Me.Engine.Services.Translator
 {
     public interface ITranslatorService
     {

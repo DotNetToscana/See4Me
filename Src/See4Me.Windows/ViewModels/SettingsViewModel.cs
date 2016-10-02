@@ -3,7 +3,6 @@ using GalaSoft.MvvmLight.Messaging;
 using Microsoft.ProjectOxford.Vision;
 using See4Me.Common;
 using See4Me.Services;
-using See4Me.Services.Translator;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;

@@ -1,21 +1,21 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.ProjectOxford.Emotion;
 using Microsoft.ProjectOxford.Vision;
 using See4Me.Common;
 using See4Me.Localization.Resources;
 using See4Me.Services;
-using See4Me.Services.Translator;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using See4Me.Extensions;
 using System.IO;
 using System.Text;
 using System.Net;
-using Microsoft.ProjectOxford.Vision.Contract;
+using See4Me.Engine;
+using Microsoft.Practices.ServiceLocation;
+using See4Me.Engine.Services.ServiceSettings;
+using See4Me.Extensions;
 
 namespace See4Me.ViewModels
 {
@@ -23,22 +23,18 @@ namespace See4Me.ViewModels
     {
         private readonly IStreamingService streamingService;
         private readonly ISpeechService speechService;
+        private readonly CognitiveClient cognitiveClient;
 
         private CameraPanel lastCameraPanel = CameraPanel.Unknown;
         private bool initialized = false;
 
         public bool IsVisionServiceRegistered => !string.IsNullOrWhiteSpace(ServiceKeys.VisionSubscriptionKey);
 
-        public bool IsEmotionServiceRegistered => !string.IsNullOrWhiteSpace(ServiceKeys.EmotionSubscriptionKey);
-
-        public bool IsTranslatorServiceRegistered
-            => !string.IsNullOrWhiteSpace(ServiceKeys.TranslatorClientId) && !string.IsNullOrWhiteSpace(ServiceKeys.TranslatorClientSecret);
-
         private string statusMessage;
         public string StatusMessage
         {
             get { return statusMessage; }
-			set { this.Set(ref statusMessage, value, true); }
+            set { this.Set(ref statusMessage, value, true); }
         }
 
         public AutoRelayCommand DescribeImageCommand { get; set; }
@@ -49,15 +45,13 @@ namespace See4Me.ViewModels
 
         public AutoRelayCommand GotoRecognizeTextCommand { get; set; }
 
-        public MainViewModel(IStreamingService streamingService, ISpeechService speechService)
+        public MainViewModel(CognitiveClient cognitiveClient, IStreamingService streamingService, ISpeechService speechService)
         {
+            this.cognitiveClient = cognitiveClient;
             this.streamingService = streamingService;
             this.speechService = speechService;
 
             this.CreateCommands();
-
-            // Initializes vision extensions.
-            var visionInitializeTask = VisionExtensions.InitializeAsync();
         }
 
         private void CreateCommands()
@@ -146,10 +140,6 @@ namespace See4Me.ViewModels
             IsBusy = true;
             StatusMessage = null;
 
-            var visionService = ViewModelLocator.VisionServiceClient;
-            var emotionService = ViewModelLocator.EmotionServiceClient;
-            var translatorService = ViewModelLocator.TranslatorService;
-
             string baseDescription = null;
             string facesRecognizedDescription = null;
             string emotionDescription = null;
@@ -168,85 +158,57 @@ namespace See4Me.ViewModels
                             var imageBytes = await stream.ToArrayAsync();
                             MessengerInstance.Send(new NotificationMessage<byte[]>(imageBytes, Constants.PhotoTaken));
 
-                            var visualFeatures = new VisualFeature[] { VisualFeature.Description, VisualFeature.Faces };
-                            var result = await visionService.AnalyzeImageAsync(stream, visualFeatures);
+                            var result = await cognitiveClient.RecognizeAsync(stream, Language, RecognitionType.Vision | RecognitionType.Emotion, OnRecognitionProgress);
+                            var visionResult = result.VisionResult;
 
-                            Caption originalDescription;
-                            Caption filteredDescription;
-
-                            if (result.IsValid(out originalDescription, out filteredDescription))
+                            if (visionResult.IsValid)
                             {
-                                baseDescription = filteredDescription.Text;
-
-                                if (Language != Constants.DefaultLanguge && IsTranslatorServiceRegistered)
+                                baseDescription = visionResult.Description;
+                                if (visionResult.IsTranslated)
                                 {
-                                    // The description needs to be translated.
-                                    StatusMessage = AppResources.Translating;
-                                    var translation = await translatorService.TranslateAsync(filteredDescription.Text, from: Constants.DefaultLanguge, to: Language);
-
                                     if (Settings.ShowOriginalDescriptionOnTranslation)
-                                        baseDescription = $"{translation} ({filteredDescription.Text})";
+                                        baseDescription = $"{visionResult.TranslatedDescription} ({visionResult.Description})";
                                     else
-                                        baseDescription = translation;
+                                        baseDescription = visionResult.TranslatedDescription;
                                 }
 
                                 if (Settings.ShowDescriptionConfidence)
-                                    baseDescription = $"{baseDescription} ({Math.Round(filteredDescription.Confidence, 2)})";
+                                    baseDescription = $"{baseDescription} ({Math.Round(visionResult.Confidence, 2)})";
 
-                                try
+                                // Analyzes emotion results.
+                                var emotionResults = result.EmotionResults;
+
+                                if (emotionResults.Any())
                                 {
-                                    // If there is one or more faces, asks the service information about them.
-                                    if (IsEmotionServiceRegistered && result.Faces?.Count() > 0)
+                                    var emotionMessages = new StringBuilder();
+
+                                    foreach (var emotionResult in emotionResults)
                                     {
-                                        StatusMessage = AppResources.RecognizingFaces;
-                                        var messages = new StringBuilder();
-
-                                        foreach (var face in result.Faces)
-                                        {
-                                            using (var ms = new MemoryStream(imageBytes))
-                                            {
-                                                var emotions = await emotionService.RecognizeAsync(ms, face.FaceRectangle.ToRectangle());
-                                                var bestEmotion = emotions.FirstOrDefault()?.Scores.GetBestEmotion();
-
-                                                // Creates the emotion description text to be speeched (if there are interesting information).
-                                                var emotionMessage = SpeechHelper.GetEmotionMessage(face, bestEmotion, includeAge: Settings.GuessAge);
-                                                if (!string.IsNullOrWhiteSpace(emotionMessage))
-                                                    messages.Append(emotionMessage);
-                                            }
-                                        }
-
-                                        // Checks if at least one emotion has been actually recognized.
-                                        if (messages.Length > 0)
-                                        {
-                                            // Describes how many faces have been recognized.
-                                            if (result.Faces.Count() == 1)
-                                                facesRecognizedDescription = AppResources.FaceRecognizedSingular;
-                                            else
-                                                facesRecognizedDescription = $"{string.Format(AppResources.FacesRecognizedPlural, result.Faces.Count())} {Constants.SentenceEnd}";
-
-                                            emotionDescription = messages.ToString();
-                                        }
+                                        var emotionMessage = SpeechHelper.GetEmotionMessage(emotionResult.Gender, emotionResult.Age, emotionResult.Emotion);
+                                        if (!string.IsNullOrWhiteSpace(emotionMessage))
+                                            emotionMessages.Append(emotionMessage);
                                     }
+
+                                    // Describes how many faces have been recognized.
+                                    if (emotionResults.Count() == 1)
+                                        facesRecognizedDescription = AppResources.FaceRecognizedSingular;
+                                    else
+                                        facesRecognizedDescription = $"{string.Format(AppResources.FacesRecognizedPlural, emotionResults.Count())} {Constants.SentenceEnd}";
+
+                                    emotionDescription = emotionMessages.ToString();
                                 }
-                                catch (Microsoft.ProjectOxford.Common.ClientException ex) when (ex.Error.Code.ToLower() == "unauthorized")
-                                {
-                                    // Unable to access the service (tipically, due to invalid registration keys).
-                                    baseDescription = AppResources.UnableToAccessService;
-                                }
-                                catch
-                                { }
                             }
                             else
                             {
-                                if (Settings.ShowRawDescriptionOnInvalidRecognition && originalDescription != null)
-                                    baseDescription = $"{AppResources.RecognitionFailed} ({originalDescription.Text}, {Math.Round(originalDescription.Confidence, 2)})";
+                                if (Settings.ShowRawDescriptionOnInvalidRecognition && visionResult.RawDescription != null)
+                                    baseDescription = $"{AppResources.RecognitionFailed} ({visionResult.RawDescription}, {Math.Round(visionResult.Confidence, 2)})";
                                 else
                                     baseDescription = AppResources.RecognitionFailed;
                             }
                         }
                         else
                         {
-                            // Internet isn't available, the service cannot be reached.
+                            // Connection isn't available, the service cannot be reached.
                             baseDescription = AppResources.NoConnection;
                         }
                     }
@@ -256,15 +218,20 @@ namespace See4Me.ViewModels
                     }
                 }
             }
+            catch (Microsoft.ProjectOxford.Vision.ClientException)
+            {
+                // Unable to access the service (tipically, due to invalid registration keys).
+                baseDescription = AppResources.UnableToAccessService;
+            }
+            catch (Microsoft.ProjectOxford.Common.ClientException ex) when (ex.Error.Code.ToLower() == "unauthorized")
+            {
+                // Unable to access the service (tipically, due to invalid registration keys).
+                baseDescription = AppResources.UnableToAccessService;
+            }
             catch (WebException)
             {
                 // Internet isn't available, the service cannot be reached.
                 baseDescription = AppResources.NoConnection;
-            }
-            catch (ClientException)
-            {
-                // Unable to access the service (tipically, due to invalid registration keys).
-                baseDescription = AppResources.UnableToAccessService;
             }
             catch (Exception ex)
             {
@@ -283,6 +250,26 @@ namespace See4Me.ViewModels
             await SpeechHelper.TrySpeechAsync(message);
 
             IsBusy = false;
+        }
+
+        private Task OnRecognitionProgress(RecognitionPhase phase)
+        {
+            switch (phase)
+            {
+                case RecognitionPhase.QueryingService:
+                    StatusMessage = AppResources.QueryingVisionService;
+                    break;
+
+                case RecognitionPhase.Translating:
+                    StatusMessage = AppResources.Translating;
+                    break;
+
+                case RecognitionPhase.RecognizingFaces:
+                    StatusMessage = AppResources.RecognizingFaces;
+                    break;
+            }
+
+            return Task.CompletedTask;
         }
 
         public async Task SwapCameraAsync()

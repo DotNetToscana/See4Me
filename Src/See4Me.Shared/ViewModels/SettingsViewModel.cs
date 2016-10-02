@@ -5,7 +5,6 @@ using Microsoft.ProjectOxford.Vision;
 using See4Me.Common;
 using See4Me.Localization.Resources;
 using See4Me.Services;
-using See4Me.Services.Translator;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,12 +18,14 @@ using System.Text.RegularExpressions;
 using Microsoft.ProjectOxford.Vision.Contract;
 using Microsoft.Practices.ServiceLocation;
 using GalaSoft.MvvmLight.Ioc;
+using See4Me.Engine;
 
 namespace See4Me.ViewModels
 {
     public partial class SettingsViewModel : ViewModelBase
     {
         private readonly ILauncherService launcherService;
+        private readonly CognitiveClient cognitiveClient;
 
         public AutoRelayCommand SubscribeCognitiveServicesCommand { get; set; }
 
@@ -94,8 +95,9 @@ namespace See4Me.ViewModels
             set { this.Set(ref showOriginalDescriptionOnTranslation, value); }
         }
 
-        public SettingsViewModel(ILauncherService launcherService)
+        public SettingsViewModel(CognitiveClient cognitiveClient, ILauncherService launcherService)
         {
+            this.cognitiveClient = cognitiveClient;
             this.launcherService = launcherService;
 
             this.CreateCommands();
@@ -137,8 +139,11 @@ namespace See4Me.ViewModels
             Settings.GuessAge = guessAge;
             Settings.ShowOriginalDescriptionOnTranslation = showOriginalDescriptionOnTranslation;
 
-            // Reinitializes services.
-            ViewModelLocator.InitializeServices();
+            var cognitiveSettings = cognitiveClient.Settings;
+            cognitiveSettings.EmotionSubscriptionKey = emotionSubscriptionKey;
+            cognitiveSettings.VisionSubscriptionKey = visionSubscriptionKey;
+            cognitiveSettings.TranslatorClientId = translatorClientId;
+            cognitiveSettings.TranslatorClientSecret = translatorClientSecret;
 
             Navigator.GoBack();
         }

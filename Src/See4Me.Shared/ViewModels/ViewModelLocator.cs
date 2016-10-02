@@ -3,9 +3,10 @@ using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.ProjectOxford.Emotion;
 using Microsoft.ProjectOxford.Vision;
+using See4Me.Engine;
+using See4Me.Engine.Services.ServiceSettings;
 using See4Me.Services;
 using See4Me.Services.ServiceSettings;
-using See4Me.Services.Translator;
 using System.Globalization;
 
 namespace See4Me.ViewModels
@@ -21,7 +22,19 @@ namespace See4Me.ViewModels
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            InitializeServices();
+            SimpleIoc.Default.Register<CognitiveClient>(() =>
+            {
+                var visionSettingsProvider = new LocalVisionSettingsProvider();
+                var cognitiveClient = new CognitiveClient(visionSettingsProvider);
+
+                var cognitiveSettings = cognitiveClient.Settings;
+                cognitiveSettings.EmotionSubscriptionKey = ServiceKeys.EmotionSubscriptionKey;
+                cognitiveSettings.VisionSubscriptionKey = ServiceKeys.VisionSubscriptionKey;
+                cognitiveSettings.TranslatorClientId = ServiceKeys.TranslatorClientId;
+                cognitiveSettings.TranslatorClientSecret = ServiceKeys.TranslatorClientSecret;
+
+                return cognitiveClient;
+            });
 
             SimpleIoc.Default.Register<ISpeechService>(() =>
             {
@@ -37,7 +50,6 @@ namespace See4Me.ViewModels
             SimpleIoc.Default.Register<ILauncherService, LauncherService>();
             SimpleIoc.Default.Register<IAppService, AppService>();
             SimpleIoc.Default.Register<IMediaPicker, MediaPicker>();
-            SimpleIoc.Default.Register<IVisionSettingsProvider, LocalVisionSettingsProvider>();
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
@@ -46,29 +58,6 @@ namespace See4Me.ViewModels
             SimpleIoc.Default.Register<PrivacyViewModel>();
 
             OnInitialize();
-        }
-
-        public static void InitializeServices()
-        {
-            var language = GetLanguage();
-
-            if (SimpleIoc.Default.IsRegistered<ITranslatorService>())
-                SimpleIoc.Default.Unregister<ITranslatorService>();
-
-            if (SimpleIoc.Default.IsRegistered<VisionServiceClient>())
-                SimpleIoc.Default.Unregister<VisionServiceClient>();
-
-            if (SimpleIoc.Default.IsRegistered<EmotionServiceClient>())
-                SimpleIoc.Default.Unregister<EmotionServiceClient>();
-
-            SimpleIoc.Default.Register<ITranslatorService>(() =>
-            {
-                var service = new TranslatorService(ServiceKeys.TranslatorClientId, ServiceKeys.TranslatorClientSecret, language);
-                return service;
-            });
-
-            SimpleIoc.Default.Register<VisionServiceClient>(() => new VisionServiceClient(ServiceKeys.VisionSubscriptionKey));
-            SimpleIoc.Default.Register<EmotionServiceClient>(() => new EmotionServiceClient(ServiceKeys.EmotionSubscriptionKey));
         }
 
         public MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
@@ -80,12 +69,6 @@ namespace See4Me.ViewModels
         public RecognizeTextViewModel RecognizeTextViewModel => ServiceLocator.Current.GetInstance<RecognizeTextViewModel>();
 
         public PrivacyViewModel PrivacyViewModel => ServiceLocator.Current.GetInstance<PrivacyViewModel>();
-
-        public static VisionServiceClient VisionServiceClient => ServiceLocator.Current.GetInstance<VisionServiceClient>();
-
-        public static EmotionServiceClient EmotionServiceClient => ServiceLocator.Current.GetInstance<EmotionServiceClient>();
-
-        public static ITranslatorService TranslatorService => ServiceLocator.Current.GetInstance<ITranslatorService>();
 
         static partial void OnInitialize();
 

@@ -1,11 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.ProjectOxford.Emotion;
 using Microsoft.ProjectOxford.Vision;
 using See4Me.Common;
 using See4Me.Localization.Resources;
 using See4Me.Services;
-using See4Me.Services.Translator;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,10 +13,7 @@ using See4Me.Extensions;
 using System.IO;
 using System.Text;
 using System.Net;
-using System.Text.RegularExpressions;
-using Microsoft.ProjectOxford.Vision.Contract;
-using Microsoft.Practices.ServiceLocation;
-using GalaSoft.MvvmLight.Ioc;
+using See4Me.Engine;
 
 namespace See4Me.ViewModels
 {
@@ -26,6 +21,7 @@ namespace See4Me.ViewModels
     {
         private readonly IMediaPicker mediaPicker;
         private readonly ISpeechService speechService;
+        private readonly CognitiveClient cognitiveClient;
 
         public AutoRelayCommand TakePhotoCommand { get; set; }
 
@@ -39,8 +35,9 @@ namespace See4Me.ViewModels
         public bool IsTranslatorServiceRegistered
             => !string.IsNullOrWhiteSpace(ServiceKeys.TranslatorClientId) && !string.IsNullOrWhiteSpace(ServiceKeys.TranslatorClientSecret);
 
-        public RecognizeTextViewModel(IMediaPicker mediaPicker, ISpeechService speechService)
+        public RecognizeTextViewModel(CognitiveClient cognitiveClient, IMediaPicker mediaPicker, ISpeechService speechService)
         {
+            this.cognitiveClient = cognitiveClient;
             this.mediaPicker = mediaPicker;
             this.speechService = speechService;
 
@@ -56,9 +53,6 @@ namespace See4Me.ViewModels
         {
             IsBusy = true;
 
-            var visionService = ViewModelLocator.VisionServiceClient;
-            var translatorService = ViewModelLocator.TranslatorService;
-
             string recognizeText = null;
 
             try
@@ -73,13 +67,13 @@ namespace See4Me.ViewModels
 
                         if (await Network.IsInternetAvailableAsync())
                         {
-                            var results = await visionService.RecognizeTextAsync(stream);
-                            var text = results.GetRecognizedText();
+                            var result = await cognitiveClient.RecognizeAsync(stream, Language, RecognitionType.Text);
+                            var ocrResult = result.OcrResult;
 
-                            if (string.IsNullOrWhiteSpace(text))
-                                recognizeText = AppResources.UnableToRecognizeText;
+                            if (ocrResult.IsValid)
+                                recognizeText = ocrResult.Text;
                             else
-                                recognizeText = text;
+                                recognizeText = AppResources.UnableToRecognizeText;
                         }
                         else
                         {

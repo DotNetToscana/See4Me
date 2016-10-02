@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Xml.Linq;
 
-namespace See4Me.Services.Translator
+namespace See4Me.Engine.Services.Translator
 {
     /// <summary>
     /// The <strong>TranslatorService</strong> class provides methods to translate text in various supported languages.
@@ -123,7 +123,7 @@ namespace See4Me.Services.Translator
 
             using (var client = this.GetHttpClient())
             {
-                var content = await client.GetStringAsync(LANGUAGES_URI);
+                var content = await client.GetStringAsync(LANGUAGES_URI).ConfigureAwait(false);
 
                 XNamespace ns = "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
                 var doc = XDocument.Parse(content);
@@ -135,7 +135,7 @@ namespace See4Me.Services.Translator
 
         #endregion
 
-        #region Translate        
+        #region Translate
 
         /// <summary>
         /// Translates a text string into the specified language.
@@ -178,7 +178,7 @@ namespace See4Me.Services.Translator
                 else
                     uri = string.Format(TRANSLATE_WITH_FROM_URI, Uri.EscapeDataString(text), from, to);
 
-                var content = await client.GetStringAsync(uri);
+                var content = await client.GetStringAsync(uri).ConfigureAwait(false);
 
                 var doc = XDocument.Parse(content);
                 var translatedText = doc.Root.Value;
@@ -241,7 +241,7 @@ namespace See4Me.Services.Translator
             using (var client = this.GetHttpClient())
             {
                 var uri = string.Format(DETECT_URI, Uri.EscapeDataString(text));
-                var content = await client.GetStringAsync(uri);
+                var content = await client.GetStringAsync(uri).ConfigureAwait(false);
 
                 var doc = XDocument.Parse(content);
                 var detectedLanguage = doc.Root.Value;
