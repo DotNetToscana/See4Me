@@ -28,6 +28,7 @@ namespace See4Me.iOS
 
 		public UIButton TakePhotoButton { get; set; }
 		public UIButton SwapCameraButton { get; set; }
+		public UIButton SettingsButton { get; set; }
 
 		public UIImageView PreviewImage { get; set; }
 		private bool PreviewImageCollapsed = false;
@@ -38,6 +39,8 @@ namespace See4Me.iOS
         public override async void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+			NavigationController.SetNavigationBarHidden(true, false);
 
 			CGRect ScreenBounds = UIScreen.MainScreen.Bounds;
 
@@ -91,6 +94,20 @@ namespace See4Me.iOS
 			SwapCameraButton.Layer.CornerRadius = 30f;
 			SwapCameraButton.SetCommand(this.ViewModel.SwapCameraCommand);
 
+			//Settings button
+			SettingsButton = new UIButton(UIButtonType.System)
+			{
+				Frame = new RectangleF((float)ScreenBounds.Width - 70f,
+									   10f,
+									   60f, 60f),
+				BackgroundColor = UIColor.Black.ColorWithAlpha(0.25f),
+
+			};
+			SettingsButton.TintColor = UIColor.White;
+			SettingsButton.SetImage(UIImage.FromFile("Images/Settings.png"), UIControlState.Normal);
+			SettingsButton.Layer.CornerRadius = 30f;
+			SettingsButton.SetCommand(this.ViewModel.GotoSettingsCommand);
+
 			//Message Label
 			MessageText = new UITextView
             {
@@ -105,7 +122,7 @@ namespace See4Me.iOS
 
 			View.AddSubview(TakePhotoButton);
 			View.AddSubview(SwapCameraButton);
-
+			//View.AddSubview(SettingsButton);
 			View.AddSubview(PreviewImage);
 
 			View.AddSubview(MessageText);
