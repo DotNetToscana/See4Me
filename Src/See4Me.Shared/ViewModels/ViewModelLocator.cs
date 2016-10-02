@@ -51,6 +51,10 @@ namespace See4Me.ViewModels
             SimpleIoc.Default.Register<IAppService, AppService>();
             SimpleIoc.Default.Register<IMediaPicker, MediaPicker>();
 
+#if DEMO
+            SimpleIoc.Default.Register<IDemoSettingsProvider, LocalDemoSettingsProvider>();
+#endif
+
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
             SimpleIoc.Default.Register<AboutViewModel>();

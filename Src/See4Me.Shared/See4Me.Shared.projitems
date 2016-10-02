@@ -31,6 +31,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\ISpeechService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IStreamingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\NetworkService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ServiceSettings\DemoSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ServiceSettings\IDemoSettingsProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ServiceSettings\LocalDemoSettingsProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ServiceSettings\LocalVisionSettingsProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SpeechHelper.cs" />
@@ -44,6 +47,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Common\DemoSettings.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Common\VisionSettings.json" />
   </ItemGroup>
 </Project>

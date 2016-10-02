@@ -16,6 +16,8 @@ using See4Me.Engine;
 using Microsoft.Practices.ServiceLocation;
 using See4Me.Engine.Services.ServiceSettings;
 using See4Me.Extensions;
+using See4Me.Services.ServiceSettings;
+using GalaSoft.MvvmLight.Ioc;
 
 namespace See4Me.ViewModels
 {
@@ -24,6 +26,9 @@ namespace See4Me.ViewModels
         private readonly IStreamingService streamingService;
         private readonly ISpeechService speechService;
         private readonly CognitiveClient cognitiveClient;
+
+        private readonly IDemoSettingsProvider demoSettings;
+        private int demoIndex;
 
         private CameraPanel lastCameraPanel = CameraPanel.Unknown;
         private bool initialized = false;
@@ -50,6 +55,9 @@ namespace See4Me.ViewModels
             this.cognitiveClient = cognitiveClient;
             this.streamingService = streamingService;
             this.speechService = speechService;
+
+            if (SimpleIoc.Default.IsRegistered<IDemoSettingsProvider>())
+                demoSettings = SimpleIoc.Default.GetInstance<IDemoSettingsProvider>();
 
             this.CreateCommands();
         }
@@ -153,63 +161,72 @@ namespace See4Me.ViewModels
                 {
                     if (stream != null)
                     {
-                        if (await Network.IsInternetAvailableAsync())
+                        var imageBytes = await stream.ToArrayAsync();
+                        MessengerInstance.Send(new NotificationMessage<byte[]>(imageBytes, Constants.PhotoTaken));
+
+                        // Checks if demo-mode.
+                        if (demoSettings == null)
                         {
-                            var imageBytes = await stream.ToArrayAsync();
-                            MessengerInstance.Send(new NotificationMessage<byte[]>(imageBytes, Constants.PhotoTaken));
-
-                            var result = await cognitiveClient.RecognizeAsync(stream, Language, RecognitionType.Vision | RecognitionType.Emotion, OnRecognitionProgress);
-                            var visionResult = result.VisionResult;
-
-                            if (visionResult.IsValid)
+                            if (await Network.IsInternetAvailableAsync())
                             {
-                                baseDescription = visionResult.Description;
-                                if (visionResult.IsTranslated)
+                                var result = await cognitiveClient.RecognizeAsync(stream, Language, RecognitionType.Vision | RecognitionType.Emotion, OnRecognitionProgress);
+                                var visionResult = result.VisionResult;
+
+                                if (visionResult.IsValid)
                                 {
-                                    if (Settings.ShowOriginalDescriptionOnTranslation)
-                                        baseDescription = $"{visionResult.TranslatedDescription} ({visionResult.Description})";
-                                    else
-                                        baseDescription = visionResult.TranslatedDescription;
-                                }
-
-                                if (Settings.ShowDescriptionConfidence)
-                                    baseDescription = $"{baseDescription} ({Math.Round(visionResult.Confidence, 2)})";
-
-                                // Analyzes emotion results.
-                                var emotionResults = result.EmotionResults;
-
-                                if (emotionResults.Any())
-                                {
-                                    var emotionMessages = new StringBuilder();
-
-                                    foreach (var emotionResult in emotionResults)
+                                    baseDescription = visionResult.Description;
+                                    if (visionResult.IsTranslated)
                                     {
-                                        var emotionMessage = SpeechHelper.GetEmotionMessage(emotionResult.Gender, emotionResult.Age, emotionResult.Emotion);
-                                        if (!string.IsNullOrWhiteSpace(emotionMessage))
-                                            emotionMessages.Append(emotionMessage);
+                                        if (Settings.ShowOriginalDescriptionOnTranslation)
+                                            baseDescription = $"{visionResult.TranslatedDescription} ({visionResult.Description})";
+                                        else
+                                            baseDescription = visionResult.TranslatedDescription;
                                     }
 
-                                    // Describes how many faces have been recognized.
-                                    if (emotionResults.Count() == 1)
-                                        facesRecognizedDescription = AppResources.FaceRecognizedSingular;
-                                    else
-                                        facesRecognizedDescription = $"{string.Format(AppResources.FacesRecognizedPlural, emotionResults.Count())} {Constants.SentenceEnd}";
+                                    if (Settings.ShowDescriptionConfidence)
+                                        baseDescription = $"{baseDescription} ({Math.Round(visionResult.Confidence, 2)})";
 
-                                    emotionDescription = emotionMessages.ToString();
+                                    // Analyzes emotion results.
+                                    var emotionResults = result.EmotionResults;
+
+                                    if (emotionResults.Any())
+                                    {
+                                        var emotionMessages = new StringBuilder();
+
+                                        foreach (var emotionResult in emotionResults)
+                                        {
+                                            var emotionMessage = SpeechHelper.GetEmotionMessage(emotionResult.Gender, emotionResult.Age, emotionResult.Emotion);
+                                            if (!string.IsNullOrWhiteSpace(emotionMessage))
+                                                emotionMessages.Append(emotionMessage);
+                                        }
+
+                                        // Describes how many faces have been recognized.
+                                        if (emotionResults.Count() == 1)
+                                            facesRecognizedDescription = AppResources.FaceRecognizedSingular;
+                                        else
+                                            facesRecognizedDescription = $"{string.Format(AppResources.FacesRecognizedPlural, emotionResults.Count())} {Constants.SentenceEnd}";
+
+                                        emotionDescription = emotionMessages.ToString();
+                                    }
+                                }
+                                else
+                                {
+                                    if (Settings.ShowRawDescriptionOnInvalidRecognition && visionResult.RawDescription != null)
+                                        baseDescription = $"{AppResources.RecognitionFailed} ({visionResult.RawDescription}, {Math.Round(visionResult.Confidence, 2)})";
+                                    else
+                                        baseDescription = AppResources.RecognitionFailed;
                                 }
                             }
                             else
                             {
-                                if (Settings.ShowRawDescriptionOnInvalidRecognition && visionResult.RawDescription != null)
-                                    baseDescription = $"{AppResources.RecognitionFailed} ({visionResult.RawDescription}, {Math.Round(visionResult.Confidence, 2)})";
-                                else
-                                    baseDescription = AppResources.RecognitionFailed;
+                                // Connection isn't available, the service cannot be reached.
+                                baseDescription = AppResources.NoConnection;
                             }
                         }
                         else
                         {
-                            // Connection isn't available, the service cannot be reached.
-                            baseDescription = AppResources.NoConnection;
+                            // Demo-mode on. Retrieves messages from demo settings.
+                            baseDescription = await this.GetDemoDescriptionAsync();
                         }
                     }
                     else
@@ -333,5 +350,30 @@ namespace See4Me.ViewModels
 
         private string GetNormalizedMessage(string message)
             => message.Replace(Constants.SentenceEnd, ". ").TrimEnd('.').Trim().Replace("  ", " ").Replace(" .", ".").Replace("..", ".");
+
+        private async Task<string> GetDemoDescriptionAsync()
+        {
+            var messages = await demoSettings.GetSettingsAsync();
+            var selectedMessage = messages.ElementAt(demoIndex);
+
+            await Task.Delay(2000);
+            var baseDescription = selectedMessage.ImageDescription;
+
+            if (selectedMessage.IsTranslated)
+            {
+                StatusMessage = AppResources.Translating;
+                await Task.Delay(1800);
+            }
+
+            if (!string.IsNullOrWhiteSpace(selectedMessage.EmotionDescription))
+            {
+                StatusMessage = AppResources.RecognizingFaces;
+                await Task.Delay(1700);
+                baseDescription = $"{baseDescription}{Constants.SentenceEnd} {selectedMessage.EmotionDescription}";
+            }
+
+            demoIndex = (demoIndex + 1) % messages.Count();
+            return baseDescription;
+        }
     }
 }
