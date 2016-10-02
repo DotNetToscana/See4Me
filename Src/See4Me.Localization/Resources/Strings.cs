@@ -84,5 +84,6 @@
         public static string PrivacyStatement = "PrivacyStatement";
         public static string MicrosoftPrivacyPolicies = "MicrosoftPrivacyPolicies";
         public static string PoweredByCognitiveServices = "PoweredByCognitiveServices";
+        public static string RecognizingText = "RecognizingText";
     }
 }
