@@ -17,7 +17,7 @@ You need to insert these service keys (Subscription Key for Vision and Emotion, 
 
 *iOS version*
 
-<img src="https://raw.githubusercontent.com/DotNetToscana/See4Me/master/Screenshots/iOS/DescribeImage01.png" width="400" height="225">
+<img src="https://raw.githubusercontent.com/DotNetToscana/See4Me/dev/Screenshots/iOS/DescribeImage01.png" width="400" height="225">
 
 **Contribute**
 
