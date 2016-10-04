@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xaml.Interactivity;
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using Windows.ApplicationModel.Core;
 using Windows.Devices.Gpio;
 using Windows.Phone.UI.Input;
@@ -17,7 +19,7 @@ namespace See4Me.Behaviors
     public sealed class PushButtonPressedBehavior : Behavior
     {
         /// <summary>
-        /// Get/Sets the direction of the PushButton pin number 
+        /// Get/Sets the direction of the PushButton pin number
         /// </summary>
         public int PinNumber { get; set; }
 
@@ -26,7 +28,7 @@ namespace See4Me.Behaviors
         /// <summary>
         /// Identifies the <seealso cref="Actions"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty ActionsProperty = DependencyProperty.Register(
             "Actions",
             typeof(ActionCollection),
@@ -51,12 +53,12 @@ namespace See4Me.Behaviors
             }
         }
 
-        [System.Runtime.CompilerServices.PlatformSpecific]
+        [PlatformSpecific]
         private readonly bool isTypePresent;
 
         private PushButton button;
 
-        [System.Runtime.CompilerServices.PlatformSpecific]
+        [PlatformSpecific]
         public PushButtonPressedBehavior()
         {
             isTypePresent = (GpioController.GetDefault() != null);
@@ -120,7 +122,7 @@ namespace See4Me.Behaviors
         public event EventHandler Released;
         public event EventHandler Click;
 
-        [System.Runtime.CompilerServices.PlatformSpecific]
+        [PlatformSpecific]
         public PushButton(int pinNumber, ButtonType type = ButtonType.PullDown)
         {
             controller = GpioController.GetDefault();
@@ -146,12 +148,12 @@ namespace See4Me.Behaviors
             pin.ValueChanged += Pin_ValueChanged;
         }
 
-        [System.Runtime.CompilerServices.PlatformSpecific]
+        [PlatformSpecific]
         private void Pin_ValueChanged(GpioPin sender, GpioPinValueChangedEventArgs args)
         {
             var currentPinValue = pin.Read();
 
-            // If same value of last read, exits. 
+            // If same value of last read, exits.
             if (currentPinValue == lastPinValue)
                 return;
 
@@ -173,7 +175,7 @@ namespace See4Me.Behaviors
             lastPinValue = currentPinValue;
         }
 
-        [System.Runtime.CompilerServices.PlatformSpecific]
+        [PlatformSpecific]
         public void Dispose()
         {
             pin.ValueChanged -= Pin_ValueChanged;

@@ -56,10 +56,10 @@
 
         <Interactivity:Interaction.Behaviors>
             <behaviors:CameraPressedBehavior>
-                <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}"  />
+                <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}" />
             </behaviors:CameraPressedBehavior>
             <behaviors:PushButtonPressedBehavior PinNumber="27" ButtonType="PullDown">
-                <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}"  />
+                <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}" />
             </behaviors:PushButtonPressedBehavior>
         </Interactivity:Interaction.Behaviors>
 

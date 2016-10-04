@@ -49,16 +49,9 @@ namespace See4Me.Engine
             {
                 var imageBytes = await stream.ToArrayAsync();
 
-                var features = new HashSet<VisualFeature>();
-                if (recognitionType.HasFlag(RecognitionType.Vision))
-                {
-                    features.Add(VisualFeature.Description);
-                }
+                var features = new HashSet<VisualFeature> { VisualFeature.Description };
                 if (recognitionType.HasFlag(RecognitionType.Emotion))
-                {
-                    features.Add(VisualFeature.Description);
                     features.Add(VisualFeature.Faces);
-                }
 
                 var visionSettings = await VisionSettingsProvider?.GetSettingsAsync();
                 var analyzeImageResult = await visionService.AnalyzeImageAsync(stream, features);

@@ -60,7 +60,7 @@ namespace See4Me.iOS
 			PreviewImage = new UIImageView()
 			{
 				Frame = new RectangleF(0,0,
-				                       (float)ScreenBounds.Width / 4, 
+				                       (float)ScreenBounds.Width / 4,
 				                       (float)View.Frame.Height / 4),
 				Alpha = 0.75f,
 				UserInteractionEnabled = true
@@ -69,8 +69,8 @@ namespace See4Me.iOS
 			//TakePhoto button
 			TakePhotoButton = new UIButton(UIButtonType.System)
 			{
-				Frame = new RectangleF((float)ScreenBounds.Width - 70f, 
-				                       ((float)View.Frame.Height / 2) - 30f, 
+				Frame = new RectangleF((float)ScreenBounds.Width - 70f,
+				                       ((float)View.Frame.Height / 2) - 30f,
 				                       60f, 60f),
 				BackgroundColor = UIColor.Black.ColorWithAlpha(0.25f),
 
@@ -128,7 +128,7 @@ namespace See4Me.iOS
 			View.AddSubview(MessageText);
 
 			// Tap
-			PreviewImage.AddGestureRecognizer(new UITapGestureRecognizer(tap => 
+			PreviewImage.AddGestureRecognizer(new UITapGestureRecognizer(tap =>
 			{
 				if (PreviewImageCollapsed)
 				{
@@ -137,7 +137,7 @@ namespace See4Me.iOS
 										   (float)View.Frame.Height);
 					PreviewImage.Alpha = 1f;
 				}
-				else 
+				else
 				{
 					PreviewImage.Frame = new RectangleF(0, 0,
 										   (float)ScreenBounds.Width / 4,
