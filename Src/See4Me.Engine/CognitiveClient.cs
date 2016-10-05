@@ -61,13 +61,14 @@ namespace See4Me.Engine
                 Caption filteredDescription;
 
                 var isValid = analyzeImageResult.IsValid(out originalDescription, out filteredDescription, visionSettings);
+
                 visionResult.IsValid = isValid;
                 visionResult.RawDescription = originalDescription.Text;
+                visionResult.Confidence = originalDescription.Confidence;
 
                 if (isValid)
                 {
                     visionResult.Description = filteredDescription.Text;
-                    visionResult.Confidence = filteredDescription.Confidence;
 
                     if (language != DefaultLanguge && IsTranslatorServiceRegistered)
                     {
