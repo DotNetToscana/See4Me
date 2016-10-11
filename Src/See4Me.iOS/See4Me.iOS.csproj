@@ -168,6 +168,7 @@
     </Compile>
     <BundleResource Include="Resources\Images\Settings.png" />
     <BundleResource Include="Resources\Images\Settings%402x.png" />
+    <Compile Include="LinkerWorkarounds.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\StreamingService.cs" />

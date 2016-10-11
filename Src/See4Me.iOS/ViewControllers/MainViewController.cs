@@ -122,7 +122,7 @@ namespace See4Me.iOS
 
 			View.AddSubview(TakePhotoButton);
 			View.AddSubview(SwapCameraButton);
-			//View.AddSubview(SettingsButton);
+			View.AddSubview(SettingsButton);
 			View.AddSubview(PreviewImage);
 
 			View.AddSubview(MessageText);
@@ -159,16 +159,17 @@ namespace See4Me.iOS
 
 		public override void ViewDidAppear(bool animated)
 		{
-			base.ViewDidAppear(animated);
-
 			var previewLayerConnection = previewLayer.Connection;
-			if (previewLayerConnection.SupportsVideoOrientation)
+			if (previewLayerConnection.SupportsVideoOrientation &&
+				previewLayerConnection.VideoOrientation == AVCaptureVideoOrientation.Portrait)
 				previewLayerConnection.VideoOrientation = AVCaptureVideoOrientation.LandscapeLeft;
+
+			base.ViewDidAppear(animated);
 		}
 
-        public override async void ViewWillDisappear(bool animated)
+        public override async void ViewWillUnload()
         {
-            base.ViewWillDisappear(animated);
+            base.ViewWillUnload();
 
             await ViewModel.CleanupAsync();
         }
