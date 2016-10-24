@@ -9,14 +9,11 @@
                 <navigationController definesPresentationContext="YES" id="14" sceneMemberID="viewController" title="See4Me">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="17">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                     </navigationBar>
                     <connections>
                         <segue destination="16" kind="relationship" relationship="rootViewController" id="15"/>
                     </connections>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="18" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -34,14 +31,104 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <connections/>
+                    <connections>
+                        <segue id="160" destination="30" kind="push"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="247" y="602"/>
+        </scene>
+        <scene sceneID="29">
+            <objects>
+                <viewController id="30" sceneMemberID="viewController" title="Settings" storyboardIdentifier="SettingsPage" customClass="SettingsViewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="27"/>
+                        <viewControllerLayoutGuide type="bottom" id="28"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="31">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Vision Subscription Key" lineBreakMode="tailTruncation" minimumFontSize="10" id="42" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="20" y="20" width="560" height="21"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <constraints>
+                                    <constraint id="178" firstAttribute="width" constant="560"/>
+                                </constraints>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="44" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="20" y="50" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <constraints>
+                                    <constraint id="175" firstAttribute="width" constant="560"/>
+                                </constraints>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="215" translatesAutoresizingMaskIntoConstraints="NO" text="Subscribe to get the key" textAlignment="right" editable="NO" selectable="NO" misplaced="YES">
+                                <rect key="frame" x="20" y="80" width="560" height="30"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Emotion Subscription Key" lineBreakMode="tailTruncation" minimumFontSize="10" id="220" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="20" y="120" width="560" height="21"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="222" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="20" y="150" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="224" translatesAutoresizingMaskIntoConstraints="NO" text="Subscribe to get the key" textAlignment="right" editable="NO" selectable="NO" misplaced="YES">
+                                <rect key="frame" x="20" y="180" width="560" height="30"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                        </subviews>
+                        <constraints>
+                            <constraint id="173" firstItem="31" firstAttribute="trailing" secondItem="44" secondAttribute="trailing" constant="20"/>
+                            <constraint id="176" firstItem="31" firstAttribute="trailing" secondItem="42" secondAttribute="trailing" constant="20"/>
+                            <constraint id="181" firstItem="44" firstAttribute="leading" secondItem="31" secondAttribute="leading" constant="20"/>
+                            <constraint id="182" firstItem="42" firstAttribute="leading" secondItem="31" secondAttribute="leading" constant="20"/>
+                            <constraint id="205" firstItem="42" firstAttribute="top" secondItem="27" secondAttribute="bottom" constant="20"/>
+                            <constraint id="206" firstItem="44" firstAttribute="top" secondItem="27" secondAttribute="bottom" constant="50"/>
+                            <constraint id="240" firstItem="215" firstAttribute="top" secondItem="27" secondAttribute="bottom" constant="80"/>
+                            <constraint id="241" firstItem="220" firstAttribute="top" secondItem="27" secondAttribute="bottom" constant="120"/>
+                            <constraint id="242" firstItem="222" firstAttribute="top" secondItem="27" secondAttribute="bottom" constant="150"/>
+                            <constraint id="243" firstItem="224" firstAttribute="top" secondItem="27" secondAttribute="bottom" constant="180"/>
+                            <constraint id="244" firstItem="215" firstAttribute="leading" secondItem="31" secondAttribute="leading" constant="20"/>
+                            <constraint id="245" firstItem="31" firstAttribute="trailing" secondItem="215" secondAttribute="trailing" constant="20"/>
+                            <constraint id="246" firstItem="220" firstAttribute="leading" secondItem="31" secondAttribute="leading" constant="20"/>
+                            <constraint id="247" firstItem="31" firstAttribute="trailing" secondItem="220" secondAttribute="trailing" constant="20"/>
+                            <constraint id="248" firstItem="222" firstAttribute="leading" secondItem="31" secondAttribute="leading" constant="20"/>
+                            <constraint id="249" firstItem="31" firstAttribute="trailing" secondItem="222" secondAttribute="trailing" constant="20"/>
+                            <constraint id="250" firstItem="224" firstAttribute="leading" secondItem="31" secondAttribute="leading" constant="20"/>
+                            <constraint id="251" firstItem="31" firstAttribute="trailing" secondItem="224" secondAttribute="trailing" constant="20"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="TextVisionSubscriptionKey" destination="44" id="name-outlet-44"/>
+                        <outlet property="TextEmotionSubscriptionKey" destination="222" id="name-outlet-222"/>
+                        <outlet property="VisionSubscribeLink" destination="215" id="name-outlet-215"/>
+                        <outlet property="EmotionSubscribeLink" destination="224" id="name-outlet-224"/>
+                    </connections>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="32" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="238" y="1384"/>
         </scene>
     </scenes>
     <resources>
