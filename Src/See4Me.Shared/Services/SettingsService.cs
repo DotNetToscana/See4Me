@@ -9,7 +9,6 @@ namespace See4Me.Services
         private const string CAMERA_PANEL = "CameraPanel";
         private const string SHOW_DESCRIPTION_CONFIDENCE = "ShowDescriptionConfidence";
         private const string SHOW_EXCEPTION_ON_ERROR = "ShowExceptionOnError";
-        private const string GUESS_AGE = "GuessAge";
         private const string SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION = "ShowOriginalDescriptionOnTranslation";
         private const string SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION = "ShowRawDescriptionOnInvalidRecognition";
         private const string VISION_SUBSCRIPTION_KEY = "VisionSubscriptionKey";
@@ -40,12 +39,6 @@ namespace See4Me.Services
         {
             get { return settings.GetValueOrDefault(SHOW_DESCRIPTION_CONFIDENCE, false); }
             set { settings.AddOrUpdateValue(SHOW_DESCRIPTION_CONFIDENCE, value); }
-        }
-
-        public bool GuessAge
-        {
-            get { return settings.GetValueOrDefault(GUESS_AGE, true); }
-            set { settings.AddOrUpdateValue(GUESS_AGE, value); }
         }
 
         public bool ShowOriginalDescriptionOnTranslation

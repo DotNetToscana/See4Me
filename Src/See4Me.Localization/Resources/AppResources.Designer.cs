@@ -89,6 +89,15 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Developed by Marco Minerva - MVP Windows Development.
+        /// </summary>
+        public static string AndroidProjectAuthor {
+            get {
+                return ResourceManager.GetString("AndroidProjectAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Angry.
         /// </summary>
         public static string AngerFemale {
@@ -314,15 +323,6 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Try to guess age upon face detection.
-        /// </summary>
-        public static string GuessAgeOption {
-            get {
-                return ResourceManager.GetString("GuessAgeOption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Happy.
         /// </summary>
         public static string HappinessFemale {
@@ -346,6 +346,15 @@ namespace See4Me.Localization.Resources {
         public static string InitializationError {
             get {
                 return ResourceManager.GetString("InitializationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Developed by Riccardo Cappello.
+        /// </summary>
+        public static string iOSProjectAuthor {
+            get {
+                return ResourceManager.GetString("iOSProjectAuthor", resourceCulture);
             }
         }
         
@@ -476,24 +485,6 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A {0}.
-        /// </summary>
-        public static string PersonMessageFemale {
-            get {
-                return ResourceManager.GetString("PersonMessageFemale", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A {0}.
-        /// </summary>
-        public static string PersonMessageMale {
-            get {
-                return ResourceManager.GetString("PersonMessageMale", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Powered by Microsoft’s Cognitive Services:.
         /// </summary>
         public static string PoweredByCognitiveServices {
@@ -526,15 +517,6 @@ namespace See4Me.Localization.Resources {
         public static string PrivacyStatement {
             get {
                 return ResourceManager.GetString("PrivacyStatement", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Developed by Marco Minerva - MVP Windows Development.
-        /// </summary>
-        public static string ProjectAuthor {
-            get {
-                return ResourceManager.GetString("ProjectAuthor", resourceCulture);
             }
         }
         
@@ -796,6 +778,15 @@ namespace See4Me.Localization.Resources {
         public static string VisionSubscriptionKey {
             get {
                 return ResourceManager.GetString("VisionSubscriptionKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Developed by Marco Minerva - MVP Windows Development.
+        /// </summary>
+        public static string WindowsProjectAuthor {
+            get {
+                return ResourceManager.GetString("WindowsProjectAuthor", resourceCulture);
             }
         }
         

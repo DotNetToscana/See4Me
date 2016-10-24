@@ -26,7 +26,6 @@
   <string name="FrontCameraReady">Fotocamera frontale pronta</string>
   <string name="GotoCognitiveServices">Visualizza la Home Page dei Cognitive Services</string>
   <string name="GotoGitHub">Segui il progetto su GitHub</string>
-  <string name="GuessAgeOption">Prova a determinare l\'età quando viene riconosciuta una persona</string>
   <string name="HappinessFemale">Felice</string>
   <string name="HappinessMale">Felice</string>
   <string name="InitializationError">Errore durante l\'avvio dell\'app</string>
@@ -43,9 +42,7 @@
   <string name="OpenSettings">Vai alle Impostazioni</string>
   <string name="PersonAgeMessageFemale">Una {0} di {1} anni</string>
   <string name="PersonAgeMessageMale">Un {0} di {1} anni</string>
-  <string name="PersonMessageFemale">Una {0}</string>
-  <string name="PersonMessageMale">Un {0}</string>
-  <string name="ProjectAuthor">Sviluppato da Marco Minerva - MVP Windows Development</string>
+  <string name="WindowsProjectAuthor">Sviluppato da Marco Minerva - MVP Windows Development</string>
   <string name="QueryingVisionService">Analisi dell\'immagine...</string>
   <string name="RecognitionError">Mi dispiace, si è verificato un errore inatteso</string>
   <string name="RecognitionFailed">Mi dispiace, non riconosco l\'immagine</string>
@@ -83,4 +80,6 @@
   <string name="MicrosoftPrivacyPolicies">Informativa sulla privacy Microsoft</string>
   <string name="PoweredByCognitiveServices">Powered by Microsoft’s Cognitive Services:</string>
   <string name="RecognizingText">Riconoscimento del testo...</string>
+  <string name="AndroidProjectAuthor">Sviluppato da Marco Minerva - MVP Windows Development</string>
+  <string name="iOSProjectAuthor">Sviluppato da Riccardo Cappello</string>
 </resources>

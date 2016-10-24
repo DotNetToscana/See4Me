@@ -25,15 +25,10 @@ namespace See4Me.Services
         public static string GetEmotionMessage(Gender gender, int age, Emotion bestEmotion)
         {
             // Creates the emotion description text to be speeched.
-            string personAgeMessage = null;
             string emotionMessage = null;
 
             var ageDescription = GetAgeDescription(age, gender);
-
-            if (settings.GuessAge)
-                personAgeMessage = string.Format(GetString(Constants.PersonAgeMessage, gender), ageDescription, age);
-            else
-                personAgeMessage = string.Format(GetString(Constants.PersonMessage, gender), ageDescription);
+            var personAgeMessage = string.Format(GetString(Constants.PersonAgeMessage, gender), ageDescription, age);
 
             if (bestEmotion != Emotion.Neutral)
             {

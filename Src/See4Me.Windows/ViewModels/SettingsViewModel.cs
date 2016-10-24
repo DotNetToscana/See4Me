@@ -17,7 +17,6 @@ namespace See4Me.ViewModels
     public partial class SettingsViewModel : ViewModelBase
     {
         private const string SHOW_DESCRIPTION_CONFIDENCE = "ShowDescriptionConfidence";
-        private const string GUESS_AGE = "GuessAge";
         private const string SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION = "ShowOriginalDescriptionOnTranslation";
         private const string VISION_SUBSCRIPTION_KEY = "VisionSubscriptionKey";
         private const string EMOTION_SUBSCRIPTION_KEY = "EmotionSubscriptionKey";
@@ -52,7 +51,6 @@ namespace See4Me.ViewModels
             if (suspending)
             {
                 state[SHOW_DESCRIPTION_CONFIDENCE] = showDescriptionConfidence;
-                state[GUESS_AGE] = guessAge;
                 state[SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION] = showOriginalDescriptionOnTranslation;
                 state[VISION_SUBSCRIPTION_KEY] = visionSubscriptionKey;
                 state[EMOTION_SUBSCRIPTION_KEY] = emotionSubscriptionKey;
@@ -67,7 +65,6 @@ namespace See4Me.ViewModels
         private void Restore(IDictionary<string, object> state)
         {
             showDescriptionConfidence = Convert.ToBoolean(state[SHOW_DESCRIPTION_CONFIDENCE]);
-            guessAge = Convert.ToBoolean(state[GUESS_AGE]);
             showOriginalDescriptionOnTranslation = Convert.ToBoolean(state[SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION]);
             visionSubscriptionKey = state[VISION_SUBSCRIPTION_KEY].ToString();
             emotionSubscriptionKey = state[EMOTION_SUBSCRIPTION_KEY].ToString();

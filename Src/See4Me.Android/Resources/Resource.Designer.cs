@@ -118,6 +118,9 @@ namespace See4Me
 			// aapt resource value: 0x7f040004
 			public const int ActivateTranslatorService = 2130968580;
 			
+			// aapt resource value: 0x7f040052
+			public const int AndroidProjectAuthor = 2130968658;
+			
 			// aapt resource value: 0x7f040005
 			public const int AngerFemale = 2130968581;
 			
@@ -151,11 +154,11 @@ namespace See4Me
 			// aapt resource value: 0x7f04000e
 			public const int ChildMale = 2130968590;
 			
-			// aapt resource value: 0x7f04004d
-			public const int ConsentRequiredMessage = 2130968653;
+			// aapt resource value: 0x7f04004a
+			public const int ConsentRequiredMessage = 2130968650;
 			
-			// aapt resource value: 0x7f04004e
-			public const int ConsentRequiredTitle = 2130968654;
+			// aapt resource value: 0x7f04004b
+			public const int ConsentRequiredTitle = 2130968651;
 			
 			// aapt resource value: 0x7f04000f
 			public const int ContemptFemale = 2130968591;
@@ -197,172 +200,166 @@ namespace See4Me
 			public const int GotoGitHub = 2130968603;
 			
 			// aapt resource value: 0x7f04001c
-			public const int GuessAgeOption = 2130968604;
+			public const int HappinessFemale = 2130968604;
 			
 			// aapt resource value: 0x7f04001d
-			public const int HappinessFemale = 2130968605;
-			
-			// aapt resource value: 0x7f04001e
-			public const int HappinessMale = 2130968606;
+			public const int HappinessMale = 2130968605;
 			
 			// aapt resource value: 0x7f040000
 			public const int Hello = 2130968576;
 			
+			// aapt resource value: 0x7f04001e
+			public const int InitializationError = 2130968606;
+			
 			// aapt resource value: 0x7f04001f
-			public const int InitializationError = 2130968607;
+			public const int LinkedIn = 2130968607;
 			
 			// aapt resource value: 0x7f040020
-			public const int LinkedIn = 2130968608;
+			public const int LookingFemale = 2130968608;
 			
 			// aapt resource value: 0x7f040021
-			public const int LookingFemale = 2130968609;
+			public const int LookingMale = 2130968609;
 			
 			// aapt resource value: 0x7f040022
-			public const int LookingMale = 2130968610;
+			public const int ManFemale = 2130968610;
 			
 			// aapt resource value: 0x7f040023
-			public const int ManFemale = 2130968611;
-			
-			// aapt resource value: 0x7f040024
-			public const int ManMale = 2130968612;
-			
-			// aapt resource value: 0x7f040052
-			public const int MicrosoftPrivacyPolicies = 2130968658;
-			
-			// aapt resource value: 0x7f040025
-			public const int NeutralFemale = 2130968613;
-			
-			// aapt resource value: 0x7f040026
-			public const int NeutralMale = 2130968614;
-			
-			// aapt resource value: 0x7f040027
-			public const int No = 2130968615;
-			
-			// aapt resource value: 0x7f040028
-			public const int NoConnection = 2130968616;
-			
-			// aapt resource value: 0x7f040029
-			public const int OK = 2130968617;
-			
-			// aapt resource value: 0x7f04002a
-			public const int OpenSettings = 2130968618;
-			
-			// aapt resource value: 0x7f04002b
-			public const int PersonAgeMessageFemale = 2130968619;
-			
-			// aapt resource value: 0x7f04002c
-			public const int PersonAgeMessageMale = 2130968620;
-			
-			// aapt resource value: 0x7f04002d
-			public const int PersonMessageFemale = 2130968621;
-			
-			// aapt resource value: 0x7f04002e
-			public const int PersonMessageMale = 2130968622;
-			
-			// aapt resource value: 0x7f040053
-			public const int PoweredByCognitiveServices = 2130968659;
+			public const int ManMale = 2130968611;
 			
 			// aapt resource value: 0x7f04004f
-			public const int PrivacyPolicy = 2130968655;
+			public const int MicrosoftPrivacyPolicies = 2130968655;
+			
+			// aapt resource value: 0x7f040024
+			public const int NeutralFemale = 2130968612;
+			
+			// aapt resource value: 0x7f040025
+			public const int NeutralMale = 2130968613;
+			
+			// aapt resource value: 0x7f040026
+			public const int No = 2130968614;
+			
+			// aapt resource value: 0x7f040027
+			public const int NoConnection = 2130968615;
+			
+			// aapt resource value: 0x7f040028
+			public const int OK = 2130968616;
+			
+			// aapt resource value: 0x7f040029
+			public const int OpenSettings = 2130968617;
+			
+			// aapt resource value: 0x7f04002a
+			public const int PersonAgeMessageFemale = 2130968618;
+			
+			// aapt resource value: 0x7f04002b
+			public const int PersonAgeMessageMale = 2130968619;
 			
 			// aapt resource value: 0x7f040050
-			public const int PrivacyPolicyCommand = 2130968656;
-			
-			// aapt resource value: 0x7f040051
-			public const int PrivacyStatement = 2130968657;
-			
-			// aapt resource value: 0x7f04002f
-			public const int ProjectAuthor = 2130968623;
-			
-			// aapt resource value: 0x7f040030
-			public const int QueryingVisionService = 2130968624;
-			
-			// aapt resource value: 0x7f040031
-			public const int RecognitionError = 2130968625;
-			
-			// aapt resource value: 0x7f040032
-			public const int RecognitionFailed = 2130968626;
-			
-			// aapt resource value: 0x7f040033
-			public const int RecognizeText = 2130968627;
-			
-			// aapt resource value: 0x7f040034
-			public const int RecognizingFaces = 2130968628;
-			
-			// aapt resource value: 0x7f040054
-			public const int RecognizingText = 2130968660;
-			
-			// aapt resource value: 0x7f040035
-			public const int ResourceLanguage = 2130968629;
-			
-			// aapt resource value: 0x7f040036
-			public const int SadnessFemale = 2130968630;
-			
-			// aapt resource value: 0x7f040037
-			public const int SadnessMale = 2130968631;
-			
-			// aapt resource value: 0x7f040038
-			public const int Save = 2130968632;
-			
-			// aapt resource value: 0x7f040039
-			public const int ServiceNotRegistered = 2130968633;
-			
-			// aapt resource value: 0x7f04003a
-			public const int Settings = 2130968634;
-			
-			// aapt resource value: 0x7f04003b
-			public const int ShowDescriptionConfidence = 2130968635;
-			
-			// aapt resource value: 0x7f04003c
-			public const int ShowOriginalDescriptionOnTranslation = 2130968636;
-			
-			// aapt resource value: 0x7f04003d
-			public const int SubscribeCognitiveServices = 2130968637;
-			
-			// aapt resource value: 0x7f04003e
-			public const int SurpriseFemale = 2130968638;
-			
-			// aapt resource value: 0x7f04003f
-			public const int SurpriseMale = 2130968639;
-			
-			// aapt resource value: 0x7f040040
-			public const int SwapCamera = 2130968640;
-			
-			// aapt resource value: 0x7f040041
-			public const int SwapCameraError = 2130968641;
-			
-			// aapt resource value: 0x7f040042
-			public const int TakePhoto = 2130968642;
-			
-			// aapt resource value: 0x7f040043
-			public const int TextToSpeech = 2130968643;
-			
-			// aapt resource value: 0x7f040044
-			public const int Translating = 2130968644;
-			
-			// aapt resource value: 0x7f040045
-			public const int TranslatorClientId = 2130968645;
-			
-			// aapt resource value: 0x7f040046
-			public const int TranslatorClientSecret = 2130968646;
-			
-			// aapt resource value: 0x7f040047
-			public const int Twitter = 2130968647;
-			
-			// aapt resource value: 0x7f040048
-			public const int UnableToAccessService = 2130968648;
-			
-			// aapt resource value: 0x7f040049
-			public const int UnableToRecognizeText = 2130968649;
-			
-			// aapt resource value: 0x7f04004a
-			public const int UnableToTakePhoto = 2130968650;
-			
-			// aapt resource value: 0x7f04004b
-			public const int VisionSubscriptionKey = 2130968651;
+			public const int PoweredByCognitiveServices = 2130968656;
 			
 			// aapt resource value: 0x7f04004c
-			public const int Yes = 2130968652;
+			public const int PrivacyPolicy = 2130968652;
+			
+			// aapt resource value: 0x7f04004d
+			public const int PrivacyPolicyCommand = 2130968653;
+			
+			// aapt resource value: 0x7f04004e
+			public const int PrivacyStatement = 2130968654;
+			
+			// aapt resource value: 0x7f04002d
+			public const int QueryingVisionService = 2130968621;
+			
+			// aapt resource value: 0x7f04002e
+			public const int RecognitionError = 2130968622;
+			
+			// aapt resource value: 0x7f04002f
+			public const int RecognitionFailed = 2130968623;
+			
+			// aapt resource value: 0x7f040030
+			public const int RecognizeText = 2130968624;
+			
+			// aapt resource value: 0x7f040031
+			public const int RecognizingFaces = 2130968625;
+			
+			// aapt resource value: 0x7f040051
+			public const int RecognizingText = 2130968657;
+			
+			// aapt resource value: 0x7f040032
+			public const int ResourceLanguage = 2130968626;
+			
+			// aapt resource value: 0x7f040033
+			public const int SadnessFemale = 2130968627;
+			
+			// aapt resource value: 0x7f040034
+			public const int SadnessMale = 2130968628;
+			
+			// aapt resource value: 0x7f040035
+			public const int Save = 2130968629;
+			
+			// aapt resource value: 0x7f040036
+			public const int ServiceNotRegistered = 2130968630;
+			
+			// aapt resource value: 0x7f040037
+			public const int Settings = 2130968631;
+			
+			// aapt resource value: 0x7f040038
+			public const int ShowDescriptionConfidence = 2130968632;
+			
+			// aapt resource value: 0x7f040039
+			public const int ShowOriginalDescriptionOnTranslation = 2130968633;
+			
+			// aapt resource value: 0x7f04003a
+			public const int SubscribeCognitiveServices = 2130968634;
+			
+			// aapt resource value: 0x7f04003b
+			public const int SurpriseFemale = 2130968635;
+			
+			// aapt resource value: 0x7f04003c
+			public const int SurpriseMale = 2130968636;
+			
+			// aapt resource value: 0x7f04003d
+			public const int SwapCamera = 2130968637;
+			
+			// aapt resource value: 0x7f04003e
+			public const int SwapCameraError = 2130968638;
+			
+			// aapt resource value: 0x7f04003f
+			public const int TakePhoto = 2130968639;
+			
+			// aapt resource value: 0x7f040040
+			public const int TextToSpeech = 2130968640;
+			
+			// aapt resource value: 0x7f040041
+			public const int Translating = 2130968641;
+			
+			// aapt resource value: 0x7f040042
+			public const int TranslatorClientId = 2130968642;
+			
+			// aapt resource value: 0x7f040043
+			public const int TranslatorClientSecret = 2130968643;
+			
+			// aapt resource value: 0x7f040044
+			public const int Twitter = 2130968644;
+			
+			// aapt resource value: 0x7f040045
+			public const int UnableToAccessService = 2130968645;
+			
+			// aapt resource value: 0x7f040046
+			public const int UnableToRecognizeText = 2130968646;
+			
+			// aapt resource value: 0x7f040047
+			public const int UnableToTakePhoto = 2130968647;
+			
+			// aapt resource value: 0x7f040048
+			public const int VisionSubscriptionKey = 2130968648;
+			
+			// aapt resource value: 0x7f04002c
+			public const int WindowsProjectAuthor = 2130968620;
+			
+			// aapt resource value: 0x7f040049
+			public const int Yes = 2130968649;
+			
+			// aapt resource value: 0x7f040053
+			public const int iOSProjectAuthor = 2130968659;
 			
 			static String()
 			{

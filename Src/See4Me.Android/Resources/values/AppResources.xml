@@ -26,7 +26,6 @@
   <string name="FrontCameraReady">Front camera ready</string>
   <string name="GotoCognitiveServices">Visit Cognitive Services Home Page</string>
   <string name="GotoGitHub">Follow the project on GitHub</string>
-  <string name="GuessAgeOption">Try to guess age upon face detection</string>
   <string name="HappinessFemale">Happy</string>
   <string name="HappinessMale">Happy</string>
   <string name="InitializationError">Error during app initialization</string>
@@ -43,9 +42,7 @@
   <string name="OpenSettings">Go to Settings</string>
   <string name="PersonAgeMessageFemale">A {1} years old {0}</string>
   <string name="PersonAgeMessageMale">A {1} years old {0}</string>
-  <string name="PersonMessageFemale">A {0}</string>
-  <string name="PersonMessageMale">A {0}</string>
-  <string name="ProjectAuthor">Developed by Marco Minerva - MVP Windows Development</string>
+  <string name="WindowsProjectAuthor">Developed by Marco Minerva - MVP Windows Development</string>
   <string name="QueryingVisionService">Analyzing the image...</string>
   <string name="RecognitionError">I\'m sorry, there was an unexpected error</string>
   <string name="RecognitionFailed">I\'m sorry, I don\'t recognize the image</string>
@@ -83,4 +80,6 @@
   <string name="MicrosoftPrivacyPolicies">Microsoft privacy policies</string>
   <string name="PoweredByCognitiveServices">Powered by Microsoft’s Cognitive Services:</string>
   <string name="RecognizingText">Recognizing text...</string>
+  <string name="AndroidProjectAuthor">Developed by Marco Minerva - MVP Windows Development</string>
+  <string name="iOSProjectAuthor">Developed by Riccardo Cappello</string>
 </resources>

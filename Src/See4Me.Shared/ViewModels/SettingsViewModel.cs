@@ -81,13 +81,6 @@ namespace See4Me.ViewModels
             set { this.Set(ref showDescriptionConfidence, value); }
         }
 
-        private bool guessAge;
-        public bool GuessAge
-        {
-            get { return guessAge; }
-            set { this.Set(ref guessAge, value); }
-        }
-
         private bool showOriginalDescriptionOnTranslation;
         public bool ShowOriginalDescriptionOnTranslation
         {
@@ -112,7 +105,6 @@ namespace See4Me.ViewModels
 
             IsTextToSpeechEnabled = Settings.IsTextToSpeechEnabled;
             ShowDescriptionConfidence = Settings.ShowDescriptionConfidence;
-            GuessAge = Settings.GuessAge;
             ShowOriginalDescriptionOnTranslation = Settings.ShowOriginalDescriptionOnTranslation;
         }
 
@@ -136,7 +128,6 @@ namespace See4Me.ViewModels
 
             Settings.IsTextToSpeechEnabled = isTextToSpeechEnabled;
             Settings.ShowDescriptionConfidence = showDescriptionConfidence;
-            Settings.GuessAge = guessAge;
             Settings.ShowOriginalDescriptionOnTranslation = showOriginalDescriptionOnTranslation;
 
             var cognitiveSettings = cognitiveClient.Settings;

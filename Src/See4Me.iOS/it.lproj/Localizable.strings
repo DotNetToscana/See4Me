@@ -24,7 +24,6 @@
 "FrontCameraReady"="Fotocamera frontale pronta";
 "GotoCognitiveServices"="Visualizza la Home Page dei Cognitive Services";
 "GotoGitHub"="Segui il progetto su GitHub";
-"GuessAgeOption"="Prova a determinare l\'età quando viene riconosciuta una persona";
 "HappinessFemale"="Felice";
 "HappinessMale"="Felice";
 "InitializationError"="Errore durante l\'avvio dell\'app";
@@ -41,9 +40,7 @@
 "OpenSettings"="Vai alle Impostazioni";
 "PersonAgeMessageFemale"="Una {0} di {1} anni";
 "PersonAgeMessageMale"="Un {0} di {1} anni";
-"PersonMessageFemale"="Una {0}";
-"PersonMessageMale"="Un {0}";
-"ProjectAuthor"="Sviluppato da Marco Minerva - MVP Windows Development";
+"WindowsProjectAuthor"="Sviluppato da Marco Minerva - MVP Windows Development";
 "QueryingVisionService"="Analisi dell\'immagine...";
 "RecognitionError"="Mi dispiace, si è verificato un errore inatteso";
 "RecognitionFailed"="Mi dispiace, non riconosco l\'immagine";
@@ -81,3 +78,5 @@
 "MicrosoftPrivacyPolicies"="Informativa sulla privacy Microsoft";
 "PoweredByCognitiveServices"="Powered by Microsoft’s Cognitive Services:";
 "RecognizingText"="Riconoscimento del testo...";
+"AndroidProjectAuthor"="Sviluppato da Marco Minerva - MVP Windows Development";
+"iOSProjectAuthor"="Sviluppato da Riccardo Cappello";

@@ -1,4 +1,5 @@
 using Foundation;
+using See4Me.Localization.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,10 @@ namespace See4Me.Services
 {
     public class AppService : IAppService
     {
+        private const string BLOG_URL = "";
+        private const string TWITTER_URL = "https://twitter.com/rcappello";
+        private const string LINKEDIN_URL = "";
+
         private readonly NSString buildKey;
         private readonly NSString versionKey;
 
@@ -34,5 +39,13 @@ namespace See4Me.Services
                 }
             }
         }
+
+        public string Author => AppResources.iOSProjectAuthor;
+
+        public string BlogUrl => BLOG_URL;
+
+        public string TwitterUrl => TWITTER_URL;
+
+        public string LinkedInUrl => LINKEDIN_URL;
     }
 }

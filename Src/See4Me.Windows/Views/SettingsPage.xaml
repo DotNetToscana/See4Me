@@ -54,15 +54,7 @@
                 <ToggleSwitch Header="{Binding Path=LocalizedResources.TextToSpeech, Source={StaticResource LocalizedStrings}}"
                          IsOn="{Binding IsTextToSpeechEnabled, Mode=TwoWay}" Margin="5" />
                 <ToggleSwitch Header="{Binding Path=LocalizedResources.ShowDescriptionConfidence, Source={StaticResource LocalizedStrings}}"
-                              IsOn="{Binding ShowDescriptionConfidence, Mode=TwoWay}" Margin="5" />
-                <ToggleSwitch IsOn="{Binding GuessAge, Mode=TwoWay}" Margin="5">
-                    <ToggleSwitch.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Path=LocalizedResources.GuessAgeOption, Source={StaticResource LocalizedStrings}}"
-                                       TextWrapping="Wrap" />
-                        </DataTemplate>
-                    </ToggleSwitch.HeaderTemplate>
-                </ToggleSwitch>
+                              IsOn="{Binding ShowDescriptionConfidence, Mode=TwoWay}" Margin="5" />                
                 <ToggleSwitch IsOn="{Binding ShowOriginalDescriptionOnTranslation, Mode=TwoWay}" Margin="5">
                     <ToggleSwitch.HeaderTemplate>
                         <DataTemplate>

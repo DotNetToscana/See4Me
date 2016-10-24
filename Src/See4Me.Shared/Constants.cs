@@ -11,7 +11,6 @@
         public const string Man = "Man";
         public const string LookingMessage = "Looking";
         public const string PersonAgeMessage = "PersonAgeMessage";
-        public const string PersonMessage = "PersonMessage";
         public const string EmotionMessage = "EmotionMessage";
 
         public const string CognitiveServicesUrl = "https://www.microsoft.com/cognitive-services";
@@ -20,9 +19,6 @@
         public const string CognitiveServicesSubscriptionUrl = "https://www.microsoft.com/cognitive-services/en-us/sign-up";
         public const string ActivateTranslatorServiceUrl = "https://datamarket.azure.com/dataset/bing/microsofttranslator";
         public const string TranslatorServiceCreateAppUrl = "https://datamarket.azure.com/developer/applications";
-        public const string BlogUrl = "https://marcominerva.wordpress.com";
-        public const string TwitterUrl = "https://twitter.com/marcominerva";
-        public const string LinkedInUrl = "https://www.linkedin.com/in/marcominerva";
 
 #if __ANDROID__
         public const string SentenceEnd = " / ";

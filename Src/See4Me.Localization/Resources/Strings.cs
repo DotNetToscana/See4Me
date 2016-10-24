@@ -28,7 +28,6 @@
         public static string FrontCameraReady = "FrontCameraReady";
         public static string GotoCognitiveServices = "GotoCognitiveServices";
         public static string GotoGitHub = "GotoGitHub";
-        public static string GuessAgeOption = "GuessAgeOption";
         public static string HappinessFemale = "HappinessFemale";
         public static string HappinessMale = "HappinessMale";
         public static string InitializationError = "InitializationError";
@@ -45,9 +44,7 @@
         public static string OpenSettings = "OpenSettings";
         public static string PersonAgeMessageFemale = "PersonAgeMessageFemale";
         public static string PersonAgeMessageMale = "PersonAgeMessageMale";
-        public static string PersonMessageFemale = "PersonMessageFemale";
-        public static string PersonMessageMale = "PersonMessageMale";
-        public static string ProjectAuthor = "ProjectAuthor";
+        public static string WindowsProjectAuthor = "WindowsProjectAuthor";
         public static string QueryingVisionService = "QueryingVisionService";
         public static string RecognitionError = "RecognitionError";
         public static string RecognitionFailed = "RecognitionFailed";
@@ -85,5 +82,7 @@
         public static string MicrosoftPrivacyPolicies = "MicrosoftPrivacyPolicies";
         public static string PoweredByCognitiveServices = "PoweredByCognitiveServices";
         public static string RecognizingText = "RecognizingText";
+        public static string AndroidProjectAuthor = "AndroidProjectAuthor";
+        public static string iOSProjectAuthor = "iOSProjectAuthor";
     }
 }
