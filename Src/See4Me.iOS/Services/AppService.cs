@@ -10,9 +10,9 @@ namespace See4Me.Services
 {
     public class AppService : IAppService
     {
-        private const string BLOG_URL = "";
+        private const string BLOG_URL = "http://www.riccardocappello.com";
         private const string TWITTER_URL = "https://twitter.com/rcappello";
-        private const string LINKEDIN_URL = "";
+        private const string LINKEDIN_URL = "https://www.linkedin.com/in/rcappello";
 
         private readonly NSString buildKey;
         private readonly NSString versionKey;
