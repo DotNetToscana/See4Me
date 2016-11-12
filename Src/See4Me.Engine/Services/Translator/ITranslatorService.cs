@@ -5,9 +5,7 @@ namespace See4Me.Engine.Services.Translator
 {
     public interface ITranslatorService
     {
-        string ClientId { get; set; }
-
-        string ClientSecret { get; set; }
+        string SubscriptionKey { get; set; }
 
         string Language { get; set; }
 
@@ -20,7 +18,5 @@ namespace See4Me.Engine.Services.Translator
         Task<string> TranslateAsync(string text, string from, string to);
 
         Task<string> TranslateAsync(string text, string to = null);
-
-        bool IsInitialized { get; }
     }
 }

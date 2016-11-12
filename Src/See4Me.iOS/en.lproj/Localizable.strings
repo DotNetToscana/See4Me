@@ -1,6 +1,5 @@
 ﻿"About"="About";
 "AboutCommand"="About...";
-"ActivateTranslatorService"="Activate Translator Service";
 "AngerFemale"="Angry";
 "AngerMale"="Angry";
 "ApplicationTitle"="See4Me";
@@ -13,7 +12,6 @@
 "ChildMale"="Child";
 "ContemptFemale"="To show contempt";
 "ContemptMale"="To show contempt";
-"CreateTranslatorApp"="Create an app to get the keys";
 "DisgustFemale"="Disgusted";
 "DisgustMale"="Disgusted";
 "EmotionSubscriptionKey"="Emotion Subscription Key";
@@ -62,8 +60,7 @@
 "TakePhoto"="Take a photo";
 "TextToSpeech"="Text-To-Speech";
 "Translating"="Translating...";
-"TranslatorClientId"="Translator Client ID";
-"TranslatorClientSecret"="Translator Client Secret";
+"TranslatorSubscriptionKey"="Translator Subscription Key";
 "Twitter"="Twitter:";
 "UnableToAccessService"="Unable to access the service. Ensure that registration keys are correct";
 "UnableToRecognizeText"="I\'m sorry, I can\'t recognize text inside the photo";
@@ -80,3 +77,4 @@
 "RecognizingText"="Recognizing text...";
 "AndroidProjectAuthor"="Developed by Marco Minerva - MVP Windows Development";
 "iOSProjectAuthor"="Developed by Riccardo Cappello";
+"SubscribeTranslatorService"="Subscribe to get the key";

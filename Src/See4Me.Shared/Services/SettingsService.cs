@@ -13,8 +13,7 @@ namespace See4Me.Services
         private const string SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION = "ShowRawDescriptionOnInvalidRecognition";
         private const string VISION_SUBSCRIPTION_KEY = "VisionSubscriptionKey";
         private const string EMOTION_SUBSCRIPTION_KEY = "EmotionSubscriptionKey";
-        private const string TRANSLATOR_CLIENT_ID = "TranslatorClientId";
-        private const string TRANSLATOR_CLIENT_SECRET = "TranslatorClientSecret";
+        private const string TRANSLATOR_SUBSCRIPTION_KEY = "TranslatorSubscriptionKey";
         private const string IS_TEXT_TO_SPEECH_ENABLED = "IsTextToSpeechEnabled";
         private const string IS_CONSENT_GIVEN = "IsConsentGiven";
 
@@ -78,16 +77,10 @@ namespace See4Me.Services
             set { settings.AddOrUpdateValue(EMOTION_SUBSCRIPTION_KEY, value); }
         }
 
-        public string TranslatorClientId
+        public string TranslatorSubscriptionKey
         {
-            get { return settings.GetValueOrDefault<string>(TRANSLATOR_CLIENT_ID, null); }
-            set { settings.AddOrUpdateValue(TRANSLATOR_CLIENT_ID, value); }
-        }
-
-        public string TranslatorClientSecret
-        {
-            get { return settings.GetValueOrDefault<string>(TRANSLATOR_CLIENT_SECRET, null); }
-            set { settings.AddOrUpdateValue(TRANSLATOR_CLIENT_SECRET, value); }
+            get { return settings.GetValueOrDefault<string>(TRANSLATOR_SUBSCRIPTION_KEY, null); }
+            set { settings.AddOrUpdateValue(TRANSLATOR_SUBSCRIPTION_KEY, value); }
         }
 
         public bool IsTextToSpeechEnabled

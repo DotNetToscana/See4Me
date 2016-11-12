@@ -27,12 +27,12 @@ namespace See4Me.Engine
 
         public bool IsEmotionServiceRegistered => !string.IsNullOrWhiteSpace(Settings.EmotionSubscriptionKey);
 
-        public bool IsTranslatorServiceRegistered
-            => !string.IsNullOrWhiteSpace(Settings.TranslatorClientId) && !string.IsNullOrWhiteSpace(Settings.TranslatorClientSecret);
+        public bool IsTranslatorServiceRegistered => !string.IsNullOrWhiteSpace(Settings.TranslatorSubscriptionKey);
 
         public CognitiveClient(IVisionSettingsProvider visionSettingsProvider = null)
         {
             VisionSettingsProvider = visionSettingsProvider;
+            translatorService = new TranslatorService();
         }
 
         public Task<CognitiveResult> RecognizeAsync(string language, byte[] buffer, RecognitionType recognitionType = RecognitionType.Vision | RecognitionType.Emotion, Func<RecognitionPhase, Task> onProgress = null)
@@ -72,8 +72,8 @@ namespace See4Me.Engine
 
                     if (language != DefaultLanguge && IsTranslatorServiceRegistered)
                     {
-                        if (Settings.TranslatorClientId != translatorService?.ClientId || Settings.TranslatorClientSecret != translatorService?.ClientSecret)
-                            translatorService = new TranslatorService(Settings.TranslatorClientId, Settings.TranslatorClientSecret);
+                        // Make sure to use the updated translator subscription key.
+                        translatorService.SubscriptionKey = Settings.TranslatorSubscriptionKey;
 
                         // The description needs to be translated.
                         await this.RaiseOnProgressAsync(onProgress, RecognitionPhase.Translating);

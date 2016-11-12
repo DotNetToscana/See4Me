@@ -4,7 +4,6 @@
     {
         public static string About = "About";
         public static string AboutCommand = "AboutCommand";
-        public static string ActivateTranslatorService = "ActivateTranslatorService";
         public static string AngerFemale = "AngerFemale";
         public static string AngerMale = "AngerMale";
         public static string ApplicationTitle = "ApplicationTitle";
@@ -17,7 +16,6 @@
         public static string ChildMale = "ChildMale";
         public static string ContemptFemale = "ContemptFemale";
         public static string ContemptMale = "ContemptMale";
-        public static string CreateTranslatorApp = "CreateTranslatorApp";
         public static string DisgustFemale = "DisgustFemale";
         public static string DisgustMale = "DisgustMale";
         public static string EmotionSubscriptionKey = "EmotionSubscriptionKey";
@@ -66,8 +64,7 @@
         public static string TakePhoto = "TakePhoto";
         public static string TextToSpeech = "TextToSpeech";
         public static string Translating = "Translating";
-        public static string TranslatorClientId = "TranslatorClientId";
-        public static string TranslatorClientSecret = "TranslatorClientSecret";
+        public static string TranslatorSubscriptionKey = "TranslatorSubscriptionKey";
         public static string Twitter = "Twitter";
         public static string UnableToAccessService = "UnableToAccessService";
         public static string UnableToRecognizeText = "UnableToRecognizeText";
@@ -84,5 +81,6 @@
         public static string RecognizingText = "RecognizingText";
         public static string AndroidProjectAuthor = "AndroidProjectAuthor";
         public static string iOSProjectAuthor = "iOSProjectAuthor";
+        public static string SubscribeTranslatorService = "SubscribeTranslatorService";
     }
 }

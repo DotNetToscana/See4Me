@@ -17,8 +17,7 @@
         public const string MicrosoftPrivacyPoliciesUrl = "https://go.microsoft.com/fwlink/?LinkId=521839";
         public const string GitHubProjectUrl = "https://github.com/DotNetToscana/see4me";
         public const string CognitiveServicesSubscriptionUrl = "https://www.microsoft.com/cognitive-services/en-us/sign-up";
-        public const string ActivateTranslatorServiceUrl = "https://datamarket.azure.com/dataset/bing/microsofttranslator";
-        public const string TranslatorServiceCreateAppUrl = "https://datamarket.azure.com/developer/applications";
+        public const string TranslatorServiceSubscriptionUrl = "https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/TextTranslation";
 
 #if __ANDROID__
         public const string SentenceEnd = " / ";

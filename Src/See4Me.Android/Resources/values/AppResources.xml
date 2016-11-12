@@ -2,7 +2,6 @@
 <resources>
   <string name="About">About</string>
   <string name="AboutCommand">About...</string>
-  <string name="ActivateTranslatorService">Activate Translator Service</string>
   <string name="AngerFemale">Angry</string>
   <string name="AngerMale">Angry</string>
   <string name="ApplicationTitle">See4Me</string>
@@ -15,7 +14,6 @@
   <string name="ChildMale">Child</string>
   <string name="ContemptFemale">To show contempt</string>
   <string name="ContemptMale">To show contempt</string>
-  <string name="CreateTranslatorApp">Create an app to get the keys</string>
   <string name="DisgustFemale">Disgusted</string>
   <string name="DisgustMale">Disgusted</string>
   <string name="EmotionSubscriptionKey">Emotion Subscription Key</string>
@@ -64,8 +62,7 @@
   <string name="TakePhoto">Take a photo</string>
   <string name="TextToSpeech">Text-To-Speech</string>
   <string name="Translating">Translating...</string>
-  <string name="TranslatorClientId">Translator Client ID</string>
-  <string name="TranslatorClientSecret">Translator Client Secret</string>
+  <string name="TranslatorSubscriptionKey">Translator Subscription Key</string>
   <string name="Twitter">Twitter:</string>
   <string name="UnableToAccessService">Unable to access the service. Ensure that registration keys are correct</string>
   <string name="UnableToRecognizeText">I\'m sorry, I can\'t recognize text inside the photo</string>
@@ -82,4 +79,5 @@
   <string name="RecognizingText">Recognizing text...</string>
   <string name="AndroidProjectAuthor">Developed by Marco Minerva - MVP Windows Development</string>
   <string name="iOSProjectAuthor">Developed by Riccardo Cappello</string>
+  <string name="SubscribeTranslatorService">Subscribe to get the key</string>
 </resources>

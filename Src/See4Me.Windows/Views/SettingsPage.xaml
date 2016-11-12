@@ -42,19 +42,15 @@
                 <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.SubscribeCognitiveServices, Source={StaticResource LocalizedStrings}}"
                                  Margin="0,-5,5,0" Command="{Binding SubscribeCognitiveServicesCommand}" />
 
-                <TextBox Header="{Binding Path=LocalizedResources.TranslatorClientId, Source={StaticResource LocalizedStrings}}"
-                         Text="{Binding TranslatorClientId, Mode=TwoWay}" Margin="5" />
-                <TextBox Header="{Binding Path=LocalizedResources.TranslatorClientSecret, Source={StaticResource LocalizedStrings}}"
-                         Text="{Binding TranslatorClientSecret, Mode=TwoWay}" Margin="5" />
-                <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.ActivateTranslatorService, Source={StaticResource LocalizedStrings}}"
-                                 Command="{Binding ActivateTranslatorServiceCommand}" Margin="0,-5,5,0" />
-                <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.CreateTranslatorApp, Source={StaticResource LocalizedStrings}}"
-                                 Command="{Binding CreateTranslatorAppCommand}" Margin="0,-5,5,10" />
+                <TextBox Header="{Binding Path=LocalizedResources.TranslatorSubscriptionKey, Source={StaticResource LocalizedStrings}}"
+                         Text="{Binding TranslatorSubscriptionKey, Mode=TwoWay}" Margin="5" />
+                <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.SubscribeTranslatorService, Source={StaticResource LocalizedStrings}}"
+                                 Command="{Binding SubscribeTranslatorServiceCommand}" Margin="0,-5,5,0" />
 
                 <ToggleSwitch Header="{Binding Path=LocalizedResources.TextToSpeech, Source={StaticResource LocalizedStrings}}"
                          IsOn="{Binding IsTextToSpeechEnabled, Mode=TwoWay}" Margin="5" />
                 <ToggleSwitch Header="{Binding Path=LocalizedResources.ShowDescriptionConfidence, Source={StaticResource LocalizedStrings}}"
-                              IsOn="{Binding ShowDescriptionConfidence, Mode=TwoWay}" Margin="5" />                
+                              IsOn="{Binding ShowDescriptionConfidence, Mode=TwoWay}" Margin="5" />
                 <ToggleSwitch IsOn="{Binding ShowOriginalDescriptionOnTranslation, Mode=TwoWay}" Margin="5">
                     <ToggleSwitch.HeaderTemplate>
                         <DataTemplate>
