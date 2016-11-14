@@ -123,9 +123,6 @@
   <data name="AboutCommand" xml:space="preserve">
     <value>About...</value>
   </data>
-  <data name="ActivateTranslatorService" xml:space="preserve">
-    <value>Activate Translator Service</value>
-  </data>
   <data name="AngerFemale" xml:space="preserve">
     <value>Angry</value>
   </data>
@@ -161,9 +158,6 @@
   </data>
   <data name="ContemptMale" xml:space="preserve">
     <value>To show contempt</value>
-  </data>
-  <data name="CreateTranslatorApp" xml:space="preserve">
-    <value>Create an app to get the keys</value>
   </data>
   <data name="DisgustFemale" xml:space="preserve">
     <value>Disgusted</value>
@@ -309,11 +303,8 @@
   <data name="Translating" xml:space="preserve">
     <value>Translating...</value>
   </data>
-  <data name="TranslatorClientId" xml:space="preserve">
-    <value>Translator Client ID</value>
-  </data>
-  <data name="TranslatorClientSecret" xml:space="preserve">
-    <value>Translator Client Secret</value>
+  <data name="TranslatorSubscriptionKey" xml:space="preserve">
+    <value>Translator Subscription Key</value>
   </data>
   <data name="Twitter" xml:space="preserve">
     <value>Twitter:</value>
@@ -362,5 +353,8 @@
   </data>
   <data name="iOSProjectAuthor" xml:space="preserve">
     <value>Developed by Riccardo Cappello</value>
+  </data>
+  <data name="SubscribeTranslatorService" xml:space="preserve">
+    <value>Subscribe to get the key</value>
   </data>
 </root>

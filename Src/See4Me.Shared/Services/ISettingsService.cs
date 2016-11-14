@@ -16,9 +16,7 @@
 
         string EmotionSubscriptionKey { get; set; }
 
-        string TranslatorClientId { get; set; }
-
-        string TranslatorClientSecret { get; set; }
+        string TranslatorSubscriptionKey { get; set; }
 
         bool IsTextToSpeechEnabled { get; set; }
 

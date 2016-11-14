@@ -32,9 +32,6 @@ namespace See4Me.ViewModels
             set { this.Set(ref message, value, broadcast: true); }
         }
 
-        public bool IsTranslatorServiceRegistered
-            => !string.IsNullOrWhiteSpace(ServiceKeys.TranslatorClientId) && !string.IsNullOrWhiteSpace(ServiceKeys.TranslatorClientSecret);
-
         public RecognizeTextViewModel(CognitiveClient cognitiveClient, IMediaPicker mediaPicker, ISpeechService speechService)
         {
             this.cognitiveClient = cognitiveClient;

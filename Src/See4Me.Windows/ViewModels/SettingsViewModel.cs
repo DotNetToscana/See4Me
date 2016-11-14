@@ -20,8 +20,7 @@ namespace See4Me.ViewModels
         private const string SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION = "ShowOriginalDescriptionOnTranslation";
         private const string VISION_SUBSCRIPTION_KEY = "VisionSubscriptionKey";
         private const string EMOTION_SUBSCRIPTION_KEY = "EmotionSubscriptionKey";
-        private const string TRANSLATOR_CLIENT_ID = "TranslatorClientId";
-        private const string TRANSLATOR_CLIENT_SECRET = "TranslatorClientSecret";
+        private const string TRANSLATOR_SUBSCRIPTION_KEY = "TranslatorSubscriptionKey";
         private const string IS_TEXT_TO_SPEECH_ENABLED = "IsTextToSpeechEnabled";
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -54,8 +53,7 @@ namespace See4Me.ViewModels
                 state[SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION] = showOriginalDescriptionOnTranslation;
                 state[VISION_SUBSCRIPTION_KEY] = visionSubscriptionKey;
                 state[EMOTION_SUBSCRIPTION_KEY] = emotionSubscriptionKey;
-                state[TRANSLATOR_CLIENT_ID] = translatorClientId;
-                state[TRANSLATOR_CLIENT_SECRET] = translatorClientSecret;
+                state[TRANSLATOR_SUBSCRIPTION_KEY] = translatorSubscriptionKey;
                 state[IS_TEXT_TO_SPEECH_ENABLED] = isTextToSpeechEnabled;
             }
 
@@ -68,8 +66,7 @@ namespace See4Me.ViewModels
             showOriginalDescriptionOnTranslation = Convert.ToBoolean(state[SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION]);
             visionSubscriptionKey = state[VISION_SUBSCRIPTION_KEY].ToString();
             emotionSubscriptionKey = state[EMOTION_SUBSCRIPTION_KEY].ToString();
-            translatorClientId = state[TRANSLATOR_CLIENT_ID].ToString();
-            translatorClientSecret = state[TRANSLATOR_CLIENT_SECRET].ToString();
+            translatorSubscriptionKey = state[TRANSLATOR_SUBSCRIPTION_KEY].ToString();
             isTextToSpeechEnabled = Convert.ToBoolean(state[IS_TEXT_TO_SPEECH_ENABLED]);
         }
     }

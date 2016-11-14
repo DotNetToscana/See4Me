@@ -80,15 +80,6 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Activate Translator Service.
-        /// </summary>
-        public static string ActivateTranslatorService {
-            get {
-                return ResourceManager.GetString("ActivateTranslatorService", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Developed by Marco Minerva - MVP Windows Development.
         /// </summary>
         public static string AndroidProjectAuthor {
@@ -220,15 +211,6 @@ namespace See4Me.Localization.Resources {
         public static string ContemptMale {
             get {
                 return ResourceManager.GetString("ContemptMale", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create an app to get the keys.
-        /// </summary>
-        public static string CreateTranslatorApp {
-            get {
-                return ResourceManager.GetString("CreateTranslatorApp", resourceCulture);
             }
         }
         
@@ -656,6 +638,15 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Subscribe to get the key.
+        /// </summary>
+        public static string SubscribeTranslatorService {
+            get {
+                return ResourceManager.GetString("SubscribeTranslatorService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Surprised.
         /// </summary>
         public static string SurpriseFemale {
@@ -719,20 +710,11 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Translator Client ID.
+        ///   Looks up a localized string similar to Translator Subscription Key.
         /// </summary>
-        public static string TranslatorClientId {
+        public static string TranslatorSubscriptionKey {
             get {
-                return ResourceManager.GetString("TranslatorClientId", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Translator Client Secret.
-        /// </summary>
-        public static string TranslatorClientSecret {
-            get {
-                return ResourceManager.GetString("TranslatorClientSecret", resourceCulture);
+                return ResourceManager.GetString("TranslatorSubscriptionKey", resourceCulture);
             }
         }
         

@@ -29,9 +29,7 @@ namespace See4Me.ViewModels
 
         public AutoRelayCommand SubscribeCognitiveServicesCommand { get; set; }
 
-        public AutoRelayCommand ActivateTranslatorServiceCommand { get; set; }
-
-        public AutoRelayCommand CreateTranslatorAppCommand { get; set; }
+        public AutoRelayCommand SubscribeTranslatorServiceCommand { get; set; }
 
         public AutoRelayCommand GotoAboutCommand { get; set; }
 
@@ -53,18 +51,11 @@ namespace See4Me.ViewModels
             set { this.Set(ref emotionSubscriptionKey, value); }
         }
 
-        private string translatorClientId;
-        public string TranslatorClientId
+        private string translatorSubscriptionKey;
+        public string TranslatorSubscriptionKey
         {
-            get { return translatorClientId; }
-            set { this.Set(ref translatorClientId, value); }
-        }
-
-        private string translatorClientSecret;
-        public string TranslatorClientSecret
-        {
-            get { return translatorClientSecret; }
-            set { this.Set(ref translatorClientSecret, value); }
+            get { return translatorSubscriptionKey; }
+            set { this.Set(ref translatorSubscriptionKey, value); }
         }
 
         private bool isTextToSpeechEnabled;
@@ -100,8 +91,7 @@ namespace See4Me.ViewModels
         {
             VisionSubscriptionKey = ServiceKeys.VisionSubscriptionKey;
             EmotionSubscriptionKey = ServiceKeys.EmotionSubscriptionKey;
-            TranslatorClientId = ServiceKeys.TranslatorClientId;
-            TranslatorClientSecret = ServiceKeys.TranslatorClientSecret;
+            TranslatorSubscriptionKey = ServiceKeys.TranslatorSubscriptionKey;
 
             IsTextToSpeechEnabled = Settings.IsTextToSpeechEnabled;
             ShowDescriptionConfidence = Settings.ShowDescriptionConfidence;
@@ -113,8 +103,7 @@ namespace See4Me.ViewModels
             SaveCommand = new AutoRelayCommand(Save);
 
             SubscribeCognitiveServicesCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.CognitiveServicesSubscriptionUrl));
-            ActivateTranslatorServiceCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.ActivateTranslatorServiceUrl));
-            CreateTranslatorAppCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.TranslatorServiceCreateAppUrl));
+            SubscribeTranslatorServiceCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.TranslatorServiceSubscriptionUrl));
             GotoAboutCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.AboutPage.ToString()));
             GotoPrivacyPolicyCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.PrivacyPolicyPage.ToString()));
         }
@@ -123,8 +112,7 @@ namespace See4Me.ViewModels
         {
             ServiceKeys.VisionSubscriptionKey = visionSubscriptionKey;
             ServiceKeys.EmotionSubscriptionKey = emotionSubscriptionKey;
-            ServiceKeys.TranslatorClientId = translatorClientId;
-            ServiceKeys.TranslatorClientSecret = TranslatorClientSecret;
+            ServiceKeys.TranslatorSubscriptionKey = translatorSubscriptionKey;
 
             Settings.IsTextToSpeechEnabled = isTextToSpeechEnabled;
             Settings.ShowDescriptionConfidence = showDescriptionConfidence;
@@ -133,8 +121,7 @@ namespace See4Me.ViewModels
             var cognitiveSettings = cognitiveClient.Settings;
             cognitiveSettings.EmotionSubscriptionKey = emotionSubscriptionKey;
             cognitiveSettings.VisionSubscriptionKey = visionSubscriptionKey;
-            cognitiveSettings.TranslatorClientId = translatorClientId;
-            cognitiveSettings.TranslatorClientSecret = translatorClientSecret;
+            cognitiveSettings.TranslatorSubscriptionKey = translatorSubscriptionKey;
 
             Navigator.GoBack();
         }

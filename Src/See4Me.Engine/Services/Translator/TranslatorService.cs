@@ -12,10 +12,10 @@ namespace See4Me.Engine.Services.Translator
     /// The <strong>TranslatorService</strong> class provides methods to translate text in various supported languages.
     /// </summary>
     /// <remarks>
-    /// <para>To use this library, you need to go to <strong>Azure DataMarket</strong> at https://datamarket.azure.com/developer/applications and register your application. In this way, you'll obtain the <see cref="ClientId"/> and <see cref="ClientSecret"/> that are necessary to use <strong>Microsoft Translator Service</strong>.</para>
-    /// <para>You also need to go to https://datamarket.azure.com/dataset/bing/microsofttranslator and subscribe the <strong>Microsoft Translator Service</strong>. There are many options, based on the amount of characters per month. The service is free up to 2 million characters per month.</para>
+    /// <para>To use this library, you must register Microsoft Translator on https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/TextTranslation to obtain the Subscription key.
+    /// </para>
     /// </remarks>
-    public sealed class TranslatorService : ITranslatorService
+    public sealed class TranslatorService : ITranslatorService, IDisposable
     {
         private const string BASE_URL = "http://api.microsofttranslator.com/v2/Http.svc/";
         private const string LANGUAGES_URI = "GetLanguagesForTranslate";
@@ -26,31 +26,24 @@ namespace See4Me.Engine.Services.Translator
         private const int MAX_TEXT_LENGTH = 1000;
         private const int MAX_TEXT_LENGTH_FOR_AUTODETECTION = 100;
 
-        private DateTime tokenRequestTime;
-        private int tokenValiditySeconds;
-        private string headerValue;
+        private readonly AzureAuthToken authToken;
+        private readonly HttpClient client;
+        private string authorizationHeaderValue = string.Empty;
 
         #region Properties
 
         /// <summary>
-        /// Gets or sets the Application Client ID that is necessary to use <strong>Microsoft Translator Service</strong>.
+        /// Gets or sets the Subscription key that is necessary to use <strong>Microsoft Translator Service</strong>.
         /// </summary>
-        /// <value>The Application Client ID.</value>
+        /// <value>The Subscription Key.</value>
         /// <remarks>
-        /// <para>Go to <strong>Azure DataMarket</strong> at https://datamarket.azure.com/developer/applications to register your application and obtain a Client ID.</para>
-        /// <para>You also need to go to https://datamarket.azure.com/dataset/bing/microsofttranslator and subscribe the <strong>Microsoft Translator Service</strong>. There are many options, based on the amount of characters per month. The service is free up to 2 million characters per month.</para>
+        /// <para>You must register Microsoft Translator on https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/TextTranslation to obtain the Subscription key needed to use the service.</para>
         /// </remarks>
-        public string ClientId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Application Client Secret that is necessary to use <strong>Microsoft Translator Service</strong>.
-        /// </summary>
-        /// <remarks>
-        /// <value>The Application Client Secret.</value>
-        /// <para>Go to <strong>Azure DataMaket</strong> at https://datamarket.azure.com/developer/applications to register your application and obtain a Client Secret.</para>
-        /// <para>You also need to go to https://datamarket.azure.com/dataset/bing/microsofttranslator and subscribe the <strong>Microsoft Translator Service</strong>. There are many options, based on the amount of characters per month. The service is free up to 2 million characters per month.</para>
-        /// </remarks>
-        public string ClientSecret { get; set; }
+        public string SubscriptionKey
+        {
+            get { return authToken.SubscriptionKey; }
+            set { authToken.SubscriptionKey = value; }
+        }
 
         /// <summary>
         /// Gets or sets the string representing the supported language code to speak the text in.
@@ -59,49 +52,39 @@ namespace See4Me.Engine.Services.Translator
         /// <seealso cref="GetLanguagesAsync"/>
         public string Language { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value that tells whether the TranslatorService is initialized.
-        /// </summary>
-        /// <value><strong>true</strong> if the TranslatorService is initialized, <strong>false</strong> otherwise.</value>
-        public bool IsInitialized { get; private set; }
-
         #endregion
 
         /// <summary>
         /// Initializes a new instance of the <strong>TranslatorService</strong> class, using the specified Client ID and Client Secret and the current system language.
         /// </summary>
-        /// <param name="clientId">The Application Client ID.
+        /// <param name="subscriptionKey">The subscription key for the Microsoft Translator Service on Azure
         /// </param>
-        /// <param name="clientSecret">The Application Client Secret.
-        /// </param>
-        /// <remarks><para>You must register your application on <strong>Azure DataMarket</strong> at https://datamarket.azure.com/developer/applications to obtain the Client ID and Client Secret needed to use the service.</para>
-        /// <para>You also need to go to https://datamarket.azure.com/dataset/bing/microsofttranslator and subscribe the <strong>Microsoft Translator Service</strong>. There are many options, based on the amount of characters per month. The service is free up to 2 million characters per month.</para>
+        /// <remarks>
+        /// <para>You must register Microsoft Translator on https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/TextTranslation to obtain the Subscription key needed to use the service.</para>
         /// </remarks>
-        /// <seealso cref="ClientId"/>
-        /// <seealso cref="ClientSecret"/>
+        /// <seealso cref="SubscriptionKey"/>
         /// <seealso cref="Language"/>
-        public TranslatorService(string clientId, string clientSecret)
-            : this(clientId, clientSecret, CultureInfo.CurrentCulture.Name.ToLower())
+        public TranslatorService(string subscriptionKey = null)
+            : this(subscriptionKey, CultureInfo.CurrentCulture.Name.ToLower())
         { }
 
         /// <summary>
         /// Initializes a new instance of the <strong>TranslatorService</strong> class, using the specified Client ID and Client Secret and the desired language.
         /// </summary>
-        /// <param name="clientId">The Application Client ID.
-        /// </param>
-        /// <param name="clientSecret">The Application Client Secret.
+        /// <param name="subscriptionKey">The subscription key for the Microsoft Translator Service on Azure
         /// </param>
         /// <param name="language">A string representing the supported language code to speak the text in. The code must be present in the list of codes returned from the method <see cref="GetLanguagesAsync"/>.</param>
-        /// <remarks><para>You must register your application on <strong>Azure DataMarket</strong> at https://datamarket.azure.com/developer/applications to obtain the Client ID and Client Secret needed to use the service.</para>
-        /// <para>You also need to go to https://datamarket.azure.com/dataset/bing/microsofttranslator and subscribe the <strong>Microsoft Translator Service</strong>. There are many options, based on the amount of characters per month. The service is free up to 2 million characters per month.</para>
+        /// <remarks>
+        /// <para>You must register Microsoft Translator on https://portal.azure.com to obtain the Subscription key needed to use the service.</para>
         /// </remarks>
-        /// <seealso cref="ClientId"/>
-        /// <seealso cref="ClientSecret"/>
+        /// <seealso cref="SubscriptionKey"/>
         /// <seealso cref="Language"/>
-        public TranslatorService(string clientId, string clientSecret, string language)
+        public TranslatorService(string subscriptionKey, string language)
         {
-            ClientId = clientId;
-            ClientSecret = clientSecret;
+            authToken = new AzureAuthToken(subscriptionKey);
+            client = new HttpClient { BaseAddress = new Uri(BASE_URL) };
+
+            SubscriptionKey = subscriptionKey;
             Language = language;
         }
 
@@ -111,7 +94,7 @@ namespace See4Me.Engine.Services.Translator
         /// Retrieves the languages available for speech synthesis.
         /// </summary>
         /// <returns>A string array containing the language codes supported for speech synthesis by <strong>Microsoft Translator Service</strong>.</returns>
-        /// <exception cref="ArgumentException">The <see cref="ClientId"/> or <see cref="ClientSecret"/> properties haven't been set.</exception>
+        /// <exception cref="ArgumentException">The <see cref="SubscriptionKey"/> property hasn't been set.</exception>
         /// <remarks><para>This method performs a non-blocking request.</para>
         /// <para>For more information, go to http://msdn.microsoft.com/en-us/library/ff512415.aspx.
         /// </para>
@@ -119,18 +102,15 @@ namespace See4Me.Engine.Services.Translator
         public async Task<IEnumerable<string>> GetLanguagesAsync()
         {
             // Check if it is necessary to obtain/update access token.
-            await this.UpdateTokenAsync();
+            await this.CheckUpdateTokenAsync().ConfigureAwait(false);
 
-            using (var client = this.GetHttpClient())
-            {
-                var content = await client.GetStringAsync(LANGUAGES_URI).ConfigureAwait(false);
+            var content = await client.GetStringAsync(LANGUAGES_URI).ConfigureAwait(false);
 
-                XNamespace ns = "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
-                var doc = XDocument.Parse(content);
+            XNamespace ns = "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
+            var doc = XDocument.Parse(content);
 
-                var languages = doc.Root.Elements(ns + "string").Select(s => s.Value);
-                return languages;
-            }
+            var languages = doc.Root.Elements(ns + "string").Select(s => s.Value);
+            return languages;
         }
 
         #endregion
@@ -146,7 +126,7 @@ namespace See4Me.Engine.Services.Translator
         /// <param name="to">A string representing the language code to translate the text into. The code must be present in the list of codes returned from the <see cref="GetLanguagesAsync"/> method. If the parameter is set to <strong>null</strong>, the language specified in the <seealso cref="Language"/> property will be used.</param>
         /// <exception cref="ArgumentException">
         /// <list type="bullet">
-        /// <term>The <see cref="ClientId"/> or <see cref="ClientSecret"/> properties haven't been set.</term>
+        /// <term>The <see cref="SubscriptionKey"/> property hasn't been set.</term>
         /// <term>The <paramref name="text"/> parameter is longer than 1000 characters.</term>
         /// </list>
         /// </exception>
@@ -165,26 +145,23 @@ namespace See4Me.Engine.Services.Translator
                 throw new ArgumentException($"{nameof(text)} parameter cannot be longer than {MAX_TEXT_LENGTH} characters");
 
             // Checks if it is necessary to obtain/update access token.
-            await this.UpdateTokenAsync();
+            await this.CheckUpdateTokenAsync().ConfigureAwait(false);
 
             if (string.IsNullOrWhiteSpace(to))
                 to = Language;
 
-            using (var client = this.GetHttpClient())
-            {
-                string uri = null;
-                if (string.IsNullOrWhiteSpace(from))
-                    uri = string.Format(TRANSLATE_URI, Uri.EscapeDataString(text), to);
-                else
-                    uri = string.Format(TRANSLATE_WITH_FROM_URI, Uri.EscapeDataString(text), from, to);
+            string uri = null;
+            if (string.IsNullOrWhiteSpace(from))
+                uri = string.Format(TRANSLATE_URI, Uri.EscapeDataString(text), to);
+            else
+                uri = string.Format(TRANSLATE_WITH_FROM_URI, Uri.EscapeDataString(text), from, to);
 
-                var content = await client.GetStringAsync(uri).ConfigureAwait(false);
+            var content = await client.GetStringAsync(uri).ConfigureAwait(false);
 
-                var doc = XDocument.Parse(content);
-                var translatedText = doc.Root.Value;
+            var doc = XDocument.Parse(content);
+            var translatedText = doc.Root.Value;
 
-                return translatedText;
-            }
+            return translatedText;
         }
 
         /// <summary>
@@ -195,7 +172,7 @@ namespace See4Me.Engine.Services.Translator
         /// <param name="to">A string representing the language code to translate the text into. The code must be present in the list of codes returned from the <see cref="GetLanguagesAsync"/> method. If the parameter is set to <strong>null</strong>, the language specified in the <seealso cref="Language"/> property will be used.</param>
         /// <exception cref="ArgumentException">
         /// <list type="bullet">
-        /// <term>The <see cref="ClientId"/> or <see cref="ClientSecret"/> properties haven't been set.</term>
+        /// <term>The <see cref="SubscriptionKey"/> property hasn't been set.</term>
         /// <term>The <paramref name="text"/> parameter is longer than 1000 characters.</term>
         /// </list>
         /// </exception>
@@ -218,7 +195,7 @@ namespace See4Me.Engine.Services.Translator
         /// <returns>A string containing a two-character Language code for the given text.</returns>
         /// <exception cref="ArgumentException">
         /// <list type="bullet">
-        /// <term>The <see cref="ClientId"/> or <see cref="ClientSecret"/> properties haven't been set.</term>
+        /// <term>The <see cref="SubscriptionKey"/> property hasn't been set.</term>
         /// <term>The <paramref name="text"/> parameter is longer than 1000 characters.</term>
         /// </list>
         /// </exception>
@@ -236,57 +213,56 @@ namespace See4Me.Engine.Services.Translator
             text = text.Substring(0, Math.Min(text.Length, MAX_TEXT_LENGTH_FOR_AUTODETECTION));
 
             // Checks if it is necessary to obtain/update access token.
-            await this.UpdateTokenAsync();
+            await this.CheckUpdateTokenAsync().ConfigureAwait(false);
 
-            using (var client = this.GetHttpClient())
-            {
-                var uri = string.Format(DETECT_URI, Uri.EscapeDataString(text));
-                var content = await client.GetStringAsync(uri).ConfigureAwait(false);
+            var uri = string.Format(DETECT_URI, Uri.EscapeDataString(text));
+            var content = await client.GetStringAsync(uri).ConfigureAwait(false);
 
-                var doc = XDocument.Parse(content);
-                var detectedLanguage = doc.Root.Value;
+            var doc = XDocument.Parse(content);
+            var detectedLanguage = doc.Root.Value;
 
-                return detectedLanguage;
-            }
+            return detectedLanguage;
         }
 
         #endregion
 
-        private async Task UpdateTokenAsync()
+        private async Task CheckUpdateTokenAsync()
         {
-            if (string.IsNullOrWhiteSpace(ClientId))
-                throw new ArgumentException("Invalid Client ID. Go to Azure Marketplace and sign up for Microsoft Translator: https://datamarket.azure.com/developer/applications");
+            if (string.IsNullOrWhiteSpace(SubscriptionKey))
+                throw new ArgumentException("Invalid Subscription Key. Go to Azure Portal and sign up for Microsoft Translator: https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/TextTranslation");
 
-            if (string.IsNullOrWhiteSpace(ClientSecret))
-                throw new ArgumentException("Invalid Client Secret. Go to Azure Marketplace and sign up for Microsoft Translator: https://datamarket.azure.com/developer/applications");
-
-            if ((DateTime.Now - tokenRequestTime).TotalSeconds > tokenValiditySeconds)
+            try
             {
-                // Token has expired. Makes a request for a new one.
-                tokenRequestTime = DateTime.Now;
-                var admAuth = new AdmAuthentication(ClientId, ClientSecret);
-
-                try
+                var token = await authToken.GetAccessTokenAsync().ConfigureAwait(false);
+                if (token != authorizationHeaderValue)
                 {
-                    var admToken = await admAuth.GetAccessTokenAsync();
+                    // Updates the access token.
+                    authorizationHeaderValue = token;
+                    var headers = client.DefaultRequestHeaders;
 
-                    tokenValiditySeconds = int.Parse(admToken.ExpiresIn);
-                    headerValue = "Bearer " + admToken.AccessToken;
-                    IsInitialized = true;
+                    if (headers.Contains(AUTHORIZATION_HEADER))
+                        headers.Remove(AUTHORIZATION_HEADER);
+
+                    headers.Add(AUTHORIZATION_HEADER, authorizationHeaderValue);
                 }
-                catch
-                { }
             }
+            catch { }
         }
 
-        public Task InitializeAsync() => this.UpdateTokenAsync();
+        /// <summary>
+        /// Initializes the <see cref="TranslatorService"/> class by getting an access token for the service.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> that represents the initialize operation.</returns>
+        /// <remarks>Calling this method isn't mandatory, because the token is get/refreshed everytime is needed. However, it is called at startup, it can speed-up subsequest requests.</remarks>
+        public Task InitializeAsync() => this.CheckUpdateTokenAsync();
 
-        private HttpClient GetHttpClient()
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
         {
-            var client = new HttpClient { BaseAddress = new Uri(BASE_URL) };
-            client.DefaultRequestHeaders.Add(AUTHORIZATION_HEADER, headerValue);
-
-            return client;
+            authToken.Dispose();
+            client.Dispose();
         }
     }
 }

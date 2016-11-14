@@ -11,14 +11,11 @@ namespace See4Me
 #if DEBUG
         private const string visionSubscriptionKey = "";
         private const string emotionSubscriptionKey = "";
-        private const string translatorClientId = "";
-        private const string translatorClientSecret = "";
+        private const string translatorSubscriptionKey = "";
 #else
         private const string visionSubscriptionKey = "";
         private const string emotionSubscriptionKey = "";
-        private const string translatorClientId = "";
-        private const string translatorClientSecret = "";
-
+        private const string translatorSubscriptionKey = "";
 #endif
 
         private static readonly ISettingsService settings;
@@ -40,16 +37,10 @@ namespace See4Me
             set { settings.EmotionSubscriptionKey = value; }
         }
 
-        public static string TranslatorClientId
+        public static string TranslatorSubscriptionKey
         {
-            get { return GetValue(settings.TranslatorClientId) ?? translatorClientId; }
-            set { settings.TranslatorClientId = value; }
-        }
-
-        public static string TranslatorClientSecret
-        {
-            get { return GetValue(settings.TranslatorClientSecret) ?? translatorClientSecret; }
-            set { settings.TranslatorClientSecret = value; }
+            get { return GetValue(settings.TranslatorSubscriptionKey) ?? translatorSubscriptionKey; }
+            set { settings.TranslatorSubscriptionKey = value; }
         }
 
         private static string GetValue(string value)

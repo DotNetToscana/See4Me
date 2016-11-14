@@ -12,8 +12,6 @@ namespace See4Me.Engine
 
         public string EmotionSubscriptionKey { get; set; }
 
-        public string TranslatorClientId { get; set; }
-
-        public string TranslatorClientSecret { get; set; }
+        public string TranslatorSubscriptionKey { get; set; }
     }
 }
