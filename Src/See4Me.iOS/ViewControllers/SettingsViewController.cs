@@ -29,13 +29,14 @@ namespace See4Me
 			ViewModel.Initialize();
 
 			this.RegisterMessages();
+			this.SetTranslation();
 			this.bindings = new List<Binding>()
 			{
 				this.SetBinding(() => ViewModel.VisionSubscriptionKey, () => TextVisionSubscriptionKey.Text, BindingMode.TwoWay),
 				this.SetBinding(() => ViewModel.EmotionSubscriptionKey, () => TextEmotionSubscriptionKey.Text, BindingMode.TwoWay),
 				this.SetBinding(() => ViewModel.TranslatorClientId, () => TextTranslatorClientID.Text, BindingMode.TwoWay),
 				this.SetBinding(() => ViewModel.TranslatorClientSecret, () => TextTranslatorClientSecret.Text, BindingMode.TwoWay),
-			    
+
 				this.SetBinding(() => ViewModel.IsTextToSpeechEnabled, () => SwitchTextToSpeech.Selected, BindingMode.TwoWay),
 				this.SetBinding(() => ViewModel.ShowDescriptionConfidence, () => SwitchShowDescriptionConfidence.Selected, BindingMode.TwoWay),
 				this.SetBinding(() => ViewModel.ShowOriginalDescriptionOnTranslation, () => SwitchShowOriginalDescription.Selected, BindingMode.TwoWay),
@@ -49,36 +50,74 @@ namespace See4Me
 			ButtonAbout.SetCommand(this.ViewModel.GotoAboutCommand);
 			ButtonPrivacy.SetCommand(this.ViewModel.GotoPrivacyPolicyCommand);
 
-			//LinkSubscribeVision.SetCommand(this.ViewModel.SubscribeCognitiveServicesCommand);
-			//LinkSubscribeEmotion.SetCommand(this.ViewModel.SubscribeCognitiveServicesCommand);
-			//LinkCreateAnApp.SetCommand(this.ViewModel.CreateTranslatorAppCommand);
-			//LinkActivateTranslatorService.SetCommand(this.ViewModel.ActivateTranslatorServiceCommand);
+			LinkSubscribeEmotion.UserInteractionEnabled = true;
+			LinkSubscribeEmotion.AddGestureRecognizer(new UITapGestureRecognizer(() =>
+			{
+				this.ViewModel.SubscribeCognitiveServicesCommand.Execute(null);
+			}));
+			LinkSubscribeVision.UserInteractionEnabled = true;
+			LinkSubscribeVision.AddGestureRecognizer(new UITapGestureRecognizer(() =>
+			{
+				this.ViewModel.SubscribeCognitiveServicesCommand.Execute(null);
+			}));
+			LinkCreateAnApp.UserInteractionEnabled = true;
+			LinkCreateAnApp.AddGestureRecognizer(new UITapGestureRecognizer(() =>
+			{
+				this.ViewModel.CreateTranslatorAppCommand.Execute(null);
+			}));
+			LinkActivateTranslatorService.UserInteractionEnabled = true;
+			LinkActivateTranslatorService.AddGestureRecognizer(new UITapGestureRecognizer(() =>
+			{
+				this.ViewModel.ActivateTranslatorServiceCommand.Execute(null);
+			}));
 
 			this.NavigationItem.SetRightBarButtonItem(
 				new UIBarButtonItem(UIBarButtonSystemItem.Save, (sender, args) =>
 				{
-					// button was clicked
+					this.ViewModel.Save();
 				})
 			, true);
-		}
 
-	    public override void ViewDidAppear(bool animated)
-		{
-			base.ViewDidAppear(animated);
-		
-			NavigationController.SetNavigationBarHidden(false, true);
+			//dismiss the keyboard if the user taps anywhere in the view
+			var g = new UITapGestureRecognizer(() => View.EndEditing(true));
+			g.CancelsTouchesInView = false; //for iOS5
+			View.AddGestureRecognizer(g);
+
+			NavigationController.SetNavigationBarHidden(false, false);
 		}
 
 		public override void ViewWillDisappear(bool animated)
 		{
 			base.ViewWillDisappear(animated);
-	
+
 			NavigationController.SetNavigationBarHidden(true, false);
 		}
 
 		private void RegisterMessages()
 		{
 
+		}
+
+		private void SetTranslation()
+		{
+			this.NavigationItem.Title = Strings.Settings;
+
+			LabelVisionSubscriptionKey.Text = Strings.VisionSubscriptionKey;
+			LabelEmotionSubscriptionKey.Text = Strings.EmotionSubscriptionKey;
+			LabelTranslatorClientID.Text = Strings.TranslatorClientId;
+			LabelTranslatorClientSecret.Text = Strings.TranslatorClientSecret;
+
+			LinkSubscribeEmotion.Text = Strings.SubscribeCognitiveServices;
+			LinkSubscribeVision.Text = Strings.SubscribeCognitiveServices;
+			LinkCreateAnApp.Text = Strings.CreateTranslatorApp;
+			LinkActivateTranslatorService.Text = Strings.ActivateTranslatorService;
+
+			LabelTextToSpeech.Text = Strings.TextToSpeech;
+			LabelShowDescriptionConfidence.Text = Strings.ShowDescriptionConfidence;
+			LabelShowOriginalDescription.Text = Strings.ShowOriginalDescriptionOnTranslation;
+
+			ButtonAbout.SetTitle(Strings.AboutCommand, UIControlState.Normal);
+			ButtonPrivacy.SetTitle(Strings.PrivacyPolicyCommand, UIControlState.Normal);
 		}
 	}
 }

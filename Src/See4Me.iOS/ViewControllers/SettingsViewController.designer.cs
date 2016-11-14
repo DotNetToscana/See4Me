@@ -22,6 +22,15 @@ namespace See4Me
 		UIKit.UILabel LabelEmotionSubscriptionKey { get; set; }
 
 		[Outlet]
+		UIKit.UILabel LabelShowDescriptionConfidence { get; set; }
+
+		[Outlet]
+		UIKit.UILabel LabelShowOriginalDescription { get; set; }
+
+		[Outlet]
+		UIKit.UILabel LabelTextToSpeech { get; set; }
+
+		[Outlet]
 		UIKit.UILabel LabelTranslatorClientID { get; set; }
 
 		[Outlet]
@@ -65,6 +74,16 @@ namespace See4Me
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (ButtonAbout != null) {
+				ButtonAbout.Dispose ();
+				ButtonAbout = null;
+			}
+
+			if (ButtonPrivacy != null) {
+				ButtonPrivacy.Dispose ();
+				ButtonPrivacy = null;
+			}
+
 			if (LabelEmotionSubscriptionKey != null) {
 				LabelEmotionSubscriptionKey.Dispose ();
 				LabelEmotionSubscriptionKey = null;
@@ -83,6 +102,26 @@ namespace See4Me
 			if (LabelVisionSubscriptionKey != null) {
 				LabelVisionSubscriptionKey.Dispose ();
 				LabelVisionSubscriptionKey = null;
+			}
+
+			if (LinkActivateTranslatorService != null) {
+				LinkActivateTranslatorService.Dispose ();
+				LinkActivateTranslatorService = null;
+			}
+
+			if (LinkCreateAnApp != null) {
+				LinkCreateAnApp.Dispose ();
+				LinkCreateAnApp = null;
+			}
+
+			if (LinkSubscribeEmotion != null) {
+				LinkSubscribeEmotion.Dispose ();
+				LinkSubscribeEmotion = null;
+			}
+
+			if (LinkSubscribeVision != null) {
+				LinkSubscribeVision.Dispose ();
+				LinkSubscribeVision = null;
 			}
 
 			if (SwitchShowDescriptionConfidence != null) {
@@ -120,34 +159,19 @@ namespace See4Me
 				TextVisionSubscriptionKey = null;
 			}
 
-			if (ButtonAbout != null) {
-				ButtonAbout.Dispose ();
-				ButtonAbout = null;
+			if (LabelTextToSpeech != null) {
+				LabelTextToSpeech.Dispose ();
+				LabelTextToSpeech = null;
 			}
 
-			if (ButtonPrivacy != null) {
-				ButtonPrivacy.Dispose ();
-				ButtonPrivacy = null;
+			if (LabelShowDescriptionConfidence != null) {
+				LabelShowDescriptionConfidence.Dispose ();
+				LabelShowDescriptionConfidence = null;
 			}
 
-			if (LinkSubscribeEmotion != null) {
-				LinkSubscribeEmotion.Dispose ();
-				LinkSubscribeEmotion = null;
-			}
-
-			if (LinkSubscribeVision != null) {
-				LinkSubscribeVision.Dispose ();
-				LinkSubscribeVision = null;
-			}
-
-			if (LinkCreateAnApp != null) {
-				LinkCreateAnApp.Dispose ();
-				LinkCreateAnApp = null;
-			}
-
-			if (LinkActivateTranslatorService != null) {
-				LinkActivateTranslatorService.Dispose ();
-				LinkActivateTranslatorService = null;
+			if (LabelShowOriginalDescription != null) {
+				LabelShowOriginalDescription.Dispose ();
+				LabelShowOriginalDescription = null;
 			}
 		}
 	}
