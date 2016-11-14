@@ -31,25 +31,19 @@ namespace See4Me
 		UIKit.UILabel LabelTextToSpeech { get; set; }
 
 		[Outlet]
-		UIKit.UILabel LabelTranslatorClientID { get; set; }
-
-		[Outlet]
-		UIKit.UILabel LabelTranslatorClientSecret { get; set; }
+		UIKit.UILabel LabelTranslatorSubscriptionKey { get; set; }
 
 		[Outlet]
 		UIKit.UILabel LabelVisionSubscriptionKey { get; set; }
-
-		[Outlet]
-		UIKit.UILabel LinkActivateTranslatorService { get; set; }
-
-		[Outlet]
-		UIKit.UILabel LinkCreateAnApp { get; set; }
 
 		[Outlet]
 		UIKit.UILabel LinkSubscribeEmotion { get; set; }
 
 		[Outlet]
 		UIKit.UILabel LinkSubscribeVision { get; set; }
+
+		[Outlet]
+		UIKit.UILabel LinkTranslatorSubscriptionKey { get; set; }
 
 		[Outlet]
 		UIKit.UISwitch SwitchShowDescriptionConfidence { get; set; }
@@ -64,10 +58,7 @@ namespace See4Me
 		UIKit.UITextField TextEmotionSubscriptionKey { get; set; }
 
 		[Outlet]
-		UIKit.UITextField TextTranslatorClientID { get; set; }
-
-		[Outlet]
-		UIKit.UITextField TextTranslatorClientSecret { get; set; }
+		UIKit.UITextField TextTranslatorSubscriptionKey { get; set; }
 
 		[Outlet]
 		UIKit.UITextField TextVisionSubscriptionKey { get; set; }
@@ -89,14 +80,24 @@ namespace See4Me
 				LabelEmotionSubscriptionKey = null;
 			}
 
-			if (LabelTranslatorClientID != null) {
-				LabelTranslatorClientID.Dispose ();
-				LabelTranslatorClientID = null;
+			if (LabelShowDescriptionConfidence != null) {
+				LabelShowDescriptionConfidence.Dispose ();
+				LabelShowDescriptionConfidence = null;
 			}
 
-			if (LabelTranslatorClientSecret != null) {
-				LabelTranslatorClientSecret.Dispose ();
-				LabelTranslatorClientSecret = null;
+			if (LabelShowOriginalDescription != null) {
+				LabelShowOriginalDescription.Dispose ();
+				LabelShowOriginalDescription = null;
+			}
+
+			if (LabelTextToSpeech != null) {
+				LabelTextToSpeech.Dispose ();
+				LabelTextToSpeech = null;
+			}
+
+			if (LabelTranslatorSubscriptionKey != null) {
+				LabelTranslatorSubscriptionKey.Dispose ();
+				LabelTranslatorSubscriptionKey = null;
 			}
 
 			if (LabelVisionSubscriptionKey != null) {
@@ -104,14 +105,9 @@ namespace See4Me
 				LabelVisionSubscriptionKey = null;
 			}
 
-			if (LinkActivateTranslatorService != null) {
-				LinkActivateTranslatorService.Dispose ();
-				LinkActivateTranslatorService = null;
-			}
-
-			if (LinkCreateAnApp != null) {
-				LinkCreateAnApp.Dispose ();
-				LinkCreateAnApp = null;
+			if (LinkTranslatorSubscriptionKey != null) {
+				LinkTranslatorSubscriptionKey.Dispose ();
+				LinkTranslatorSubscriptionKey = null;
 			}
 
 			if (LinkSubscribeEmotion != null) {
@@ -144,34 +140,14 @@ namespace See4Me
 				TextEmotionSubscriptionKey = null;
 			}
 
-			if (TextTranslatorClientID != null) {
-				TextTranslatorClientID.Dispose ();
-				TextTranslatorClientID = null;
-			}
-
-			if (TextTranslatorClientSecret != null) {
-				TextTranslatorClientSecret.Dispose ();
-				TextTranslatorClientSecret = null;
+			if (TextTranslatorSubscriptionKey != null) {
+				TextTranslatorSubscriptionKey.Dispose ();
+				TextTranslatorSubscriptionKey = null;
 			}
 
 			if (TextVisionSubscriptionKey != null) {
 				TextVisionSubscriptionKey.Dispose ();
 				TextVisionSubscriptionKey = null;
-			}
-
-			if (LabelTextToSpeech != null) {
-				LabelTextToSpeech.Dispose ();
-				LabelTextToSpeech = null;
-			}
-
-			if (LabelShowDescriptionConfidence != null) {
-				LabelShowDescriptionConfidence.Dispose ();
-				LabelShowDescriptionConfidence = null;
-			}
-
-			if (LabelShowOriginalDescription != null) {
-				LabelShowOriginalDescription.Dispose ();
-				LabelShowOriginalDescription = null;
 			}
 		}
 	}
