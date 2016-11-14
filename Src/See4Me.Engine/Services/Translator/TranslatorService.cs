@@ -12,10 +12,10 @@ namespace See4Me.Engine.Services.Translator
     /// The <strong>TranslatorService</strong> class provides methods to translate text in various supported languages.
     /// </summary>
     /// <remarks>
-    /// <para>To use this library, you must register Microsoft Translator on https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/TextTranslation to obtain the Subscription key.</para>
+    /// <para>To use this library, you must register Microsoft Translator on https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/TextTranslation to obtain the Subscription key.
     /// </para>
     /// </remarks>
-    public sealed class TranslatorService : ITranslatorService
+    public sealed class TranslatorService : ITranslatorService, IDisposable
     {
         private const string BASE_URL = "http://api.microsofttranslator.com/v2/Http.svc/";
         private const string LANGUAGES_URI = "GetLanguagesForTranslate";
@@ -26,9 +26,9 @@ namespace See4Me.Engine.Services.Translator
         private const int MAX_TEXT_LENGTH = 1000;
         private const int MAX_TEXT_LENGTH_FOR_AUTODETECTION = 100;
 
-        private AzureAuthToken authToken;
+        private readonly AzureAuthToken authToken;
+        private readonly HttpClient client;
         private string authorizationHeaderValue = string.Empty;
-        private HttpClient client;
 
         #region Properties
 
@@ -41,7 +41,7 @@ namespace See4Me.Engine.Services.Translator
         /// </remarks>
         public string SubscriptionKey
         {
-            get { return authToken?.SubscriptionKey; }
+            get { return authToken.SubscriptionKey; }
             set { authToken.SubscriptionKey = value; }
         }
 
@@ -249,6 +249,20 @@ namespace See4Me.Engine.Services.Translator
             catch { }
         }
 
+        /// <summary>
+        /// Initializes the <see cref="TranslatorService"/> class by getting an access token for the service.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> that represents the initialize operation.</returns>
+        /// <remarks>Calling this method isn't mandatory, because the token is get/refreshed everytime is needed. However, it is called at startup, it can speed-up subsequest requests.</remarks>
         public Task InitializeAsync() => this.CheckUpdateTokenAsync();
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            authToken.Dispose();
+            client.Dispose();
+        }
     }
 }

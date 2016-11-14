@@ -44,13 +44,16 @@ namespace See4Me.Engine.Services.Translator
             }
         }
 
+        private readonly HttpClient client;
+
         /// <summary>
         /// Creates a client to obtain an access token.
         /// </summary>
         /// <param name="key">Subscription key to use to get an authentication token.</param>
         public AzureAuthToken(string key)
         {
-            this.SubscriptionKey = key;
+            SubscriptionKey = key;
+            client = new HttpClient();
         }
 
         /// <summary>
@@ -73,25 +76,27 @@ namespace See4Me.Engine.Services.Translator
             if ((DateTime.Now - storedTokenTime) < TokenCacheDuration && !string.IsNullOrWhiteSpace(storedTokenValue))
                 return storedTokenValue;
 
-            using (var client = new HttpClient())
+            using (var request = new HttpRequestMessage())
             {
-                using (var request = new HttpRequestMessage())
-                {
-                    request.Method = HttpMethod.Post;
-                    request.RequestUri = ServiceUrl;
-                    request.Content = new StringContent(string.Empty);
-                    request.Headers.TryAddWithoutValidation(OcpApimSubscriptionKeyHeader, this.SubscriptionKey);
+                request.Method = HttpMethod.Post;
+                request.RequestUri = ServiceUrl;
+                request.Content = new StringContent(string.Empty);
+                request.Headers.TryAddWithoutValidation(OcpApimSubscriptionKeyHeader, this.SubscriptionKey);
 
-                    var response = await client.SendAsync(request).ConfigureAwait(false);
-                    response.EnsureSuccessStatusCode();
+                var response = await client.SendAsync(request).ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
 
-                    var token = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    storedTokenTime = DateTime.Now;
-                    storedTokenValue = $"Bearer {token}";
+                var token = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                storedTokenTime = DateTime.Now;
+                storedTokenValue = $"Bearer {token}";
 
-                    return storedTokenValue;
-                }
+                return storedTokenValue;
             }
+        }
+
+        public void Dispose()
+        {
+            client.Dispose();
         }
     }
 }
