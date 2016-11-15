@@ -3,7 +3,6 @@ using GalaSoft.MvvmLight.Messaging;
 using Microsoft.ProjectOxford.Vision;
 using See4Me.Common;
 using See4Me.Services;
-using See4Me.Services.Translator;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -18,12 +17,10 @@ namespace See4Me.ViewModels
     public partial class SettingsViewModel : ViewModelBase
     {
         private const string SHOW_DESCRIPTION_CONFIDENCE = "ShowDescriptionConfidence";
-        private const string GUESS_AGE = "GuessAge";
         private const string SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION = "ShowOriginalDescriptionOnTranslation";
         private const string VISION_SUBSCRIPTION_KEY = "VisionSubscriptionKey";
         private const string EMOTION_SUBSCRIPTION_KEY = "EmotionSubscriptionKey";
-        private const string TRANSLATOR_CLIENT_ID = "TranslatorClientId";
-        private const string TRANSLATOR_CLIENT_SECRET = "TranslatorClientSecret";
+        private const string TRANSLATOR_SUBSCRIPTION_KEY = "TranslatorSubscriptionKey";
         private const string IS_TEXT_TO_SPEECH_ENABLED = "IsTextToSpeechEnabled";
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -53,12 +50,10 @@ namespace See4Me.ViewModels
             if (suspending)
             {
                 state[SHOW_DESCRIPTION_CONFIDENCE] = showDescriptionConfidence;
-                state[GUESS_AGE] = guessAge;
                 state[SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION] = showOriginalDescriptionOnTranslation;
                 state[VISION_SUBSCRIPTION_KEY] = visionSubscriptionKey;
                 state[EMOTION_SUBSCRIPTION_KEY] = emotionSubscriptionKey;
-                state[TRANSLATOR_CLIENT_ID] = translatorClientId;
-                state[TRANSLATOR_CLIENT_SECRET] = translatorClientSecret;
+                state[TRANSLATOR_SUBSCRIPTION_KEY] = translatorSubscriptionKey;
                 state[IS_TEXT_TO_SPEECH_ENABLED] = isTextToSpeechEnabled;
             }
 
@@ -68,12 +63,10 @@ namespace See4Me.ViewModels
         private void Restore(IDictionary<string, object> state)
         {
             showDescriptionConfidence = Convert.ToBoolean(state[SHOW_DESCRIPTION_CONFIDENCE]);
-            guessAge = Convert.ToBoolean(state[GUESS_AGE]);
             showOriginalDescriptionOnTranslation = Convert.ToBoolean(state[SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION]);
             visionSubscriptionKey = state[VISION_SUBSCRIPTION_KEY].ToString();
             emotionSubscriptionKey = state[EMOTION_SUBSCRIPTION_KEY].ToString();
-            translatorClientId = state[TRANSLATOR_CLIENT_ID].ToString();
-            translatorClientSecret = state[TRANSLATOR_CLIENT_SECRET].ToString();
+            translatorSubscriptionKey = state[TRANSLATOR_SUBSCRIPTION_KEY].ToString();
             isTextToSpeechEnabled = Convert.ToBoolean(state[IS_TEXT_TO_SPEECH_ENABLED]);
         }
     }

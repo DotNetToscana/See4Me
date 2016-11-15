@@ -69,7 +69,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.ProjectOxford.Emotion, Version=1.0.331.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.ProjectOxford.Emotion.1.0.331\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Microsoft.ProjectOxford.Emotion.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.ProjectOxford.Emotion.1.0.331.1\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Microsoft.ProjectOxford.Emotion.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.ProjectOxford.Vision, Version=1.0.370.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -159,6 +159,10 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\See4Me.Engine\See4Me.Engine.csproj">
+      <Project>{995009d6-ade7-4102-b6a6-1ab667cbe848}</Project>
+      <Name>See4Me.Engine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\See4Me.Localization\See4Me.Localization.csproj">
       <Project>{10463b05-995d-4730-b617-d2ca57d95c65}</Project>
       <Name>See4Me.Localization</Name>
@@ -178,6 +182,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\roundedbutton.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Values-it\AppResources.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\AppResources.xml" />
   </ItemGroup>
   <Import Project="..\See4Me.Shared\See4Me.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

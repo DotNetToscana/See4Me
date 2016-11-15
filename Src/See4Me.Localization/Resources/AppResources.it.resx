@@ -123,9 +123,6 @@
   <data name="AboutCommand" xml:space="preserve">
     <value>Informazioni su...</value>
   </data>
-  <data name="ActivateTranslatorService" xml:space="preserve">
-    <value>Attiva il servizio Translator</value>
-  </data>
   <data name="AngerFemale" xml:space="preserve">
     <value>Arrabbiata</value>
   </data>
@@ -162,9 +159,6 @@
   <data name="ContemptMale" xml:space="preserve">
     <value>Mostrare disprezzo</value>
   </data>
-  <data name="CreateTranslatorApp" xml:space="preserve">
-    <value>Crea un'app per ottenere le chiavi</value>
-  </data>
   <data name="DisgustFemale" xml:space="preserve">
     <value>Disgustata</value>
   </data>
@@ -194,9 +188,6 @@
   </data>
   <data name="GotoGitHub" xml:space="preserve">
     <value>Segui il progetto su GitHub</value>
-  </data>
-  <data name="GuessAgeOption" xml:space="preserve">
-    <value>Prova a determinare l'età quando viene riconosciuta una persona</value>
   </data>
   <data name="HappinessFemale" xml:space="preserve">
     <value>Felice</value>
@@ -246,13 +237,7 @@
   <data name="PersonAgeMessageMale" xml:space="preserve">
     <value>Un {0} di {1} anni</value>
   </data>
-  <data name="PersonMessageFemale" xml:space="preserve">
-    <value>Una {0}</value>
-  </data>
-  <data name="PersonMessageMale" xml:space="preserve">
-    <value>Un {0}</value>
-  </data>
-  <data name="ProjectAuthor" xml:space="preserve">
+  <data name="WindowsProjectAuthor" xml:space="preserve">
     <value>Sviluppato da Marco Minerva - MVP Windows Development</value>
   </data>
   <data name="QueryingVisionService" xml:space="preserve">
@@ -318,11 +303,8 @@
   <data name="Translating" xml:space="preserve">
     <value>Traduzione...</value>
   </data>
-  <data name="TranslatorClientId" xml:space="preserve">
-    <value>Client ID Translator</value>
-  </data>
-  <data name="TranslatorClientSecret" xml:space="preserve">
-    <value>Client Secret Translator</value>
+  <data name="TranslatorSubscriptionKey" xml:space="preserve">
+    <value>Chiave di sottoscrizione servizio Translator</value>
   </data>
   <data name="Twitter" xml:space="preserve">
     <value>Twitter:</value>
@@ -362,5 +344,17 @@
   </data>
   <data name="PoweredByCognitiveServices" xml:space="preserve">
     <value>Powered by Microsoft’s Cognitive Services:</value>
+  </data>
+  <data name="RecognizingText" xml:space="preserve">
+    <value>Riconoscimento del testo...</value>
+  </data>
+  <data name="AndroidProjectAuthor" xml:space="preserve">
+    <value>Sviluppato da Marco Minerva - MVP Windows Development</value>
+  </data>
+  <data name="iOSProjectAuthor" xml:space="preserve">
+    <value>Sviluppato da Riccardo Cappello</value>
+  </data>
+  <data name="SubscribeTranslatorService" xml:space="preserve">
+    <value>Registrati per ottenere la chiave</value>
   </data>
 </root>

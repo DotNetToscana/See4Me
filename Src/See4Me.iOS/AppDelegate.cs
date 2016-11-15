@@ -22,6 +22,11 @@ namespace See4Me.iOS
         {
             this.Initialize(application);
 
+			//Uncomment the 3 rows below to enforce English
+			//var ci = new System.Globalization.CultureInfo("en");
+			//System.Threading.Thread.CurrentThread.CurrentCulture = ci;
+			//System.Threading.Thread.CurrentThread.CurrentUICulture = ci;
+
             return true;
         }
 

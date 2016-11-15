@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace See4Me.Services.ServiceSettings
+namespace See4Me.Engine.Services.ServiceSettings
 {
     public class VisionSettings
     {

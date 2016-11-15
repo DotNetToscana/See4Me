@@ -8,8 +8,6 @@
 
         bool ShowExceptionOnError { get; set; }
 
-        bool GuessAge { get; set; }
-
         bool ShowOriginalDescriptionOnTranslation { get; set; }
 
         bool ShowRawDescriptionOnInvalidRecognition { get; set; }
@@ -18,9 +16,7 @@
 
         string EmotionSubscriptionKey { get; set; }
 
-        string TranslatorClientId { get; set; }
-
-        string TranslatorClientSecret { get; set; }
+        string TranslatorSubscriptionKey { get; set; }
 
         bool IsTextToSpeechEnabled { get; set; }
 
