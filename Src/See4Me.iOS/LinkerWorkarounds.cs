@@ -10,6 +10,7 @@ namespace See4Me
 		public static void KeepTheseMethods()
 		{
 			default(UITextField).Text = "";
+			default(UISwitch).Selected = true;
 			throw new Exception("Don't actually call this!");
 		}
 	}

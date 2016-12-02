@@ -37,6 +37,16 @@ namespace See4Me
 
 			return control;
 		}
+
+		public static UITextField DismissKeyboardOnReturn(this UITextField control)
+		{
+			control.ShouldReturn += (textField) =>
+			{
+				textField.ResignFirstResponder();
+				return true;
+			};
+			return control;
+		}
 	}
 
 	public static class Events
