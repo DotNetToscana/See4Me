@@ -40,7 +40,7 @@ namespace See4Me.Services
             {
                 if (IsConnected)
                 {
-                    var isReachable = await CrossConnectivity.Current.IsRemoteReachable(CONNECTION_TEST_URL, msTimeout: CONNECTION_TEST_TIMEOUT_MILLISECONDS);
+                    var isReachable = await connectionManager.IsRemoteReachable(CONNECTION_TEST_URL, msTimeout: CONNECTION_TEST_TIMEOUT_MILLISECONDS);
                     return isReachable;
                 }
             }
