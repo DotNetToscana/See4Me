@@ -5,7 +5,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Net;
 
-namespace See4Me.Engine.Services.Translator
+namespace See4Me.Engine.Services.TranslatorService
 {
     /// <summary>
     /// Client to call Cognitive Services Azure Auth Token service in order to get an access token.

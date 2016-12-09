@@ -17,11 +17,8 @@
         <Grid>
             <Grid>
                 <CaptureElement x:Name="video" Stretch="UniformToFill" />
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="12">
-                    <Border Background="Black" Opacity="0.1" />
-                    <TextBlock Text="{Binding StatusMessage}" Style="{StaticResource SubheaderTextBlockStyle}" TextAlignment="Center"
-                               Margin="5" TextWrapping="Wrap" />
-                </Grid>
+                <TextBlock Text="{Binding StatusMessage}" Style="{StaticResource SubheaderTextBlockStyle}" TextAlignment="Center"
+                               VerticalAlignment="Bottom" Margin="12" TextWrapping="Wrap" />
 
                 <Image x:Name="previewImage" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Opacity="0.75" />
             </Grid>
