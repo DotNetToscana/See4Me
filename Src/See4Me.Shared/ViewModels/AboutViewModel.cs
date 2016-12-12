@@ -5,7 +5,6 @@ using Microsoft.ProjectOxford.Vision;
 using See4Me.Common;
 using See4Me.Localization.Resources;
 using See4Me.Services;
-using See4Me.Services.Translator;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,11 +26,11 @@ namespace See4Me.ViewModels
         private readonly ILauncherService launcherService;
         private readonly IAppService appService;
 
-        public string BlogUrl => Constants.BlogUrl;
+        public string BlogUrl => appService.BlogUrl;
 
-        public string TwitterUrl => Constants.TwitterUrl;
+        public string TwitterUrl => appService.TwitterUrl;
 
-        public string LinkedInUrl => Constants.LinkedInUrl;
+        public string LinkedInUrl => appService.LinkedInUrl;
 
         public string CognitiveServicesUrl => Constants.CognitiveServicesUrl;
 
@@ -42,6 +41,8 @@ namespace See4Me.ViewModels
         public AutoRelayCommand<string> GotoUrlCommand { get; set; }
 
         public string AppVersion => appService.Version;
+
+        public string ProjectAuthor => appService.Author;
 
         public AboutViewModel(ILauncherService launcherService, IAppService appService)
         {

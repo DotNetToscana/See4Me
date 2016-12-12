@@ -16,17 +16,11 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid>
             <Grid>
-                <CaptureElement x:Name="video" Stretch="UniformToFill" Margin="0" />
+                <CaptureElement x:Name="video" Stretch="UniformToFill" />
                 <TextBlock Text="{Binding StatusMessage}" Style="{StaticResource SubheaderTextBlockStyle}" TextAlignment="Center"
-                       HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="12" TextWrapping="Wrap" />
+                               VerticalAlignment="Bottom" Margin="12" TextWrapping="Wrap" />
 
                 <Image x:Name="previewImage" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Opacity="0.75" />
-
-                <!--<Interactivity:Interaction.Behaviors>
-                    <Interactions:EventTriggerBehavior EventName="Tapped">
-                        <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}"  />
-                    </Interactions:EventTriggerBehavior>
-                </Interactivity:Interaction.Behaviors>-->
             </Grid>
 
             <Button x:Name="changeCameraButton" Style="{StaticResource CircleButton}" VerticalAlignment="Top" HorizontalAlignment="Center"
@@ -56,10 +50,10 @@
 
         <Interactivity:Interaction.Behaviors>
             <behaviors:CameraPressedBehavior>
-                <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}"  />
+                <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}" />
             </behaviors:CameraPressedBehavior>
             <behaviors:PushButtonPressedBehavior PinNumber="27" ButtonType="PullDown">
-                <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}"  />
+                <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}" />
             </behaviors:PushButtonPressedBehavior>
         </Interactivity:Interaction.Behaviors>
 

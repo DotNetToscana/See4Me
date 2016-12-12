@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.ServiceLocation;
 using Microsoft.ProjectOxford.Vision.Contract;
+using See4Me.Engine;
 using See4Me.Localization.Resources;
 using See4Me.Services;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace See4Me.Extensions
+namespace See4Me.Services
 {
     public static class SpeechHelper
     {
@@ -21,29 +22,18 @@ namespace See4Me.Extensions
             speechService = ServiceLocator.Current.GetInstance<ISpeechService>();
         }
 
-        public static string GetEmotionMessage(Face face, string bestEmotion, bool includeAge)
+        public static string GetEmotionMessage(Gender gender, int age, Emotion bestEmotion)
         {
-            //if (bestEmotion == null && !includeAge)
-            //{
-            //    // If no emotion recognized and we don't want to speech age, we actually don't have anything.
-            //    return null;
-            //}
-
             // Creates the emotion description text to be speeched.
-            string personAgeMessage = null;
             string emotionMessage = null;
 
-            var ageDescription = GetAgeDescription(face);
+            var ageDescription = GetAgeDescription(age, gender);
+            var personAgeMessage = string.Format(GetString(Constants.PersonAgeMessage, gender), ageDescription, age);
 
-            if (includeAge)
-                personAgeMessage = string.Format(GetString(Constants.PersonAgeMessage, face.Gender), ageDescription, face.Age);
-            else
-                personAgeMessage = string.Format(GetString(Constants.PersonMessage, face.Gender), ageDescription);
-
-            if (bestEmotion != null)
+            if (bestEmotion != Emotion.Neutral)
             {
-                var emotion = GetString(bestEmotion, face.Gender);
-                var lookingMessage = string.Format(GetString(Constants.LookingMessage, face.Gender), emotion);
+                var emotion = GetString(bestEmotion.ToString(), gender);
+                var lookingMessage = string.Format(GetString(Constants.LookingMessage, gender), emotion);
                 emotionMessage = $"{personAgeMessage} {lookingMessage}";
             }
             else
@@ -56,23 +46,23 @@ namespace See4Me.Extensions
             return emotionMessage;
         }
 
-        private static string GetAgeDescription(Face face)
+        private static string GetAgeDescription(int age, Gender gender)
         {
             string key = null;
 
-            if (face.Age <= 13)
+            if (age <= 13)
                 key = Constants.Child;
-            else if (face.Age >= 14 && face.Age <= 29)
+            else if (age >= 14 && age <= 29)
                 key = Constants.Boy;
             else
                 key = Constants.Man;
 
-            var ageDescription = GetString(key, face.Gender);
+            var ageDescription = GetString(key, gender);
             return ageDescription;
         }
 
-        private static string GetString(string key, string gender)
-            => AppResources.ResourceManager.GetString(key + gender);
+        private static string GetString(string key, Gender gender)
+            => AppResources.ResourceManager.GetString(key + gender.ToString());
 
         public static async Task TrySpeechAsync(string message)
         {

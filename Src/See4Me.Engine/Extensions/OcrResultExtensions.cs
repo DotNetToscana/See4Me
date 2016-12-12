@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace See4Me.Extensions
+namespace See4Me.Engine.Extensions
 {
-    public static class OcrResultExtensions
+    internal static class OcrResultExtensions
     {
         public static string GetRecognizedText(this OcrResults results)
         {

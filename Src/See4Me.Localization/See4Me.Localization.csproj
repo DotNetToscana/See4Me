@@ -68,7 +68,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.Designer.cs</LastGenOutput> 
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
       <LogicalName>See4Me.AppResources.resources</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
@@ -79,6 +79,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Resx2Others.log</LastGenOutput>
       <LastOutputs>
+..\..\See4Me.Android\Resources\Values\AppResources.xml
+..\..\See4Me.Android\Resources\Values-it\AppResources.xml
+..\..\See4Me.iOS\en.lproj\Localizable.strings
+..\..\See4Me.iOS\it.lproj\Localizable.strings
 .\Resx2Others.log
 .\Strings.cs
 </LastOutputs>

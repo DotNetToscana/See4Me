@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xaml.Interactivity;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Markup;
@@ -14,7 +16,7 @@ namespace See4Me.Behaviors
         /// <summary>
         /// Identifies the <seealso cref="Actions"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty ActionsProperty = DependencyProperty.Register(
             "Actions",
             typeof(ActionCollection),
@@ -39,7 +41,7 @@ namespace See4Me.Behaviors
             }
         }
 
-        [System.Runtime.CompilerServices.PlatformSpecific]
+        [PlatformSpecific]
         private readonly bool isTypePresent;
 
         public CameraPressedBehavior()
@@ -77,6 +79,6 @@ namespace See4Me.Behaviors
         private void OnEvent(object sender, object eventArgs)
         {
             Interaction.ExecuteActions(this, this.Actions, eventArgs);
-        }       
+        }
     }
 }

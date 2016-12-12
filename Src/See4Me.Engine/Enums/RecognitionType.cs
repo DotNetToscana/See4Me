@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace See4Me.Services.ServiceSettings
+namespace See4Me.Engine
 {
-    public interface IVisionSettingsProvider
+    [Flags]
+    public enum RecognitionType
     {
-        Task<VisionSettings> GetSettingsAsync();
+        Vision = 1,
+        Emotion = 2,
+        Text = 4
     }
 }

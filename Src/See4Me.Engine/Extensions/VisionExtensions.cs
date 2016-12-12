@@ -6,30 +6,14 @@ using System.Linq;
 using System.Reflection;
 using System.IO;
 using Newtonsoft.Json;
-using See4Me.Services.ServiceSettings;
 using System.Threading.Tasks;
-using Microsoft.Practices.ServiceLocation;
+using See4Me.Engine.Services.ServiceSettings;
 
-namespace See4Me.Extensions
+namespace See4Me.Engine.Extensions
 {
-    public static class VisionExtensions
+    internal static class VisionExtensions
     {
-        private static VisionSettings settings;
-
-        public static async Task InitializeAsync()
-        {
-            try
-            {
-                if (settings == null)
-                {
-                    var settingsProvider = ServiceLocator.Current.GetInstance<IVisionSettingsProvider>();
-                    settings = await settingsProvider.GetSettingsAsync();
-                }
-            }
-            catch { }
-        }
-
-        public static bool IsValid(this AnalysisResult result, out Caption rawDescription, out Caption filteredDescription)
+        public static bool IsValid(this AnalysisResult result, out Caption rawDescription, out Caption filteredDescription, VisionSettings settings = null)
         {
             rawDescription = result.Description.Captions.FirstOrDefault();
             filteredDescription = null;

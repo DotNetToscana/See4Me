@@ -1,5 +1,6 @@
 ﻿using Foundation;
 using GalaSoft.MvvmLight.Threading;
+using See4Me.Services;
 using See4Me.ViewModels;
 using UIKit;
 
@@ -13,27 +14,40 @@ namespace See4Me.iOS
     {
         // class-level declarations
         public ViewModelLocator Locator { get; private set; }
-
-        public override UIWindow Window
-        {
-            get;
-            set;
-        }
+		public override UIWindow Window { get; set; }
+		public static UIStoryboard Storyboard = UIStoryboard.FromName("Main", null);
+		public static UINavigationController initialController;
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             this.Initialize(application);
+
+			//Uncomment the 3 rows below to enforce English
+			//var ci = new System.Globalization.CultureInfo("en");
+			//System.Threading.Thread.CurrentThread.CurrentCulture = ci;
+			//System.Threading.Thread.CurrentThread.CurrentUICulture = ci;
 
             return true;
         }
 
         private void Initialize(UIApplication application)
         {
+			this.Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
             var navigationService = new See4Me.Services.NavigationService();
 
             this.Locator = new ViewModelLocator();
             this.Locator.Initialize(navigationService);
 
+			initialController = Storyboard.InstantiateInitialViewController() as UINavigationController;
+			navigationService.Initialize(initialController);
+			navigationService.Configure(Pages.MainPage.ToString(), Pages.MainPage.ToString());
+			navigationService.Configure(Pages.SettingsPage.ToString(), Pages.SettingsPage.ToString());
+			navigationService.Configure(Pages.AboutPage.ToString(), Pages.AboutPage.ToString());
+			navigationService.Configure(Pages.PrivacyPolicyPage.ToString(), Pages.PrivacyPolicyPage.ToString());
+
+			Window.RootViewController = initialController;
+			Window.MakeKeyAndVisible();
             // MVVM Light's DispatcherHelper for cross-thread handling.
             DispatcherHelper.Initialize(application);
         }
