@@ -177,6 +177,11 @@
     <Compile Include="ViewControllers\PrivacyPolicyViewController.designer.cs">
       <DependentUpon>PrivacyPolicyViewController.cs</DependentUpon>
     </Compile>
+    <BundleResource Include="Resources\Icon-60.png" />
+    <BundleResource Include="Resources\Icon-60%403x.png" />
+    <BundleResource Include="Resources\Icon-83.5%402x.png" />
+    <BundleResource Include="Resources\Icon-Small-40%403x.png" />
+    <BundleResource Include="Resources\Icon-Small%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\StreamingService.cs" />
@@ -277,6 +282,10 @@
       <Project>{10463b05-995d-4730-b617-d2ca57d95c65}</Project>
       <Name>See4Me.Localization</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="Resources\iTunesArtwork.png" />
+    <ITunesArtwork Include="Resources\iTunesArtwork%402x.png" />
   </ItemGroup>
   <Import Project="..\See4Me.Shared\See4Me.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

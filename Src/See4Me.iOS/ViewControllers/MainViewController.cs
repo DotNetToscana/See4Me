@@ -157,6 +157,13 @@ namespace See4Me.iOS
             await ViewModel.CheckShowConsentAsync();
 		}
 
+		public override void ViewWillAppear(bool animated)
+		{
+			MoveStatusMessageInTheRightPosition();
+
+			base.ViewWillAppear(animated);
+		}
+
 		public override void ViewDidAppear(bool animated)
 		{
 			var previewLayerConnection = previewLayer.Connection;
@@ -254,11 +261,16 @@ namespace See4Me.iOS
 			{
 				if (property.PropertyName == "StatusMessage")
 				{
-					var topCorrect = MessageText.Bounds.Height - MessageText.ContentSize.Height;
-					topCorrect = (topCorrect < 0.0f ? 0.0f : topCorrect);
-					MessageText.ContentOffset = new CGPoint(0, -topCorrect);
+					MoveStatusMessageInTheRightPosition();
 				}
 			});
         }
+
+		private void MoveStatusMessageInTheRightPosition()
+		{ 
+			var topCorrect = MessageText.Bounds.Height - MessageText.ContentSize.Height;
+			topCorrect = (topCorrect < 0.0f ? 0.0f : topCorrect);
+			MessageText.ContentOffset = new CGPoint(0, -topCorrect);
+		}
     }
 }

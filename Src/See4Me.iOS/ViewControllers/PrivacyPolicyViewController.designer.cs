@@ -12,9 +12,39 @@ namespace See4Me
 	[Register ("PrivacyPolicyViewController")]
 	partial class PrivacyPolicyViewController
 	{
+		[Outlet]
+		UIKit.UILabel LabelPageTitle { get; set; }
+
+		[Outlet]
+		UIKit.UITextView LabelPrivacyText { get; set; }
+
+		[Outlet]
+		UIKit.UILabel LinkHomePageCognitiveServices { get; set; }
+
+		[Outlet]
+		UIKit.UILabel LinkPrivacyPolicy { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (LabelPageTitle != null) {
+				LabelPageTitle.Dispose ();
+				LabelPageTitle = null;
+			}
+
+			if (LabelPrivacyText != null) {
+				LabelPrivacyText.Dispose ();
+				LabelPrivacyText = null;
+			}
+
+			if (LinkHomePageCognitiveServices != null) {
+				LinkHomePageCognitiveServices.Dispose ();
+				LinkHomePageCognitiveServices = null;
+			}
+
+			if (LinkPrivacyPolicy != null) {
+				LinkPrivacyPolicy.Dispose ();
+				LinkPrivacyPolicy = null;
+			}
 		}
 	}
 }
