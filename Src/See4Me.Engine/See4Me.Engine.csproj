@@ -49,9 +49,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ServiceSettings\IVisionSettingsProvider.cs" />
     <Compile Include="Services\ServiceSettings\VisionSettings.cs" />
-    <Compile Include="Services\Translator\AzureAuthToken.cs" />
-    <Compile Include="Services\Translator\ITranslatorService.cs" />
-    <Compile Include="Services\Translator\TranslatorService.cs" />
+    <Compile Include="Services\TranslatorService\AzureAuthToken.cs" />
+    <Compile Include="Services\TranslatorService\ITranslatorServiceClient.cs" />
+    <Compile Include="Services\TranslatorService\TranslatorServiceClient.cs" />
     <Compile Include="CognitiveSettings.cs" />
   </ItemGroup>
   <ItemGroup>

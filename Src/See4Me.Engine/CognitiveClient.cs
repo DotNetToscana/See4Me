@@ -3,7 +3,7 @@ using Microsoft.ProjectOxford.Vision;
 using Microsoft.ProjectOxford.Vision.Contract;
 using See4Me.Engine.Extensions;
 using See4Me.Engine.Services.ServiceSettings;
-using See4Me.Engine.Services.Translator;
+using See4Me.Engine.Services.TranslatorService;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,7 +19,7 @@ namespace See4Me.Engine
 
         public IVisionSettingsProvider VisionSettingsProvider { get; set; }
 
-        private ITranslatorService translatorService;
+        private ITranslatorServiceClient translatorService;
 
         private const string DefaultLanguge = "en";
 
@@ -32,7 +32,7 @@ namespace See4Me.Engine
         public CognitiveClient(IVisionSettingsProvider visionSettingsProvider = null)
         {
             VisionSettingsProvider = visionSettingsProvider;
-            translatorService = new TranslatorService();
+            translatorService = new TranslatorServiceClient();
         }
 
         public Task<CognitiveResult> RecognizeAsync(string language, byte[] buffer, RecognitionType recognitionType = RecognitionType.Vision | RecognitionType.Emotion, Func<RecognitionPhase, Task> onProgress = null)
@@ -40,10 +40,10 @@ namespace See4Me.Engine
 
         public async Task<CognitiveResult> RecognizeAsync(Stream stream, string language, RecognitionType recognitionType = RecognitionType.Vision | RecognitionType.Emotion, Func<RecognitionPhase, Task> onProgress = null)
         {
+            var result = new CognitiveResult();
             await this.RaiseOnProgressAsync(onProgress, RecognitionPhase.QueryingService);
 
             var visionService = new VisionServiceClient(Settings.VisionSubscriptionKey);
-            var result = new CognitiveResult();
 
             if (recognitionType.HasFlag(RecognitionType.Vision) || recognitionType.HasFlag(RecognitionType.Emotion))
             {
