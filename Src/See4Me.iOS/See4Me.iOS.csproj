@@ -60,7 +60,7 @@
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignKey>iPhone Developer: Marco Minerva (442NQ24348)</CodesignKey>
+    <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>True</MtouchDebug>
     <MtouchSdkVersion></MtouchSdkVersion>
     <MtouchLink>SdkOnly</MtouchLink>
@@ -73,7 +73,7 @@
     <OptimizePNGs>True</OptimizePNGs>
     <MtouchFloat32>False</MtouchFloat32>
     <DeviceSpecificBuild>False</DeviceSpecificBuild>
-    <CodesignProvision>150eb8f7-e41a-4b1b-ac4f-c6178c98c979</CodesignProvision>
+    <CodesignProvision>f21a5fef-56b6-426a-b983-bc5907b8f58d</CodesignProvision>
     <MtouchEnableBitcode>False</MtouchEnableBitcode>
     <MtouchTlsProvider>Legacy</MtouchTlsProvider>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
@@ -110,10 +110,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
-    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>Automatic:AppStore</CodesignProvision>
-    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignProvision>1089846a-2a8a-4aeb-99a3-2756856a79c5</CodesignProvision>
+    <CodesignKey>iPhone Distribution: Riccardo Cappello (P8ASPQMX34)</CodesignKey>
+    <MtouchTlsProvider>Legacy</MtouchTlsProvider>
   </PropertyGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon%402x.png" />

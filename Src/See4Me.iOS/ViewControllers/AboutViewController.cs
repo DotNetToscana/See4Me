@@ -41,6 +41,21 @@ namespace See4Me
 				this.SetBinding(() => ViewModel.CognitiveServicesUrl, () => LinkPoweredBy.Text, BindingMode.OneWay),
 			};
 
+			LinkBlog.UserInteractionEnabled = true;
+			LinkBlog.AddGestureRecognizer(new UITapGestureRecognizer(() =>
+			{
+				this.ViewModel.GotoUrlCommand.Execute(ViewModel.BlogUrl);
+			}));
+			LinkLinkedin.UserInteractionEnabled = true;
+			LinkLinkedin.AddGestureRecognizer(new UITapGestureRecognizer(() =>
+			{
+				this.ViewModel.GotoUrlCommand.Execute(ViewModel.LinkedInUrl);
+			}));
+			LinkTwitter.UserInteractionEnabled = true;
+			LinkTwitter.AddGestureRecognizer(new UITapGestureRecognizer(() =>
+			{
+				this.ViewModel.GotoUrlCommand.Execute(ViewModel.TwitterUrl);
+			}));
 			LinkPoweredBy.UserInteractionEnabled = true;
 			LinkPoweredBy.AddGestureRecognizer(new UITapGestureRecognizer(() =>
 			{
