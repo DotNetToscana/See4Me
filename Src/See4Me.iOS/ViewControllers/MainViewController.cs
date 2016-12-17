@@ -159,6 +159,14 @@ namespace See4Me.iOS
 
 		public override void ViewWillAppear(bool animated)
 		{
+			ViewModel.DescribeImageCommand.RaiseCanExecuteChanged();
+			ViewModel.SwapCameraCommand.RaiseCanExecuteChanged();
+			ViewModel.GotoRecognizeTextCommand.RaiseCanExecuteChanged();
+
+			if (MessageText.Text == AppResources.ServiceNotRegistered && 
+			    ViewModel.IsVisionServiceRegistered)
+				MessageText.Text = Strings.AppName.Localize();
+
 			MoveStatusMessageInTheRightPosition();
 
 			base.ViewWillAppear(animated);

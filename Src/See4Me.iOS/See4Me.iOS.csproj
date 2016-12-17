@@ -73,7 +73,7 @@
     <OptimizePNGs>True</OptimizePNGs>
     <MtouchFloat32>False</MtouchFloat32>
     <DeviceSpecificBuild>False</DeviceSpecificBuild>
-    <CodesignProvision>f21a5fef-56b6-426a-b983-bc5907b8f58d</CodesignProvision>
+    <CodesignProvision>3482537e-0af7-4b1c-8888-b727a5ba5215</CodesignProvision>
     <MtouchEnableBitcode>False</MtouchEnableBitcode>
     <MtouchTlsProvider>Legacy</MtouchTlsProvider>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
@@ -183,6 +183,7 @@
     <BundleResource Include="Resources\Icon-83.5%402x.png" />
     <BundleResource Include="Resources\Icon-Small-40%403x.png" />
     <BundleResource Include="Resources\Icon-Small%403x.png" />
+    <BundleResource Include="Resources\Images\Eye%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\StreamingService.cs" />
