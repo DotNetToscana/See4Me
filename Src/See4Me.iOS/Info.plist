@@ -5,22 +5,22 @@
 	<key>CFBundleDisplayName</key>
 	<string>See4Me</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.see4me.ios</string>
+	<string>com.riccardocappello.see4me</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.0.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>8.0</string>
+	<string>9.0</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
 		<integer>2</integer>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen.xib</string>
+	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -32,12 +32,11 @@
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
-		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIMainStoryboardFile~ipad</key>
-	<string>MainViewController</string>
+	<string>Main</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIStatusBarHidden</key>
@@ -57,10 +56,13 @@
 		<string>Icon-Small-40@2x.png</string>
 		<string>Icon-Small.png</string>
 		<string>Icon-Small@2x.png</string>
+		<string>Icon-83.5@2x.png</string>
 	</array>
 	<key>CFBundleName</key>
 	<string>See4Me</string>
 	<key>NSCameraUsageDescription</key>
 	<string></string>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 </dict>
 </plist>

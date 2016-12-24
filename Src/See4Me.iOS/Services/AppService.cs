@@ -31,7 +31,7 @@ namespace See4Me.Services
                 {
                     var build = NSBundle.MainBundle.InfoDictionary.ValueForKey(buildKey);
                     var version = NSBundle.MainBundle.InfoDictionary.ValueForKey(versionKey);
-                    return $"{version}.{build}";
+					return $"{version} (build {build})";
                 }
                 catch
                 {

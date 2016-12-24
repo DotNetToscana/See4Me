@@ -36,9 +36,9 @@ namespace See4Me
 				this.SetBinding(() => ViewModel.EmotionSubscriptionKey, () => TextEmotionSubscriptionKey.Text, BindingMode.TwoWay),
 				this.SetBinding(() => ViewModel.TranslatorSubscriptionKey, () => TextTranslatorSubscriptionKey.Text, BindingMode.TwoWay),
 
-				this.SetBinding(() => ViewModel.IsTextToSpeechEnabled, () => SwitchTextToSpeech.Selected, BindingMode.TwoWay),
-				this.SetBinding(() => ViewModel.ShowDescriptionConfidence, () => SwitchShowDescriptionConfidence.Selected, BindingMode.TwoWay),
-				this.SetBinding(() => ViewModel.ShowOriginalDescriptionOnTranslation, () => SwitchShowOriginalDescription.Selected, BindingMode.TwoWay),
+				this.SetBinding(() => ViewModel.IsTextToSpeechEnabled, () => SwitchTextToSpeech.On, BindingMode.TwoWay),
+				this.SetBinding(() => ViewModel.ShowDescriptionConfidence, () => SwitchShowDescriptionConfidence.On, BindingMode.TwoWay),
+				this.SetBinding(() => ViewModel.ShowOriginalDescriptionOnTranslation, () => SwitchShowOriginalDescription.On, BindingMode.TwoWay),
 			};
 
 			TextVisionSubscriptionKey.DismissKeyboardOnReturn();
@@ -71,9 +71,6 @@ namespace See4Me
 					this.ViewModel.Save();
 				})
 			, true);
-
-			ButtonAbout.Hidden = true;
-			ButtonPrivacy.Hidden = true;
 
 			//dismiss the keyboard if the user taps anywhere in the view
 			var g = new UITapGestureRecognizer(() => View.EndEditing(true));
