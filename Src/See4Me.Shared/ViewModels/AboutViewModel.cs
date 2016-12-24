@@ -56,7 +56,7 @@ namespace See4Me.ViewModels
         {
             GotoGitHubCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.GitHubProjectUrl));
             GotoUrlCommand = new AutoRelayCommand<string>((url) => launcherService.LaunchUriAsync(url));
-            GotoPrivacyPolicyCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.PrivacyPolicyPage.ToString()));
+            GotoPrivacyPolicyCommand = new AutoRelayCommand(() => AppNavigationService.NavigateTo(Pages.PrivacyPolicyPage.ToString()));
         }
     }
 }

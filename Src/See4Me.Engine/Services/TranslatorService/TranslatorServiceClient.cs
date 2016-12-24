@@ -9,13 +9,13 @@ using System.Xml.Linq;
 namespace See4Me.Engine.Services.TranslatorService
 {
     /// <summary>
-    /// The <strong>TranslatorService</strong> class provides methods to translate text in various supported languages.
+    /// The <strong>TranslatorServiceClient</strong> class provides methods to translate text to various supported languages.
     /// </summary>
     /// <remarks>
     /// <para>To use this library, you must register Microsoft Translator on https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/TextTranslation to obtain the Subscription key.
     /// </para>
     /// </remarks>
-    public sealed class TranslatorServiceClient : ITranslatorServiceClient, IDisposable
+    public class TranslatorServiceClient : ITranslatorServiceClient, IDisposable
     {
         private const string BASE_URL = "http://api.microsofttranslator.com/v2/Http.svc/";
         private const string LANGUAGES_URI = "GetLanguagesForTranslate";
@@ -46,16 +46,16 @@ namespace See4Me.Engine.Services.TranslatorService
         }
 
         /// <summary>
-        /// Gets or sets the string representing the supported language code to speak the text in.
+        /// Gets or sets the string representing the supported language code to translate the text to.
         /// </summary>
-        /// <value>The string representing the supported language code to speak the text in. The code must be present in the list of codes returned from the method <see cref="GetLanguagesAsync"/>.</value>
+        /// <value>The string representing the supported language code to translate the text to. The code must be present in the list of codes returned from the method <see cref="GetLanguagesAsync"/>.</value>
         /// <seealso cref="GetLanguagesAsync"/>
         public string Language { get; set; }
 
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <strong>TranslatorService</strong> class, using the specified Client ID and Client Secret and the current system language.
+        /// Initializes a new instance of the <see cref="TranslatorServiceClient"/> class, using the specified Subscription key and the current system language.
         /// </summary>
         /// <param name="subscriptionKey">The subscription key for the Microsoft Translator Service on Azure
         /// </param>
@@ -69,11 +69,11 @@ namespace See4Me.Engine.Services.TranslatorService
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <strong>TranslatorService</strong> class, using the specified Client ID and Client Secret and the desired language.
+        /// Initializes a new instance of the <see cref="TranslatorServiceClient"/> class, using the specified Subscription key and the desired language.
         /// </summary>
         /// <param name="subscriptionKey">The subscription key for the Microsoft Translator Service on Azure
         /// </param>
-        /// <param name="language">A string representing the supported language code to speak the text in. The code must be present in the list of codes returned from the method <see cref="GetLanguagesAsync"/>.</param>
+        /// <param name="language">A string representing the supported language code to translate the text to. The code must be present in the list of codes returned from the method <see cref="GetLanguagesAsync"/>.</param>
         /// <remarks>
         /// <para>You must register Microsoft Translator on https://portal.azure.com to obtain the Subscription key needed to use the service.</para>
         /// </remarks>
@@ -250,7 +250,7 @@ namespace See4Me.Engine.Services.TranslatorService
         }
 
         /// <summary>
-        /// Initializes the <see cref="TranslatorService"/> class by getting an access token for the service.
+        /// Initializes the <see cref="TranslatorServiceClient"/> class by getting an access token for the service.
         /// </summary>
         /// <returns>A <see cref="Task"/> that represents the initialize operation.</returns>
         /// <remarks>Calling this method isn't mandatory, because the token is get/refreshed everytime is needed. However, it is called at startup, it can speed-up subsequest requests.</remarks>

@@ -1,6 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
-using Microsoft.ProjectOxford.Vision;
+﻿using GalaSoft.MvvmLight.Messaging;
 using See4Me.Common;
 using See4Me.Localization.Resources;
 using See4Me.Services;
@@ -13,8 +11,6 @@ using System.IO;
 using System.Text;
 using System.Net;
 using See4Me.Engine;
-using Microsoft.Practices.ServiceLocation;
-using See4Me.Engine.Services.ServiceSettings;
 using See4Me.Extensions;
 
 namespace See4Me.ViewModels
@@ -62,9 +58,9 @@ namespace See4Me.ViewModels
             SwapCameraCommand = new AutoRelayCommand(async () => await SwapCameraAsync(), () => IsVisionServiceRegistered && !IsBusy)
                 .DependsOn(() => IsBusy);
 
-            GotoSettingsCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.SettingsPage.ToString()));
+            GotoSettingsCommand = new AutoRelayCommand(() => AppNavigationService.NavigateTo(Pages.SettingsPage.ToString()));
 
-            GotoRecognizeTextCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.RecognizeTextPage.ToString()), () => IsVisionServiceRegistered && !IsBusy)
+            GotoRecognizeTextCommand = new AutoRelayCommand(() => AppNavigationService.NavigateTo(Pages.RecognizeTextPage.ToString()), () => IsVisionServiceRegistered && !IsBusy)
                 .DependsOn(() => IsBusy);
         }
 
@@ -156,7 +152,7 @@ namespace See4Me.ViewModels
                         var imageBytes = await stream.ToArrayAsync();
                         MessengerInstance.Send(new NotificationMessage<byte[]>(imageBytes, Constants.PhotoTaken));
 
-                        if (await Network.IsInternetAvailableAsync())
+                        if (await NetworkService.IsInternetAvailableAsync())
                         {
                             var result = await cognitiveClient.RecognizeAsync(stream, Language, RecognitionType.Vision | RecognitionType.Emotion, OnRecognitionProgress);
                             var visionResult = result.VisionResult;
@@ -218,15 +214,10 @@ namespace See4Me.ViewModels
                     }
                 }
             }
-            catch (Microsoft.ProjectOxford.Vision.ClientException)
+            catch (CognitiveException ex)
             {
-                // Unable to access the service (tipically, due to invalid registration keys).
-                baseDescription = AppResources.UnableToAccessService;
-            }
-            catch (Microsoft.ProjectOxford.Common.ClientException ex) when (ex.Error.Code.ToLower() == "unauthorized")
-            {
-                // Unable to access the service (tipically, due to invalid registration keys).
-                baseDescription = AppResources.UnableToAccessService;
+                // Unable to access the service (message will contains translated error details).
+                baseDescription = ex.Message;
             }
             catch (WebException)
             {

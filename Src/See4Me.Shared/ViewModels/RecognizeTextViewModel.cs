@@ -62,7 +62,7 @@ namespace See4Me.ViewModels
                         MessengerInstance.Send(new NotificationMessage<byte[]>(imageBytes, Constants.PhotoTaken));
                         Message = null;
 
-                        if (await Network.IsInternetAvailableAsync())
+                        if (await NetworkService.IsInternetAvailableAsync())
                         {
                             var result = await cognitiveClient.RecognizeAsync(stream, Language, RecognitionType.Text);
                             var ocrResult = result.OcrResult;
@@ -83,7 +83,7 @@ namespace See4Me.ViewModels
                         // If message is null at this point, this is the first request. If we cancel it, turns automatically to the
                         // previous page.
                         if (message == null)
-                            Navigator.GoBack();
+                            AppNavigationService.GoBack();
 
                         IsBusy = false;
                         return;

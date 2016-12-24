@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppDescription" xml:space="preserve">
-    <value>See4Me shows how Cognitive Services work. Just start the app, point the smartphone to a subject and tap: in a few instants, the app will describe and speech what it sees. Moreover, if it recognizes one or more people, it tries to detect their ages and emotions. The app is also able to automatically translate the descriptions using Bing Translator.</value>
+    <value>See4Me shows how Cognitive Services work. Just start the app, point the smartphone to a subject and tap: in a few instants, the app will describe and speech what it sees. Moreover, if it recognizes one or more people, it tries to detect their ages and emotions. The app is also able to automatically translate the descriptions using Microsoft Translator.</value>
   </data>
   <data name="AppName" xml:space="preserve">
     <value>See4Me</value>

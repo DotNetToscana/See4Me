@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace See4Me.Engine.Services.TranslatorService
 {
     /// <summary>
-    /// The <strong>ITranslatorService</strong> interface specifies properties and methods to translate text in various supported languages.
+    /// The <strong>ITranslatorServiceClient</strong> interface specifies properties and methods to translate text to various supported languages.
     /// </summary>
     public interface ITranslatorServiceClient
     {
@@ -18,9 +18,9 @@ namespace See4Me.Engine.Services.TranslatorService
         string SubscriptionKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the string representing the supported language code to speak the text in.
+        /// Gets or sets the string representing the supported language code to translate the text to.
         /// </summary>
-        /// <value>The string representing the supported language code to speak the text in. The code must be present in the list of codes returned from the method <see cref="GetLanguagesAsync"/>.</value>
+        /// <value>The string representing the supported language code to translate the text to. The code must be present in the list of codes returned from the method <see cref="GetLanguagesAsync"/>.</value>
         /// <seealso cref="GetLanguagesAsync"/>
         string Language { get; set; }
 
@@ -28,7 +28,7 @@ namespace See4Me.Engine.Services.TranslatorService
         /// Detects the language of a text.
         /// </summary>
         /// <param name="text">A string represeting the text whose language must be detected.</param>
-        /// <returns>A string containing a two-character Language code for the given text.</returns>
+        /// <returns>A string containing a two-character language code for the given text.</returns>
         /// <exception cref="ArgumentException">
         /// <list type="bullet">
         /// <term>The <see cref="SubscriptionKey"/> property hasn't been set.</term>
@@ -55,7 +55,7 @@ namespace See4Me.Engine.Services.TranslatorService
         Task<IEnumerable<string>> GetLanguagesAsync();
 
         /// <summary>
-        /// Initializes the <see cref="TranslatorService"/> class by getting an access token for the service.
+        /// Initializes the <see cref="TranslatorServiceClient"/> class by getting an access token for the service.
         /// </summary>
         /// <returns>A <see cref="Task"/> that represents the initialize operation.</returns>
         /// <remarks>Calling this method isn't mandatory, because the token is get/refreshed everytime is needed. However, it is called at startup, it can speed-up subsequest requests.</remarks>

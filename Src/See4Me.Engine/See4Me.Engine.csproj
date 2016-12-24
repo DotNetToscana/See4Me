@@ -37,11 +37,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CognitiveClient.cs" />
+    <Compile Include="CognitiveException.cs" />
     <Compile Include="CognitiveResult.cs" />
     <Compile Include="Enums\Emotion.cs" />
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Enums\RecognitionPhase.cs" />
     <Compile Include="Enums\RecognitionType.cs" />
+    <Compile Include="Enums\ServiceResponse.cs" />
     <Compile Include="Extensions\EmotionExtensions.cs" />
     <Compile Include="Extensions\OcrResultExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />

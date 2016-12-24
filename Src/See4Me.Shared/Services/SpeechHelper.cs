@@ -1,5 +1,4 @@
 ﻿using Microsoft.Practices.ServiceLocation;
-using Microsoft.ProjectOxford.Vision.Contract;
 using See4Me.Engine;
 using See4Me.Localization.Resources;
 using See4Me.Services;

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,8 +54,19 @@ namespace See4Me.Engine
                 if (recognitionType.HasFlag(RecognitionType.Emotion))
                     features.Add(VisualFeature.Faces);
 
+                AnalysisResult analyzeImageResult = null;
                 var visionSettings = await VisionSettingsProvider?.GetSettingsAsync();
-                var analyzeImageResult = await visionService.AnalyzeImageAsync(stream, features);
+
+                try
+                {
+                    analyzeImageResult = await visionService.AnalyzeImageAsync(stream, features);
+                }
+                catch (Microsoft.ProjectOxford.Vision.ClientException ex)
+                {
+                    var exception = await this.CreateExceptionAsync(ex.Error.Code, ex.Error.Message, ex.HttpStatus, ex, language, onProgress);
+                    throw exception;
+                }
+
                 var visionResult = result.VisionResult;
 
                 Caption originalDescription;
@@ -69,18 +81,7 @@ namespace See4Me.Engine
                 if (isValid)
                 {
                     visionResult.Description = filteredDescription.Text;
-
-                    if (language != DefaultLanguge && IsTranslatorServiceRegistered)
-                    {
-                        // Make sure to use the updated translator subscription key.
-                        translatorService.SubscriptionKey = Settings.TranslatorSubscriptionKey;
-
-                        // The description needs to be translated.
-                        await this.RaiseOnProgressAsync(onProgress, RecognitionPhase.Translating);
-
-                        var translation = await translatorService.TranslateAsync(filteredDescription.Text, from: DefaultLanguge, to: language);
-                        visionResult.TranslatedDescription = translation;
-                    }
+                    visionResult.TranslatedDescription = await this.TranslateAsync(filteredDescription.Text, language, onProgress);
                 }
 
                 if (recognitionType.HasFlag(RecognitionType.Emotion))
@@ -96,9 +97,17 @@ namespace See4Me.Engine
                         {
                             using (var ms = new MemoryStream(imageBytes))
                             {
-                                var emotions = await emotionService.RecognizeAsync(ms, face.FaceRectangle.ToRectangle());
-                                var emotionResult = emotions.GetEmotionResult(face);
-                                result.EmotionResults.Add(emotionResult);
+                                try
+                                {
+                                    var emotions = await emotionService.RecognizeAsync(ms, face.FaceRectangle.ToRectangle());
+                                    var emotionResult = emotions.GetEmotionResult(face);
+                                    result.EmotionResults.Add(emotionResult);
+                                }
+                                catch (Microsoft.ProjectOxford.Common.ClientException ex)
+                                {
+                                    var exception = await this.CreateExceptionAsync(ex.Error.Code, ex.Error.Message, ex.HttpStatus, ex, language, onProgress);
+                                    throw exception;
+                                }
                             }
                         }
                     }
@@ -109,10 +118,17 @@ namespace See4Me.Engine
             {
                 await this.RaiseOnProgressAsync(onProgress, RecognitionPhase.RecognizingText);
 
-                var results = await visionService.RecognizeTextAsync(stream);
-                var text = results.GetRecognizedText();
-
-                result.OcrResult.Text = text;
+                try
+                {
+                    var results = await visionService.RecognizeTextAsync(stream);
+                    var text = results.GetRecognizedText();
+                    result.OcrResult.Text = text;
+                }
+                catch (Microsoft.ProjectOxford.Vision.ClientException ex)
+                {
+                    var exception = await this.CreateExceptionAsync(ex.Error.Code, ex.Error.Message, ex.HttpStatus, ex, language, onProgress);
+                    throw exception;
+                }
             }
 
             return result;
@@ -123,6 +139,40 @@ namespace See4Me.Engine
             var handler = onProgress;
             if (handler != null)
                 await handler.Invoke(phase);
+        }
+
+        private async Task<CognitiveException> CreateExceptionAsync(string code, string message, HttpStatusCode statusCode, Exception originalException, string language, Func<RecognitionPhase, Task> onProgress = null)
+        {
+            try
+            {
+                message = await this.TranslateAsync(message, language, onProgress);
+            }
+            catch { }
+
+            var exception = new CognitiveException(message, originalException)
+            {
+                Code = code,
+                HttpStatusCode = statusCode
+            };
+
+            return exception;
+        }
+
+        private async Task<string> TranslateAsync(string message, string language, Func<RecognitionPhase, Task> onProgress = null)
+        {
+            var translation = message;
+            if (language != DefaultLanguge && IsTranslatorServiceRegistered)
+            {
+                // Make sure to use the updated translator subscription key.
+                translatorService.SubscriptionKey = Settings.TranslatorSubscriptionKey;
+
+                // The description needs to be translated.
+                await this.RaiseOnProgressAsync(onProgress, RecognitionPhase.Translating);
+
+                translation = await translatorService.TranslateAsync(message, from: DefaultLanguge, to: language);
+            }
+
+            return translation;
         }
     }
 }

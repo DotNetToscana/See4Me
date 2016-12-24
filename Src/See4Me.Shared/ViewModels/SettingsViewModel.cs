@@ -104,8 +104,8 @@ namespace See4Me.ViewModels
 
             SubscribeCognitiveServicesCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.CognitiveServicesSubscriptionUrl));
             SubscribeTranslatorServiceCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.TranslatorServiceSubscriptionUrl));
-            GotoAboutCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.AboutPage.ToString()));
-            GotoPrivacyPolicyCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.PrivacyPolicyPage.ToString()));
+            GotoAboutCommand = new AutoRelayCommand(() => AppNavigationService.NavigateTo(Pages.AboutPage.ToString()));
+            GotoPrivacyPolicyCommand = new AutoRelayCommand(() => AppNavigationService.NavigateTo(Pages.PrivacyPolicyPage.ToString()));
         }
 
         public void Save()
@@ -123,7 +123,7 @@ namespace See4Me.ViewModels
             cognitiveSettings.VisionSubscriptionKey = visionSubscriptionKey;
             cognitiveSettings.TranslatorSubscriptionKey = translatorSubscriptionKey;
 
-            Navigator.GoBack();
+            AppNavigationService.GoBack();
         }
     }
 }

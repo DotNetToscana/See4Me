@@ -23,6 +23,8 @@ namespace See4Me.Engine
 
         public double Confidence { get; internal set; }
 
+        public string RawDescription { get; internal set; }
+
         public string Description { get; internal set; }
 
         private string translatedDescription;
@@ -33,8 +35,6 @@ namespace See4Me.Engine
         }
 
         public bool IsTranslated => Description != translatedDescription;
-
-        public string RawDescription { get; set; }
 
         internal VisionResult() { }
     }
