@@ -31,7 +31,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\ISpeechService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IStreamingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\NetworkService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ServiceSettings\LocalVisionSettingsProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SpeechHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SpeechService.cs" />

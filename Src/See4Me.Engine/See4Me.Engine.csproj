@@ -43,13 +43,13 @@
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Enums\RecognitionPhase.cs" />
     <Compile Include="Enums\RecognitionType.cs" />
-    <Compile Include="Enums\ServiceResponse.cs" />
     <Compile Include="Extensions\EmotionExtensions.cs" />
     <Compile Include="Extensions\OcrResultExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Extensions\VisionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ServiceSettings\IVisionSettingsProvider.cs" />
+    <Compile Include="Services\ServiceSettings\SimpleVisionSettingsProvider.cs" />
     <Compile Include="Services\ServiceSettings\VisionSettings.cs" />
     <Compile Include="Services\TranslatorService\AzureAuthToken.cs" />
     <Compile Include="Services\TranslatorService\ITranslatorServiceClient.cs" />

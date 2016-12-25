@@ -16,13 +16,13 @@ namespace See4Me.Engine
 {
     public class CognitiveClient
     {
-        public CognitiveSettings Settings { get; } = new CognitiveSettings();
+        private const string DefaultLanguge = "en";
+
+        private readonly ITranslatorServiceClient translatorService;
+
+        public CognitiveSettings Settings { get; set; } = new CognitiveSettings();
 
         public IVisionSettingsProvider VisionSettingsProvider { get; set; }
-
-        private ITranslatorServiceClient translatorService;
-
-        private const string DefaultLanguge = "en";
 
         public bool IsVisionServiceRegistered => !string.IsNullOrWhiteSpace(Settings.VisionSubscriptionKey);
 
@@ -36,10 +36,10 @@ namespace See4Me.Engine
             translatorService = new TranslatorServiceClient();
         }
 
-        public Task<CognitiveResult> RecognizeAsync(string language, byte[] buffer, RecognitionType recognitionType = RecognitionType.Vision | RecognitionType.Emotion, Func<RecognitionPhase, Task> onProgress = null)
-            => RecognizeAsync(new MemoryStream(buffer), language, recognitionType, onProgress);
+        public Task<CognitiveResult> AnalyzeAsync(byte[] buffer, string language, RecognitionType recognitionType = RecognitionType.Vision | RecognitionType.Emotion, Func<RecognitionPhase, Task> onProgress = null)
+            => AnalyzeAsync(new MemoryStream(buffer), language, recognitionType, onProgress);
 
-        public async Task<CognitiveResult> RecognizeAsync(Stream stream, string language, RecognitionType recognitionType = RecognitionType.Vision | RecognitionType.Emotion, Func<RecognitionPhase, Task> onProgress = null)
+        public async Task<CognitiveResult> AnalyzeAsync(Stream stream, string language, RecognitionType recognitionType = RecognitionType.Vision | RecognitionType.Emotion, Func<RecognitionPhase, Task> onProgress = null)
         {
             var result = new CognitiveResult();
             await this.RaiseOnProgressAsync(onProgress, RecognitionPhase.QueryingService);
@@ -55,7 +55,7 @@ namespace See4Me.Engine
                     features.Add(VisualFeature.Faces);
 
                 AnalysisResult analyzeImageResult = null;
-                var visionSettings = await VisionSettingsProvider?.GetSettingsAsync();
+                VisionSettings visionSettings = null;
 
                 try
                 {
@@ -63,17 +63,18 @@ namespace See4Me.Engine
                 }
                 catch (Microsoft.ProjectOxford.Vision.ClientException ex)
                 {
-                    var exception = await this.CreateExceptionAsync(ex.Error.Code, ex.Error.Message, ex.HttpStatus, ex, language, onProgress);
+                    var exception = await this.CreateExceptionAsync(ex.Error.Code, ex.Error.Message, ex.GetHttpStatusCode(), ex, language, onProgress);
                     throw exception;
                 }
 
-                var visionResult = result.VisionResult;
+                if (VisionSettingsProvider != null)
+                    visionSettings = await VisionSettingsProvider.GetSettingsAsync();
 
                 Caption originalDescription;
                 Caption filteredDescription;
-
                 var isValid = analyzeImageResult.IsValid(out originalDescription, out filteredDescription, visionSettings);
 
+                var visionResult = result.VisionResult;
                 visionResult.IsValid = isValid;
                 visionResult.RawDescription = originalDescription.Text;
                 visionResult.Confidence = originalDescription.Confidence;
@@ -161,7 +162,7 @@ namespace See4Me.Engine
         private async Task<string> TranslateAsync(string message, string language, Func<RecognitionPhase, Task> onProgress = null)
         {
             var translation = message;
-            if (language != DefaultLanguge && IsTranslatorServiceRegistered)
+            if (!string.IsNullOrWhiteSpace(language) && language != DefaultLanguge && IsTranslatorServiceRegistered)
             {
                 // Make sure to use the updated translator subscription key.
                 translatorService.SubscriptionKey = Settings.TranslatorSubscriptionKey;

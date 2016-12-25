@@ -154,7 +154,7 @@ namespace See4Me.ViewModels
 
                         if (await NetworkService.IsInternetAvailableAsync())
                         {
-                            var result = await cognitiveClient.RecognizeAsync(stream, Language, RecognitionType.Vision | RecognitionType.Emotion, OnRecognitionProgress);
+                            var result = await cognitiveClient.AnalyzeAsync(stream, Language, RecognitionType.Vision | RecognitionType.Emotion, OnRecognitionProgress);
                             var visionResult = result.VisionResult;
 
                             if (visionResult.IsValid)
@@ -216,7 +216,7 @@ namespace See4Me.ViewModels
             }
             catch (CognitiveException ex)
             {
-                // Unable to access the service (message will contains translated error details).
+                // Unable to access the service (message contains translated error details).
                 baseDescription = ex.Message;
             }
             catch (WebException)

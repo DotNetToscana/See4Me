@@ -5,8 +5,9 @@
         public const string TakingPhoto = "TakingPhoto";
         public const string PhotoTaken = "PhotoTaken";
         public const string InitializeStreaming = "InitializeStreaming";
+        public const string VisionSettingsFile = "See4Me.Common.VisionSettings.json";
 
-		public const string Child = "Child";
+        public const string Child = "Child";
         public const string Boy = "Boy";
         public const string Man = "Man";
         public const string LookingMessage = "Looking";

@@ -64,7 +64,7 @@ namespace See4Me.ViewModels
 
                         if (await NetworkService.IsInternetAvailableAsync())
                         {
-                            var result = await cognitiveClient.RecognizeAsync(stream, Language, RecognitionType.Text);
+                            var result = await cognitiveClient.AnalyzeAsync(stream, Language, RecognitionType.Text);
                             var ocrResult = result.OcrResult;
 
                             if (ocrResult.IsValid)
