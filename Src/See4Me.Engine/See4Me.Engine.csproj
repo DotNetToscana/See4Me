@@ -46,6 +46,7 @@
     <Compile Include="Extensions\EmotionExtensions.cs" />
     <Compile Include="Extensions\OcrResultExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\VisionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ServiceSettings\IVisionSettingsProvider.cs" />

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,7 @@ namespace See4Me.Engine
         private const string DefaultLanguge = "en";
 
         private readonly ITranslatorServiceClient translatorService;
+        private readonly HttpClient httpClient;
 
         public CognitiveSettings Settings { get; set; } = new CognitiveSettings();
 
@@ -30,10 +32,19 @@ namespace See4Me.Engine
 
         public bool IsTranslatorServiceRegistered => !string.IsNullOrWhiteSpace(Settings.TranslatorSubscriptionKey);
 
-        public CognitiveClient(IVisionSettingsProvider visionSettingsProvider = null)
+        public CognitiveClient(CognitiveSettings settings = null, IVisionSettingsProvider visionSettingsProvider = null)
         {
+            Settings = settings ?? new CognitiveSettings();
             VisionSettingsProvider = visionSettingsProvider;
+
             translatorService = new TranslatorServiceClient();
+            httpClient = new HttpClient();
+        }
+
+        public async Task<CognitiveResult> AnalyzeAsync(string sourceUrl, string language, RecognitionType recognitionType = RecognitionType.Vision | RecognitionType.Emotion, Func<RecognitionPhase, Task> onProgress = null)
+        {
+            var buffer = await httpClient.GetByteArrayAsync(sourceUrl);
+            return await this.AnalyzeAsync(buffer, language, recognitionType, onProgress);
         }
 
         public Task<CognitiveResult> AnalyzeAsync(byte[] buffer, string language, RecognitionType recognitionType = RecognitionType.Vision | RecognitionType.Emotion, Func<RecognitionPhase, Task> onProgress = null)

@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using See4Me.Engine.Services.ServiceSettings;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace See4Me.Engine.Extensions
 {
@@ -51,16 +52,16 @@ namespace See4Me.Engine.Extensions
 
             if (rawDescription?.Confidence >= settings.MinimumConfidence)
             {
-                var text = rawDescription.Text.ToLower();
+                var text = rawDescription.Text;
+                var replacedText = settings.DescriptionsToReplace.FirstOrDefault(d => d.Key.EqualsIgnoreCase(text)).Value;
 
-                string replacedText = null;
-                if (settings.DescriptionsToReplace.TryGetValue(text, out replacedText))
+                if (!string.IsNullOrWhiteSpace(replacedText))
                     text = replacedText;
 
-                var textToRemove = settings.DescriptionsToRemove.FirstOrDefault(d => text.Contains(d));
-                var filteredText = !string.IsNullOrWhiteSpace(textToRemove) ? text.Replace(textToRemove, string.Empty).Trim() : text;
+                var textToRemove = settings.DescriptionsToRemove.FirstOrDefault(d => text.ContainsIgnoreCase(d));
+                var filteredText = !string.IsNullOrWhiteSpace(textToRemove) ? text.ReplaceIgnoreCase(textToRemove, string.Empty).Trim() : text;
 
-                if (!settings.InvalidDescriptions.Any(d => filteredText.Contains(d)))
+                if (!settings.InvalidDescriptions.Any(d => filteredText.ContainsIgnoreCase(d)))
                 {
                     filteredDescription = new Caption
                     {
