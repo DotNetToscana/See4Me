@@ -67,7 +67,7 @@ namespace See4Me.ViewModels
                             var result = await cognitiveClient.AnalyzeAsync(stream, Language, RecognitionType.Text);
                             var ocrResult = result.OcrResult;
 
-                            if (ocrResult.IsValid)
+                            if (ocrResult.ContainsText)
                                 recognizeText = ocrResult.Text;
                             else
                                 recognizeText = AppResources.UnableToRecognizeText;

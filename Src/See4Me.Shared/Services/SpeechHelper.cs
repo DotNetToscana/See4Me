@@ -21,28 +21,37 @@ namespace See4Me.Services
             speechService = ServiceLocator.Current.GetInstance<ISpeechService>();
         }
 
-        public static string GetEmotionMessage(Gender gender, int age, Emotion bestEmotion)
+        public static string GetFaceMessage(FaceResult face)
         {
-            // Creates the emotion description text to be speeched.
-            string emotionMessage = null;
+            // Creates the face description text to be speeched.
+            string faceMessage = null;
+            string personMessage;
 
-            var ageDescription = GetAgeDescription(age, gender);
-            var personAgeMessage = string.Format(GetString(Constants.PersonAgeMessage, gender), ageDescription, age);
-
-            if (bestEmotion != Emotion.Neutral)
+            if (!string.IsNullOrWhiteSpace(face.Name))
             {
-                var emotion = GetString(bestEmotion.ToString(), gender);
-                var lookingMessage = string.Format(GetString(Constants.LookingMessage, gender), emotion);
-                emotionMessage = $"{personAgeMessage} {lookingMessage}";
+                // A person name has been identified.
+                personMessage = $"{face.Name} ";
             }
             else
             {
-                // No emotion recognized, so includes only the age in the message.
-                emotionMessage = personAgeMessage;
+                var ageDescription = GetAgeDescription(face.Age, face.Gender);
+                personMessage = string.Format(GetString(Constants.PersonAgeMessage, face.Gender), ageDescription, face.Age);
             }
 
-            emotionMessage = $"{emotionMessage} {Constants.SentenceEnd} ";
-            return emotionMessage;
+            if (face.Emotion != Emotion.Neutral)
+            {
+                var emotion = GetString(face.Emotion.ToString(), face.Gender);
+                var lookingMessage = string.Format(GetString(Constants.LookingMessage, face.Gender), emotion);
+                faceMessage = $"{personMessage} {lookingMessage}";
+            }
+            else
+            {
+                // No emotion recognized, so includes only the person name or age in the message.
+                faceMessage = personMessage;
+            }
+
+            faceMessage = $"{faceMessage} {Constants.SentenceEnd} ";
+            return faceMessage;
         }
 
         private static string GetAgeDescription(int age, Gender gender)

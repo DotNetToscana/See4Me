@@ -260,6 +260,15 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Face Subscription Key.
+        /// </summary>
+        public static string FaceSubscriptionKey {
+            get {
+                return ResourceManager.GetString("FaceSubscriptionKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fearful.
         /// </summary>
         public static string FearFemale {

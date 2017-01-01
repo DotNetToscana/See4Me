@@ -101,5 +101,10 @@ namespace See4Me.Engine.Services.TranslatorService
         /// </remarks>
         /// <seealso cref="Language"/>
         Task<string> TranslateAsync(string text, string to = null);
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        void Dispose();
     }
 }

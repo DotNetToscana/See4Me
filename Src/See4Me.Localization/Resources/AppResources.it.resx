@@ -357,4 +357,7 @@
   <data name="SubscribeTranslatorService" xml:space="preserve">
     <value>Registrati per ottenere la chiave</value>
   </data>
+  <data name="FaceSubscriptionKey" xml:space="preserve">
+    <value>Chiave di sottoscrizione servizio Face</value>
+  </data>
 </root>

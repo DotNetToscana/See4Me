@@ -10,7 +10,7 @@ namespace See4Me.Engine
     {
         public VisionResult VisionResult { get; internal set; } = new VisionResult();
 
-        public IList<EmotionResult> EmotionResults { get; internal set; } = new List<EmotionResult>();
+        public IList<FaceResult> FaceResults { get; internal set; } = new List<FaceResult>();
 
         public OcrResult OcrResult { get; internal set; } = new OcrResult();
 
@@ -39,22 +39,26 @@ namespace See4Me.Engine
         internal VisionResult() { }
     }
 
-    public class EmotionResult
+    public class FaceResult
     {
-        public Emotion Emotion { get; internal set; }
+        public Emotion Emotion { get; internal set; } = Emotion.Neutral;
 
         public int Age { get; internal set; }
 
         public Gender Gender { get; internal set; }
 
-        internal EmotionResult() { }
+        public string Name { get; internal set; }
+
+        public double IdentifyConfidence { get; internal set; }
+
+        internal FaceResult() { }
     }
 
     public class OcrResult
     {
         public string Text { get; internal set; }
 
-        public bool IsValid => !string.IsNullOrWhiteSpace(Text);
+        public bool ContainsText => !string.IsNullOrWhiteSpace(Text);
 
         internal OcrResult() { }
     }

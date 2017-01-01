@@ -39,6 +39,7 @@ namespace See4Me.ViewModels
                 var cognitiveSettings = cognitiveClient.Settings;
                 cognitiveSettings.EmotionSubscriptionKey = ServiceKeys.EmotionSubscriptionKey;
                 cognitiveSettings.VisionSubscriptionKey = ServiceKeys.VisionSubscriptionKey;
+                cognitiveSettings.FaceSubscriptionKey = ServiceKeys.FaceSubscriptionKey;
                 cognitiveSettings.TranslatorSubscriptionKey = ServiceKeys.TranslatorSubscriptionKey;
 
                 return cognitiveClient;

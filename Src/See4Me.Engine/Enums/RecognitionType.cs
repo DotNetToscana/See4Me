@@ -10,7 +10,9 @@ namespace See4Me.Engine
     public enum RecognitionType
     {
         Vision = 1,
-        Emotion = 2,
-        Text = 4
+        Face = 2,
+        Emotion = 4,
+        Text = 8,
+        All = Vision | Face | Emotion | Text
     }
 }

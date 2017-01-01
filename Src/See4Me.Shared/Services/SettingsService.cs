@@ -13,6 +13,7 @@ namespace See4Me.Services
         private const string SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION = "ShowRawDescriptionOnInvalidRecognition";
         private const string VISION_SUBSCRIPTION_KEY = "VisionSubscriptionKey";
         private const string EMOTION_SUBSCRIPTION_KEY = "EmotionSubscriptionKey";
+        private const string FACE_SUBSCRIPTION_KEY = "FaceSubscriptionKey";
         private const string TRANSLATOR_SUBSCRIPTION_KEY = "TranslatorSubscriptionKey";
         private const string IS_TEXT_TO_SPEECH_ENABLED = "IsTextToSpeechEnabled";
         private const string IS_CONSENT_GIVEN = "IsConsentGiven";
@@ -75,6 +76,12 @@ namespace See4Me.Services
         {
             get { return settings.GetValueOrDefault<string>(EMOTION_SUBSCRIPTION_KEY, null); }
             set { settings.AddOrUpdateValue(EMOTION_SUBSCRIPTION_KEY, value); }
+        }
+
+        public string FaceSubscriptionKey
+        {
+            get { return settings.GetValueOrDefault<string>(FACE_SUBSCRIPTION_KEY, null); }
+            set { settings.AddOrUpdateValue(FACE_SUBSCRIPTION_KEY, value); }
         }
 
         public string TranslatorSubscriptionKey

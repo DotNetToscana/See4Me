@@ -9,8 +9,8 @@ namespace See4Me.Engine.Extensions
 {
     internal static class StringExtensions
     {
-        public static bool Contains(this string source, string value, StringComparison comparison) 
-            => source.IndexOf(value, comparison) >= 0;
+        public static bool Contains(this string source, string value, StringComparison comparison)
+            => source?.IndexOf(value, comparison) >= 0;
 
         public static bool ContainsIgnoreCase(this string source, string value)
             => source.Contains(value, StringComparison.OrdinalIgnoreCase);

@@ -82,5 +82,6 @@
         public static string AndroidProjectAuthor = "AndroidProjectAuthor";
         public static string iOSProjectAuthor = "iOSProjectAuthor";
         public static string SubscribeTranslatorService = "SubscribeTranslatorService";
+        public static string FaceSubscriptionKey = "FaceSubscriptionKey";
     }
 }

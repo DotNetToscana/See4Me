@@ -37,6 +37,11 @@
                 <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.SubscribeCognitiveServices, Source={StaticResource LocalizedStrings}}"
                                  Margin="0,-5,5,0" Command="{Binding SubscribeCognitiveServicesCommand}" />
 
+                <TextBox Header="{Binding Path=LocalizedResources.FaceSubscriptionKey, Source={StaticResource LocalizedStrings}}"
+                         Text="{Binding FaceSubscriptionKey, Mode=TwoWay}" Margin="5" />
+                <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.SubscribeCognitiveServices, Source={StaticResource LocalizedStrings}}"
+                                 Margin="0,-5,5,0" Command="{Binding SubscribeCognitiveServicesCommand}" />
+
                 <TextBox Header="{Binding Path=LocalizedResources.EmotionSubscriptionKey, Source={StaticResource LocalizedStrings}}"
                          Text="{Binding EmotionSubscriptionKey, Mode=TwoWay}" Margin="5" />
                 <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.SubscribeCognitiveServices, Source={StaticResource LocalizedStrings}}"

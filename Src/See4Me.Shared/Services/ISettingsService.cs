@@ -16,6 +16,8 @@
 
         string EmotionSubscriptionKey { get; set; }
 
+        string FaceSubscriptionKey { get; set; }
+
         string TranslatorSubscriptionKey { get; set; }
 
         bool IsTextToSpeechEnabled { get; set; }

@@ -51,6 +51,13 @@ namespace See4Me.ViewModels
             set { this.Set(ref emotionSubscriptionKey, value); }
         }
 
+        private string faceSubscriptionKey;
+        public string FaceSubscriptionKey
+        {
+            get { return faceSubscriptionKey; }
+            set { this.Set(ref faceSubscriptionKey, value); }
+        }
+
         private string translatorSubscriptionKey;
         public string TranslatorSubscriptionKey
         {
@@ -91,6 +98,7 @@ namespace See4Me.ViewModels
         {
             VisionSubscriptionKey = ServiceKeys.VisionSubscriptionKey;
             EmotionSubscriptionKey = ServiceKeys.EmotionSubscriptionKey;
+            FaceSubscriptionKey = ServiceKeys.FaceSubscriptionKey;
             TranslatorSubscriptionKey = ServiceKeys.TranslatorSubscriptionKey;
 
             IsTextToSpeechEnabled = Settings.IsTextToSpeechEnabled;
@@ -112,6 +120,7 @@ namespace See4Me.ViewModels
         {
             ServiceKeys.VisionSubscriptionKey = visionSubscriptionKey;
             ServiceKeys.EmotionSubscriptionKey = emotionSubscriptionKey;
+            ServiceKeys.FaceSubscriptionKey = faceSubscriptionKey;
             ServiceKeys.TranslatorSubscriptionKey = translatorSubscriptionKey;
 
             Settings.IsTextToSpeechEnabled = isTextToSpeechEnabled;
@@ -121,6 +130,7 @@ namespace See4Me.ViewModels
             var cognitiveSettings = cognitiveClient.Settings;
             cognitiveSettings.EmotionSubscriptionKey = emotionSubscriptionKey;
             cognitiveSettings.VisionSubscriptionKey = visionSubscriptionKey;
+            cognitiveSettings.FaceSubscriptionKey = faceSubscriptionKey;
             cognitiveSettings.TranslatorSubscriptionKey = translatorSubscriptionKey;
 
             AppNavigationService.GoBack();
