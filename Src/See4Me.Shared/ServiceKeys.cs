@@ -11,10 +11,12 @@ namespace See4Me
 #if DEBUG
         private const string visionSubscriptionKey = "";
         private const string emotionSubscriptionKey = "";
+        private const string faceSubscriptionKey = "";
         private const string translatorSubscriptionKey = "";
 #else
         private const string visionSubscriptionKey = "";
         private const string emotionSubscriptionKey = "";
+        private const string faceSubscriptionKey = "";
         private const string translatorSubscriptionKey = "";
 #endif
 
@@ -35,6 +37,12 @@ namespace See4Me
         {
             get { return GetValue(settings.EmotionSubscriptionKey) ?? emotionSubscriptionKey; }
             set { settings.EmotionSubscriptionKey = value; }
+        }
+
+        public static string FaceSubscriptionKey
+        {
+            get { return GetValue(settings.FaceSubscriptionKey) ?? faceSubscriptionKey; }
+            set { settings.FaceSubscriptionKey = value; }
         }
 
         public static string TranslatorSubscriptionKey
