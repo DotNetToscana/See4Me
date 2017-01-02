@@ -35,8 +35,6 @@ namespace See4Me.ViewModels
 
         public AutoRelayCommand GotoPrivacyPolicyCommand { get; set; }
 
-        public AutoRelayCommand SaveCommand { get; set; }
-
         private string visionSubscriptionKey;
         public string VisionSubscriptionKey
         {
@@ -108,8 +106,6 @@ namespace See4Me.ViewModels
 
         private void CreateCommands()
         {
-            SaveCommand = new AutoRelayCommand(Save);
-
             SubscribeCognitiveServicesCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.CognitiveServicesSubscriptionUrl));
             SubscribeTranslatorServiceCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.TranslatorServiceSubscriptionUrl));
             GotoAboutCommand = new AutoRelayCommand(() => AppNavigationService.NavigateTo(Pages.AboutPage.ToString()));
@@ -132,8 +128,6 @@ namespace See4Me.ViewModels
             cognitiveSettings.VisionSubscriptionKey = visionSubscriptionKey;
             cognitiveSettings.FaceSubscriptionKey = faceSubscriptionKey;
             cognitiveSettings.TranslatorSubscriptionKey = translatorSubscriptionKey;
-
-            AppNavigationService.GoBack();
         }
     }
 }

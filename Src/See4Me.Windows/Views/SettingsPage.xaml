@@ -20,35 +20,27 @@
         </Grid.RowDefinitions>
 
         <controls:PageHeader Frame="{x:Bind Frame}" Text="{Binding Path=LocalizedResources.Settings, Source={StaticResource LocalizedStrings}}"
-                             EllipsisVisibility="Collapsed">
-            <controls:PageHeader.PrimaryCommands>
-                <AppBarButton
-                    Icon="Save"
-                    Label="{Binding Path=LocalizedResources.Save, Source={StaticResource LocalizedStrings}}"
-                    Command="{Binding SaveCommand}"
-                    AutomationProperties.Name="{Binding Path=LocalizedResources.Save, Source={StaticResource LocalizedStrings}}" />
-            </controls:PageHeader.PrimaryCommands>
-        </controls:PageHeader>
+                             EllipsisVisibility="Collapsed" />
 
         <ScrollViewer Grid.Row="1" Margin="12" Padding="0,0,12,0">
             <StackPanel>
                 <TextBox Header="{Binding Path=LocalizedResources.VisionSubscriptionKey, Source={StaticResource LocalizedStrings}}"
-                         Text="{Binding VisionSubscriptionKey, Mode=TwoWay}" Margin="5" />
+                         Text="{Binding VisionSubscriptionKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
                 <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.SubscribeCognitiveServices, Source={StaticResource LocalizedStrings}}"
                                  Margin="0,-5,5,0" Command="{Binding SubscribeCognitiveServicesCommand}" />
 
                 <TextBox Header="{Binding Path=LocalizedResources.FaceSubscriptionKey, Source={StaticResource LocalizedStrings}}"
-                         Text="{Binding FaceSubscriptionKey, Mode=TwoWay}" Margin="5" />
+                         Text="{Binding FaceSubscriptionKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
                 <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.SubscribeCognitiveServices, Source={StaticResource LocalizedStrings}}"
                                  Margin="0,-5,5,0" Command="{Binding SubscribeCognitiveServicesCommand}" />
 
                 <TextBox Header="{Binding Path=LocalizedResources.EmotionSubscriptionKey, Source={StaticResource LocalizedStrings}}"
-                         Text="{Binding EmotionSubscriptionKey, Mode=TwoWay}" Margin="5" />
+                         Text="{Binding EmotionSubscriptionKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
                 <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.SubscribeCognitiveServices, Source={StaticResource LocalizedStrings}}"
                                  Margin="0,-5,5,0" Command="{Binding SubscribeCognitiveServicesCommand}" />
 
                 <TextBox Header="{Binding Path=LocalizedResources.TranslatorSubscriptionKey, Source={StaticResource LocalizedStrings}}"
-                         Text="{Binding TranslatorSubscriptionKey, Mode=TwoWay}" Margin="5" />
+                         Text="{Binding TranslatorSubscriptionKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
                 <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.SubscribeTranslatorService, Source={StaticResource LocalizedStrings}}"
                                  Command="{Binding SubscribeTranslatorServiceCommand}" Margin="0,-5,5,0" />
 

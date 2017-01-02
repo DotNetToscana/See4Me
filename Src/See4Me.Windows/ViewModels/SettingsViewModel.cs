@@ -29,7 +29,8 @@ namespace See4Me.ViewModels
             {
                 this.Initialize();
             }
-            else if (state.Any())
+
+            if (state.Any())
             {
                 try
                 {
@@ -43,6 +44,12 @@ namespace See4Me.ViewModels
             }
 
             await base.OnNavigatedToAsync(parameter, mode, state);
+        }
+
+        public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
+        {
+            this.Save();      
+            return base.OnNavigatingFromAsync(args);
         }
 
         public override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
