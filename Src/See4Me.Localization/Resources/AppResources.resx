@@ -268,7 +268,7 @@
     <value>Save</value>
   </data>
   <data name="ServiceNotRegistered" xml:space="preserve">
-    <value>Attention, the service is not registered. Go to Settings page to enter the required keys.</value>
+    <value>Attention, the service is not registered. Tap here to discover how to proceed.</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
@@ -278,9 +278,6 @@
   </data>
   <data name="ShowOriginalDescriptionOnTranslation" xml:space="preserve">
     <value>Show original description on translation</value>
-  </data>
-  <data name="SubscribeCognitiveServices" xml:space="preserve">
-    <value>Subscribe to get the key</value>
   </data>
   <data name="SurpriseFemale" xml:space="preserve">
     <value>Surprised</value>
@@ -354,8 +351,8 @@
   <data name="iOSProjectAuthor" xml:space="preserve">
     <value>Developed by Riccardo Cappello</value>
   </data>
-  <data name="SubscribeTranslatorService" xml:space="preserve">
-    <value>Subscribe to get the key</value>
+  <data name="RegisterServices" xml:space="preserve">
+    <value>Register services</value>
   </data>
   <data name="FaceSubscriptionKey" xml:space="preserve">
     <value>Face Subscription Key</value>

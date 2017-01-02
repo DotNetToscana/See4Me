@@ -54,6 +54,7 @@ namespace See4Me.ViewModels
             DescribeImageCommand.RaiseCanExecuteChanged();
             SwapCameraCommand.RaiseCanExecuteChanged();
             GotoRecognizeTextCommand.RaiseCanExecuteChanged();
+            HowToRegisterCommand.RaiseCanExecuteChanged();
 
             await base.OnNavigatedToAsync(parameter, mode, state);
         }

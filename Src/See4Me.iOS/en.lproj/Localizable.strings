@@ -48,11 +48,10 @@
 "SadnessFemale"="Sad";
 "SadnessMale"="Sad";
 "Save"="Save";
-"ServiceNotRegistered"="Attention, the service is not registered. Go to Settings page to enter the required keys.";
+"ServiceNotRegistered"="Attention, the service is not registered. Tap here to discover how to proceed.";
 "Settings"="Settings";
 "ShowDescriptionConfidence"="Show description confidence";
 "ShowOriginalDescriptionOnTranslation"="Show original description on translation";
-"SubscribeCognitiveServices"="Subscribe to get the key";
 "SurpriseFemale"="Surprised";
 "SurpriseMale"="Surprised";
 "SwapCamera"="Swap camera";
@@ -77,6 +76,6 @@
 "RecognizingText"="Recognizing text...";
 "AndroidProjectAuthor"="Developed by Marco Minerva - MVP Windows Development";
 "iOSProjectAuthor"="Developed by Riccardo Cappello";
-"SubscribeTranslatorService"="Subscribe to get the key";
+"RegisterServices"="Register services";
 "FaceSubscriptionKey"="Face Subscription Key";
 "ShuttingDown"="Shutting down the device...";

@@ -21,6 +21,12 @@
                                VerticalAlignment="Bottom" Margin="12" TextWrapping="Wrap" />
 
                 <Image x:Name="previewImage" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Opacity="0.75" />
+                
+                <Interactivity:Interaction.Behaviors>
+                    <Interactions:EventTriggerBehavior EventName="Tapped">
+                        <Interactions:InvokeCommandAction Command="{Binding HowToRegisterCommand}"  />
+                    </Interactions:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
             </Grid>
 
             <Button x:Name="changeCameraButton" Style="{StaticResource CircleButton}" VerticalAlignment="Top" HorizontalAlignment="Center"

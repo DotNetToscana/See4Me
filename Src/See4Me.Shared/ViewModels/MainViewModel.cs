@@ -20,6 +20,7 @@ namespace See4Me.ViewModels
         private readonly IStreamingService streamingService;
         private readonly ISpeechService speechService;
         private readonly CognitiveClient cognitiveClient;
+        private readonly ILauncherService launcherService;
 
         private CameraPanel lastCameraPanel = CameraPanel.Unknown;
         private bool initialized = false;
@@ -41,11 +42,14 @@ namespace See4Me.ViewModels
 
         public AutoRelayCommand GotoRecognizeTextCommand { get; set; }
 
-        public MainViewModel(CognitiveClient cognitiveClient, IStreamingService streamingService, ISpeechService speechService)
+        public AutoRelayCommand HowToRegisterCommand { get; set; }
+
+        public MainViewModel(CognitiveClient cognitiveClient, IStreamingService streamingService, ISpeechService speechService, ILauncherService launcherService)
         {
             this.cognitiveClient = cognitiveClient;
             this.streamingService = streamingService;
             this.speechService = speechService;
+            this.launcherService = launcherService;
 
             this.CreateCommands();
         }
@@ -62,6 +66,9 @@ namespace See4Me.ViewModels
 
             GotoRecognizeTextCommand = new AutoRelayCommand(() => AppNavigationService.NavigateTo(Pages.RecognizeTextPage.ToString()), () => IsVisionServiceRegistered && !IsBusy)
                 .DependsOn(() => IsBusy);
+
+            HowToRegisterCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.HowToRegisterUrl),
+              () => !IsVisionServiceRegistered).DependsOn(() => IsVisionServiceRegistered);
 
             OnCreateCommands();
         }

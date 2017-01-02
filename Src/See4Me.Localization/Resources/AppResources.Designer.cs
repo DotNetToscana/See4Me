@@ -566,6 +566,15 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Register services.
+        /// </summary>
+        public static string RegisterServices {
+            get {
+                return ResourceManager.GetString("RegisterServices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to en.
         /// </summary>
         public static string ResourceLanguage {
@@ -602,7 +611,7 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Attention, the service is not registered. Go to Settings page to enter the required keys..
+        ///   Looks up a localized string similar to Attention, the service is not registered. Tap here to discover how to proceed..
         /// </summary>
         public static string ServiceNotRegistered {
             get {
@@ -643,24 +652,6 @@ namespace See4Me.Localization.Resources {
         public static string ShuttingDown {
             get {
                 return ResourceManager.GetString("ShuttingDown", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Subscribe to get the key.
-        /// </summary>
-        public static string SubscribeCognitiveServices {
-            get {
-                return ResourceManager.GetString("SubscribeCognitiveServices", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Subscribe to get the key.
-        /// </summary>
-        public static string SubscribeTranslatorService {
-            get {
-                return ResourceManager.GetString("SubscribeTranslatorService", resourceCulture);
             }
         }
         

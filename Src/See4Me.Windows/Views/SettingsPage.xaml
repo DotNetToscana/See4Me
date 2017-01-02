@@ -19,36 +19,41 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <controls:PageHeader Frame="{x:Bind Frame}" Text="{Binding Path=LocalizedResources.Settings, Source={StaticResource LocalizedStrings}}"
-                             EllipsisVisibility="Collapsed" />
+        <controls:PageHeader Frame="{x:Bind Frame}" Text="{Binding Path=LocalizedResources.Settings, Source={StaticResource LocalizedStrings}}">
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton 
+                     Icon="Globe" 
+                     Label="{Binding Path=LocalizedResources.RegisterServices, Source={StaticResource LocalizedStrings}}" 
+                     Command="{Binding RegisterCommand}" 
+                     AutomationProperties.Name="{Binding Path=LocalizedResources.RegisterServices, Source={StaticResource LocalizedStrings}}" />
+            </controls:PageHeader.PrimaryCommands>
+        </controls:PageHeader>
 
         <ScrollViewer Grid.Row="1" Margin="12" Padding="0,0,12,0">
             <StackPanel>
                 <TextBox Header="{Binding Path=LocalizedResources.VisionSubscriptionKey, Source={StaticResource LocalizedStrings}}"
                          Text="{Binding VisionSubscriptionKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
-                <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.SubscribeCognitiveServices, Source={StaticResource LocalizedStrings}}"
-                                 Margin="0,-5,5,0" Command="{Binding SubscribeCognitiveServicesCommand}" />
 
                 <TextBox Header="{Binding Path=LocalizedResources.FaceSubscriptionKey, Source={StaticResource LocalizedStrings}}"
                          Text="{Binding FaceSubscriptionKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
-                <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.SubscribeCognitiveServices, Source={StaticResource LocalizedStrings}}"
-                                 Margin="0,-5,5,0" Command="{Binding SubscribeCognitiveServicesCommand}" />
 
                 <TextBox Header="{Binding Path=LocalizedResources.EmotionSubscriptionKey, Source={StaticResource LocalizedStrings}}"
                          Text="{Binding EmotionSubscriptionKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
-                <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.SubscribeCognitiveServices, Source={StaticResource LocalizedStrings}}"
-                                 Margin="0,-5,5,0" Command="{Binding SubscribeCognitiveServicesCommand}" />
 
                 <TextBox Header="{Binding Path=LocalizedResources.TranslatorSubscriptionKey, Source={StaticResource LocalizedStrings}}"
                          Text="{Binding TranslatorSubscriptionKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
-                <HyperlinkButton HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.SubscribeTranslatorService, Source={StaticResource LocalizedStrings}}"
-                                 Command="{Binding SubscribeTranslatorServiceCommand}" Margin="0,-5,5,0" />
 
                 <ToggleSwitch Header="{Binding Path=LocalizedResources.TextToSpeech, Source={StaticResource LocalizedStrings}}"
-                         IsOn="{Binding IsTextToSpeechEnabled, Mode=TwoWay}" Margin="5" />
+                         IsOn="{Binding IsTextToSpeechEnabled, Mode=TwoWay}"
+                              AutomationProperties.Name="{Binding Path=LocalizedResources.TextToSpeech, Source={StaticResource LocalizedStrings}}" 
+                              Margin="5,20,5,5" />
                 <ToggleSwitch Header="{Binding Path=LocalizedResources.ShowDescriptionConfidence, Source={StaticResource LocalizedStrings}}"
-                              IsOn="{Binding ShowDescriptionConfidence, Mode=TwoWay}" Margin="5" />
-                <ToggleSwitch IsOn="{Binding ShowOriginalDescriptionOnTranslation, Mode=TwoWay}" Margin="5">
+                              IsOn="{Binding ShowDescriptionConfidence, Mode=TwoWay}" 
+                              AutomationProperties.Name="{Binding Path=LocalizedResources.ShowDescriptionConfidence, Source={StaticResource LocalizedStrings}}"
+                              Margin="5" />
+                <ToggleSwitch IsOn="{Binding ShowOriginalDescriptionOnTranslation, Mode=TwoWay}" 
+                              AutomationProperties.Name="{Binding Path=LocalizedResources.ShowOriginalDescriptionOnTranslation, Source={StaticResource LocalizedStrings}}"
+                              Margin="5">
                     <ToggleSwitch.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=LocalizedResources.ShowOriginalDescriptionOnTranslation, Source={StaticResource LocalizedStrings}}"
@@ -58,9 +63,11 @@
                 </ToggleSwitch>
 
                 <Button Content="{Binding Path=LocalizedResources.AboutCommand, Source={StaticResource LocalizedStrings}}" Margin="0,20,0,0"
+                        AutomationProperties.Name="{Binding Path=LocalizedResources.AboutCommand, Source={StaticResource LocalizedStrings}}"
                         Command="{Binding GotoAboutCommand}" />
 
                 <Button Content="{Binding Path=LocalizedResources.PrivacyPolicyCommand, Source={StaticResource LocalizedStrings}}" Margin="0,30,0,0"
+                        AutomationProperties.Name="{Binding Path=LocalizedResources.PrivacyPolicyCommand, Source={StaticResource LocalizedStrings}}"
                         Command="{Binding GotoPrivacyPolicyCommand}" />
             </StackPanel>
         </ScrollViewer>

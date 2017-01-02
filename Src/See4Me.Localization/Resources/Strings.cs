@@ -56,7 +56,6 @@
         public static string Settings = "Settings";
         public static string ShowDescriptionConfidence = "ShowDescriptionConfidence";
         public static string ShowOriginalDescriptionOnTranslation = "ShowOriginalDescriptionOnTranslation";
-        public static string SubscribeCognitiveServices = "SubscribeCognitiveServices";
         public static string SurpriseFemale = "SurpriseFemale";
         public static string SurpriseMale = "SurpriseMale";
         public static string SwapCamera = "SwapCamera";
@@ -81,7 +80,7 @@
         public static string RecognizingText = "RecognizingText";
         public static string AndroidProjectAuthor = "AndroidProjectAuthor";
         public static string iOSProjectAuthor = "iOSProjectAuthor";
-        public static string SubscribeTranslatorService = "SubscribeTranslatorService";
+        public static string RegisterServices = "RegisterServices";
         public static string FaceSubscriptionKey = "FaceSubscriptionKey";
         public static string ShuttingDown = "ShuttingDown";
     }

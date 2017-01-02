@@ -50,11 +50,10 @@
   <string name="SadnessFemale">Triste</string>
   <string name="SadnessMale">Triste</string>
   <string name="Save">Salva</string>
-  <string name="ServiceNotRegistered">Attenzione, il servizio non è registrato. Vai alle Impostazioni per inserire le chiavi necessarie</string>
+  <string name="ServiceNotRegistered">Attenzione, il servizio non è registrato. Tocca qui per scoprire come effettuare la registrazione</string>
   <string name="Settings">Impostazioni</string>
   <string name="ShowDescriptionConfidence">Mostra l\'accuratezza della descrizione</string>
   <string name="ShowOriginalDescriptionOnTranslation">Mostra anche la descrizione originale in caso di traduzione</string>
-  <string name="SubscribeCognitiveServices">Registrati per ottenere la chiave</string>
   <string name="SurpriseFemale">Sorpresa</string>
   <string name="SurpriseMale">Sorpreso</string>
   <string name="SwapCamera">Cambia la fotocamera</string>
@@ -79,7 +78,7 @@
   <string name="RecognizingText">Riconoscimento del testo...</string>
   <string name="AndroidProjectAuthor">Sviluppato da Marco Minerva - MVP Windows Development</string>
   <string name="iOSProjectAuthor">Sviluppato da Riccardo Cappello</string>
-  <string name="SubscribeTranslatorService">Registrati per ottenere la chiave</string>
   <string name="FaceSubscriptionKey">Chiave di sottoscrizione servizio Face</string>
   <string name="ShuttingDown">Spegnimento in corso...</string>
+  <string name="RegisterServices">Registra i servizi</string>
 </resources>

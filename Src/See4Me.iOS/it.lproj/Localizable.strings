@@ -48,11 +48,10 @@
 "SadnessFemale"="Triste";
 "SadnessMale"="Triste";
 "Save"="Salva";
-"ServiceNotRegistered"="Attenzione, il servizio non è registrato. Vai alle Impostazioni per inserire le chiavi necessarie";
+"ServiceNotRegistered"="Attenzione, il servizio non è registrato. Tocca qui per scoprire come effettuare la registrazione";
 "Settings"="Impostazioni";
 "ShowDescriptionConfidence"="Mostra l\'accuratezza della descrizione";
 "ShowOriginalDescriptionOnTranslation"="Mostra anche la descrizione originale in caso di traduzione";
-"SubscribeCognitiveServices"="Registrati per ottenere la chiave";
 "SurpriseFemale"="Sorpresa";
 "SurpriseMale"="Sorpreso";
 "SwapCamera"="Cambia la fotocamera";
@@ -77,6 +76,6 @@
 "RecognizingText"="Riconoscimento del testo...";
 "AndroidProjectAuthor"="Sviluppato da Marco Minerva - MVP Windows Development";
 "iOSProjectAuthor"="Sviluppato da Riccardo Cappello";
-"SubscribeTranslatorService"="Registrati per ottenere la chiave";
 "FaceSubscriptionKey"="Chiave di sottoscrizione servizio Face";
 "ShuttingDown"="Spegnimento in corso...";
+"RegisterServices"="Registra i servizi";

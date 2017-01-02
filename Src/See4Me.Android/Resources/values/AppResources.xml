@@ -50,11 +50,10 @@
   <string name="SadnessFemale">Sad</string>
   <string name="SadnessMale">Sad</string>
   <string name="Save">Save</string>
-  <string name="ServiceNotRegistered">Attention, the service is not registered. Go to Settings page to enter the required keys.</string>
+  <string name="ServiceNotRegistered">Attention, the service is not registered. Tap here to discover how to proceed.</string>
   <string name="Settings">Settings</string>
   <string name="ShowDescriptionConfidence">Show description confidence</string>
   <string name="ShowOriginalDescriptionOnTranslation">Show original description on translation</string>
-  <string name="SubscribeCognitiveServices">Subscribe to get the key</string>
   <string name="SurpriseFemale">Surprised</string>
   <string name="SurpriseMale">Surprised</string>
   <string name="SwapCamera">Swap camera</string>
@@ -79,7 +78,7 @@
   <string name="RecognizingText">Recognizing text...</string>
   <string name="AndroidProjectAuthor">Developed by Marco Minerva - MVP Windows Development</string>
   <string name="iOSProjectAuthor">Developed by Riccardo Cappello</string>
-  <string name="SubscribeTranslatorService">Subscribe to get the key</string>
+  <string name="RegisterServices">Register services</string>
   <string name="FaceSubscriptionKey">Face Subscription Key</string>
   <string name="ShuttingDown">Shutting down the device...</string>
 </resources>

@@ -27,9 +27,7 @@ namespace See4Me.ViewModels
         private readonly ILauncherService launcherService;
         private readonly CognitiveClient cognitiveClient;
 
-        public AutoRelayCommand SubscribeCognitiveServicesCommand { get; set; }
-
-        public AutoRelayCommand SubscribeTranslatorServiceCommand { get; set; }
+        public AutoRelayCommand RegisterCommand { get; set; }
 
         public AutoRelayCommand GotoAboutCommand { get; set; }
 
@@ -106,8 +104,7 @@ namespace See4Me.ViewModels
 
         private void CreateCommands()
         {
-            SubscribeCognitiveServicesCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.CognitiveServicesSubscriptionUrl));
-            SubscribeTranslatorServiceCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.TranslatorServiceSubscriptionUrl));
+            RegisterCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.HowToRegisterUrl));
             GotoAboutCommand = new AutoRelayCommand(() => AppNavigationService.NavigateTo(Pages.AboutPage.ToString()));
             GotoPrivacyPolicyCommand = new AutoRelayCommand(() => AppNavigationService.NavigateTo(Pages.PrivacyPolicyPage.ToString()));
         }

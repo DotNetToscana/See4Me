@@ -268,7 +268,7 @@
     <value>Salva</value>
   </data>
   <data name="ServiceNotRegistered" xml:space="preserve">
-    <value>Attenzione, il servizio non è registrato. Vai alle Impostazioni per inserire le chiavi necessarie</value>
+    <value>Attenzione, il servizio non è registrato. Tocca qui per scoprire come effettuare la registrazione</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Impostazioni</value>
@@ -278,9 +278,6 @@
   </data>
   <data name="ShowOriginalDescriptionOnTranslation" xml:space="preserve">
     <value>Mostra anche la descrizione originale in caso di traduzione</value>
-  </data>
-  <data name="SubscribeCognitiveServices" xml:space="preserve">
-    <value>Registrati per ottenere la chiave</value>
   </data>
   <data name="SurpriseFemale" xml:space="preserve">
     <value>Sorpresa</value>
@@ -354,13 +351,13 @@
   <data name="iOSProjectAuthor" xml:space="preserve">
     <value>Sviluppato da Riccardo Cappello</value>
   </data>
-  <data name="SubscribeTranslatorService" xml:space="preserve">
-    <value>Registrati per ottenere la chiave</value>
-  </data>
   <data name="FaceSubscriptionKey" xml:space="preserve">
     <value>Chiave di sottoscrizione servizio Face</value>
   </data>
   <data name="ShuttingDown" xml:space="preserve">
     <value>Spegnimento in corso...</value>
+  </data>
+  <data name="RegisterServices" xml:space="preserve">
+    <value>Registra i servizi</value>
   </data>
 </root>
