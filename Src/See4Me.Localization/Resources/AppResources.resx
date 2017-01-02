@@ -360,4 +360,7 @@
   <data name="FaceSubscriptionKey" xml:space="preserve">
     <value>Face Subscription Key</value>
   </data>
+  <data name="ShuttingDown" xml:space="preserve">
+    <value>Shutting down the device...</value>
+  </data>
 </root>

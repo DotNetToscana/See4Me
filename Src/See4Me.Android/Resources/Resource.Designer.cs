@@ -304,6 +304,9 @@ namespace See4Me
 			// aapt resource value: 0x7f040037
 			public const int ShowOriginalDescriptionOnTranslation = 2130968631;
 			
+			// aapt resource value: 0x7f040053
+			public const int ShuttingDown = 2130968659;
+			
 			// aapt resource value: 0x7f040038
 			public const int SubscribeCognitiveServices = 2130968632;
 			

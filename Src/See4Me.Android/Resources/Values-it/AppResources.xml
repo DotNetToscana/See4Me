@@ -81,4 +81,5 @@
   <string name="iOSProjectAuthor">Sviluppato da Riccardo Cappello</string>
   <string name="SubscribeTranslatorService">Registrati per ottenere la chiave</string>
   <string name="FaceSubscriptionKey">Chiave di sottoscrizione servizio Face</string>
+  <string name="ShuttingDown">Spegnimento in corso...</string>
 </resources>

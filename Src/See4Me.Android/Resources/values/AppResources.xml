@@ -81,4 +81,5 @@
   <string name="iOSProjectAuthor">Developed by Riccardo Cappello</string>
   <string name="SubscribeTranslatorService">Subscribe to get the key</string>
   <string name="FaceSubscriptionKey">Face Subscription Key</string>
+  <string name="ShuttingDown">Shutting down the device...</string>
 </resources>

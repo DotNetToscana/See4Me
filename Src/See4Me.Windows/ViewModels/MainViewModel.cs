@@ -21,10 +21,10 @@ namespace See4Me.ViewModels
 
         partial void OnCreateCommands()
         {
-            ShutdownCommand = new AutoRelayCommand(Shutdown, () => !IsBusy).DependsOn(() => IsBusy);
+            ShutdownCommand = new AutoRelayCommand(async () => await Shutdown(), () => !IsBusy).DependsOn(() => IsBusy);
         }
 
-        public void Shutdown()
+        public async Task Shutdown()
         {
             try
             {
@@ -32,7 +32,10 @@ namespace See4Me.ViewModels
                 if (ApiInformation.IsTypePresent("Windows.System.ShutdownManager"))
                 {
                     IsBusy = true;
-                    ShutdownManager.BeginShutdown(ShutdownKind.Shutdown, TimeSpan.FromSeconds(0));
+                    StatusMessage = AppResources.ShuttingDown;
+                    await SpeechHelper.TrySpeechAsync(AppResources.ShuttingDown);
+
+                    ShutdownManager.BeginShutdown(ShutdownKind.Shutdown, TimeSpan.FromSeconds(3));
                 }
             }
             catch { }

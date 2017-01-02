@@ -360,4 +360,7 @@
   <data name="FaceSubscriptionKey" xml:space="preserve">
     <value>Chiave di sottoscrizione servizio Face</value>
   </data>
+  <data name="ShuttingDown" xml:space="preserve">
+    <value>Spegnimento in corso...</value>
+  </data>
 </root>

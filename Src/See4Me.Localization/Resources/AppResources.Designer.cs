@@ -638,6 +638,15 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shutting down the device....
+        /// </summary>
+        public static string ShuttingDown {
+            get {
+                return ResourceManager.GetString("ShuttingDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subscribe to get the key.
         /// </summary>
         public static string SubscribeCognitiveServices {

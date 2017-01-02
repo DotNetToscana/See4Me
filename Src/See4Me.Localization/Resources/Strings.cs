@@ -83,5 +83,6 @@
         public static string iOSProjectAuthor = "iOSProjectAuthor";
         public static string SubscribeTranslatorService = "SubscribeTranslatorService";
         public static string FaceSubscriptionKey = "FaceSubscriptionKey";
+        public static string ShuttingDown = "ShuttingDown";
     }
 }
