@@ -52,9 +52,8 @@
             <behaviors:CameraPressedBehavior>
                 <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}" />
             </behaviors:CameraPressedBehavior>
-            <behaviors:PushButtonPressedBehavior PinNumber="27" ButtonType="PullDown">
-                <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}" />
-            </behaviors:PushButtonPressedBehavior>
+            <behaviors:PushButtonBehavior PinNumber="27" ButtonType="PullDown" 
+                                          ClickCommand="{Binding DescribeImageCommand}" LongClickCommand="{Binding ShutdownCommand}" />
         </Interactivity:Interaction.Behaviors>
 
         <VisualStateManager.VisualStateGroups>

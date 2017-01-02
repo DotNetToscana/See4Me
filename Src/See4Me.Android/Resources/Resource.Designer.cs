@@ -175,6 +175,9 @@ namespace See4Me
 			// aapt resource value: 0x7f040013
 			public const int FaceRecognizedSingular = 2130968595;
 			
+			// aapt resource value: 0x7f040052
+			public const int FaceSubscriptionKey = 2130968658;
+			
 			// aapt resource value: 0x7f040014
 			public const int FacesRecognizedPlural = 2130968596;
 			

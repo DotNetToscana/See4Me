@@ -8,11 +8,40 @@ using Windows.UI.Xaml.Navigation;
 using Template10.Services.NavigationService;
 using Microsoft.Practices.ServiceLocation;
 using See4Me.Localization.Resources;
+using System;
+using Windows.System;
+using Windows.Foundation.Metadata;
+using System.Runtime.CompilerServices;
 
 namespace See4Me.ViewModels
 {
     public partial class MainViewModel : ViewModelBase
     {
+        public AutoRelayCommand ShutdownCommand { get; set; }
+
+        partial void OnCreateCommands()
+        {
+            ShutdownCommand = new AutoRelayCommand(Shutdown, () => !IsBusy).DependsOn(() => IsBusy);
+        }
+
+        public void Shutdown()
+        {
+            try
+            {
+                // Shutdowns the device immediately.
+                if (ApiInformation.IsTypePresent("Windows.System.ShutdownManager"))
+                {
+                    IsBusy = true;
+                    ShutdownManager.BeginShutdown(ShutdownKind.Shutdown, TimeSpan.FromSeconds(0));
+                }
+            }
+            catch { }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             // Calls methods to initialize the app.

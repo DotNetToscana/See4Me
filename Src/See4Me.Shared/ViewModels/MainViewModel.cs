@@ -62,7 +62,11 @@ namespace See4Me.ViewModels
 
             GotoRecognizeTextCommand = new AutoRelayCommand(() => AppNavigationService.NavigateTo(Pages.RecognizeTextPage.ToString()), () => IsVisionServiceRegistered && !IsBusy)
                 .DependsOn(() => IsBusy);
+
+            OnCreateCommands();
         }
+
+        partial void OnCreateCommands();
 
         public async Task CheckShowConsentAsync()
         {
