@@ -24,6 +24,10 @@ namespace See4Me.Engine
         private readonly ITranslatorServiceClient translatorService;
         private readonly HttpClient httpClient;
 
+        // Variables to handle face identification.
+        private string identifyPersonGroupId = null;
+        private bool faceServiceInitialized = false;
+
         public CognitiveSettings Settings { get; set; }
 
         public IVisionSettingsProvider VisionSettingsProvider { get; set; }
@@ -117,13 +121,17 @@ namespace See4Me.Engine
                     {
                         // Tries to identify faces in the image.
                         IdentifyResult[] faceIdentificationResult = null;
-                        var personGroups = await faceService.ListPersonGroupsAsync();
-                        var defaultPersonGroupId = (personGroups.FirstOrDefault(p => p.Name.ContainsIgnoreCase("See4Me") || p.UserData.ContainsIgnoreCase("See4Me") || p.Name.ContainsIgnoreCase("_default") || p.UserData.ContainsIgnoreCase("_default")) ?? personGroups.FirstOrDefault())?.PersonGroupId;
 
-                        if (!string.IsNullOrWhiteSpace(defaultPersonGroupId))
+                        // If necessary, initializes face service by obtaining the face group used for identification, if any.
+                        if (!faceServiceInitialized)
+                        {
+                            await this.InitializeFaceServiceAsync(faceService);
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(identifyPersonGroupId))
                         {
                             var faceIds = faces.Select(face => face.FaceId).ToArray();
-                            faceIdentificationResult = await faceService.IdentifyAsync(defaultPersonGroupId, faceIds);
+                            faceIdentificationResult = await faceService.IdentifyAsync(identifyPersonGroupId, faceIds);
                         }
 
                         foreach (var face in faces)
@@ -134,7 +142,7 @@ namespace See4Me.Engine
                             var candidate = faceIdentificationResult?.FirstOrDefault(r => r.FaceId == face.FaceId)?.Candidates.FirstOrDefault();
                             if (candidate != null)
                             {
-                                var person = await faceService.GetPersonAsync(defaultPersonGroupId, candidate.PersonId);
+                                var person = await faceService.GetPersonAsync(identifyPersonGroupId, candidate.PersonId);
                                 faceResult.IdentifyConfidence = candidate.Confidence;
                                 faceResult.Name = person?.Name;
                             }
@@ -191,6 +199,20 @@ namespace See4Me.Engine
             }
 
             return result;
+        }
+
+        private async Task InitializeFaceServiceAsync(FaceServiceClient faceService)
+        {
+            try
+            {
+                var personGroups = await faceService.ListPersonGroupsAsync();
+                identifyPersonGroupId = (personGroups.FirstOrDefault(p => p.Name.ContainsIgnoreCase("See4Me") || p.UserData.ContainsIgnoreCase("See4Me") || p.Name.ContainsIgnoreCase("_default") || p.UserData.ContainsIgnoreCase("_default")) ?? personGroups.FirstOrDefault())?.PersonGroupId;
+            }
+            catch { }
+            finally
+            {
+                faceServiceInitialized = true;
+            }
         }
 
         private async Task RaiseOnProgressAsync(Func<RecognitionPhase, Task> onProgress, RecognitionPhase phase)
