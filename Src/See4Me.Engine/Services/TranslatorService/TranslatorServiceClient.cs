@@ -23,6 +23,9 @@ namespace See4Me.Engine.Services.TranslatorService
         private const string TRANSLATE_WITH_FROM_URI = "Translate?text={0}&from={1}&to={2}&contentType=text/plain";
         private const string DETECT_URI = "Detect?text={0}";
         private const string AUTHORIZATION_HEADER = "Authorization";
+
+        private const string ARRAY_NAMESPACE = "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
+
         private const int MAX_TEXT_LENGTH = 1000;
         private const int MAX_TEXT_LENGTH_FOR_AUTODETECTION = 100;
 
@@ -106,7 +109,7 @@ namespace See4Me.Engine.Services.TranslatorService
 
             var content = await client.GetStringAsync(LANGUAGES_URI).ConfigureAwait(false);
 
-            XNamespace ns = "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
+            XNamespace ns = ARRAY_NAMESPACE;
             var doc = XDocument.Parse(content);
 
             var languages = doc.Root.Elements(ns + "string").Select(s => s.Value);
@@ -231,22 +234,18 @@ namespace See4Me.Engine.Services.TranslatorService
             if (string.IsNullOrWhiteSpace(SubscriptionKey))
                 throw new ArgumentException("Invalid Subscription Key. Go to Azure Portal and sign up for Microsoft Translator: https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/TextTranslation");
 
-            try
+            var token = await authToken.GetAccessTokenAsync().ConfigureAwait(false);
+            if (token != authorizationHeaderValue)
             {
-                var token = await authToken.GetAccessTokenAsync().ConfigureAwait(false);
-                if (token != authorizationHeaderValue)
-                {
-                    // Updates the access token.
-                    authorizationHeaderValue = token;
-                    var headers = client.DefaultRequestHeaders;
+                // Updates the access token.
+                authorizationHeaderValue = token;
+                var headers = client.DefaultRequestHeaders;
 
-                    if (headers.Contains(AUTHORIZATION_HEADER))
-                        headers.Remove(AUTHORIZATION_HEADER);
+                if (headers.Contains(AUTHORIZATION_HEADER))
+                    headers.Remove(AUTHORIZATION_HEADER);
 
-                    headers.Add(AUTHORIZATION_HEADER, authorizationHeaderValue);
-                }
+                headers.Add(AUTHORIZATION_HEADER, authorizationHeaderValue);
             }
-            catch { }
         }
 
         /// <summary>

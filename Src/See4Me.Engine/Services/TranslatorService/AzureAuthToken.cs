@@ -76,17 +76,13 @@ namespace See4Me.Engine.Services.TranslatorService
             if ((DateTime.Now - storedTokenTime) < TokenCacheDuration && !string.IsNullOrWhiteSpace(storedTokenValue))
                 return storedTokenValue;
 
-            using (var request = new HttpRequestMessage())
+            using (var request = new HttpRequestMessage(HttpMethod.Post, ServiceUrl))
             {
-                request.Method = HttpMethod.Post;
-                request.RequestUri = ServiceUrl;
-                request.Content = new StringContent(string.Empty);
                 request.Headers.TryAddWithoutValidation(OcpApimSubscriptionKeyHeader, this.SubscriptionKey);
 
                 var response = await client.SendAsync(request).ConfigureAwait(false);
-                response.EnsureSuccessStatusCode();
-
                 var token = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
                 storedTokenTime = DateTime.Now;
                 storedTokenValue = $"Bearer {token}";
 
