@@ -81,4 +81,5 @@
   <string name="FaceSubscriptionKey">Chiave di sottoscrizione servizio Face</string>
   <string name="ShuttingDown">Spegnimento in corso...</string>
   <string name="RegisterServices">Registra i servizi</string>
+  <string name="ShowDescriptionOnFaceIdentification">Mostra anche la descrizione dell\'immagine quando vengono riconosciuti uno o più volti</string>
 </resources>

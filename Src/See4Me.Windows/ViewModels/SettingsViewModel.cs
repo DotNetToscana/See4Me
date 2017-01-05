@@ -19,9 +19,11 @@ namespace See4Me.ViewModels
         private const string SHOW_DESCRIPTION_CONFIDENCE = "ShowDescriptionConfidence";
         private const string SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION = "ShowOriginalDescriptionOnTranslation";
         private const string VISION_SUBSCRIPTION_KEY = "VisionSubscriptionKey";
+        private const string FACE_SUBSCRIPTION_KEY = "FaceSubscriptionKey";
         private const string EMOTION_SUBSCRIPTION_KEY = "EmotionSubscriptionKey";
         private const string TRANSLATOR_SUBSCRIPTION_KEY = "TranslatorSubscriptionKey";
         private const string IS_TEXT_TO_SPEECH_ENABLED = "IsTextToSpeechEnabled";
+        private const string SHOW_DESCRIPTION_ON_FACE_IDENTIFICATION = "ShowDescriptionOnFaceIdentification";
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
@@ -62,6 +64,7 @@ namespace See4Me.ViewModels
                 state[EMOTION_SUBSCRIPTION_KEY] = emotionSubscriptionKey;
                 state[TRANSLATOR_SUBSCRIPTION_KEY] = translatorSubscriptionKey;
                 state[IS_TEXT_TO_SPEECH_ENABLED] = isTextToSpeechEnabled;
+                state[SHOW_DESCRIPTION_ON_FACE_IDENTIFICATION] = showDescriptionOnFaceIdentification;
             }
 
             return base.OnNavigatedFromAsync(state, suspending);
@@ -74,7 +77,9 @@ namespace See4Me.ViewModels
             visionSubscriptionKey = state[VISION_SUBSCRIPTION_KEY].ToString();
             emotionSubscriptionKey = state[EMOTION_SUBSCRIPTION_KEY].ToString();
             translatorSubscriptionKey = state[TRANSLATOR_SUBSCRIPTION_KEY].ToString();
+            faceSubscriptionKey = state[FACE_SUBSCRIPTION_KEY].ToString();
             isTextToSpeechEnabled = Convert.ToBoolean(state[IS_TEXT_TO_SPEECH_ENABLED]);
+            showDescriptionOnFaceIdentification = Convert.ToBoolean(state[SHOW_DESCRIPTION_ON_FACE_IDENTIFICATION]);
         }
     }
 }

@@ -83,5 +83,6 @@
         public static string RegisterServices = "RegisterServices";
         public static string FaceSubscriptionKey = "FaceSubscriptionKey";
         public static string ShuttingDown = "ShuttingDown";
+        public static string ShowDescriptionOnFaceIdentification = "ShowDescriptionOnFaceIdentification";
     }
 }

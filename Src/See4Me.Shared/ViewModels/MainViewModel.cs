@@ -166,50 +166,56 @@ namespace See4Me.ViewModels
                         if (await NetworkService.IsInternetAvailableAsync())
                         {
                             var result = await cognitiveClient.AnalyzeAsync(stream, Language, RecognitionType.Vision | RecognitionType.Face | RecognitionType.Emotion, OnRecognitionProgress);
+
                             var visionResult = result.VisionResult;
+                            var faceResults = result.FaceResults;
 
-                            if (visionResult.IsValid)
+                            if (!faceResults.Any() || Settings.ShowDescriptionOnFaceIdentification)
                             {
-                                visionDescription = visionResult.Description;
-                                if (visionResult.IsTranslated)
+                                // Gets the description only if no faces has been recognized or if the corresponding setting flag is set.
+                                if (visionResult.IsValid)
                                 {
-                                    if (Settings.ShowOriginalDescriptionOnTranslation)
-                                        visionDescription = $"{visionResult.TranslatedDescription} ({visionResult.Description})";
-                                    else
-                                        visionDescription = visionResult.TranslatedDescription;
-                                }
-
-                                if (Settings.ShowDescriptionConfidence)
-                                    visionDescription = $"{visionDescription} ({Math.Round(visionResult.Confidence, 2)})";
-
-                                // Analyzes face results.
-                                var faceResults = result.FaceResults;
-
-                                if (faceResults.Any())
-                                {
-                                    var faceMessages = new StringBuilder();
-
-                                    foreach (var faceResult in faceResults)
+                                    visionDescription = visionResult.Description;
+                                    if (visionResult.IsTranslated)
                                     {
-                                        var faceMessage = SpeechHelper.GetFaceMessage(faceResult);
-                                        faceMessages.Append(faceMessage);
+                                        if (Settings.ShowOriginalDescriptionOnTranslation)
+                                            visionDescription = $"{visionResult.TranslatedDescription} ({visionResult.Description})";
+                                        else
+                                            visionDescription = visionResult.TranslatedDescription;
                                     }
 
-                                    // Describes how many faces have been recognized.
-                                    if (faceResults.Count() == 1)
-                                        facesRecognizedDescription = AppResources.FaceRecognizedSingular;
-                                    else
-                                        facesRecognizedDescription = $"{string.Format(AppResources.FacesRecognizedPlural, faceResults.Count())} {Constants.SentenceEnd}";
-
-                                    facesDescription = faceMessages.ToString();
+                                    if (Settings.ShowDescriptionConfidence)
+                                        visionDescription = $"{visionDescription} ({Math.Round(visionResult.Confidence, 2)})";
                                 }
-                            }
-                            else
-                            {
-                                if (Settings.ShowRawDescriptionOnInvalidRecognition && visionResult.RawDescription != null)
-                                    visionDescription = $"{AppResources.RecognitionFailed} ({visionResult.RawDescription}, {Math.Round(visionResult.Confidence, 2)})";
                                 else
-                                    visionDescription = AppResources.RecognitionFailed;
+                                {
+                                    if (Settings.ShowRawDescriptionOnInvalidRecognition && visionResult.RawDescription != null)
+                                        visionDescription = $"{AppResources.RecognitionFailed} ({visionResult.RawDescription}, {Math.Round(visionResult.Confidence, 2)})";
+                                    else
+                                        visionDescription = AppResources.RecognitionFailed;
+                                }
+
+                                visionDescription = $"{visionDescription}{Constants.SentenceEnd}";
+                            }
+                            
+                            if (faceResults.Any())
+                            {
+                                // At least a face has been recognized.
+                                var faceMessages = new StringBuilder();
+
+                                foreach (var faceResult in faceResults)
+                                {
+                                    var faceMessage = SpeechHelper.GetFaceMessage(faceResult);
+                                    faceMessages.Append(faceMessage);
+                                }
+
+                                // Describes how many faces have been recognized.
+                                if (faceResults.Count() == 1)
+                                    facesRecognizedDescription = AppResources.FaceRecognizedSingular;
+                                else
+                                    facesRecognizedDescription = $"{string.Format(AppResources.FacesRecognizedPlural, faceResults.Count())} {Constants.SentenceEnd}";
+
+                                facesDescription = faceMessages.ToString();
                             }
                         }
                         else
@@ -245,7 +251,7 @@ namespace See4Me.ViewModels
             }
 
             // Shows and speaks the result.
-            var message = $"{visionDescription}{Constants.SentenceEnd} {facesRecognizedDescription} {facesDescription}";
+            var message = $"{visionDescription} {facesRecognizedDescription} {facesDescription}";
             StatusMessage = this.GetNormalizedMessage(message);
 
             await SpeechHelper.TrySpeechAsync(message);

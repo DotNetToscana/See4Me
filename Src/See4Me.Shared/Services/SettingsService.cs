@@ -17,6 +17,7 @@ namespace See4Me.Services
         private const string TRANSLATOR_SUBSCRIPTION_KEY = "TranslatorSubscriptionKey";
         private const string IS_TEXT_TO_SPEECH_ENABLED = "IsTextToSpeechEnabled";
         private const string IS_CONSENT_GIVEN = "IsConsentGiven";
+        private const string SHOW_DESCRIPTION_ON_FACE_IDENTIFICATION = "ShowDescriptionOnFaceIdentification";
 
         private readonly ISettings settings;
 
@@ -62,7 +63,14 @@ namespace See4Me.Services
 
         public bool ShowRawDescriptionOnInvalidRecognition
         {
-            get { return settings.GetValueOrDefault(SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION, false); }
+            get
+            {
+#if DEBUG
+                return true;
+#else
+                return settings.GetValueOrDefault(SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION, false);
+#endif
+            }
             set { settings.AddOrUpdateValue(SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION, value); }
         }
 
@@ -107,8 +115,13 @@ namespace See4Me.Services
                 return settings.GetValueOrDefault(IS_CONSENT_GIVEN, false);
 #endif
             }
-
             set { settings.AddOrUpdateValue(IS_CONSENT_GIVEN, value); }
+        }
+
+        public bool ShowDescriptionOnFaceIdentification
+        {
+            get { return settings.GetValueOrDefault(SHOW_DESCRIPTION_ON_FACE_IDENTIFICATION, false); }
+            set { settings.AddOrUpdateValue(SHOW_DESCRIPTION_ON_FACE_IDENTIFICATION, value); }
         }
     }
 }

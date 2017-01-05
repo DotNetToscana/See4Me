@@ -360,4 +360,7 @@
   <data name="ShuttingDown" xml:space="preserve">
     <value>Shutting down the device...</value>
   </data>
+  <data name="ShowDescriptionOnFaceIdentification" xml:space="preserve">
+    <value>Show also image description when detecting one or more faces</value>
+  </data>
 </root>

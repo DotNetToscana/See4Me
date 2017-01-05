@@ -638,6 +638,15 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show also image description when detecting one or more faces.
+        /// </summary>
+        public static string ShowDescriptionOnFaceIdentification {
+            get {
+                return ResourceManager.GetString("ShowDescriptionOnFaceIdentification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show original description on translation.
         /// </summary>
         public static string ShowOriginalDescriptionOnTranslation {

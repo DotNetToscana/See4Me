@@ -23,5 +23,7 @@
         bool IsTextToSpeechEnabled { get; set; }
 
         bool IsConsentGiven { get; set; }
+
+        bool ShowDescriptionOnFaceIdentification { get; set; }
     }
 }

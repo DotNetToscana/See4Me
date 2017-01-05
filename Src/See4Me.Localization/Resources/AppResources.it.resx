@@ -360,4 +360,7 @@
   <data name="RegisterServices" xml:space="preserve">
     <value>Registra i servizi</value>
   </data>
+  <data name="ShowDescriptionOnFaceIdentification" xml:space="preserve">
+    <value>Mostra anche la descrizione dell'immagine quando vengono riconosciuti uno o più volti</value>
+  </data>
 </root>

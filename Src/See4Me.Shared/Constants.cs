@@ -14,7 +14,7 @@
         public const string PersonAgeMessage = "PersonAgeMessage";
         public const string EmotionMessage = "EmotionMessage";
 
-        public const string HowToRegisterUrl = "https://github.com/DotNetToscana/See4Me/blob/master/Docs/HowToRegister.md";
+        public const string HowToRegisterUrl = "https://github.com/DotNetToscana/See4Me/blob/master/Docs/Register.md";
         public const string CognitiveServicesUrl = "https://www.microsoft.com/cognitive-services";
         public const string MicrosoftPrivacyPoliciesUrl = "https://go.microsoft.com/fwlink/?LinkId=521839";
         public const string GitHubProjectUrl = "https://github.com/DotNetToscana/see4me";

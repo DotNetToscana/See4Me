@@ -79,3 +79,4 @@
 "RegisterServices"="Register services";
 "FaceSubscriptionKey"="Face Subscription Key";
 "ShuttingDown"="Shutting down the device...";
+"ShowDescriptionOnFaceIdentification"="Show also image description when detecting one or more faces";

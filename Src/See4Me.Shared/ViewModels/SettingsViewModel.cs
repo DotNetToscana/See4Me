@@ -82,6 +82,13 @@ namespace See4Me.ViewModels
             set { this.Set(ref showOriginalDescriptionOnTranslation, value); }
         }
 
+        private bool showDescriptionOnFaceIdentification;
+        public bool ShowDescriptionOnFaceIdentification
+        {
+            get { return showDescriptionOnFaceIdentification; }
+            set { this.Set(ref showDescriptionOnFaceIdentification, value); }
+        }
+
         public SettingsViewModel(CognitiveClient cognitiveClient, ILauncherService launcherService)
         {
             this.cognitiveClient = cognitiveClient;
@@ -100,6 +107,7 @@ namespace See4Me.ViewModels
             IsTextToSpeechEnabled = Settings.IsTextToSpeechEnabled;
             ShowDescriptionConfidence = Settings.ShowDescriptionConfidence;
             ShowOriginalDescriptionOnTranslation = Settings.ShowOriginalDescriptionOnTranslation;
+            showDescriptionOnFaceIdentification = Settings.ShowDescriptionOnFaceIdentification;
         }
 
         private void CreateCommands()
@@ -119,6 +127,7 @@ namespace See4Me.ViewModels
             Settings.IsTextToSpeechEnabled = isTextToSpeechEnabled;
             Settings.ShowDescriptionConfidence = showDescriptionConfidence;
             Settings.ShowOriginalDescriptionOnTranslation = showOriginalDescriptionOnTranslation;
+            Settings.ShowDescriptionOnFaceIdentification = showDescriptionOnFaceIdentification;
 
             var cognitiveSettings = cognitiveClient.Settings;
             cognitiveSettings.EmotionSubscriptionKey = emotionSubscriptionKey;

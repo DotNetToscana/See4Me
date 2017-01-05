@@ -81,4 +81,5 @@
   <string name="RegisterServices">Register services</string>
   <string name="FaceSubscriptionKey">Face Subscription Key</string>
   <string name="ShuttingDown">Shutting down the device...</string>
+  <string name="ShowDescriptionOnFaceIdentification">Show also image description when detecting one or more faces</string>
 </resources>
