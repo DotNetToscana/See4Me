@@ -22,7 +22,6 @@ namespace See4Me.Engine
         private const string DefaultLanguge = "en";
 
         private readonly ITranslatorServiceClient translatorService;
-        private readonly HttpClient httpClient;
 
         // Variables to handle face identification.
         private string identifyPersonGroupId = null;
@@ -46,13 +45,6 @@ namespace See4Me.Engine
             VisionSettingsProvider = visionSettingsProvider;
 
             translatorService = new TranslatorServiceClient();
-            httpClient = new HttpClient();
-        }
-
-        public async Task<CognitiveResult> AnalyzeAsync(string sourceUrl, string language, RecognitionType recognitionType = RecognitionType.All, Func<RecognitionPhase, Task> onProgress = null)
-        {
-            var buffer = await httpClient.GetByteArrayAsync(sourceUrl);
-            return await this.AnalyzeAsync(buffer, language, recognitionType, onProgress);
         }
 
         public Task<CognitiveResult> AnalyzeAsync(byte[] buffer, string language, RecognitionType recognitionType = RecognitionType.All, Func<RecognitionPhase, Task> onProgress = null)
@@ -119,14 +111,14 @@ namespace See4Me.Engine
 
                     if (faces.Any())
                     {
-                        // Tries to identify faces in the image.
-                        IdentifyResult[] faceIdentificationResult = null;
-
-                        // If necessary, initializes face service by obtaining the face group used for identification, if any.
                         if (!faceServiceInitialized)
                         {
+                            // If necessary, initializes face service by obtaining the face group used for identification, if any.
                             await this.InitializeFaceServiceAsync(faceService);
                         }
+
+                        // Tries to identify faces in the image.
+                        IdentifyResult[] faceIdentificationResult = null;
 
                         if (!string.IsNullOrWhiteSpace(identifyPersonGroupId))
                         {
@@ -142,6 +134,7 @@ namespace See4Me.Engine
                             var candidate = faceIdentificationResult?.FirstOrDefault(r => r.FaceId == face.FaceId)?.Candidates.FirstOrDefault();
                             if (candidate != null)
                             {
+                                // Gets the person name.
                                 var person = await faceService.GetPersonAsync(identifyPersonGroupId, candidate.PersonId);
                                 faceResult.IdentifyConfidence = candidate.Confidence;
                                 faceResult.Name = person?.Name;
@@ -260,7 +253,6 @@ namespace See4Me.Engine
         public void Dispose()
         {
             translatorService.Dispose();
-            httpClient.Dispose();
         }
     }
 }
