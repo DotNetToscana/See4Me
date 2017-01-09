@@ -115,8 +115,8 @@ namespace See4Me
 			// aapt resource value: 0x7f040003
 			public const int AboutCommand = 2130968579;
 			
-			// aapt resource value: 0x7f04004f
-			public const int AndroidProjectAuthor = 2130968655;
+			// aapt resource value: 0x7f04004e
+			public const int AndroidProjectAuthor = 2130968654;
 			
 			// aapt resource value: 0x7f040004
 			public const int AngerFemale = 2130968580;
@@ -151,11 +151,11 @@ namespace See4Me
 			// aapt resource value: 0x7f04000d
 			public const int ChildMale = 2130968589;
 			
-			// aapt resource value: 0x7f040047
-			public const int ConsentRequiredMessage = 2130968647;
+			// aapt resource value: 0x7f040046
+			public const int ConsentRequiredMessage = 2130968646;
 			
-			// aapt resource value: 0x7f040048
-			public const int ConsentRequiredTitle = 2130968648;
+			// aapt resource value: 0x7f040047
+			public const int ConsentRequiredTitle = 2130968647;
 			
 			// aapt resource value: 0x7f04000e
 			public const int ContemptFemale = 2130968590;
@@ -175,8 +175,8 @@ namespace See4Me
 			// aapt resource value: 0x7f040013
 			public const int FaceRecognizedSingular = 2130968595;
 			
-			// aapt resource value: 0x7f040052
-			public const int FaceSubscriptionKey = 2130968658;
+			// aapt resource value: 0x7f040051
+			public const int FaceSubscriptionKey = 2130968657;
 			
 			// aapt resource value: 0x7f040014
 			public const int FacesRecognizedPlural = 2130968596;
@@ -223,8 +223,8 @@ namespace See4Me
 			// aapt resource value: 0x7f040021
 			public const int ManMale = 2130968609;
 			
-			// aapt resource value: 0x7f04004c
-			public const int MicrosoftPrivacyPolicies = 2130968652;
+			// aapt resource value: 0x7f04004b
+			public const int MicrosoftPrivacyPolicies = 2130968651;
 			
 			// aapt resource value: 0x7f040022
 			public const int NeutralFemale = 2130968610;
@@ -250,17 +250,17 @@ namespace See4Me
 			// aapt resource value: 0x7f040029
 			public const int PersonAgeMessageMale = 2130968617;
 			
-			// aapt resource value: 0x7f04004d
-			public const int PoweredByCognitiveServices = 2130968653;
+			// aapt resource value: 0x7f04004c
+			public const int PoweredByCognitiveServices = 2130968652;
+			
+			// aapt resource value: 0x7f040048
+			public const int PrivacyPolicy = 2130968648;
 			
 			// aapt resource value: 0x7f040049
-			public const int PrivacyPolicy = 2130968649;
+			public const int PrivacyPolicyCommand = 2130968649;
 			
 			// aapt resource value: 0x7f04004a
-			public const int PrivacyPolicyCommand = 2130968650;
-			
-			// aapt resource value: 0x7f04004b
-			public const int PrivacyStatement = 2130968651;
+			public const int PrivacyStatement = 2130968650;
 			
 			// aapt resource value: 0x7f04002b
 			public const int QueryingVisionService = 2130968619;
@@ -277,8 +277,11 @@ namespace See4Me
 			// aapt resource value: 0x7f04002f
 			public const int RecognizingFaces = 2130968623;
 			
-			// aapt resource value: 0x7f04004e
-			public const int RecognizingText = 2130968654;
+			// aapt resource value: 0x7f04004d
+			public const int RecognizingText = 2130968653;
+			
+			// aapt resource value: 0x7f040050
+			public const int RegisterServices = 2130968656;
 			
 			// aapt resource value: 0x7f040030
 			public const int ResourceLanguage = 2130968624;
@@ -301,65 +304,62 @@ namespace See4Me
 			// aapt resource value: 0x7f040036
 			public const int ShowDescriptionConfidence = 2130968630;
 			
+			// aapt resource value: 0x7f040053
+			public const int ShowDescriptionOnFaceIdentification = 2130968659;
+			
 			// aapt resource value: 0x7f040037
 			public const int ShowOriginalDescriptionOnTranslation = 2130968631;
 			
-			// aapt resource value: 0x7f040053
-			public const int ShuttingDown = 2130968659;
+			// aapt resource value: 0x7f040052
+			public const int ShuttingDown = 2130968658;
 			
 			// aapt resource value: 0x7f040038
-			public const int SubscribeCognitiveServices = 2130968632;
-			
-			// aapt resource value: 0x7f040051
-			public const int SubscribeTranslatorService = 2130968657;
+			public const int SurpriseFemale = 2130968632;
 			
 			// aapt resource value: 0x7f040039
-			public const int SurpriseFemale = 2130968633;
+			public const int SurpriseMale = 2130968633;
 			
 			// aapt resource value: 0x7f04003a
-			public const int SurpriseMale = 2130968634;
+			public const int SwapCamera = 2130968634;
 			
 			// aapt resource value: 0x7f04003b
-			public const int SwapCamera = 2130968635;
+			public const int SwapCameraError = 2130968635;
 			
 			// aapt resource value: 0x7f04003c
-			public const int SwapCameraError = 2130968636;
+			public const int TakePhoto = 2130968636;
 			
 			// aapt resource value: 0x7f04003d
-			public const int TakePhoto = 2130968637;
+			public const int TextToSpeech = 2130968637;
 			
 			// aapt resource value: 0x7f04003e
-			public const int TextToSpeech = 2130968638;
+			public const int Translating = 2130968638;
 			
 			// aapt resource value: 0x7f04003f
-			public const int Translating = 2130968639;
+			public const int TranslatorSubscriptionKey = 2130968639;
 			
 			// aapt resource value: 0x7f040040
-			public const int TranslatorSubscriptionKey = 2130968640;
+			public const int Twitter = 2130968640;
 			
 			// aapt resource value: 0x7f040041
-			public const int Twitter = 2130968641;
+			public const int UnableToAccessService = 2130968641;
 			
 			// aapt resource value: 0x7f040042
-			public const int UnableToAccessService = 2130968642;
+			public const int UnableToRecognizeText = 2130968642;
 			
 			// aapt resource value: 0x7f040043
-			public const int UnableToRecognizeText = 2130968643;
+			public const int UnableToTakePhoto = 2130968643;
 			
 			// aapt resource value: 0x7f040044
-			public const int UnableToTakePhoto = 2130968644;
-			
-			// aapt resource value: 0x7f040045
-			public const int VisionSubscriptionKey = 2130968645;
+			public const int VisionSubscriptionKey = 2130968644;
 			
 			// aapt resource value: 0x7f04002a
 			public const int WindowsProjectAuthor = 2130968618;
 			
-			// aapt resource value: 0x7f040046
-			public const int Yes = 2130968646;
+			// aapt resource value: 0x7f040045
+			public const int Yes = 2130968645;
 			
-			// aapt resource value: 0x7f040050
-			public const int iOSProjectAuthor = 2130968656;
+			// aapt resource value: 0x7f04004f
+			public const int iOSProjectAuthor = 2130968655;
 			
 			static String()
 			{
