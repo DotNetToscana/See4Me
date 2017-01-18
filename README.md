@@ -4,7 +4,7 @@
 
 **Getting started**
 
-First, you must obtain a Cognitive API subscription keys by following instructions in [Microsoft Cognitive Services subscription](https://www.microsoft.com/cognitive-services/en-us/sign-up). Then, you also need to subscribe to [Microsoft Translator Service](https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/TextTranslation) on Azure.
+You must obtain Cognitive API and Microsoft Translator subscription keys by following the instructions available in [How to register Cognitive Services](https://raw.githubusercontent.com/DotNetToscana/See4Me/master/Docs/Register.md).
 
 You need to insert these service keys (Subscription Key for Vision, Face, Emotion and Translator Services) in the *Src/See4Me.Shared/ServiceKeys.cs* file.
 
