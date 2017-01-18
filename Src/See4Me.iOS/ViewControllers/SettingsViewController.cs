@@ -48,23 +48,6 @@ namespace See4Me
 			ButtonAbout.SetCommand(this.ViewModel.GotoAboutCommand);
 			ButtonPrivacy.SetCommand(this.ViewModel.GotoPrivacyPolicyCommand);
 
-			LinkSubscribeEmotion.UserInteractionEnabled = true;
-			LinkSubscribeEmotion.AddGestureRecognizer(new UITapGestureRecognizer(() =>
-			{
-				this.ViewModel.SubscribeCognitiveServicesCommand.Execute(null);
-			}));
-			LinkSubscribeVision.UserInteractionEnabled = true;
-			LinkSubscribeVision.AddGestureRecognizer(new UITapGestureRecognizer(() =>
-			{
-				this.ViewModel.SubscribeCognitiveServicesCommand.Execute(null);
-			}));
-			LinkTranslatorSubscriptionKey.UserInteractionEnabled = true;
-			LinkTranslatorSubscriptionKey.AddGestureRecognizer(new UITapGestureRecognizer(() =>
-			{
-				this.ViewModel.SubscribeTranslatorServiceCommand.Execute(null);
-			}));
-
-
 			this.NavigationItem.SetRightBarButtonItem(
 				new UIBarButtonItem(UIBarButtonSystemItem.Save, (sender, args) =>
 				{
@@ -99,10 +82,6 @@ namespace See4Me
 			LabelVisionSubscriptionKey.Text = AppResources.VisionSubscriptionKey;
 			LabelEmotionSubscriptionKey.Text = AppResources.EmotionSubscriptionKey;
 			LabelTranslatorSubscriptionKey.Text = AppResources.TranslatorSubscriptionKey;
-
-			LinkSubscribeEmotion.Text = AppResources.SubscribeCognitiveServices;
-			LinkSubscribeVision.Text = AppResources.SubscribeCognitiveServices;
-			LinkTranslatorSubscriptionKey.Text = AppResources.SubscribeTranslatorService;
 
 			LabelTextToSpeech.Text = AppResources.TextToSpeech;
 			LabelShowDescriptionConfidence.Text = AppResources.ShowDescriptionConfidence;
