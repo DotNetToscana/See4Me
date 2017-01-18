@@ -37,7 +37,7 @@ namespace See4Me.Behaviors
         public event EventHandler LongClick;
 
         private readonly Stopwatch longClickWatch;
-        private readonly TimeSpan longClickTimeout = TimeSpan.FromMilliseconds(700);
+        private readonly TimeSpan longClickTimeout = TimeSpan.FromMilliseconds(1200);
 
         [PlatformSpecific]
         public PushButton(int pinNumber, ButtonType type = ButtonType.PullDown, PushButtonBehavior behavior = null)

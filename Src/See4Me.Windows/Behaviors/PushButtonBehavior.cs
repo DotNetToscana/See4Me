@@ -27,7 +27,6 @@ namespace See4Me.Behaviors
 
         public PushButton Button { get; private set; }
 
-        [PlatformSpecific]
         public static readonly DependencyProperty ClickCommandProperty = DependencyProperty.Register("ClickCommand", typeof(ICommand),
             typeof(PushButtonBehavior), new PropertyMetadata(null, OnClickCommandPropertyChanged));
 

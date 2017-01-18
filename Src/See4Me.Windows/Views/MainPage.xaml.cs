@@ -7,6 +7,7 @@ using System.IO;
 using See4Me.Extensions;
 using Windows.System.Profile;
 using See4Me.Common;
+using Windows.UI.Core;
 
 namespace See4Me.Views
 {
@@ -24,7 +25,9 @@ namespace See4Me.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
             this.RegisterMessages();
+
             base.OnNavigatedTo(e);
         }
 
@@ -45,6 +48,9 @@ namespace See4Me.Views
                 switch (message.Notification)
                 {
                     case Constants.TakingPhoto:
+                        fullSizeImage.Source = null;
+
+                        previewImageBorder.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                         previewImage.Source = null;
 
                         if (deviceFamily != Constants.WindowsMobileFamily)
@@ -60,6 +66,9 @@ namespace See4Me.Views
                 {
                     case Constants.PhotoTaken:
                         await previewImage.SetSourceAsync(message.Content);
+                        previewImageBorder.Visibility = Windows.UI.Xaml.Visibility.Visible;
+
+                        await fullSizeImage.SetSourceAsync(message.Content);
 
                         break;
                 }
@@ -68,8 +77,20 @@ namespace See4Me.Views
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
             Messenger.Default.Unregister(this);
+
             base.OnNavigatingFrom(e);
+        }
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (fullSizeImage.Opacity == 1)
+            {
+                // If the full size image is shown, the back button must actually hide it.
+                hideFullSizeImageAnimation.Begin();
+                e.Handled = true;
+            }
         }
     }
 }
