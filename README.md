@@ -4,9 +4,9 @@
 
 **Getting started**
 
-You must obtain Cognitive API and Microsoft Translator subscription keys by following the instructions available in [How to register Cognitive Services](Docs/Register.md).
+To use See4Me, you must obtain Cognitive API and Microsoft Translator subscription keys by following the instructions available in [How to register Cognitive Services](Docs/Register.md).
 
-You need to insert these service keys (Subscription Key for Vision, Face, Emotion and Translator Services) in the *Src/See4Me.Shared/ServiceKeys.cs* file.
+Then, you need to insert these service keys (Subscription Key for Vision, Face, Emotion and Translator Services) in the *Src/See4Me.Shared/ServiceKeys.cs* file.
 
 **Screenshots**
 
