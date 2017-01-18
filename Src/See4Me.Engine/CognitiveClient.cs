@@ -39,13 +39,19 @@ namespace See4Me.Engine
 
         public bool IsTranslatorServiceRegistered => !string.IsNullOrWhiteSpace(Settings.TranslatorSubscriptionKey);
 
-        public CognitiveClient(CognitiveSettings settings = null, IVisionSettingsProvider visionSettingsProvider = null)
+        public CognitiveClient(IVisionSettingsProvider visionSettingsProvider)
+            : this(new CognitiveSettings(), visionSettingsProvider)
+        {
+        }
+
+        public CognitiveClient(CognitiveSettings settings, IVisionSettingsProvider visionSettingsProvider = null)
         {
             Settings = settings ?? new CognitiveSettings();
             VisionSettingsProvider = visionSettingsProvider;
 
             translatorService = new TranslatorServiceClient();
         }
+
 
         public Task<CognitiveResult> AnalyzeAsync(byte[] buffer, string language, RecognitionType recognitionType = RecognitionType.All, Func<RecognitionPhase, Task> onProgress = null)
             => AnalyzeAsync(new MemoryStream(buffer), language, recognitionType, onProgress);
