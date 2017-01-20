@@ -60,6 +60,9 @@
   ],
   "DescriptionsToReplace": {
     "a man in a blue cloudy sky": "a blue cloudy sky",
-    "a sidewalk with luggage": "a sidewalk"
+    "a sidewalk with luggage": "a sidewalk",
+    "a train traveling down tracks next to a mountain": "a mountain",
+    "a train on a path": "a path",
+    "a train is coming down the mountain":  "a mountain"
   }
 }
