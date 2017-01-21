@@ -39,19 +39,23 @@ namespace See4Me.Engine
 
         public bool IsTranslatorServiceRegistered => !string.IsNullOrWhiteSpace(Settings.TranslatorSubscriptionKey);
 
-        public CognitiveClient(IVisionSettingsProvider visionSettingsProvider)
-            : this(new CognitiveSettings(), visionSettingsProvider)
+        public CognitiveClient()
+            : this(null, null)
         {
         }
 
-        public CognitiveClient(CognitiveSettings settings, IVisionSettingsProvider visionSettingsProvider = null)
+        public CognitiveClient(IVisionSettingsProvider visionSettingsProvider)
+            : this(null, visionSettingsProvider)
+        {
+        }
+
+        public CognitiveClient(CognitiveSettings settings, IVisionSettingsProvider visionSettingsProvider)
         {
             Settings = settings ?? new CognitiveSettings();
             VisionSettingsProvider = visionSettingsProvider;
 
             translatorService = new TranslatorServiceClient();
         }
-
 
         public Task<CognitiveResult> AnalyzeAsync(byte[] buffer, string language, RecognitionType recognitionType = RecognitionType.All, Func<RecognitionPhase, Task> onProgress = null)
             => AnalyzeAsync(new MemoryStream(buffer), language, recognitionType, onProgress);
@@ -70,10 +74,12 @@ namespace See4Me.Engine
             {
                 var features = new HashSet<VisualFeature> { VisualFeature.Description };
 
-                // If recognition types include face or emotions, adde also the Face Visual Feature, so Face and Emotion services are called
-                // only if really needed.
                 if (recognitionType.HasFlag(RecognitionType.Face) || recognitionType.HasFlag(RecognitionType.Emotion))
+                { 
+                    // If recognition types include face or emotions, adde also the Face Visual Feature, so Face and Emotion services are called
+                    // only if really needed.
                     features.Add(VisualFeature.Faces);
+                }
 
                 try
                 {
