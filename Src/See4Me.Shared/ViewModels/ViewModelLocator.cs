@@ -1,8 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
-using Microsoft.ProjectOxford.Emotion;
-using Microsoft.ProjectOxford.Vision;
 using Newtonsoft.Json;
 using See4Me.Engine;
 using See4Me.Engine.Services.ServiceSettings;

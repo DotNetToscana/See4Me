@@ -77,7 +77,7 @@ namespace See4Me.Engine
 
                 try
                 {
-                    analyzeImageResult = await visionService.AnalyzeImageAsync(stream, features);
+                    analyzeImageResult = await visionService.AnalyzeImageAsync(stream, features);                    
                 }
                 catch (Microsoft.ProjectOxford.Vision.ClientException ex)
                 {
@@ -105,7 +105,7 @@ namespace See4Me.Engine
             if ((recognitionType.HasFlag(RecognitionType.Face) || recognitionType.HasFlag(RecognitionType.Emotion))
                 && (analyzeImageResult?.Faces.Any() ?? true))   // If Vision service was previously called, checks if any face was detected.
             {
-                var faceService = new FaceServiceClient(Settings.FaceSubscriptionKey);
+                var faceService = new FaceServiceClient(Settings.FaceSubscriptionKey, "https://westus.api.cognitive.microsoft.com/face/v1.0");
                 var emotionService = new EmotionServiceClient(Settings.EmotionSubscriptionKey);
 
                 await this.RaiseOnProgressAsync(onProgress, RecognitionPhase.RecognizingFaces);

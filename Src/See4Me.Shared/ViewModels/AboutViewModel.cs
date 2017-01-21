@@ -1,23 +1,9 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using System;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.ProjectOxford.Emotion;
-using Microsoft.ProjectOxford.Vision;
 using See4Me.Common;
 using See4Me.Localization.Resources;
 using See4Me.Services;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using See4Me.Extensions;
-using System.IO;
-using System.Text;
-using System.Net;
-using System.Text.RegularExpressions;
-using Microsoft.ProjectOxford.Vision.Contract;
-using Microsoft.Practices.ServiceLocation;
-using GalaSoft.MvvmLight.Ioc;
 
 namespace See4Me.ViewModels
 {

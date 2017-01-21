@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.ProjectOxford.Vision;
 using See4Me.Common;
 using See4Me.Localization.Resources;
 using See4Me.Services;
@@ -90,15 +89,15 @@ namespace See4Me.ViewModels
                     }
                 }
             }
+            catch (CognitiveException ex)
+            {
+                // Unable to access the service (message contains translated error details).
+                recognizeText = ex.Message;
+            }
             catch (WebException)
             {
                 // Internet isn't available, the service cannot be reached.
                 recognizeText = AppResources.NoConnection;
-            }
-            catch (ClientException)
-            {
-                // Unable to access the service (tipically, due to invalid registration keys).
-                recognizeText = AppResources.UnableToAccessService;
             }
             catch (Exception ex)
             {

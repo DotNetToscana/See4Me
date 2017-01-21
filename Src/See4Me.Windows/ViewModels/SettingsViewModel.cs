@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.ProjectOxford.Vision;
 using See4Me.Common;
 using See4Me.Services;
 using System.Collections.Generic;

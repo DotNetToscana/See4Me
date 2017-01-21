@@ -1,6 +1,6 @@
-﻿using GalaSoft.MvvmLight.Ioc;
+﻿using System;
+using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
-using Microsoft.ProjectOxford.Vision;
 using See4Me.Services;
 using System.Globalization;
 using System.Threading.Tasks;
