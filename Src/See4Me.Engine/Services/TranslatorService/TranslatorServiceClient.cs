@@ -58,17 +58,15 @@ namespace See4Me.Engine.Services.TranslatorService
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TranslatorServiceClient"/> class, using the specified Subscription key and the current system language.
+        /// Initializes a new instance of the <see cref="TranslatorServiceClient"/> class, using the current system language.
         /// </summary>
-        /// <param name="subscriptionKey">The subscription key for the Microsoft Translator Service on Azure
-        /// </param>
         /// <remarks>
         /// <para>You must register Microsoft Translator on https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/TextTranslation to obtain the Subscription key needed to use the service.</para>
         /// </remarks>
         /// <seealso cref="SubscriptionKey"/>
         /// <seealso cref="Language"/>
-        public TranslatorServiceClient(string subscriptionKey = null)
-            : this(subscriptionKey, CultureInfo.CurrentCulture.Name.ToLower())
+        public TranslatorServiceClient()
+            : this(null, CultureInfo.CurrentCulture.Name.ToLower())
         { }
 
         /// <summary>
@@ -76,19 +74,20 @@ namespace See4Me.Engine.Services.TranslatorService
         /// </summary>
         /// <param name="subscriptionKey">The subscription key for the Microsoft Translator Service on Azure
         /// </param>
-        /// <param name="language">A string representing the supported language code to translate the text to. The code must be present in the list of codes returned from the method <see cref="GetLanguagesAsync"/>.</param>
+        /// <param name="language">A string representing the supported language code to translate the text to. The code must be present in the list of codes returned from the method <see cref="GetLanguagesAsync"/>. If a null value is provided, the current system language is used.
+        /// </param>
         /// <remarks>
         /// <para>You must register Microsoft Translator on https://portal.azure.com to obtain the Subscription key needed to use the service.</para>
         /// </remarks>
         /// <seealso cref="SubscriptionKey"/>
         /// <seealso cref="Language"/>
-        public TranslatorServiceClient(string subscriptionKey, string language)
+        public TranslatorServiceClient(string subscriptionKey, string language = null)
         {
             authToken = new AzureAuthToken(subscriptionKey);
             client = new HttpClient { BaseAddress = new Uri(BASE_URL) };
 
             SubscriptionKey = subscriptionKey;
-            Language = language;
+            Language = language ?? CultureInfo.CurrentCulture.Name.ToLower();
         }
 
         #region Get Languages
