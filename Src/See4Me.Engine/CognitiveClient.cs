@@ -87,7 +87,7 @@ namespace See4Me.Engine
                 }
                 catch (Microsoft.ProjectOxford.Vision.ClientException ex)
                 {
-                    var exception = await this.CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Vision", ex.GetHttpStatusCode(), ex, language, onProgress);
+                    var exception = await CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Vision", ex.GetHttpStatusCode(), ex, language, onProgress);
                     throw exception;
                 }
 
@@ -104,7 +104,7 @@ namespace See4Me.Engine
                 if (isValid)
                 {
                     visionResult.Description = filteredDescription.Text;
-                    visionResult.TranslatedDescription = await this.TranslateAsync(filteredDescription.Text, language, onProgress);
+                    visionResult.TranslatedDescription = await TranslateAsync(filteredDescription.Text, language, onProgress);
                 }
             }
 
@@ -114,7 +114,7 @@ namespace See4Me.Engine
                 var faceService = new FaceServiceClient(Settings.FaceSubscriptionKey, "https://westus.api.cognitive.microsoft.com/face/v1.0");
                 var emotionService = new EmotionServiceClient(Settings.EmotionSubscriptionKey);
 
-                await this.RaiseOnProgressAsync(onProgress, RecognitionPhase.RecognizingFaces);
+                await RaiseOnProgressAsync(onProgress, RecognitionPhase.RecognizingFaces);
 
                 try
                 {
@@ -185,7 +185,7 @@ namespace See4Me.Engine
 
             if (recognitionType.HasFlag(RecognitionType.Text))
             {
-                await this.RaiseOnProgressAsync(onProgress, RecognitionPhase.RecognizingText);
+                await RaiseOnProgressAsync(onProgress, RecognitionPhase.RecognizingText);
 
                 try
                 {
@@ -254,7 +254,7 @@ namespace See4Me.Engine
                 translatorService.SubscriptionKey = Settings.TranslatorSubscriptionKey;
 
                 // The description needs to be translated.
-                await this.RaiseOnProgressAsync(onProgress, RecognitionPhase.Translating);
+                await RaiseOnProgressAsync(onProgress, RecognitionPhase.Translating);
 
                 translation = await translatorService.TranslateAsync(message, from: DefaultLanguge, to: language);
             }

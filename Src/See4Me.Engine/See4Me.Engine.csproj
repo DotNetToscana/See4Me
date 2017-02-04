@@ -53,9 +53,11 @@
     <Compile Include="Services\ServiceSettings\SimpleVisionSettingsProvider.cs" />
     <Compile Include="Services\ServiceSettings\VisionSettings.cs" />
     <Compile Include="Services\TranslatorService\AzureAuthToken.cs" />
+    <Compile Include="Services\TranslatorService\ErrorResponse.cs" />
     <Compile Include="Services\TranslatorService\ITranslatorServiceClient.cs" />
     <Compile Include="Services\TranslatorService\TranslatorServiceClient.cs" />
     <Compile Include="CognitiveSettings.cs" />
+    <Compile Include="Services\TranslatorService\TranslatorServiceException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.ProjectOxford.Common, Version=1.0.324.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">

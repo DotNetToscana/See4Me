@@ -96,15 +96,16 @@ namespace See4Me.Engine.Services.TranslatorService
         /// Retrieves the languages available for speech synthesis.
         /// </summary>
         /// <returns>A string array containing the language codes supported for speech synthesis by <strong>Microsoft Translator Service</strong>.</returns>
-        /// <exception cref="ArgumentException">The <see cref="SubscriptionKey"/> property hasn't been set.</exception>
-        /// <remarks><para>This method performs a non-blocking request.</para>
+        /// <exception cref="ArgumentNullException">The <see cref="SubscriptionKey"/> property hasn't been set.</exception>
+        /// <exception cref="TranslatorServiceException">The provided <see cref="SubscriptionKey"/> isn't valid or has expired.</exception>
+        /// <remarks><para>This method performs a non-blocking request for language codes.</para>
         /// <para>For more information, go to http://msdn.microsoft.com/en-us/library/ff512415.aspx.
         /// </para>
         /// </remarks>
         public async Task<IEnumerable<string>> GetLanguagesAsync()
         {
             // Check if it is necessary to obtain/update access token.
-            await this.CheckUpdateTokenAsync().ConfigureAwait(false);
+            await CheckUpdateTokenAsync().ConfigureAwait(false);
 
             var content = await client.GetStringAsync(LANGUAGES_URI).ConfigureAwait(false);
 
@@ -124,16 +125,38 @@ namespace See4Me.Engine.Services.TranslatorService
         /// </summary>
         /// <returns>A string representing the translated text.</returns>
         /// <param name="text">A string representing the text to translate.</param>
-        /// <param name="from">A string representing the language code of the original text. The code must be present in the list of codes returned from the <see cref="GetLanguagesAsync"/> method. If the parameter is set to <strong>null</strong>, the language specified in the <seealso cref="Language"/> property will be used.</param>
         /// <param name="to">A string representing the language code to translate the text into. The code must be present in the list of codes returned from the <see cref="GetLanguagesAsync"/> method. If the parameter is set to <strong>null</strong>, the language specified in the <seealso cref="Language"/> property will be used.</param>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="ArgumentNullException">
         /// <list type="bullet">
         /// <term>The <see cref="SubscriptionKey"/> property hasn't been set.</term>
-        /// <term>The <paramref name="text"/> parameter is longer than 1000 characters.</term>
+        /// <term>The <paramref name="text"/> parameter is <strong>null</strong> (<strong>Nothing</strong> in Visual Basic) or empty.</term>
         /// </list>
-        /// </exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="text"/> parameter is <strong>null</strong> (<strong>Nothing</strong> in Visual Basic) or empty.</exception>
-        /// <remarks><para>This method perform a non-blocking request for translation.</para>
+        /// </exception>        
+        /// <exception cref="ArgumentException">The <paramref name="text"/> parameter is longer than 1000 characters.</exception>
+        /// <exception cref="TranslatorServiceException">The provided <see cref="SubscriptionKey"/> isn't valid or has expired.</exception>
+        /// <remarks><para>This method perform a non-blocking request for text translation.</para>
+        /// <para>For more information, go to http://msdn.microsoft.com/en-us/library/ff512421.aspx.
+        /// </para>
+        /// </remarks>
+        /// <seealso cref="Language"/>
+        public Task<string> TranslateAsync(string text, string to = null) => TranslateAsync(text, null, to);
+
+        /// <summary>
+        /// Translates a text string into the specified language.
+        /// </summary>
+        /// <returns>A string representing the translated text.</returns>
+        /// <param name="text">A string representing the text to translate.</param>
+        /// <param name="from">A string representing the language code of the original text. The code must be present in the list of codes returned from the <see cref="GetLanguagesAsync"/> method. If the parameter is set to <strong>null</strong>, the language specified in the <seealso cref="Language"/> property will be used.</param>
+        /// <param name="to">A string representing the language code to translate the text into. The code must be present in the list of codes returned from the <see cref="GetLanguagesAsync"/> method. If the parameter is set to <strong>null</strong>, the language specified in the <seealso cref="Language"/> property will be used.</param>
+        /// <exception cref="ArgumentNullException">
+        /// <list type="bullet">
+        /// <term>The <see cref="SubscriptionKey"/> property hasn't been set.</term>
+        /// <term>The <paramref name="text"/> parameter is <strong>null</strong> (<strong>Nothing</strong> in Visual Basic) or empty.</term>
+        /// </list>
+        /// </exception>        
+        /// <exception cref="ArgumentException">The <paramref name="text"/> parameter is longer than 1000 characters.</exception>
+        /// <exception cref="TranslatorServiceException">The provided <see cref="SubscriptionKey"/> isn't valid or has expired.</exception>
+        /// <remarks><para>This method perform a non-blocking request for text translation.</para>
         /// <para>For more information, go to http://msdn.microsoft.com/en-us/library/ff512421.aspx.
         /// </para>
         /// </remarks>
@@ -147,7 +170,7 @@ namespace See4Me.Engine.Services.TranslatorService
                 throw new ArgumentException($"{nameof(text)} parameter cannot be longer than {MAX_TEXT_LENGTH} characters");
 
             // Checks if it is necessary to obtain/update access token.
-            await this.CheckUpdateTokenAsync().ConfigureAwait(false);
+            await CheckUpdateTokenAsync().ConfigureAwait(false);
 
             if (string.IsNullOrWhiteSpace(to))
                 to = Language;
@@ -166,26 +189,6 @@ namespace See4Me.Engine.Services.TranslatorService
             return translatedText;
         }
 
-        /// <summary>
-        /// Translates a text string into the specified language.
-        /// </summary>
-        /// <returns>A string representing the translated text.</returns>
-        /// <param name="text">A string representing the text to translate.</param>
-        /// <param name="to">A string representing the language code to translate the text into. The code must be present in the list of codes returned from the <see cref="GetLanguagesAsync"/> method. If the parameter is set to <strong>null</strong>, the language specified in the <seealso cref="Language"/> property will be used.</param>
-        /// <exception cref="ArgumentException">
-        /// <list type="bullet">
-        /// <term>The <see cref="SubscriptionKey"/> property hasn't been set.</term>
-        /// <term>The <paramref name="text"/> parameter is longer than 1000 characters.</term>
-        /// </list>
-        /// </exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="text"/> parameter is <strong>null</strong> (<strong>Nothing</strong> in Visual Basic) or empty.</exception>
-        /// <remarks><para>This method perform a non-blocking request for translation.</para>
-        /// <para>For more information, go to http://msdn.microsoft.com/en-us/library/ff512421.aspx.
-        /// </para>
-        /// </remarks>
-        /// <seealso cref="Language"/>
-        public Task<string> TranslateAsync(string text, string to = null) => this.TranslateAsync(text, null, to);
-
         #endregion
 
         #region Detect Language
@@ -195,14 +198,14 @@ namespace See4Me.Engine.Services.TranslatorService
         /// </summary>
         /// <param name="text">A string represeting the text whose language must be detected.</param>
         /// <returns>A string containing a two-character Language code for the given text.</returns>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="ArgumentNullException">
         /// <list type="bullet">
         /// <term>The <see cref="SubscriptionKey"/> property hasn't been set.</term>
-        /// <term>The <paramref name="text"/> parameter is longer than 1000 characters.</term>
+        /// <term>The <paramref name="text"/> parameter is <strong>null</strong> (<strong>Nothing</strong> in Visual Basic) or empty.</term>
         /// </list>
-        /// </exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="text"/> parameter is <strong>null</strong> (<strong>Nothing</strong> in Visual Basic) or empty.</exception>
-        /// <remarks><para>This method perform a non-blocking request for language code.</para>
+        /// </exception>        
+        /// <exception cref="TranslatorServiceException">The provided <see cref="SubscriptionKey"/> isn't valid or has expired.</exception>
+        /// <remarks><para>This method performs a non-blocking request for language detection.</para>
         /// <para>For more information, go to http://msdn.microsoft.com/en-us/library/ff512427.aspx.
         /// </para></remarks>
         /// <seealso cref="GetLanguagesAsync"/>
@@ -215,7 +218,7 @@ namespace See4Me.Engine.Services.TranslatorService
             text = text.Substring(0, Math.Min(text.Length, MAX_TEXT_LENGTH_FOR_AUTODETECTION));
 
             // Checks if it is necessary to obtain/update access token.
-            await this.CheckUpdateTokenAsync().ConfigureAwait(false);
+            await CheckUpdateTokenAsync().ConfigureAwait(false);
 
             var uri = string.Format(DETECT_URI, Uri.EscapeDataString(text));
             var content = await client.GetStringAsync(uri).ConfigureAwait(false);
@@ -230,9 +233,6 @@ namespace See4Me.Engine.Services.TranslatorService
 
         private async Task CheckUpdateTokenAsync()
         {
-            if (string.IsNullOrWhiteSpace(SubscriptionKey))
-                throw new ArgumentException("Invalid Subscription Key. Go to Azure Portal and sign up for Microsoft Translator: https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/TextTranslation");
-
             var token = await authToken.GetAccessTokenAsync().ConfigureAwait(false);
             if (token != authorizationHeaderValue)
             {
@@ -251,8 +251,10 @@ namespace See4Me.Engine.Services.TranslatorService
         /// Initializes the <see cref="TranslatorServiceClient"/> class by getting an access token for the service.
         /// </summary>
         /// <returns>A <see cref="Task"/> that represents the initialize operation.</returns>
+        /// <exception cref="ArgumentNullException">The <see cref="SubscriptionKey"/> property hasn't been set.</exception>
+        /// <exception cref="TranslatorServiceException">The provided <see cref="SubscriptionKey"/> isn't valid or has expired.</exception>
         /// <remarks>Calling this method isn't mandatory, because the token is get/refreshed everytime is needed. However, it is called at startup, it can speed-up subsequest requests.</remarks>
-        public Task InitializeAsync() => this.CheckUpdateTokenAsync();
+        public Task InitializeAsync() => CheckUpdateTokenAsync();
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
