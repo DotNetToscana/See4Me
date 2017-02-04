@@ -15,7 +15,7 @@ namespace See4Me.Engine.Services.TranslatorService
     /// <para>To use this library, you must register Microsoft Translator on https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/TextTranslation to obtain the Subscription key.
     /// </para>
     /// </remarks>
-    public class TranslatorServiceClient : ITranslatorServiceClient, IDisposable
+    public class TranslatorServiceClient : ITranslatorServiceClient
     {
         private const string BASE_URL = "http://api.microsofttranslator.com/v2/Http.svc/";
         private const string LANGUAGES_URI = "GetLanguagesForTranslate";
