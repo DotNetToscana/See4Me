@@ -93,9 +93,9 @@ namespace See4Me.Engine.Services.TranslatorService
         #region Get Languages
 
         /// <summary>
-        /// Retrieves the languages available for speech synthesis.
+        /// Retrieves the languages available for translation.
         /// </summary>
-        /// <returns>A string array containing the language codes supported for speech synthesis by <strong>Microsoft Translator Service</strong>.</returns>
+        /// <returns>A string array containing the language codes supported for translation by <strong>Microsoft Translator Service</strong>.</returns>
         /// <exception cref="ArgumentNullException">The <see cref="SubscriptionKey"/> property hasn't been set.</exception>
         /// <exception cref="TranslatorServiceException">The provided <see cref="SubscriptionKey"/> isn't valid or has expired.</exception>
         /// <remarks><para>This method performs a non-blocking request for language codes.</para>

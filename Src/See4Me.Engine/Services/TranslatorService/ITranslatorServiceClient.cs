@@ -28,15 +28,15 @@ namespace See4Me.Engine.Services.TranslatorService
         /// Detects the language of a text.
         /// </summary>
         /// <param name="text">A string represeting the text whose language must be detected.</param>
-        /// <returns>A string containing a two-character language code for the given text.</returns>
-        /// <exception cref="ArgumentException">
+        /// <returns>A string containing a two-character Language code for the given text.</returns>
+        /// <exception cref="ArgumentNullException">
         /// <list type="bullet">
         /// <term>The <see cref="SubscriptionKey"/> property hasn't been set.</term>
-        /// <term>The <paramref name="text"/> parameter is longer than 1000 characters.</term>
+        /// <term>The <paramref name="text"/> parameter is <strong>null</strong> (<strong>Nothing</strong> in Visual Basic) or empty.</term>
         /// </list>
-        /// </exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="text"/> parameter is <strong>null</strong> (<strong>Nothing</strong> in Visual Basic) or empty.</exception>
-        /// <remarks><para>This method perform a non-blocking request for language code.</para>
+        /// </exception>        
+        /// <exception cref="TranslatorServiceException">The provided <see cref="SubscriptionKey"/> isn't valid or has expired.</exception>
+        /// <remarks><para>This method performs a non-blocking request for language detection.</para>
         /// <para>For more information, go to http://msdn.microsoft.com/en-us/library/ff512427.aspx.
         /// </para></remarks>
         /// <seealso cref="GetLanguagesAsync"/>
@@ -44,11 +44,12 @@ namespace See4Me.Engine.Services.TranslatorService
         Task<string> DetectLanguageAsync(string text);
 
         /// <summary>
-        /// Retrieves the languages available for speech synthesis.
+        /// Retrieves the languages available for translation.
         /// </summary>
-        /// <returns>A string array containing the language codes supported for speech synthesis by <strong>Microsoft Translator Service</strong>.</returns>
-        /// <exception cref="ArgumentException">The <see cref="SubscriptionKey"/> property hasn't been set.</exception>
-        /// <remarks><para>This method performs a non-blocking request.</para>
+        /// <returns>A string array containing the language codes supported for translation by <strong>Microsoft Translator Service</strong>.</returns>
+        /// <exception cref="ArgumentNullException">The <see cref="SubscriptionKey"/> property hasn't been set.</exception>
+        /// <exception cref="TranslatorServiceException">The provided <see cref="SubscriptionKey"/> isn't valid or has expired.</exception>
+        /// <remarks><para>This method performs a non-blocking request for language codes.</para>
         /// <para>For more information, go to http://msdn.microsoft.com/en-us/library/ff512415.aspx.
         /// </para>
         /// </remarks>
@@ -58,6 +59,8 @@ namespace See4Me.Engine.Services.TranslatorService
         /// Initializes the <see cref="TranslatorServiceClient"/> class by getting an access token for the service.
         /// </summary>
         /// <returns>A <see cref="Task"/> that represents the initialize operation.</returns>
+        /// <exception cref="ArgumentNullException">The <see cref="SubscriptionKey"/> property hasn't been set.</exception>
+        /// <exception cref="TranslatorServiceException">The provided <see cref="SubscriptionKey"/> isn't valid or has expired.</exception>
         /// <remarks>Calling this method isn't mandatory, because the token is get/refreshed everytime is needed. However, it is called at startup, it can speed-up subsequest requests.</remarks>
         Task InitializeAsync();
 
@@ -66,36 +69,16 @@ namespace See4Me.Engine.Services.TranslatorService
         /// </summary>
         /// <returns>A string representing the translated text.</returns>
         /// <param name="text">A string representing the text to translate.</param>
-        /// <param name="from">A string representing the language code of the original text. The code must be present in the list of codes returned from the <see cref="GetLanguagesAsync"/> method. If the parameter is set to <strong>null</strong>, the language specified in the <seealso cref="Language"/> property will be used.</param>
         /// <param name="to">A string representing the language code to translate the text into. The code must be present in the list of codes returned from the <see cref="GetLanguagesAsync"/> method. If the parameter is set to <strong>null</strong>, the language specified in the <seealso cref="Language"/> property will be used.</param>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="ArgumentNullException">
         /// <list type="bullet">
         /// <term>The <see cref="SubscriptionKey"/> property hasn't been set.</term>
-        /// <term>The <paramref name="text"/> parameter is longer than 1000 characters.</term>
+        /// <term>The <paramref name="text"/> parameter is <strong>null</strong> (<strong>Nothing</strong> in Visual Basic) or empty.</term>
         /// </list>
-        /// </exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="text"/> parameter is <strong>null</strong> (<strong>Nothing</strong> in Visual Basic) or empty.</exception>
-        /// <remarks><para>This method perform a non-blocking request for translation.</para>
-        /// <para>For more information, go to http://msdn.microsoft.com/en-us/library/ff512421.aspx.
-        /// </para>
-        /// </remarks>
-        /// <seealso cref="Language"/>
-        Task<string> TranslateAsync(string text, string from, string to);
-
-        /// <summary>
-        /// Translates a text string into the specified language.
-        /// </summary>
-        /// <returns>A string representing the translated text.</returns>
-        /// <param name="text">A string representing the text to translate.</param>
-        /// <param name="to">A string representing the language code to translate the text into. The code must be present in the list of codes returned from the <see cref="GetLanguagesAsync"/> method. If the parameter is set to <strong>null</strong>, the language specified in the <seealso cref="Language"/> property will be used.</param>
-        /// <exception cref="ArgumentException">
-        /// <list type="bullet">
-        /// <term>The <see cref="SubscriptionKey"/> property hasn't been set.</term>
-        /// <term>The <paramref name="text"/> parameter is longer than 1000 characters.</term>
-        /// </list>
-        /// </exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="text"/> parameter is <strong>null</strong> (<strong>Nothing</strong> in Visual Basic) or empty.</exception>
-        /// <remarks><para>This method perform a non-blocking request for translation.</para>
+        /// </exception>        
+        /// <exception cref="ArgumentException">The <paramref name="text"/> parameter is longer than 1000 characters.</exception>
+        /// <exception cref="TranslatorServiceException">The provided <see cref="SubscriptionKey"/> isn't valid or has expired.</exception>
+        /// <remarks><para>This method perform a non-blocking request for text translation.</para>
         /// <para>For more information, go to http://msdn.microsoft.com/en-us/library/ff512421.aspx.
         /// </para>
         /// </remarks>
@@ -103,8 +86,25 @@ namespace See4Me.Engine.Services.TranslatorService
         Task<string> TranslateAsync(string text, string to = null);
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Translates a text string into the specified language.
         /// </summary>
-        void Dispose();
+        /// <returns>A string representing the translated text.</returns>
+        /// <param name="text">A string representing the text to translate.</param>
+        /// <param name="from">A string representing the language code of the original text. The code must be present in the list of codes returned from the <see cref="GetLanguagesAsync"/> method. If the parameter is set to <strong>null</strong>, the language specified in the <seealso cref="Language"/> property will be used.</param>
+        /// <param name="to">A string representing the language code to translate the text into. The code must be present in the list of codes returned from the <see cref="GetLanguagesAsync"/> method. If the parameter is set to <strong>null</strong>, the language specified in the <seealso cref="Language"/> property will be used.</param>
+        /// <exception cref="ArgumentNullException">
+        /// <list type="bullet">
+        /// <term>The <see cref="SubscriptionKey"/> property hasn't been set.</term>
+        /// <term>The <paramref name="text"/> parameter is <strong>null</strong> (<strong>Nothing</strong> in Visual Basic) or empty.</term>
+        /// </list>
+        /// </exception>        
+        /// <exception cref="ArgumentException">The <paramref name="text"/> parameter is longer than 1000 characters.</exception>
+        /// <exception cref="TranslatorServiceException">The provided <see cref="SubscriptionKey"/> isn't valid or has expired.</exception>
+        /// <remarks><para>This method perform a non-blocking request for text translation.</para>
+        /// <para>For more information, go to http://msdn.microsoft.com/en-us/library/ff512421.aspx.
+        /// </para>
+        /// </remarks>
+        /// <seealso cref="Language"/>
+        Task<string> TranslateAsync(string text, string from, string to);
     }
 }
