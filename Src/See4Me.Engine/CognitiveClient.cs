@@ -65,7 +65,7 @@ namespace See4Me.Engine
             var result = new CognitiveResult();
 
             var imageBytes = await stream.ToArrayAsync();
-            await this.RaiseOnProgressAsync(onProgress, RecognitionPhase.QueryingService);
+            await RaiseOnProgressAsync(onProgress, RecognitionPhase.QueryingService);
 
             var visionService = new VisionServiceClient(Settings.VisionSubscriptionKey);
             AnalysisResult analyzeImageResult = null;
@@ -126,7 +126,7 @@ namespace See4Me.Engine
                         if (!faceServiceInitialized)
                         {
                             // If necessary, initializes face service by obtaining the face group used for identification, if any.
-                            await this.InitializeFaceServiceAsync(faceService);
+                            await InitializeFaceServiceAsync(faceService);
                         }
 
                         // Tries to identify faces in the image.
@@ -167,7 +167,7 @@ namespace See4Me.Engine
                                 }
                                 catch (Microsoft.ProjectOxford.Common.ClientException ex)
                                 {
-                                    var exception = await this.CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Emotion", ex.HttpStatus, ex, language, onProgress);
+                                    var exception = await CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Emotion", ex.HttpStatus, ex, language, onProgress);
                                     throw exception;
                                 }
                             }
@@ -178,7 +178,7 @@ namespace See4Me.Engine
                 }
                 catch (FaceAPIException ex)
                 {
-                    var exception = await this.CreateExceptionAsync(ex.ErrorCode, ex.ErrorMessage, "Face", ex.HttpStatus, ex, language, onProgress);
+                    var exception = await CreateExceptionAsync(ex.ErrorCode, ex.ErrorMessage, "Face", ex.HttpStatus, ex, language, onProgress);
                     throw exception;
                 }
             }
@@ -198,7 +198,7 @@ namespace See4Me.Engine
                 }
                 catch (Microsoft.ProjectOxford.Vision.ClientException ex)
                 {
-                    var exception = await this.CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Vision", ex.GetHttpStatusCode(), ex, language, onProgress);
+                    var exception = await CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Vision", ex.GetHttpStatusCode(), ex, language, onProgress);
                     throw exception;
                 }
             }
@@ -231,7 +231,7 @@ namespace See4Me.Engine
         {
             try
             {
-                message = await this.TranslateAsync(message, language, onProgress);
+                message = await TranslateAsync(message, language, onProgress);
             }
             catch { }
 

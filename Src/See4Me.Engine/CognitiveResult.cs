@@ -14,7 +14,9 @@ namespace See4Me.Engine
 
         public OcrResult OcrResult { get; internal set; } = new OcrResult();
 
-        internal CognitiveResult() { }
+        internal CognitiveResult()
+        {
+        }
     }
 
     public class VisionResult
@@ -36,7 +38,9 @@ namespace See4Me.Engine
 
         public bool IsTranslated => Description != translatedDescription;
 
-        internal VisionResult() { }
+        internal VisionResult()
+        {
+        }
     }
 
     public class FaceResult
@@ -51,15 +55,24 @@ namespace See4Me.Engine
 
         public double IdentifyConfidence { get; internal set; }
 
-        internal FaceResult() { }
+        internal FaceResult()
+        {
+        }
     }
 
     public class OcrResult
     {
-        public string Text { get; internal set; }
+        private string text;
+        public string Text
+        {
+            get { return !string.IsNullOrWhiteSpace(text) ? text : null; }
+            internal set { text = value; }
+        }
 
         public bool ContainsText => !string.IsNullOrWhiteSpace(Text);
 
-        internal OcrResult() { }
+        internal OcrResult()
+        {
+        }
     }
 }

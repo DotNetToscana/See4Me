@@ -8,12 +8,12 @@ namespace See4Me.Engine
 {
     public enum Emotion
     {
+        Neutral,
         Anger,
         Contempt,
         Disgust,
         Fear,
         Happiness,
-        Neutral,
         Sadness,
         Surprise
     }

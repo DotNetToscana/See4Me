@@ -17,6 +17,8 @@ namespace See4Me.Engine
 
         public HttpStatusCode HttpStatusCode { get; internal set; } = HttpStatusCode.InternalServerError;
 
-        internal CognitiveException() { }
+        internal CognitiveException()
+        {
+        }
     }
 }
