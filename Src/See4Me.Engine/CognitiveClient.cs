@@ -75,15 +75,15 @@ namespace See4Me.Engine
                 var features = new HashSet<VisualFeature> { VisualFeature.Description };
 
                 if (recognitionType.HasFlag(RecognitionType.Face) || recognitionType.HasFlag(RecognitionType.Emotion))
-                { 
-                    // If recognition types include face or emotions, adde also the Face Visual Feature, so Face and Emotion services are called
+                {
+                    // If recognition types include face or emotions, add also the Faces Visual Feature, so Face and Emotion services are called
                     // only if really needed.
                     features.Add(VisualFeature.Faces);
                 }
 
                 try
                 {
-                    analyzeImageResult = await visionService.AnalyzeImageAsync(stream, features);                    
+                    analyzeImageResult = await visionService.AnalyzeImageAsync(stream, features);
                 }
                 catch (Microsoft.ProjectOxford.Vision.ClientException ex)
                 {
@@ -138,42 +138,59 @@ namespace See4Me.Engine
                             faceIdentificationResult = await faceService.IdentifyAsync(identifyPersonGroupId, faceIds);
                         }
 
+                        var faceTasks = new List<Task>();
+
                         foreach (var face in faces)
                         {
-                            var faceResult = face.GetFaceResult();
-
-                            // Checks if there is a candidate (i.e. a known person) in the identification result.
-                            var candidate = faceIdentificationResult?.FirstOrDefault(r => r.FaceId == face.FaceId)?.Candidates.FirstOrDefault();
-                            if (candidate != null)
+                            // Runs face identification in parallel.
+                            var task = Task.Run(async () =>
                             {
-                                // Gets the person name.
-                                var person = await faceService.GetPersonAsync(identifyPersonGroupId, candidate.PersonId);
-                                faceResult.IdentifyConfidence = candidate.Confidence;
-                                faceResult.Name = person?.Name;
-                            }
+                                var faceResult = face.GetFaceResult();
 
-                            if (recognitionType.HasFlag(RecognitionType.Emotion))
-                            {
-                                // If required, for each face get the corresponding emotion.
-                                try
+                                var faceRecognitionTask = Task.Run(async () =>
                                 {
-                                    using (var ms = new MemoryStream(imageBytes))
+                                    // Checks if there is a candidate (i.e. a known person) in the identification result.
+                                    var candidate = faceIdentificationResult?.FirstOrDefault(r => r.FaceId == face.FaceId)?.Candidates.FirstOrDefault();
+                                    if (candidate != null)
                                     {
-                                        var emotions = await emotionService.RecognizeAsync(ms, face.FaceRectangle.ToRectangle());
-                                        var bestEmotion = emotions.GetBestEmotion();
-
-                                        faceResult.Emotion = bestEmotion;
+                                        // Gets the person name.
+                                        var person = await faceService.GetPersonAsync(identifyPersonGroupId, candidate.PersonId);
+                                        faceResult.IdentifyConfidence = candidate.Confidence;
+                                        faceResult.Name = person?.Name;
                                     }
-                                }
-                                catch (Microsoft.ProjectOxford.Common.ClientException ex)
-                                {
-                                    var exception = await CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Emotion", ex.HttpStatus, ex, language, onProgress);
-                                    throw exception;
-                                }
-                            }
+                                });
 
-                            result.FaceResults.Add(faceResult);
+                                var emotionTask = Task.Run(async () =>
+                                {
+                                    if (recognitionType.HasFlag(RecognitionType.Emotion))
+                                    {
+                                        // If required, for each face gets the corresponding emotion.
+                                        try
+                                        {
+                                            using (var ms = new MemoryStream(imageBytes))
+                                            {
+                                                var emotions = await emotionService.RecognizeAsync(ms, face.FaceRectangle.ToRectangle());
+                                                var bestEmotion = emotions.GetBestEmotion();
+
+                                                faceResult.Emotion = bestEmotion;
+                                            }
+                                        }
+                                        catch (Microsoft.ProjectOxford.Common.ClientException ex)
+                                        {
+                                            var exception = await CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Emotion", ex.HttpStatus, ex, language, onProgress);
+                                            throw exception;
+                                        }
+                                    }
+                                });
+
+                                await Task.WhenAll(faceRecognitionTask, emotionTask);
+                                result.FaceResults.Add(faceResult);
+                            });
+
+                            faceTasks.Add(task);
                         }
+
+                        await Task.WhenAll(faceTasks);
                     }
                 }
                 catch (FaceAPIException ex)
@@ -213,7 +230,9 @@ namespace See4Me.Engine
                 var personGroups = await faceService.ListPersonGroupsAsync();
                 identifyPersonGroupId = (personGroups.FirstOrDefault(p => p.Name.ContainsIgnoreCase("See4Me") || p.UserData.ContainsIgnoreCase("See4Me") || p.Name.ContainsIgnoreCase("_default") || p.UserData.ContainsIgnoreCase("_default")) ?? personGroups.FirstOrDefault())?.PersonGroupId;
             }
-            catch { }
+            catch
+            {
+            }
             finally
             {
                 faceServiceInitialized = true;
@@ -233,7 +252,9 @@ namespace See4Me.Engine
             {
                 message = await TranslateAsync(message, language, onProgress);
             }
-            catch { }
+            catch
+            {
+            }
 
             var exception = new CognitiveException(message, originalException)
             {
