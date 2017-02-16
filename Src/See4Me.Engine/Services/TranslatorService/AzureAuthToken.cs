@@ -69,7 +69,9 @@ namespace See4Me.Engine.Services.TranslatorService
         public async Task<string> GetAccessTokenAsync()
         {
             if (string.IsNullOrWhiteSpace(subscriptionKey))
+            {
                 throw new ArgumentNullException(nameof(SubscriptionKey), "A Subscription Key is required. Go to Azure Portal and sign up for Microsoft Translator: https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/TextTranslation");
+            }
 
             // Re-use the cached token if there is one.
             if ((DateTime.Now - storedTokenTime) < TokenCacheDuration && !string.IsNullOrWhiteSpace(storedTokenValue))

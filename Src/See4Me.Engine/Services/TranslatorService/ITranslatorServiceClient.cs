@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace See4Me.Engine.Services.TranslatorService
 {
     /// <summary>
-    /// The <strong>ITranslatorServiceClient</strong> interface specifies properties and methods to translate text to various supported languages.
+    /// The <strong>ITranslatorServiceClient</strong> interface specifies properties and methods to translate text in various supported languages.
     /// </summary>
     public interface ITranslatorServiceClient : IDisposable
     {
@@ -19,9 +19,9 @@ namespace See4Me.Engine.Services.TranslatorService
         string SubscriptionKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the string representing the supported language code to translate the text to.
+        /// Gets or sets the string representing the supported language code to translate the text in.
         /// </summary>
-        /// <value>The string representing the supported language code to translate the text to. The code must be present in the list of codes returned from the method <see cref="GetLanguagesAsync"/>.</value>
+        /// <value>The string representing the supported language code to translate the text in. The code must be present in the list of codes returned from the method <see cref="GetLanguagesAsync"/>.</value>
         /// <seealso cref="GetLanguagesAsync"/>
         string Language { get; set; }
 
@@ -79,7 +79,7 @@ namespace See4Me.Engine.Services.TranslatorService
         /// </exception>        
         /// <exception cref="ArgumentException">The <paramref name="text"/> parameter is longer than 1000 characters.</exception>
         /// <exception cref="TranslatorServiceException">The provided <see cref="SubscriptionKey"/> isn't valid or has expired.</exception>
-        /// <remarks><para>This method perform a non-blocking request for text translation.</para>
+        /// <remarks><para>This method performs a non-blocking request for text translation.</para>
         /// <para>For more information, go to http://msdn.microsoft.com/en-us/library/ff512421.aspx.
         /// </para>
         /// </remarks>
@@ -101,7 +101,7 @@ namespace See4Me.Engine.Services.TranslatorService
         /// </exception>        
         /// <exception cref="ArgumentException">The <paramref name="text"/> parameter is longer than 1000 characters.</exception>
         /// <exception cref="TranslatorServiceException">The provided <see cref="SubscriptionKey"/> isn't valid or has expired.</exception>
-        /// <remarks><para>This method perform a non-blocking request for text translation.</para>
+        /// <remarks><para>This method performs a non-blocking request for text translation.</para>
         /// <para>For more information, go to http://msdn.microsoft.com/en-us/library/ff512421.aspx.
         /// </para>
         /// </remarks>

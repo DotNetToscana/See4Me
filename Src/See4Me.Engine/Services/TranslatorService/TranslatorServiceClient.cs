@@ -17,23 +17,21 @@ namespace See4Me.Engine.Services.TranslatorService
     /// </remarks>
     public class TranslatorServiceClient : ITranslatorServiceClient
     {
-        private const string BASE_URL = "http://api.microsofttranslator.com/v2/Http.svc/";
-        private const string LANGUAGES_URI = "GetLanguagesForTranslate";
-        private const string TRANSLATE_URI = "Translate?text={0}&to={1}&contentType=text/plain";
-        private const string TRANSLATE_WITH_FROM_URI = "Translate?text={0}&from={1}&to={2}&contentType=text/plain";
-        private const string DETECT_URI = "Detect?text={0}";
-        private const string AUTHORIZATION_HEADER = "Authorization";
+        private const string BaseUrl = "http://api.microsofttranslator.com/v2/Http.svc/";
+        private const string LanguagesUri = "GetLanguagesForTranslate";
+        private const string TranslateUri = "Translate?text={0}&to={1}&contentType=text/plain";
+        private const string TranslateWithFromUri = "Translate?text={0}&from={1}&to={2}&contentType=text/plain";
+        private const string DetectUri = "Detect?text={0}";
+        private const string AuthorizationHeader = "Authorization";
 
-        private const string ARRAY_NAMESPACE = "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
+        private const string ArrayNamespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
 
-        private const int MAX_TEXT_LENGTH = 1000;
-        private const int MAX_TEXT_LENGTH_FOR_AUTODETECTION = 100;
+        private const int MaxTextLength = 1000;
+        private const int MaxTextLengthForAutodetection = 100;
 
         private readonly AzureAuthToken authToken;
         private readonly HttpClient client;
         private string authorizationHeaderValue = string.Empty;
-
-        #region Properties
 
         /// <summary>
         /// Gets or sets the Subscription key that is necessary to use <strong>Microsoft Translator Service</strong>.
@@ -55,8 +53,6 @@ namespace See4Me.Engine.Services.TranslatorService
         /// <seealso cref="GetLanguagesAsync"/>
         public string Language { get; set; }
 
-        #endregion
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TranslatorServiceClient"/> class, using the current system language.
         /// </summary>
@@ -67,7 +63,8 @@ namespace See4Me.Engine.Services.TranslatorService
         /// <seealso cref="Language"/>
         public TranslatorServiceClient()
             : this(null, CultureInfo.CurrentCulture.Name.ToLower())
-        { }
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TranslatorServiceClient"/> class, using the specified Subscription key and the desired language.
@@ -84,13 +81,11 @@ namespace See4Me.Engine.Services.TranslatorService
         public TranslatorServiceClient(string subscriptionKey, string language = null)
         {
             authToken = new AzureAuthToken(subscriptionKey);
-            client = new HttpClient { BaseAddress = new Uri(BASE_URL) };
+            client = new HttpClient { BaseAddress = new Uri(BaseUrl) };
 
             SubscriptionKey = subscriptionKey;
             Language = language ?? CultureInfo.CurrentCulture.Name.ToLower();
         }
-
-        #region Get Languages
 
         /// <summary>
         /// Retrieves the languages available for translation.
@@ -107,18 +102,14 @@ namespace See4Me.Engine.Services.TranslatorService
             // Check if it is necessary to obtain/update access token.
             await CheckUpdateTokenAsync().ConfigureAwait(false);
 
-            var content = await client.GetStringAsync(LANGUAGES_URI).ConfigureAwait(false);
+            var content = await client.GetStringAsync(LanguagesUri).ConfigureAwait(false);
 
-            XNamespace ns = ARRAY_NAMESPACE;
+            XNamespace ns = ArrayNamespace;
             var doc = XDocument.Parse(content);
 
             var languages = doc.Root.Elements(ns + "string").Select(s => s.Value);
             return languages;
         }
-
-        #endregion
-
-        #region Translate
 
         /// <summary>
         /// Translates a text string into the specified language.
@@ -134,7 +125,7 @@ namespace See4Me.Engine.Services.TranslatorService
         /// </exception>        
         /// <exception cref="ArgumentException">The <paramref name="text"/> parameter is longer than 1000 characters.</exception>
         /// <exception cref="TranslatorServiceException">The provided <see cref="SubscriptionKey"/> isn't valid or has expired.</exception>
-        /// <remarks><para>This method perform a non-blocking request for text translation.</para>
+        /// <remarks><para>This method performs a non-blocking request for text translation.</para>
         /// <para>For more information, go to http://msdn.microsoft.com/en-us/library/ff512421.aspx.
         /// </para>
         /// </remarks>
@@ -156,7 +147,7 @@ namespace See4Me.Engine.Services.TranslatorService
         /// </exception>        
         /// <exception cref="ArgumentException">The <paramref name="text"/> parameter is longer than 1000 characters.</exception>
         /// <exception cref="TranslatorServiceException">The provided <see cref="SubscriptionKey"/> isn't valid or has expired.</exception>
-        /// <remarks><para>This method perform a non-blocking request for text translation.</para>
+        /// <remarks><para>This method performs a non-blocking request for text translation.</para>
         /// <para>For more information, go to http://msdn.microsoft.com/en-us/library/ff512421.aspx.
         /// </para>
         /// </remarks>
@@ -166,20 +157,26 @@ namespace See4Me.Engine.Services.TranslatorService
             if (string.IsNullOrWhiteSpace(text))
                 throw new ArgumentNullException(nameof(text));
 
-            if (text.Length > MAX_TEXT_LENGTH)
-                throw new ArgumentException($"{nameof(text)} parameter cannot be longer than {MAX_TEXT_LENGTH} characters");
+            if (text.Length > MaxTextLength)
+                throw new ArgumentException($"{nameof(text)} parameter cannot be longer than {MaxTextLength} characters");
 
             // Checks if it is necessary to obtain/update access token.
             await CheckUpdateTokenAsync().ConfigureAwait(false);
 
             if (string.IsNullOrWhiteSpace(to))
+            {
                 to = Language;
+            }
 
             string uri = null;
             if (string.IsNullOrWhiteSpace(from))
-                uri = string.Format(TRANSLATE_URI, Uri.EscapeDataString(text), to);
+            {
+                uri = string.Format(TranslateUri, Uri.EscapeDataString(text), to);
+            }
             else
-                uri = string.Format(TRANSLATE_WITH_FROM_URI, Uri.EscapeDataString(text), from, to);
+            {
+                uri = string.Format(TranslateWithFromUri, Uri.EscapeDataString(text), from, to);
+            }
 
             var content = await client.GetStringAsync(uri).ConfigureAwait(false);
 
@@ -188,10 +185,6 @@ namespace See4Me.Engine.Services.TranslatorService
 
             return translatedText;
         }
-
-        #endregion
-
-        #region Detect Language
 
         /// <summary>
         /// Detects the language of a text.
@@ -213,14 +206,16 @@ namespace See4Me.Engine.Services.TranslatorService
         public async Task<string> DetectLanguageAsync(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
+            {
                 throw new ArgumentNullException(nameof(text));
+            }
 
-            text = text.Substring(0, Math.Min(text.Length, MAX_TEXT_LENGTH_FOR_AUTODETECTION));
+            text = text.Substring(0, Math.Min(text.Length, MaxTextLengthForAutodetection));
 
             // Checks if it is necessary to obtain/update access token.
             await CheckUpdateTokenAsync().ConfigureAwait(false);
 
-            var uri = string.Format(DETECT_URI, Uri.EscapeDataString(text));
+            var uri = string.Format(DetectUri, Uri.EscapeDataString(text));
             var content = await client.GetStringAsync(uri).ConfigureAwait(false);
 
             var doc = XDocument.Parse(content);
@@ -228,8 +223,6 @@ namespace See4Me.Engine.Services.TranslatorService
 
             return detectedLanguage;
         }
-
-        #endregion
 
         private async Task CheckUpdateTokenAsync()
         {
@@ -240,10 +233,10 @@ namespace See4Me.Engine.Services.TranslatorService
                 authorizationHeaderValue = token;
                 var headers = client.DefaultRequestHeaders;
 
-                if (headers.Contains(AUTHORIZATION_HEADER))
-                    headers.Remove(AUTHORIZATION_HEADER);
+                if (headers.Contains(AuthorizationHeader))
+                    headers.Remove(AuthorizationHeader);
 
-                headers.Add(AUTHORIZATION_HEADER, authorizationHeaderValue);
+                headers.Add(AuthorizationHeader, authorizationHeaderValue);
             }
         }
 

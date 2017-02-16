@@ -64,8 +64,8 @@ namespace See4Me.Engine
         {
             var result = new CognitiveResult();
 
-            var imageBytes = await stream.ToArrayAsync();
-            await RaiseOnProgressAsync(onProgress, RecognitionPhase.QueryingService);
+            var imageBytes = await stream.ToArrayAsync().ConfigureAwait(false);
+            await RaiseOnProgressAsync(onProgress, RecognitionPhase.QueryingService).ConfigureAwait(false);
 
             var visionService = new VisionServiceClient(Settings.VisionSubscriptionKey);
             AnalysisResult analyzeImageResult = null;
@@ -83,17 +83,17 @@ namespace See4Me.Engine
 
                 try
                 {
-                    analyzeImageResult = await visionService.AnalyzeImageAsync(stream, features);
+                    analyzeImageResult = await visionService.AnalyzeImageAsync(stream, features).ConfigureAwait(false);
                 }
                 catch (Microsoft.ProjectOxford.Vision.ClientException ex)
                 {
-                    var exception = await CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Vision", ex.GetHttpStatusCode(), ex, language, onProgress);
+                    var exception = await CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Vision", ex.GetHttpStatusCode(), ex, language, onProgress).ConfigureAwait(false);
                     throw exception;
                 }
 
                 Caption originalDescription;
                 Caption filteredDescription;
-                var visionSettings = VisionSettingsProvider != null ? await VisionSettingsProvider.GetSettingsAsync() : null;
+                var visionSettings = VisionSettingsProvider != null ? await VisionSettingsProvider.GetSettingsAsync().ConfigureAwait(false) : null;
                 var isValid = analyzeImageResult.IsValid(out originalDescription, out filteredDescription, visionSettings);
 
                 var visionResult = result.VisionResult;
@@ -104,7 +104,7 @@ namespace See4Me.Engine
                 if (isValid)
                 {
                     visionResult.Description = filteredDescription.Text;
-                    visionResult.TranslatedDescription = await TranslateAsync(filteredDescription.Text, language, onProgress);
+                    visionResult.TranslatedDescription = await TranslateAsync(filteredDescription.Text, language, onProgress).ConfigureAwait(false);
                 }
             }
 
@@ -114,19 +114,19 @@ namespace See4Me.Engine
                 var faceService = new FaceServiceClient(Settings.FaceSubscriptionKey, "https://westus.api.cognitive.microsoft.com/face/v1.0");
                 var emotionService = new EmotionServiceClient(Settings.EmotionSubscriptionKey);
 
-                await RaiseOnProgressAsync(onProgress, RecognitionPhase.RecognizingFaces);
+                await RaiseOnProgressAsync(onProgress, RecognitionPhase.RecognizingFaces).ConfigureAwait(false);
 
                 try
                 {
                     stream.Position = 0;
-                    var faces = await faceService.DetectAsync(stream, returnFaceAttributes: new[] { FaceAttributeType.Gender, FaceAttributeType.Age /*, FaceAttributeType.Smile, FaceAttributeType.Glasses */ });
+                    var faces = await faceService.DetectAsync(stream, returnFaceAttributes: new[] { FaceAttributeType.Gender, FaceAttributeType.Age /*, FaceAttributeType.Smile, FaceAttributeType.Glasses */ }).ConfigureAwait(false);
 
                     if (faces.Any())
                     {
                         if (!faceServiceInitialized)
                         {
                             // If necessary, initializes face service by obtaining the face group used for identification, if any.
-                            await InitializeFaceServiceAsync(faceService);
+                            await InitializeFaceServiceAsync(faceService).ConfigureAwait(false);
                         }
 
                         // Tries to identify faces in the image.
@@ -135,7 +135,7 @@ namespace See4Me.Engine
                         if (!string.IsNullOrWhiteSpace(identifyPersonGroupId))
                         {
                             var faceIds = faces.Select(face => face.FaceId).ToArray();
-                            faceIdentificationResult = await faceService.IdentifyAsync(identifyPersonGroupId, faceIds);
+                            faceIdentificationResult = await faceService.IdentifyAsync(identifyPersonGroupId, faceIds).ConfigureAwait(false);
                         }
 
                         var faceTasks = new List<Task>();
@@ -154,7 +154,7 @@ namespace See4Me.Engine
                                     if (candidate != null)
                                     {
                                         // Gets the person name.
-                                        var person = await faceService.GetPersonAsync(identifyPersonGroupId, candidate.PersonId);
+                                        var person = await faceService.GetPersonAsync(identifyPersonGroupId, candidate.PersonId).ConfigureAwait(false);
                                         faceResult.IdentifyConfidence = candidate.Confidence;
                                         faceResult.Name = person?.Name;
                                     }
@@ -169,7 +169,7 @@ namespace See4Me.Engine
                                         {
                                             using (var ms = new MemoryStream(imageBytes))
                                             {
-                                                var emotions = await emotionService.RecognizeAsync(ms, face.FaceRectangle.ToRectangle());
+                                                var emotions = await emotionService.RecognizeAsync(ms, face.FaceRectangle.ToRectangle()).ConfigureAwait(false);
                                                 var bestEmotion = emotions.GetBestEmotion();
 
                                                 faceResult.Emotion = bestEmotion;
@@ -177,45 +177,45 @@ namespace See4Me.Engine
                                         }
                                         catch (Microsoft.ProjectOxford.Common.ClientException ex)
                                         {
-                                            var exception = await CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Emotion", ex.HttpStatus, ex, language, onProgress);
+                                            var exception = await CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Emotion", ex.HttpStatus, ex, language, onProgress).ConfigureAwait(false);
                                             throw exception;
                                         }
                                     }
                                 });
 
-                                await Task.WhenAll(faceRecognitionTask, emotionTask);
+                                await Task.WhenAll(faceRecognitionTask, emotionTask).ConfigureAwait(false);
                                 result.FaceResults.Add(faceResult);
                             });
 
                             faceTasks.Add(task);
                         }
 
-                        await Task.WhenAll(faceTasks);
+                        await Task.WhenAll(faceTasks).ConfigureAwait(false);
                     }
                 }
                 catch (FaceAPIException ex)
                 {
-                    var exception = await CreateExceptionAsync(ex.ErrorCode, ex.ErrorMessage, "Face", ex.HttpStatus, ex, language, onProgress);
+                    var exception = await CreateExceptionAsync(ex.ErrorCode, ex.ErrorMessage, "Face", ex.HttpStatus, ex, language, onProgress).ConfigureAwait(false);
                     throw exception;
                 }
             }
 
             if (recognitionType.HasFlag(RecognitionType.Text))
             {
-                await RaiseOnProgressAsync(onProgress, RecognitionPhase.RecognizingText);
+                await RaiseOnProgressAsync(onProgress, RecognitionPhase.RecognizingText).ConfigureAwait(false);
 
                 try
                 {
                     using (var ms = new MemoryStream(imageBytes))
                     {
-                        var results = await visionService.RecognizeTextAsync(ms);
+                        var results = await visionService.RecognizeTextAsync(ms).ConfigureAwait(false);
                         var text = results.GetRecognizedText();
                         result.OcrResult.Text = text;
                     }
                 }
                 catch (Microsoft.ProjectOxford.Vision.ClientException ex)
                 {
-                    var exception = await CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Vision", ex.GetHttpStatusCode(), ex, language, onProgress);
+                    var exception = await CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Vision", ex.GetHttpStatusCode(), ex, language, onProgress).ConfigureAwait(false);
                     throw exception;
                 }
             }
@@ -227,7 +227,7 @@ namespace See4Me.Engine
         {
             try
             {
-                var personGroups = await faceService.ListPersonGroupsAsync();
+                var personGroups = await faceService.ListPersonGroupsAsync().ConfigureAwait(false);
                 identifyPersonGroupId = (personGroups.FirstOrDefault(p => p.Name.ContainsIgnoreCase("See4Me") || p.UserData.ContainsIgnoreCase("See4Me") || p.Name.ContainsIgnoreCase("_default") || p.UserData.ContainsIgnoreCase("_default")) ?? personGroups.FirstOrDefault())?.PersonGroupId;
             }
             catch
@@ -243,14 +243,16 @@ namespace See4Me.Engine
         {
             var handler = onProgress;
             if (handler != null)
+            { 
                 await handler.Invoke(phase);
+            }
         }
 
         private async Task<CognitiveException> CreateExceptionAsync(string code, string message, string source, HttpStatusCode statusCode, Exception originalException, string language, Func<RecognitionPhase, Task> onProgress = null)
         {
             try
             {
-                message = await TranslateAsync(message, language, onProgress);
+                message = await TranslateAsync(message, language, onProgress).ConfigureAwait(false);
             }
             catch
             {
@@ -275,9 +277,9 @@ namespace See4Me.Engine
                 translatorService.SubscriptionKey = Settings.TranslatorSubscriptionKey;
 
                 // The description needs to be translated.
-                await RaiseOnProgressAsync(onProgress, RecognitionPhase.Translating);
+                await RaiseOnProgressAsync(onProgress, RecognitionPhase.Translating).ConfigureAwait(false);
 
-                translation = await translatorService.TranslateAsync(message, from: DefaultLanguge, to: language);
+                translation = await translatorService.TranslateAsync(message, from: DefaultLanguge, to: language).ConfigureAwait(false);
             }
 
             return translation;
