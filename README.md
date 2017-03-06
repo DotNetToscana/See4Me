@@ -1,12 +1,12 @@
 # Introducing See4Me
 
-*See4Me* is a cross-platform app to 'see' the world using [Microsoft Cognitive Services](https://www.microsoft.com/cognitive-services). Simply point the smartphone and tap: in a few instants the app will describe and speak what it sees -- from scenes to objects to people with age and emotion. The app is also able to automatically translate descriptions using [Microsoft Translator](https://www.microsoft.com/en-us/translator/products.aspx).
+*See4Me* is a cross-platform app to 'see' the world using [Microsoft Cognitive Services](https://www.microsoft.com/cognitive-services). Simply point the smartphone and tap: in a few moments the app will describe and speak what it sees -- from scenes to objects to people with age and emotion. The app is also able to automatically translate descriptions using [Microsoft Translator](https://www.microsoft.com/en-us/translator/products.aspx).
 
 **Getting started**
 
 To use See4Me, you must obtain Cognitive API and Microsoft Translator subscription keys by following the instructions available in [How to register Cognitive Services](Docs/Register.md).
 
-Then, you need to insert these service keys (Subscription Key for Vision, Face, Emotion and Translator Services) in the *Src/See4Me.Shared/ServiceKeys.cs* file.
+Then, you need to enter these service keys (Subscription Key for Vision, Face, Emotion and Translator Services) in the *Src/See4Me.Shared/ServiceKeys.cs* file.
 
 **Screenshots**
 
@@ -21,7 +21,7 @@ Then, you need to insert these service keys (Subscription Key for Vision, Face, 
 
 **Contribute**
 
-The project is continually evolving. We welcome contributions. Feel free to file issues and pull requests on the repo and we'll address them as we can. 
+The project is continuously evolving. We welcome contributions. Feel free to file issues and pull requests on the repo and we'll address them as we can. 
 
 **Developer Code of Conduct**
 
