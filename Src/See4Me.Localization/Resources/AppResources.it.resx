@@ -154,10 +154,10 @@
     <value>Bambino</value>
   </data>
   <data name="ContemptFemale" xml:space="preserve">
-    <value>Mostrare disprezzo</value>
+    <value>Che mostra disprezzo</value>
   </data>
   <data name="ContemptMale" xml:space="preserve">
-    <value>Mostrare disprezzo</value>
+    <value>Che mostra disprezzo</value>
   </data>
   <data name="DisgustFemale" xml:space="preserve">
     <value>Disgustata</value>
@@ -202,10 +202,10 @@
     <value>LinkedIn:</value>
   </data>
   <data name="LookingFemale" xml:space="preserve">
-    <value>che sembra {0}</value>
+    <value>, {0}</value>
   </data>
   <data name="LookingMale" xml:space="preserve">
-    <value>che sembra {0}</value>
+    <value>, {0}</value>
   </data>
   <data name="ManFemale" xml:space="preserve">
     <value>Donna</value>

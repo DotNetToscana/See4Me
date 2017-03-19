@@ -114,18 +114,18 @@ namespace See4Me.ViewModels
                         }
                         else if (successful)
                         {
-                            await this.NotifyCameraPanelAsync();
+                            await NotifyCameraPanelAsync();
                         }
                         else
                         {
-                            await this.NotifyInitializationErrorAsync();
+                            await NotifyInitializationErrorAsync();
                         }
                     }
                 }));
             }
             catch
             {
-                await this.NotifyInitializationErrorAsync();
+                await NotifyInitializationErrorAsync();
             }
 
             initialized = true;
@@ -197,7 +197,7 @@ namespace See4Me.ViewModels
 
                                 visionDescription = $"{visionDescription}{Constants.SentenceEnd}";
                             }
-                            
+
                             if (faceResults.Any())
                             {
                                 // At least a face has been recognized.
@@ -211,11 +211,15 @@ namespace See4Me.ViewModels
 
                                 // Describes how many faces have been recognized.
                                 if (faceResults.Count() == 1)
+                                {
                                     facesRecognizedDescription = AppResources.FaceRecognizedSingular;
+                                    facesDescription = faceMessages.ToString().ToLower();
+                                }
                                 else
+                                {
                                     facesRecognizedDescription = $"{string.Format(AppResources.FacesRecognizedPlural, faceResults.Count())} {Constants.SentenceEnd}";
-
-                                facesDescription = faceMessages.ToString();
+                                    facesDescription = faceMessages.ToString();
+                                }
                             }
                         }
                         else
@@ -252,7 +256,7 @@ namespace See4Me.ViewModels
 
             // Shows and speaks the result.
             var message = $"{visionDescription} {facesRecognizedDescription} {facesDescription}";
-            StatusMessage = this.GetNormalizedMessage(message);
+            StatusMessage = GetNormalizedMessage(message);
 
             await SpeechHelper.TrySpeechAsync(message);
 
@@ -296,9 +300,9 @@ namespace See4Me.ViewModels
             finally
             {
                 if (successful)
-                    await this.NotifyCameraPanelAsync();
+                    await NotifyCameraPanelAsync();
                 else
-                    await this.NotifySwapCameraErrorAsync();
+                    await NotifySwapCameraErrorAsync();
             }
 
             IsBusy = false;
@@ -324,7 +328,9 @@ namespace See4Me.ViewModels
             {
                 var errorMessage = AppResources.InitializationError;
                 if (error != null && Settings.ShowExceptionOnError)
+                { 
                     errorMessage = $"{errorMessage} ({error.Message})";
+                }
 
                 StatusMessage = errorMessage;
 
@@ -339,6 +345,6 @@ namespace See4Me.ViewModels
         }
 
         private string GetNormalizedMessage(string message)
-            => message.Replace(Constants.SentenceEnd, ". ").TrimEnd('.').Trim().Replace("  ", " ").Replace(" .", ".").Replace("..", ".");
+            => message.Replace(Constants.SentenceEnd, ". ").TrimEnd('.').Trim().Replace("  ", " ").Replace(" .", ".").Replace("..", ".").Replace(" ,", ",");
     }
 }

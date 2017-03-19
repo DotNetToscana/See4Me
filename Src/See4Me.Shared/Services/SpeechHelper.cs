@@ -40,7 +40,7 @@ namespace See4Me.Services
 
             if (face.Emotion != Emotion.Neutral)
             {
-                var emotion = GetString(face.Emotion.ToString(), face.Gender);
+                var emotion = GetString(face.Emotion.ToString(), face.Gender).ToLower();
                 var lookingMessage = string.Format(GetString(Constants.LookingMessage, face.Gender), emotion);
                 faceMessage = $"{personMessage} {lookingMessage}";
             }
@@ -65,7 +65,7 @@ namespace See4Me.Services
             else
                 key = Constants.Man;
 
-            var ageDescription = GetString(key, gender);
+            var ageDescription = GetString(key, gender).ToLower();
             return ageDescription;
         }
 

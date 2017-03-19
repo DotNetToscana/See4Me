@@ -10,8 +10,8 @@
 "BoyMale"="Ragazzo";
 "ChildFemale"="Bambina";
 "ChildMale"="Bambino";
-"ContemptFemale"="Mostrare disprezzo";
-"ContemptMale"="Mostrare disprezzo";
+"ContemptFemale"="Che mostra disprezzo";
+"ContemptMale"="Che mostra disprezzo";
 "DisgustFemale"="Disgustata";
 "DisgustMale"="Disgustato";
 "EmotionSubscriptionKey"="Chiave di sottoscrizione servizio Emotion";
@@ -26,8 +26,8 @@
 "HappinessMale"="Felice";
 "InitializationError"="Errore durante l\'avvio dell\'app";
 "LinkedIn"="LinkedIn:";
-"LookingFemale"="che sembra {0}";
-"LookingMale"="che sembra {0}";
+"LookingFemale"=", {0}";
+"LookingMale"=", {0}";
 "ManFemale"="Donna";
 "ManMale"="Uomo";
 "NeutralFemale"="Neutro";

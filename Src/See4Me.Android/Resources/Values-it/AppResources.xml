@@ -12,8 +12,8 @@
   <string name="BoyMale">Ragazzo</string>
   <string name="ChildFemale">Bambina</string>
   <string name="ChildMale">Bambino</string>
-  <string name="ContemptFemale">Mostrare disprezzo</string>
-  <string name="ContemptMale">Mostrare disprezzo</string>
+  <string name="ContemptFemale">Che mostra disprezzo</string>
+  <string name="ContemptMale">Che mostra disprezzo</string>
   <string name="DisgustFemale">Disgustata</string>
   <string name="DisgustMale">Disgustato</string>
   <string name="EmotionSubscriptionKey">Chiave di sottoscrizione servizio Emotion</string>
@@ -28,8 +28,8 @@
   <string name="HappinessMale">Felice</string>
   <string name="InitializationError">Errore durante l\'avvio dell\'app</string>
   <string name="LinkedIn">LinkedIn:</string>
-  <string name="LookingFemale">che sembra {0}</string>
-  <string name="LookingMale">che sembra {0}</string>
+  <string name="LookingFemale">, {0}</string>
+  <string name="LookingMale">, {0}</string>
   <string name="ManFemale">Donna</string>
   <string name="ManMale">Uomo</string>
   <string name="NeutralFemale">Neutro</string>
