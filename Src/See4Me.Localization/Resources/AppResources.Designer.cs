@@ -548,7 +548,16 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Recognizing faces and emotions....
+        ///   Looks up a localized string similar to Recognizing emotions....
+        /// </summary>
+        public static string RecognizingEmotions {
+            get {
+                return ResourceManager.GetString("RecognizingEmotions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recognizing faces....
         /// </summary>
         public static string RecognizingFaces {
             get {

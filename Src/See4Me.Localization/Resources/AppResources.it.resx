@@ -253,7 +253,7 @@
     <value>Riconosci il testo</value>
   </data>
   <data name="RecognizingFaces" xml:space="preserve">
-    <value>Riconoscimento dei volti e delle emozioni...</value>
+    <value>Riconoscimento dei volti...</value>
   </data>
   <data name="ResourceLanguage" xml:space="preserve">
     <value>it</value>
@@ -362,5 +362,8 @@
   </data>
   <data name="ShowDescriptionOnFaceIdentification" xml:space="preserve">
     <value>Mostra anche la descrizione dell'immagine quando vengono riconosciuti uno o più volti</value>
+  </data>
+  <data name="RecognizingEmotions" xml:space="preserve">
+    <value>Riconoscimento delle emozioni...</value>
   </data>
 </root>

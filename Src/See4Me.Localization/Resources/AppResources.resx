@@ -253,7 +253,7 @@
     <value>Recognize Text</value>
   </data>
   <data name="RecognizingFaces" xml:space="preserve">
-    <value>Recognizing faces and emotions...</value>
+    <value>Recognizing faces...</value>
   </data>
   <data name="ResourceLanguage" xml:space="preserve">
     <value>en</value>
@@ -362,5 +362,8 @@
   </data>
   <data name="ShowDescriptionOnFaceIdentification" xml:space="preserve">
     <value>Show also image description when detecting one or more faces</value>
+  </data>
+  <data name="RecognizingEmotions" xml:space="preserve">
+    <value>Recognizing emotions...</value>
   </data>
 </root>

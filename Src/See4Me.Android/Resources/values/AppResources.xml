@@ -45,7 +45,7 @@
   <string name="RecognitionError">I\'m sorry, there was an unexpected error</string>
   <string name="RecognitionFailed">I\'m sorry, I don\'t recognize the image</string>
   <string name="RecognizeText">Recognize Text</string>
-  <string name="RecognizingFaces">Recognizing faces and emotions...</string>
+  <string name="RecognizingFaces">Recognizing faces...</string>
   <string name="ResourceLanguage">en</string>
   <string name="SadnessFemale">Sad</string>
   <string name="SadnessMale">Sad</string>
@@ -82,4 +82,5 @@
   <string name="FaceSubscriptionKey">Face Subscription Key</string>
   <string name="ShuttingDown">Shutting down the device...</string>
   <string name="ShowDescriptionOnFaceIdentification">Show also image description when detecting one or more faces</string>
+  <string name="RecognizingEmotions">Recognizing emotions...</string>
 </resources>

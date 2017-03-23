@@ -21,8 +21,10 @@ namespace See4Me.Services
             speechService = ServiceLocator.Current.GetInstance<ISpeechService>();
         }
 
-        public static string GetFaceMessage(FaceResult face)
+        public static FaceResultMessage GetFaceMessage(FaceResult face)
         {
+            var result = new FaceResultMessage();
+
             // Creates the face description text to be speeched.
             string faceMessage = null;
             string personMessage;
@@ -31,6 +33,7 @@ namespace See4Me.Services
             {
                 // A person name has been identified.
                 personMessage = $"{face.Name} ";
+                result.ContainsFace = true;
             }
             else
             {
@@ -51,7 +54,9 @@ namespace See4Me.Services
             }
 
             faceMessage = $"{faceMessage} {Constants.SentenceEnd} ";
-            return faceMessage;
+            result.Message = faceMessage;
+
+            return result;
         }
 
         private static string GetAgeDescription(int age, Gender gender)
@@ -80,5 +85,12 @@ namespace See4Me.Services
                 await speechService.SpeechAsync(speechMessage);
             }
         }
+    }
+
+    public class FaceResultMessage
+    {
+        public bool ContainsFace { get; set; }
+
+        public string Message { get; set; }
     }
 }

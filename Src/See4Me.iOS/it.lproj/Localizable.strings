@@ -43,7 +43,7 @@
 "RecognitionError"="Mi dispiace, si è verificato un errore inatteso";
 "RecognitionFailed"="Mi dispiace, non riconosco l\'immagine";
 "RecognizeText"="Riconosci il testo";
-"RecognizingFaces"="Riconoscimento dei volti e delle emozioni...";
+"RecognizingFaces"="Riconoscimento dei volti...";
 "ResourceLanguage"="it";
 "SadnessFemale"="Triste";
 "SadnessMale"="Triste";
@@ -80,3 +80,4 @@
 "ShuttingDown"="Spegnimento in corso...";
 "RegisterServices"="Registra i servizi";
 "ShowDescriptionOnFaceIdentification"="Mostra anche la descrizione dell\'immagine quando vengono riconosciuti uno o più volti";
+"RecognizingEmotions"="Riconoscimento delle emozioni...";

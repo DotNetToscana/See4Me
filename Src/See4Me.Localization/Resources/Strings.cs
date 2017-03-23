@@ -84,5 +84,6 @@
         public static string FaceSubscriptionKey = "FaceSubscriptionKey";
         public static string ShuttingDown = "ShuttingDown";
         public static string ShowDescriptionOnFaceIdentification = "ShowDescriptionOnFaceIdentification";
+        public static string RecognizingEmotions = "RecognizingEmotions";
     }
 }

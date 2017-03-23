@@ -12,6 +12,8 @@ using System.Text;
 using System.Net;
 using See4Me.Engine;
 using See4Me.Extensions;
+using System.Text.RegularExpressions;
+using GalaSoft.MvvmLight.Threading;
 
 namespace See4Me.ViewModels
 {
@@ -201,25 +203,25 @@ namespace See4Me.ViewModels
                             if (faceResults.Any())
                             {
                                 // At least a face has been recognized.
-                                var faceMessages = new StringBuilder();
+                                var faceMessages = new List<FaceResultMessage>();
 
                                 foreach (var faceResult in faceResults)
                                 {
                                     var faceMessage = SpeechHelper.GetFaceMessage(faceResult);
-                                    faceMessages.Append(faceMessage);
+                                    faceMessages.Add(faceMessage);
                                 }
 
                                 // Describes how many faces have been recognized.
                                 if (faceResults.Count() == 1)
                                 {
                                     facesRecognizedDescription = AppResources.FaceRecognizedSingular;
-                                    facesDescription = faceMessages.ToString().ToLower();
                                 }
                                 else
                                 {
                                     facesRecognizedDescription = $"{string.Format(AppResources.FacesRecognizedPlural, faceResults.Count())} {Constants.SentenceEnd}";
-                                    facesDescription = faceMessages.ToString();
                                 }
+
+                                facesDescription = string.Join(" ", faceMessages.Select(f => f.ContainsFace ? f.Message : f.Message.ToLower()));
                             }
                         }
                         else
@@ -265,20 +267,27 @@ namespace See4Me.ViewModels
 
         private Task OnRecognitionProgress(RecognitionPhase phase)
         {
-            switch (phase)
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
-                case RecognitionPhase.QueryingService:
-                    StatusMessage = AppResources.QueryingVisionService;
-                    break;
+                switch (phase)
+                {
+                    case RecognitionPhase.QueryingService:
+                        StatusMessage = AppResources.QueryingVisionService;
+                        break;
 
-                case RecognitionPhase.Translating:
-                    StatusMessage = AppResources.Translating;
-                    break;
+                    case RecognitionPhase.Translating:
+                        StatusMessage = AppResources.Translating;
+                        break;
 
-                case RecognitionPhase.RecognizingFaces:
-                    StatusMessage = AppResources.RecognizingFaces;
-                    break;
-            }
+                    case RecognitionPhase.RecognizingFaces:
+                        StatusMessage = AppResources.RecognizingFaces;
+                        break;
+
+                    case RecognitionPhase.RecognizingEmotions:
+                        StatusMessage = AppResources.RecognizingEmotions;
+                        break;
+                }
+            });
 
             return Task.CompletedTask;
         }
@@ -328,7 +337,7 @@ namespace See4Me.ViewModels
             {
                 var errorMessage = AppResources.InitializationError;
                 if (error != null && Settings.ShowExceptionOnError)
-                { 
+                {
                     errorMessage = $"{errorMessage} ({error.Message})";
                 }
 
@@ -345,6 +354,17 @@ namespace See4Me.ViewModels
         }
 
         private string GetNormalizedMessage(string message)
-            => message.Replace(Constants.SentenceEnd, ". ").TrimEnd('.').Trim().Replace("  ", " ").Replace(" .", ".").Replace("..", ".").Replace(" ,", ",");
+        {
+            const string expression = @"[\.\?\!]\s+([a-z])";
+            var output = message.Replace(Constants.SentenceEnd, ". ").TrimEnd('.').Trim().Replace("  ", " ").Replace(" .", ".").Replace("..", ".").Replace(" ,", ",");
+            var charArray = output.ToCharArray();
+            foreach (Match match in Regex.Matches(output, expression, RegexOptions.Singleline))
+            {
+                charArray[match.Groups[1].Index] = char.ToUpper(charArray[match.Groups[1].Index]);
+            }
+
+            output = new string(charArray);
+            return output;
+        }
     }
 }

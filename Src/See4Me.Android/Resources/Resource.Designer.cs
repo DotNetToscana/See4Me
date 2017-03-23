@@ -274,6 +274,9 @@ namespace See4Me
 			// aapt resource value: 0x7f04002e
 			public const int RecognizeText = 2130968622;
 			
+			// aapt resource value: 0x7f040054
+			public const int RecognizingEmotions = 2130968660;
+			
 			// aapt resource value: 0x7f04002f
 			public const int RecognizingFaces = 2130968623;
 			

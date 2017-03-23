@@ -43,7 +43,7 @@
 "RecognitionError"="I\'m sorry, there was an unexpected error";
 "RecognitionFailed"="I\'m sorry, I don\'t recognize the image";
 "RecognizeText"="Recognize Text";
-"RecognizingFaces"="Recognizing faces and emotions...";
+"RecognizingFaces"="Recognizing faces...";
 "ResourceLanguage"="en";
 "SadnessFemale"="Sad";
 "SadnessMale"="Sad";
@@ -80,3 +80,4 @@
 "FaceSubscriptionKey"="Face Subscription Key";
 "ShuttingDown"="Shutting down the device...";
 "ShowDescriptionOnFaceIdentification"="Show also image description when detecting one or more faces";
+"RecognizingEmotions"="Recognizing emotions...";

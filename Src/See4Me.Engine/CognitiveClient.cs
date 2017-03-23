@@ -142,6 +142,8 @@ namespace See4Me.Engine
 
                         foreach (var face in faces)
                         {
+                            await RaiseOnProgressAsync(onProgress, RecognitionPhase.RecognizingFaces);
+
                             // Runs face identification in parallel.
                             var task = Task.Run(async () =>
                             {
@@ -167,6 +169,8 @@ namespace See4Me.Engine
                                         // If required, for each face gets the corresponding emotion.
                                         try
                                         {
+                                            await RaiseOnProgressAsync(onProgress, RecognitionPhase.RecognizingEmotions);
+
                                             using (var ms = new MemoryStream(imageBytes))
                                             {
                                                 var emotions = await emotionService.RecognizeAsync(ms, face.FaceRectangle.ToRectangle());
