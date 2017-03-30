@@ -9,7 +9,6 @@ In order to use Microsoft Cognitive Services, you need to get the corresponding 
 2. After logging in, click the **Request new trials** button and select the products you want to subscribe. For our purposes, we need the following ones:
     1. Computer Vision
     2. Face
-    3. Emotion
 
 In the description column you can see the free quota limit for each service. Check the option *I agree to the Microsoft Cognitive Services Terms and Microsoft Privacy Statement* and click **Subscribe**.
 
