@@ -27,4 +27,4 @@ Enter an account name and be sure that, under API type, the value *Translator Te
 
 <img src="https://raw.githubusercontent.com/DotNetToscana/See4Me/master/Docs/Images/TranslatorService_Keys.png">
 
-You need to enter either Key 1 or Key 2 in the app setting page to activate translator feature.
+You need to enter either Key 1 or Key 2 in the app setting page to activate translator feature. Note that it may take up to 10 minutes for the newly (re)generated keys to take effect.
