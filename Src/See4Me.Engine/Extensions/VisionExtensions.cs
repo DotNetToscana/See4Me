@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using See4Me.Engine.Services.ServiceSettings;
 using System.Net;
 using System.Text.RegularExpressions;
+using Microsoft.ProjectOxford.Vision;
 
 namespace See4Me.Engine.Extensions
 {
@@ -56,10 +57,13 @@ namespace See4Me.Engine.Extensions
                 var replacedText = settings.DescriptionsToReplace.FirstOrDefault(d => d.Key.EqualsIgnoreCase(text)).Value;
 
                 if (!string.IsNullOrWhiteSpace(replacedText))
+                { 
                     text = replacedText;
+                }
 
                 var textToRemove = settings.DescriptionsToRemove.FirstOrDefault(d => text.ContainsIgnoreCase(d));
                 var filteredText = !string.IsNullOrWhiteSpace(textToRemove) ? text.ReplaceIgnoreCase(textToRemove, string.Empty).Trim() : text;
+                filteredText = char.ToUpper(filteredText[0]) + filteredText.Substring(1);
 
                 if (!settings.InvalidDescriptions.Any(d => filteredText.ContainsIgnoreCase(d)))
                 {
@@ -76,7 +80,7 @@ namespace See4Me.Engine.Extensions
             return false;
         }
 
-        public static HttpStatusCode GetHttpStatusCode(this Microsoft.ProjectOxford.Vision.ClientException exception)
+        public static HttpStatusCode GetHttpStatusCode(this ClientException exception)
         {
             var statusCode = HttpStatusCode.InternalServerError;
 

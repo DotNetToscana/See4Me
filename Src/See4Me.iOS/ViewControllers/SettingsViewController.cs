@@ -37,7 +37,7 @@ namespace See4Me
 				this.SetBinding(() => ViewModel.TranslatorSubscriptionKey, () => TextTranslatorSubscriptionKey.Text, BindingMode.TwoWay),
 
 				this.SetBinding(() => ViewModel.IsTextToSpeechEnabled, () => SwitchTextToSpeech.On, BindingMode.TwoWay),
-				this.SetBinding(() => ViewModel.ShowDescriptionConfidence, () => SwitchShowDescriptionConfidence.On, BindingMode.TwoWay),
+				this.SetBinding(() => ViewModel.ShowRecognitionConfidence, () => SwitchShowDescriptionConfidence.On, BindingMode.TwoWay),
 				this.SetBinding(() => ViewModel.ShowOriginalDescriptionOnTranslation, () => SwitchShowOriginalDescription.On, BindingMode.TwoWay),
 			};
 

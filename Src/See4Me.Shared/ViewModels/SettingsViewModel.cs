@@ -37,13 +37,6 @@ namespace See4Me.ViewModels
             set { this.Set(ref visionSubscriptionKey, value); }
         }
 
-        private string emotionSubscriptionKey;
-        public string EmotionSubscriptionKey
-        {
-            get { return emotionSubscriptionKey; }
-            set { this.Set(ref emotionSubscriptionKey, value); }
-        }
-
         private string faceSubscriptionKey;
         public string FaceSubscriptionKey
         {
@@ -65,11 +58,11 @@ namespace See4Me.ViewModels
             set { this.Set(ref isTextToSpeechEnabled, value); }
         }
 
-        private bool showDescriptionConfidence;
-        public bool ShowDescriptionConfidence
+        private bool showRecognitionConfidence;
+        public bool ShowRecognitionConfidence
         {
-            get { return showDescriptionConfidence; }
-            set { this.Set(ref showDescriptionConfidence, value); }
+            get { return showRecognitionConfidence; }
+            set { this.Set(ref showRecognitionConfidence, value); }
         }
 
         private bool showOriginalDescriptionOnTranslation;
@@ -97,12 +90,11 @@ namespace See4Me.ViewModels
         public void Initialize()
         {
             VisionSubscriptionKey = ServiceKeys.VisionSubscriptionKey;
-            EmotionSubscriptionKey = ServiceKeys.EmotionSubscriptionKey;
             FaceSubscriptionKey = ServiceKeys.FaceSubscriptionKey;
             TranslatorSubscriptionKey = ServiceKeys.TranslatorSubscriptionKey;
 
             IsTextToSpeechEnabled = Settings.IsTextToSpeechEnabled;
-            ShowDescriptionConfidence = Settings.ShowDescriptionConfidence;
+            ShowRecognitionConfidence = Settings.ShowRecognitionConfidence;
             ShowOriginalDescriptionOnTranslation = Settings.ShowOriginalDescriptionOnTranslation;
             showDescriptionOnFaceIdentification = Settings.ShowDescriptionOnFaceIdentification;
         }
@@ -117,17 +109,15 @@ namespace See4Me.ViewModels
         public void Save()
         {
             ServiceKeys.VisionSubscriptionKey = visionSubscriptionKey;
-            ServiceKeys.EmotionSubscriptionKey = emotionSubscriptionKey;
             ServiceKeys.FaceSubscriptionKey = faceSubscriptionKey;
             ServiceKeys.TranslatorSubscriptionKey = translatorSubscriptionKey;
 
             Settings.IsTextToSpeechEnabled = isTextToSpeechEnabled;
-            Settings.ShowDescriptionConfidence = showDescriptionConfidence;
+            Settings.ShowRecognitionConfidence = showRecognitionConfidence;
             Settings.ShowOriginalDescriptionOnTranslation = showOriginalDescriptionOnTranslation;
             Settings.ShowDescriptionOnFaceIdentification = showDescriptionOnFaceIdentification;
 
             var cognitiveSettings = cognitiveClient.Settings;
-            cognitiveSettings.EmotionSubscriptionKey = emotionSubscriptionKey;
             cognitiveSettings.VisionSubscriptionKey = visionSubscriptionKey;
             cognitiveSettings.FaceSubscriptionKey = faceSubscriptionKey;
             cognitiveSettings.TranslatorSubscriptionKey = translatorSubscriptionKey;

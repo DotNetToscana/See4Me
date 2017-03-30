@@ -46,11 +46,6 @@
 
                 <TextBox
                     Margin="5"
-                    Header="{Binding Path=LocalizedResources.EmotionSubscriptionKey, Source={StaticResource LocalizedStrings}}"
-                    Text="{Binding EmotionSubscriptionKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                <TextBox
-                    Margin="5"
                     Header="{Binding Path=LocalizedResources.TranslatorSubscriptionKey, Source={StaticResource LocalizedStrings}}"
                     Text="{Binding TranslatorSubscriptionKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
@@ -61,9 +56,9 @@
                     IsOn="{Binding IsTextToSpeechEnabled, Mode=TwoWay}" />
                 <ToggleSwitch
                     Margin="5"
-                    AutomationProperties.Name="{Binding Path=LocalizedResources.ShowDescriptionConfidence, Source={StaticResource LocalizedStrings}}"
-                    Header="{Binding Path=LocalizedResources.ShowDescriptionConfidence, Source={StaticResource LocalizedStrings}}"
-                    IsOn="{Binding ShowDescriptionConfidence, Mode=TwoWay}" />
+                    AutomationProperties.Name="{Binding Path=LocalizedResources.ShowRecognitionConfidence, Source={StaticResource LocalizedStrings}}"
+                    Header="{Binding Path=LocalizedResources.ShowRecognitionConfidence, Source={StaticResource LocalizedStrings}}"
+                    IsOn="{Binding ShowRecognitionConfidence, Mode=TwoWay}" />
                 <ToggleSwitch
                     Margin="5"
                     AutomationProperties.Name="{Binding Path=LocalizedResources.ShowDescriptionOnFaceIdentification, Source={StaticResource LocalizedStrings}}"

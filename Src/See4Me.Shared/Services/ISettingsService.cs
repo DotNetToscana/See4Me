@@ -4,7 +4,7 @@
     {
         CameraPanel CameraPanel { get; set; }
 
-        bool ShowDescriptionConfidence { get; set; }
+        bool ShowRecognitionConfidence { get; set; }
 
         bool ShowExceptionOnError { get; set; }
 
@@ -13,8 +13,6 @@
         bool ShowRawDescriptionOnInvalidRecognition { get; set; }
 
         string VisionSubscriptionKey { get; set; }
-
-        string EmotionSubscriptionKey { get; set; }
 
         string FaceSubscriptionKey { get; set; }
 

@@ -233,15 +233,6 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Emotion Subscription Key.
-        /// </summary>
-        public static string EmotionSubscriptionKey {
-            get {
-                return ResourceManager.GetString("EmotionSubscriptionKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to I see.
         /// </summary>
         public static string FaceRecognizedSingular {
@@ -548,16 +539,7 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Recognizing emotions....
-        /// </summary>
-        public static string RecognizingEmotions {
-            get {
-                return ResourceManager.GetString("RecognizingEmotions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Recognizing faces....
+        ///   Looks up a localized string similar to Recognizing faces and emotions....
         /// </summary>
         public static string RecognizingFaces {
             get {
@@ -638,15 +620,6 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show description confidence.
-        /// </summary>
-        public static string ShowDescriptionConfidence {
-            get {
-                return ResourceManager.GetString("ShowDescriptionConfidence", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Show also image description when detecting one or more faces.
         /// </summary>
         public static string ShowDescriptionOnFaceIdentification {
@@ -661,6 +634,15 @@ namespace See4Me.Localization.Resources {
         public static string ShowOriginalDescriptionOnTranslation {
             get {
                 return ResourceManager.GetString("ShowOriginalDescriptionOnTranslation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show recognition confidence.
+        /// </summary>
+        public static string ShowRecognitionConfidence {
+            get {
+                return ResourceManager.GetString("ShowRecognitionConfidence", resourceCulture);
             }
         }
         

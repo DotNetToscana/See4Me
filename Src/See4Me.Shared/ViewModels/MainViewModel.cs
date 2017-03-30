@@ -181,20 +181,30 @@ namespace See4Me.ViewModels
                                     if (visionResult.IsTranslated)
                                     {
                                         if (Settings.ShowOriginalDescriptionOnTranslation)
+                                        {
                                             visionDescription = $"{visionResult.TranslatedDescription} ({visionResult.Description})";
+                                        }
                                         else
+                                        {
                                             visionDescription = visionResult.TranslatedDescription;
+                                        }
                                     }
 
-                                    if (Settings.ShowDescriptionConfidence)
+                                    if (Settings.ShowRecognitionConfidence)
+                                    {
                                         visionDescription = $"{visionDescription} ({Math.Round(visionResult.Confidence, 2)})";
+                                    }
                                 }
                                 else
                                 {
                                     if (Settings.ShowRawDescriptionOnInvalidRecognition && visionResult.RawDescription != null)
+                                    {
                                         visionDescription = $"{AppResources.RecognitionFailed} ({visionResult.RawDescription}, {Math.Round(visionResult.Confidence, 2)})";
+                                    }
                                     else
+                                    {
                                         visionDescription = AppResources.RecognitionFailed;
+                                    }
                                 }
 
                                 visionDescription = $"{visionDescription}{Constants.SentenceEnd}";
@@ -281,10 +291,6 @@ namespace See4Me.ViewModels
 
                     case RecognitionPhase.RecognizingFaces:
                         StatusMessage = AppResources.RecognizingFaces;
-                        break;
-
-                    case RecognitionPhase.RecognizingEmotions:
-                        StatusMessage = AppResources.RecognizingEmotions;
                         break;
                 }
             });

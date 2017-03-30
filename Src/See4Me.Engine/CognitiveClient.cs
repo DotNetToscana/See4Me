@@ -1,5 +1,4 @@
-﻿using Microsoft.ProjectOxford.Emotion;
-using Microsoft.ProjectOxford.Face;
+﻿using Microsoft.ProjectOxford.Face;
 using Microsoft.ProjectOxford.Face.Contract;
 using Microsoft.ProjectOxford.Vision;
 using Microsoft.ProjectOxford.Vision.Contract;
@@ -32,8 +31,6 @@ namespace See4Me.Engine
         public IVisionSettingsProvider VisionSettingsProvider { get; set; }
 
         public bool IsVisionServiceRegistered => !string.IsNullOrWhiteSpace(Settings.VisionSubscriptionKey);
-
-        public bool IsEmotionServiceRegistered => !string.IsNullOrWhiteSpace(Settings.EmotionSubscriptionKey);
 
         public bool IsFaceServiceRegistered => !string.IsNullOrWhiteSpace(Settings.FaceSubscriptionKey);
 
@@ -85,7 +82,7 @@ namespace See4Me.Engine
                 {
                     analyzeImageResult = await visionService.AnalyzeImageAsync(stream, features);
                 }
-                catch (Microsoft.ProjectOxford.Vision.ClientException ex)
+                catch (ClientException ex)
                 {
                     var exception = await CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Vision", ex.GetHttpStatusCode(), ex, language, onProgress);
                     throw exception;
@@ -111,15 +108,24 @@ namespace See4Me.Engine
             if ((recognitionType.HasFlag(RecognitionType.Face) || recognitionType.HasFlag(RecognitionType.Emotion))
                 && (analyzeImageResult?.Faces.Any() ?? true))   // If Vision service was previously called, checks if any face was detected.
             {
-                var faceService = new FaceServiceClient(Settings.FaceSubscriptionKey, "https://westus.api.cognitive.microsoft.com/face/v1.0");
-                var emotionService = new EmotionServiceClient(Settings.EmotionSubscriptionKey);
+                var faceService = new FaceServiceClient(Settings.FaceSubscriptionKey);
 
                 await RaiseOnProgressAsync(onProgress, RecognitionPhase.RecognizingFaces);
 
                 try
                 {
                     stream.Position = 0;
-                    var faces = await faceService.DetectAsync(stream, returnFaceAttributes: new[] { FaceAttributeType.Gender, FaceAttributeType.Age /*, FaceAttributeType.Smile, FaceAttributeType.Glasses */ });
+
+                    var attributes = new HashSet<FaceAttributeType> { FaceAttributeType.Gender, FaceAttributeType.Age };
+
+                    if (recognitionType.HasFlag(RecognitionType.Emotion))
+                    {
+                        // If recognition types include emotions, add also the Emotion Face Attribute Type, so this feature is called
+                        // only if really needed.
+                        attributes.Add(FaceAttributeType.Emotion);
+                    }
+
+                    var faces = await faceService.DetectAsync(stream, returnFaceAttributes: attributes);
 
                     if (faces.Any())
                     {
@@ -149,45 +155,16 @@ namespace See4Me.Engine
                             {
                                 var faceResult = face.GetFaceResult();
 
-                                var faceRecognitionTask = Task.Run(async () =>
+                                // Checks if there is a candidate (i.e. a known person) in the identification result.
+                                var candidate = faceIdentificationResult?.FirstOrDefault(r => r.FaceId == face.FaceId)?.Candidates.FirstOrDefault();
+                                if (candidate != null)
                                 {
-                                    // Checks if there is a candidate (i.e. a known person) in the identification result.
-                                    var candidate = faceIdentificationResult?.FirstOrDefault(r => r.FaceId == face.FaceId)?.Candidates.FirstOrDefault();
-                                    if (candidate != null)
-                                    {
-                                        // Gets the person name.
-                                        var person = await faceService.GetPersonAsync(identifyPersonGroupId, candidate.PersonId);
-                                        faceResult.IdentifyConfidence = candidate.Confidence;
-                                        faceResult.Name = person?.Name;
-                                    }
-                                });
+                                    // Gets the person name.
+                                    var person = await faceService.GetPersonAsync(identifyPersonGroupId, candidate.PersonId);
+                                    faceResult.IdentifyConfidence = candidate.Confidence;
+                                    faceResult.Name = person?.Name;
+                                }
 
-                                var emotionTask = Task.Run(async () =>
-                                {
-                                    if (recognitionType.HasFlag(RecognitionType.Emotion))
-                                    {
-                                        // If required, for each face gets the corresponding emotion.
-                                        try
-                                        {
-                                            await RaiseOnProgressAsync(onProgress, RecognitionPhase.RecognizingEmotions);
-
-                                            using (var ms = new MemoryStream(imageBytes))
-                                            {
-                                                var emotions = await emotionService.RecognizeAsync(ms, face.FaceRectangle.ToRectangle());
-                                                var bestEmotion = emotions.GetBestEmotion();
-
-                                                faceResult.Emotion = bestEmotion;
-                                            }
-                                        }
-                                        catch (Microsoft.ProjectOxford.Common.ClientException ex)
-                                        {
-                                            var exception = await CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Emotion", ex.HttpStatus, ex, language, onProgress);
-                                            throw exception;
-                                        }
-                                    }
-                                });
-
-                                await Task.WhenAll(faceRecognitionTask, emotionTask);
                                 result.FaceResults.Add(faceResult);
                             });
 
@@ -247,7 +224,7 @@ namespace See4Me.Engine
         {
             var handler = onProgress;
             if (handler != null)
-            { 
+            {
                 await handler.Invoke(phase);
             }
         }

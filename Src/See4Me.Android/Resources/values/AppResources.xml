@@ -16,7 +16,6 @@
   <string name="ContemptMale">To show contempt</string>
   <string name="DisgustFemale">Disgusted</string>
   <string name="DisgustMale">Disgusted</string>
-  <string name="EmotionSubscriptionKey">Emotion Subscription Key</string>
   <string name="FaceRecognizedSingular">I see</string>
   <string name="FacesRecognizedPlural">I see {0} people</string>
   <string name="FearFemale">Fearful</string>
@@ -45,14 +44,14 @@
   <string name="RecognitionError">I\'m sorry, there was an unexpected error</string>
   <string name="RecognitionFailed">I\'m sorry, I don\'t recognize the image</string>
   <string name="RecognizeText">Recognize Text</string>
-  <string name="RecognizingFaces">Recognizing faces...</string>
+  <string name="RecognizingFaces">Recognizing faces and emotions...</string>
   <string name="ResourceLanguage">en</string>
   <string name="SadnessFemale">Sad</string>
   <string name="SadnessMale">Sad</string>
   <string name="Save">Save</string>
   <string name="ServiceNotRegistered">Attention, the service is not registered. Tap here to discover how to proceed.</string>
   <string name="Settings">Settings</string>
-  <string name="ShowDescriptionConfidence">Show description confidence</string>
+  <string name="ShowRecognitionConfidence">Show recognition confidence</string>
   <string name="ShowOriginalDescriptionOnTranslation">Show original description on translation</string>
   <string name="SurpriseFemale">Surprised</string>
   <string name="SurpriseMale">Surprised</string>
@@ -82,5 +81,4 @@
   <string name="FaceSubscriptionKey">Face Subscription Key</string>
   <string name="ShuttingDown">Shutting down the device...</string>
   <string name="ShowDescriptionOnFaceIdentification">Show also image description when detecting one or more faces</string>
-  <string name="RecognizingEmotions">Recognizing emotions...</string>
 </resources>

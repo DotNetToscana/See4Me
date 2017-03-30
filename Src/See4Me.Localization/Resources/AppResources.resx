@@ -165,9 +165,6 @@
   <data name="DisgustMale" xml:space="preserve">
     <value>Disgusted</value>
   </data>
-  <data name="EmotionSubscriptionKey" xml:space="preserve">
-    <value>Emotion Subscription Key</value>
-  </data>
   <data name="FaceRecognizedSingular" xml:space="preserve">
     <value>I see</value>
   </data>
@@ -253,7 +250,7 @@
     <value>Recognize Text</value>
   </data>
   <data name="RecognizingFaces" xml:space="preserve">
-    <value>Recognizing faces...</value>
+    <value>Recognizing faces and emotions...</value>
   </data>
   <data name="ResourceLanguage" xml:space="preserve">
     <value>en</value>
@@ -273,8 +270,8 @@
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="ShowDescriptionConfidence" xml:space="preserve">
-    <value>Show description confidence</value>
+  <data name="ShowRecognitionConfidence" xml:space="preserve">
+    <value>Show recognition confidence</value>
   </data>
   <data name="ShowOriginalDescriptionOnTranslation" xml:space="preserve">
     <value>Show original description on translation</value>
@@ -362,8 +359,5 @@
   </data>
   <data name="ShowDescriptionOnFaceIdentification" xml:space="preserve">
     <value>Show also image description when detecting one or more faces</value>
-  </data>
-  <data name="RecognizingEmotions" xml:space="preserve">
-    <value>Recognizing emotions...</value>
   </data>
 </root>

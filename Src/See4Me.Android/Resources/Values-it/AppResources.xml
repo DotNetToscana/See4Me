@@ -16,7 +16,6 @@
   <string name="ContemptMale">Che mostra disprezzo</string>
   <string name="DisgustFemale">Disgustata</string>
   <string name="DisgustMale">Disgustato</string>
-  <string name="EmotionSubscriptionKey">Chiave di sottoscrizione servizio Emotion</string>
   <string name="FaceRecognizedSingular">Ho riconosciuto</string>
   <string name="FacesRecognizedPlural">Ho riconosciuto {0} persone</string>
   <string name="FearFemale">Speventata</string>
@@ -45,14 +44,14 @@
   <string name="RecognitionError">Mi dispiace, si è verificato un errore inatteso</string>
   <string name="RecognitionFailed">Mi dispiace, non riconosco l\'immagine</string>
   <string name="RecognizeText">Riconosci il testo</string>
-  <string name="RecognizingFaces">Riconoscimento dei volti...</string>
+  <string name="RecognizingFaces">Riconoscimento dei volti e delle emozioni...</string>
   <string name="ResourceLanguage">it</string>
   <string name="SadnessFemale">Triste</string>
   <string name="SadnessMale">Triste</string>
   <string name="Save">Salva</string>
   <string name="ServiceNotRegistered">Attenzione, il servizio non è registrato. Tocca qui per scoprire come effettuare la registrazione</string>
   <string name="Settings">Impostazioni</string>
-  <string name="ShowDescriptionConfidence">Mostra l\'accuratezza della descrizione</string>
+  <string name="ShowRecognitionConfidence">Mostra l\'accuratezza del riconoscimento</string>
   <string name="ShowOriginalDescriptionOnTranslation">Mostra anche la descrizione originale in caso di traduzione</string>
   <string name="SurpriseFemale">Sorpresa</string>
   <string name="SurpriseMale">Sorpreso</string>
@@ -82,5 +81,4 @@
   <string name="ShuttingDown">Spegnimento in corso...</string>
   <string name="RegisterServices">Registra i servizi</string>
   <string name="ShowDescriptionOnFaceIdentification">Mostra anche la descrizione dell\'immagine quando vengono riconosciuti uno o più volti</string>
-  <string name="RecognizingEmotions">Riconoscimento delle emozioni...</string>
 </resources>

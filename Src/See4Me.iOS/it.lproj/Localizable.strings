@@ -14,7 +14,6 @@
 "ContemptMale"="Che mostra disprezzo";
 "DisgustFemale"="Disgustata";
 "DisgustMale"="Disgustato";
-"EmotionSubscriptionKey"="Chiave di sottoscrizione servizio Emotion";
 "FaceRecognizedSingular"="Ho riconosciuto";
 "FacesRecognizedPlural"="Ho riconosciuto {0} persone";
 "FearFemale"="Speventata";
@@ -43,14 +42,14 @@
 "RecognitionError"="Mi dispiace, si è verificato un errore inatteso";
 "RecognitionFailed"="Mi dispiace, non riconosco l\'immagine";
 "RecognizeText"="Riconosci il testo";
-"RecognizingFaces"="Riconoscimento dei volti...";
+"RecognizingFaces"="Riconoscimento dei volti e delle emozioni...";
 "ResourceLanguage"="it";
 "SadnessFemale"="Triste";
 "SadnessMale"="Triste";
 "Save"="Salva";
 "ServiceNotRegistered"="Attenzione, il servizio non è registrato. Tocca qui per scoprire come effettuare la registrazione";
 "Settings"="Impostazioni";
-"ShowDescriptionConfidence"="Mostra l\'accuratezza della descrizione";
+"ShowRecognitionConfidence"="Mostra l\'accuratezza del riconoscimento";
 "ShowOriginalDescriptionOnTranslation"="Mostra anche la descrizione originale in caso di traduzione";
 "SurpriseFemale"="Sorpresa";
 "SurpriseMale"="Sorpreso";
@@ -80,4 +79,3 @@
 "ShuttingDown"="Spegnimento in corso...";
 "RegisterServices"="Registra i servizi";
 "ShowDescriptionOnFaceIdentification"="Mostra anche la descrizione dell\'immagine quando vengono riconosciuti uno o più volti";
-"RecognizingEmotions"="Riconoscimento delle emozioni...";

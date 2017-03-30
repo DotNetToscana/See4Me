@@ -11,7 +11,6 @@ namespace See4Me.Engine
         QueryingService,
         Translating,
         RecognizingFaces,
-        RecognizingEmotions,
         RecognizingText
     }
 }

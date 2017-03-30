@@ -1,28 +1,17 @@
-﻿using Microsoft.ProjectOxford.Emotion.Contract;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using Microsoft.ProjectOxford.Common;
 using Microsoft.ProjectOxford.Face.Contract;
+using Microsoft.ProjectOxford.Common.Contract;
 
 namespace See4Me.Engine.Extensions
 {
     internal static class FaceExtensions
     {
-        public static Rectangle[] ToRectangle(this Microsoft.ProjectOxford.Face.Contract.FaceRectangle faceRectangle)
-            => new Rectangle[] {
-                new Rectangle {
-                    Height = faceRectangle.Height,
-                    Left = faceRectangle.Left,
-                    Top = faceRectangle.Top,
-                    Width = faceRectangle.Width
-                }
-            };
-
-        public static Emotion GetBestEmotion(this Microsoft.ProjectOxford.Emotion.Contract.Emotion[] emotions)
+        public static Emotion GetBestEmotion(this EmotionScores emotions)
         {
-            var bestEmotion = emotions.FirstOrDefault()?.Scores.ToRankedList().FirstOrDefault().Key;
+            var bestEmotion = emotions?.ToRankedList().FirstOrDefault().Key ?? nameof(EmotionScores.Neutral);
             return (Emotion)Enum.Parse(typeof(Emotion), bestEmotion, true);
         }
 
@@ -31,7 +20,8 @@ namespace See4Me.Engine.Extensions
             return new FaceResult
             {
                 Age = (int)face.FaceAttributes.Age,
-                Gender = (Gender)Enum.Parse(typeof(Gender), face.FaceAttributes.Gender, true)
+                Gender = (Gender)Enum.Parse(typeof(Gender), face.FaceAttributes.Gender, true),
+                Emotion = face.FaceAttributes.Emotion.GetBestEmotion()
             };
         }
     }

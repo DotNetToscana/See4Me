@@ -7,12 +7,11 @@ namespace See4Me.Services
     public class SettingsService : ISettingsService
     {
         private const string CAMERA_PANEL = "CameraPanel";
-        private const string SHOW_DESCRIPTION_CONFIDENCE = "ShowDescriptionConfidence";
+        private const string SHOW_RECOGNITION_CONFIDENCE = "ShowRecognitionConfidence";
         private const string SHOW_EXCEPTION_ON_ERROR = "ShowExceptionOnError";
         private const string SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION = "ShowOriginalDescriptionOnTranslation";
         private const string SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION = "ShowRawDescriptionOnInvalidRecognition";
         private const string VISION_SUBSCRIPTION_KEY = "VisionSubscriptionKey";
-        private const string EMOTION_SUBSCRIPTION_KEY = "EmotionSubscriptionKey";
         private const string FACE_SUBSCRIPTION_KEY = "FaceSubscriptionKey";
         private const string TRANSLATOR_SUBSCRIPTION_KEY = "TranslatorSubscriptionKey";
         private const string IS_TEXT_TO_SPEECH_ENABLED = "IsTextToSpeechEnabled";
@@ -36,10 +35,10 @@ namespace See4Me.Services
             set { settings.AddOrUpdateValue(CAMERA_PANEL, value.ToString()); }
         }
 
-        public bool ShowDescriptionConfidence
+        public bool ShowRecognitionConfidence
         {
-            get { return settings.GetValueOrDefault(SHOW_DESCRIPTION_CONFIDENCE, false); }
-            set { settings.AddOrUpdateValue(SHOW_DESCRIPTION_CONFIDENCE, value); }
+            get { return settings.GetValueOrDefault(SHOW_RECOGNITION_CONFIDENCE, false); }
+            set { settings.AddOrUpdateValue(SHOW_RECOGNITION_CONFIDENCE, value); }
         }
 
         public bool ShowOriginalDescriptionOnTranslation
@@ -78,12 +77,6 @@ namespace See4Me.Services
         {
             get { return settings.GetValueOrDefault<string>(VISION_SUBSCRIPTION_KEY, null); }
             set { settings.AddOrUpdateValue(VISION_SUBSCRIPTION_KEY, value); }
-        }
-
-        public string EmotionSubscriptionKey
-        {
-            get { return settings.GetValueOrDefault<string>(EMOTION_SUBSCRIPTION_KEY, null); }
-            set { settings.AddOrUpdateValue(EMOTION_SUBSCRIPTION_KEY, value); }
         }
 
         public string FaceSubscriptionKey

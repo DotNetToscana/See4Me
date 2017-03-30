@@ -33,6 +33,12 @@ namespace See4Me.Services
             {
                 // A person name has been identified.
                 personMessage = $"{face.Name} ";
+
+                if (settings.ShowRecognitionConfidence)
+                { 
+                    personMessage = $"{personMessage} ({Math.Round(face.IdentifyConfidence, 2)})";
+                }
+
                 result.ContainsFace = true;
             }
             else

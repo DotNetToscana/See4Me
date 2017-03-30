@@ -14,7 +14,6 @@
 "ContemptMale"="To show contempt";
 "DisgustFemale"="Disgusted";
 "DisgustMale"="Disgusted";
-"EmotionSubscriptionKey"="Emotion Subscription Key";
 "FaceRecognizedSingular"="I see";
 "FacesRecognizedPlural"="I see {0} people";
 "FearFemale"="Fearful";
@@ -43,14 +42,14 @@
 "RecognitionError"="I\'m sorry, there was an unexpected error";
 "RecognitionFailed"="I\'m sorry, I don\'t recognize the image";
 "RecognizeText"="Recognize Text";
-"RecognizingFaces"="Recognizing faces...";
+"RecognizingFaces"="Recognizing faces and emotions...";
 "ResourceLanguage"="en";
 "SadnessFemale"="Sad";
 "SadnessMale"="Sad";
 "Save"="Save";
 "ServiceNotRegistered"="Attention, the service is not registered. Tap here to discover how to proceed.";
 "Settings"="Settings";
-"ShowDescriptionConfidence"="Show description confidence";
+"ShowRecognitionConfidence"="Show recognition confidence";
 "ShowOriginalDescriptionOnTranslation"="Show original description on translation";
 "SurpriseFemale"="Surprised";
 "SurpriseMale"="Surprised";
@@ -80,4 +79,3 @@
 "FaceSubscriptionKey"="Face Subscription Key";
 "ShuttingDown"="Shutting down the device...";
 "ShowDescriptionOnFaceIdentification"="Show also image description when detecting one or more faces";
-"RecognizingEmotions"="Recognizing emotions...";
