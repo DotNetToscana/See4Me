@@ -13,10 +13,13 @@ namespace See4Me.Engine.Extensions
             => source?.IndexOf(value, comparison) >= 0;
 
         public static bool ContainsIgnoreCase(this string source, string value)
-            => source.Contains(value, StringComparison.OrdinalIgnoreCase);
+            => source?.Contains(value, StringComparison.OrdinalIgnoreCase) ?? false;
 
         public static bool EqualsIgnoreCase(this string source, string value)
             => string.Equals(source, value, StringComparison.OrdinalIgnoreCase);
+
+        public static bool StartsWithIgnoreCase(this string source, string value)
+            => source?.StartsWith(value, StringComparison.OrdinalIgnoreCase) ?? false;
 
         public static string ReplaceIgnoreCase(this string input, string pattern, string replacement)
             => Regex.Replace(input, pattern, replacement, RegexOptions.IgnoreCase);

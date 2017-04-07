@@ -56,10 +56,11 @@
     "a clock tower in front of",
     "a clock sitting in front of",
     "a sign with a clock on",
-    "an image of",    
+    "an image of",
     "a boat is sitting on",
     "an umbrella is sitting on",
-    "wearing a red umbrella"
+    "wearing a red umbrella",
+    "a train sitting on"
   ],
   "DescriptionsToReplace": {
     "a man in a blue cloudy sky": "a blue cloudy sky",

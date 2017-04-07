@@ -258,11 +258,7 @@ namespace See4Me.ViewModels
             }
             catch (Exception ex)
             {
-                var error = AppResources.RecognitionError;
-
-                if (Settings.ShowExceptionOnError)
-                    error = $"{error} ({ex.Message})";
-
+                var error = ex.GetExceptionMessage();
                 visionDescription = error;
             }
 

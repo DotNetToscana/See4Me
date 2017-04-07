@@ -18,6 +18,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Common\AutoRelayCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ExceptionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StreamExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ServiceKeys.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DialogService.cs" />

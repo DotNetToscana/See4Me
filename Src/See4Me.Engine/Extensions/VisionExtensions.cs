@@ -54,11 +54,19 @@ namespace See4Me.Engine.Extensions
             if (rawDescription?.Confidence >= settings.MinimumConfidence)
             {
                 var text = rawDescription.Text;
-                var replacedText = settings.DescriptionsToReplace.FirstOrDefault(d => d.Key.EqualsIgnoreCase(text)).Value;
+                var replacedText = settings.DescriptionsToReplace.FirstOrDefault(d => text.StartsWithIgnoreCase(d.Key));
 
-                if (!string.IsNullOrWhiteSpace(replacedText))
-                { 
-                    text = replacedText;
+                if (!string.IsNullOrWhiteSpace(replacedText.Key))
+                {
+                    // Checks whether to replace or substitute the text.
+                    if (text.EqualsIgnoreCase(replacedText.Key))
+                    {
+                        text = replacedText.Value;
+                    }
+                    else
+                    {
+                        text = text.ReplaceIgnoreCase(replacedText.Key, replacedText.Value).Trim();
+                    }
                 }
 
                 var textToRemove = settings.DescriptionsToRemove.FirstOrDefault(d => text.ContainsIgnoreCase(d));

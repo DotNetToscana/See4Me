@@ -8,6 +8,8 @@ using See4Me.Extensions;
 using Windows.System.Profile;
 using See4Me.Common;
 using Windows.UI.Core;
+using System;
+using See4Me.ViewModels;
 
 namespace See4Me.Views
 {
@@ -15,18 +17,22 @@ namespace See4Me.Views
     {
         private static string deviceFamily;
 
+        private readonly MainViewModel viewModel;
+
         public MainPage()
         {
             this.InitializeComponent();
 
             NavigationCacheMode = NavigationCacheMode.Required;
             deviceFamily = AnalyticsInfo.VersionInfo.DeviceFamily;
+
+            viewModel = DataContext as MainViewModel;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
-            this.RegisterMessages();
+            RegisterMessages();
 
             base.OnNavigatedTo(e);
         }
@@ -35,45 +41,69 @@ namespace See4Me.Views
         {
             Messenger.Default.Register<NotificationMessageAction<object>>(this, (message) =>
             {
-                switch (message.Notification)
+                try
                 {
-                    case Constants.InitializeStreaming:
-                        message.Execute(video);
-                        break;
+                    switch (message.Notification)
+                    {
+                        case Constants.InitializeStreaming:
+                            message.Execute(video);
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var error = ex.GetExceptionMessage();
+                    viewModel.StatusMessage = error;
                 }
             });
 
             Messenger.Default.Register<NotificationMessage>(this, (message) =>
             {
-                switch (message.Notification)
+                try
                 {
-                    case Constants.TakingPhoto:
-                        fullSizeImage.Source = null;
+                    switch (message.Notification)
+                    {
+                        case Constants.TakingPhoto:
+                            fullSizeImage.Source = null;
 
-                        previewImageBorder.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                        previewImage.Source = null;
+                            previewImageBorder.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                            previewImage.Source = null;
 
-                        if (deviceFamily != Constants.WindowsMobileFamily)
-                            shutter.Play();
+                            if (deviceFamily != Constants.WindowsMobileFamily)
+                                shutter.Play();
 
-                        break;
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var error = ex.GetExceptionMessage();
+                    viewModel.StatusMessage = error;
                 }
             });
 
             Messenger.Default.Register<NotificationMessage<byte[]>>(this, async (message) =>
             {
-                switch (message.Notification)
+                try
                 {
-                    case Constants.PhotoTaken:
-                        await previewImage.SetSourceAsync(message.Content);
-                        previewImageBorder.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    switch (message.Notification)
+                    {
+                        case Constants.PhotoTaken:
+                            await previewImage.SetSourceAsync(message.Content);
+                            previewImageBorder.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
-                        await fullSizeImage.SetSourceAsync(message.Content);
+                            await fullSizeImage.SetSourceAsync(message.Content);
 
-                        break;
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var error = ex.GetExceptionMessage();
+                    viewModel.StatusMessage = error;
                 }
             });
-        }
+        }       
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {

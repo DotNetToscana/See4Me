@@ -17,9 +17,15 @@ namespace See4Me.Engine.Extensions
 
         public static FaceResult GetFaceResult(this Face face)
         {
+            var age = (int)face.FaceAttributes.Age;
+            if (age == 0)
+            {
+                age = 1;
+            }
+
             return new FaceResult
             {
-                Age = (int)face.FaceAttributes.Age,
+                Age = age,
                 Gender = (Gender)Enum.Parse(typeof(Gender), face.FaceAttributes.Gender, true),
                 Emotion = face.FaceAttributes.Emotion.GetBestEmotion()
             };
