@@ -76,6 +76,9 @@
     "a train is on the side of a road": "the side of a road",
     "a train traveling down tracks next to a highway": "a road",
     "a train is traveling down the road": "a road",
-    "a train traveling down tracks next to a body of water": "a body of water"
+    "a train traveling down tracks next to a body of water": "a body of water",
+    "a large long train on a bridge": "a bridge",
+    "a large long train on a steel track": "a road",
+    "a train on a steel track": "a road"
   }
 }
