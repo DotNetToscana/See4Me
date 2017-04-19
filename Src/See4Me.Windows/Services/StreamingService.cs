@@ -22,6 +22,7 @@ using Windows.Storage.FileProperties;
 using Windows.Foundation;
 using Windows.Media.Devices;
 using System.Collections.Generic;
+using Windows.System.Profile;
 
 namespace See4Me.Services
 {
@@ -39,7 +40,6 @@ namespace See4Me.Services
         /// </summary>
         private MediaCapture mediaCapture;
         private CaptureElement preview;
-
 
         // Information about the camera device
         private bool mirroringPreview;
@@ -176,7 +176,7 @@ namespace See4Me.Services
 
                 var defaultEncodingProperties = GetMediaEncodingProperties(photoProperties);
                 if (defaultEncodingProperties != null)
-                { 
+                {
                     await deviceController.SetMediaStreamPropertiesAsync(MediaStreamType.Photo, defaultEncodingProperties);
                 }
 
@@ -299,11 +299,11 @@ namespace See4Me.Services
         {
             var dispatcher = CoreApplication.MainView?.CoreWindow?.Dispatcher;
             if (dispatcher != null)
-            { 
+            {
                 await dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () => await ChangeScenarioStateAsync(ScenarioState.Idle));
             }
             else
-            { 
+            {
                 await ChangeScenarioStateAsync(ScenarioState.Idle);
             }
         }
@@ -339,7 +339,7 @@ namespace See4Me.Services
         public async Task StartStreamingAsync(CameraPanel panel, object preview)
         {
             if (CurrentState == ScenarioState.Idle)
-            { 
+            {
                 await ChangeScenarioStateAsync(ScenarioState.Streaming, panel, preview as CaptureElement);
             }
         }
@@ -347,7 +347,7 @@ namespace See4Me.Services
         public async Task StopStreamingAsync()
         {
             if (CurrentState == ScenarioState.Streaming)
-            { 
+            {
                 await ChangeScenarioStateAsync(ScenarioState.Idle);
             }
         }
@@ -369,14 +369,14 @@ namespace See4Me.Services
         public async Task<Stream> GetCurrentFrameAsync()
         {
             if (CurrentState != ScenarioState.Streaming)
-            { 
+            {
                 return null;
             }
 
             // If a lock is being held it means we're still waiting for processing work on the previous frame to complete.
             // In this situation, don't wait on the semaphore but exit immediately.
             if (!frameProcessingSemaphore.Wait(0))
-            { 
+            {
                 return null;
             }
 
@@ -549,10 +549,20 @@ namespace See4Me.Services
 
         private IMediaEncodingProperties GetMediaEncodingProperties(IEnumerable<StreamResolution> resolutions)
         {
-            var defaultEncodingProperties = resolutions.FirstOrDefault(x => x.Width == 1440)?.EncodingProperties ??
-                resolutions.FirstOrDefault(x => x.Width == 1280)?.EncodingProperties ??
-                resolutions.FirstOrDefault(x => x.Width == 800)?.EncodingProperties ??
-                resolutions.FirstOrDefault(x => x.Width == 640)?.EncodingProperties;
+            var deviceFamily = AnalyticsInfo.VersionInfo.DeviceFamily;
+            IMediaEncodingProperties defaultEncodingProperties = null;
+
+            if (deviceFamily == Constants.WindowsIoTFamily)
+            {
+                defaultEncodingProperties = resolutions.FirstOrDefault(x => x.Width == 640)?.EncodingProperties;
+            }
+            else
+            {
+                defaultEncodingProperties = resolutions.FirstOrDefault(x => x.Width == 1440)?.EncodingProperties ??
+                    resolutions.FirstOrDefault(x => x.Width == 1280)?.EncodingProperties ??
+                    resolutions.FirstOrDefault(x => x.Width == 800)?.EncodingProperties ??
+                    resolutions.FirstOrDefault(x => x.Width == 640)?.EncodingProperties;
+            }
 
             return defaultEncodingProperties;
         }
