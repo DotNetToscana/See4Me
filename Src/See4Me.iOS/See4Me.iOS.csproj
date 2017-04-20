@@ -73,7 +73,7 @@
     <OptimizePNGs>True</OptimizePNGs>
     <MtouchFloat32>False</MtouchFloat32>
     <DeviceSpecificBuild>False</DeviceSpecificBuild>
-    <CodesignProvision>3482537e-0af7-4b1c-8888-b727a5ba5215</CodesignProvision>
+    <CodesignProvision>bd1985b1-eedb-427a-813c-fe8a81539726</CodesignProvision>
     <MtouchEnableBitcode>False</MtouchEnableBitcode>
     <MtouchTlsProvider>Legacy</MtouchTlsProvider>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
