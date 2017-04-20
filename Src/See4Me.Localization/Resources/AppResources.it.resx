@@ -154,19 +154,16 @@
     <value>Bambino</value>
   </data>
   <data name="ContemptFemale" xml:space="preserve">
-    <value>Mostrare disprezzo</value>
+    <value>Che mostra disprezzo</value>
   </data>
   <data name="ContemptMale" xml:space="preserve">
-    <value>Mostrare disprezzo</value>
+    <value>Che mostra disprezzo</value>
   </data>
   <data name="DisgustFemale" xml:space="preserve">
     <value>Disgustata</value>
   </data>
   <data name="DisgustMale" xml:space="preserve">
     <value>Disgustato</value>
-  </data>
-  <data name="EmotionSubscriptionKey" xml:space="preserve">
-    <value>Chiave di sottoscrizione servizio Emotion</value>
   </data>
   <data name="FaceRecognizedSingular" xml:space="preserve">
     <value>Ho riconosciuto</value>
@@ -202,10 +199,10 @@
     <value>LinkedIn:</value>
   </data>
   <data name="LookingFemale" xml:space="preserve">
-    <value>che sembra {0}</value>
+    <value>, {0}</value>
   </data>
   <data name="LookingMale" xml:space="preserve">
-    <value>che sembra {0}</value>
+    <value>, {0}</value>
   </data>
   <data name="ManFemale" xml:space="preserve">
     <value>Donna</value>
@@ -268,19 +265,16 @@
     <value>Salva</value>
   </data>
   <data name="ServiceNotRegistered" xml:space="preserve">
-    <value>Attenzione, il servizio non è registrato. Vai alle Impostazioni per inserire le chiavi necessarie</value>
+    <value>Attenzione, il servizio non è registrato. Tocca qui per scoprire come effettuare la registrazione</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Impostazioni</value>
   </data>
-  <data name="ShowDescriptionConfidence" xml:space="preserve">
-    <value>Mostra l'accuratezza della descrizione</value>
+  <data name="ShowRecognitionConfidence" xml:space="preserve">
+    <value>Mostra l'accuratezza del riconoscimento</value>
   </data>
   <data name="ShowOriginalDescriptionOnTranslation" xml:space="preserve">
     <value>Mostra anche la descrizione originale in caso di traduzione</value>
-  </data>
-  <data name="SubscribeCognitiveServices" xml:space="preserve">
-    <value>Registrati per ottenere la chiave</value>
   </data>
   <data name="SurpriseFemale" xml:space="preserve">
     <value>Sorpresa</value>
@@ -354,7 +348,16 @@
   <data name="iOSProjectAuthor" xml:space="preserve">
     <value>Sviluppato da Riccardo Cappello</value>
   </data>
-  <data name="SubscribeTranslatorService" xml:space="preserve">
-    <value>Registrati per ottenere la chiave</value>
+  <data name="FaceSubscriptionKey" xml:space="preserve">
+    <value>Chiave di sottoscrizione servizio Face</value>
+  </data>
+  <data name="ShuttingDown" xml:space="preserve">
+    <value>Spegnimento in corso...</value>
+  </data>
+  <data name="RegisterServices" xml:space="preserve">
+    <value>Registra i servizi</value>
+  </data>
+  <data name="ShowDescriptionOnFaceIdentification" xml:space="preserve">
+    <value>Mostra anche la descrizione dell'immagine quando vengono riconosciuti uno o più volti</value>
   </data>
 </root>

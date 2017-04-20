@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.ProjectOxford.Vision;
 using See4Me.Common;
 using See4Me.Localization.Resources;
 using See4Me.Services;
@@ -62,12 +61,12 @@ namespace See4Me.ViewModels
                         MessengerInstance.Send(new NotificationMessage<byte[]>(imageBytes, Constants.PhotoTaken));
                         Message = null;
 
-                        if (await Network.IsInternetAvailableAsync())
+                        if (await NetworkService.IsInternetAvailableAsync())
                         {
-                            var result = await cognitiveClient.RecognizeAsync(stream, Language, RecognitionType.Text);
+                            var result = await cognitiveClient.AnalyzeAsync(stream, Language, RecognitionType.Text);
                             var ocrResult = result.OcrResult;
 
-                            if (ocrResult.IsValid)
+                            if (ocrResult.ContainsText)
                                 recognizeText = ocrResult.Text;
                             else
                                 recognizeText = AppResources.UnableToRecognizeText;
@@ -83,22 +82,22 @@ namespace See4Me.ViewModels
                         // If message is null at this point, this is the first request. If we cancel it, turns automatically to the
                         // previous page.
                         if (message == null)
-                            Navigator.GoBack();
+                            AppNavigationService.GoBack();
 
                         IsBusy = false;
                         return;
                     }
                 }
             }
+            catch (CognitiveException ex)
+            {
+                // Unable to access the service (message contains translated error details).
+                recognizeText = ex.Message;
+            }
             catch (WebException)
             {
                 // Internet isn't available, the service cannot be reached.
                 recognizeText = AppResources.NoConnection;
-            }
-            catch (ClientException)
-            {
-                // Unable to access the service (tipically, due to invalid registration keys).
-                recognizeText = AppResources.UnableToAccessService;
             }
             catch (Exception ex)
             {

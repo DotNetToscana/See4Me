@@ -1,13 +1,13 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
-using Microsoft.ProjectOxford.Emotion;
-using Microsoft.ProjectOxford.Vision;
+using Newtonsoft.Json;
 using See4Me.Engine;
 using See4Me.Engine.Services.ServiceSettings;
 using See4Me.Services;
-using See4Me.Services.ServiceSettings;
 using System.Globalization;
+using System.IO;
+using System.Reflection;
 
 namespace See4Me.ViewModels
 {
@@ -24,12 +24,19 @@ namespace See4Me.ViewModels
 
             SimpleIoc.Default.Register<CognitiveClient>(() =>
             {
-                var visionSettingsProvider = new LocalVisionSettingsProvider();
+                VisionSettings visionSettings = null;
+                using (var stream = typeof(ViewModelLocator).GetTypeInfo().Assembly.GetManifestResourceStream(Constants.VisionSettingsFile))
+                {
+                    using (var reader = new StreamReader(stream))
+                        visionSettings = JsonConvert.DeserializeObject<VisionSettings>(reader.ReadToEnd());
+                }
+
+                var visionSettingsProvider = new SimpleVisionSettingsProvider(visionSettings);
                 var cognitiveClient = new CognitiveClient(visionSettingsProvider);
 
                 var cognitiveSettings = cognitiveClient.Settings;
-                cognitiveSettings.EmotionSubscriptionKey = ServiceKeys.EmotionSubscriptionKey;
                 cognitiveSettings.VisionSubscriptionKey = ServiceKeys.VisionSubscriptionKey;
+                cognitiveSettings.FaceSubscriptionKey = ServiceKeys.FaceSubscriptionKey;
                 cognitiveSettings.TranslatorSubscriptionKey = ServiceKeys.TranslatorSubscriptionKey;
 
                 return cognitiveClient;

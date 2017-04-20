@@ -9,5 +9,6 @@ namespace See4Me
     public static partial class Constants
     {
         public const string WindowsMobileFamily = "Windows.Mobile";
+        public const string WindowsIoTFamily = "Windows.IoT";
     }
 }

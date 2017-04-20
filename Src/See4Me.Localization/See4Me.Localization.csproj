@@ -65,6 +65,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.it.resx">
       <LogicalName>See4Me.AppResources.it.resources</LogicalName>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.ProjectOxford.Vision;
 using See4Me.Common;
 using See4Me.Services;
 using System.Collections.Generic;
@@ -16,12 +15,14 @@ namespace See4Me.ViewModels
 {
     public partial class SettingsViewModel : ViewModelBase
     {
-        private const string SHOW_DESCRIPTION_CONFIDENCE = "ShowDescriptionConfidence";
+        private const string SHOW_RECOGNITION_CONFIDENCE = "ShowRecognitionConfidence";
         private const string SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION = "ShowOriginalDescriptionOnTranslation";
         private const string VISION_SUBSCRIPTION_KEY = "VisionSubscriptionKey";
+        private const string FACE_SUBSCRIPTION_KEY = "FaceSubscriptionKey";
         private const string EMOTION_SUBSCRIPTION_KEY = "EmotionSubscriptionKey";
         private const string TRANSLATOR_SUBSCRIPTION_KEY = "TranslatorSubscriptionKey";
         private const string IS_TEXT_TO_SPEECH_ENABLED = "IsTextToSpeechEnabled";
+        private const string SHOW_DESCRIPTION_ON_FACE_IDENTIFICATION = "ShowDescriptionOnFaceIdentification";
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
@@ -29,7 +30,8 @@ namespace See4Me.ViewModels
             {
                 this.Initialize();
             }
-            else if (state.Any())
+
+            if (state.Any())
             {
                 try
                 {
@@ -45,16 +47,22 @@ namespace See4Me.ViewModels
             await base.OnNavigatedToAsync(parameter, mode, state);
         }
 
+        public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
+        {
+            this.Save();      
+            return base.OnNavigatingFromAsync(args);
+        }
+
         public override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
         {
             if (suspending)
             {
-                state[SHOW_DESCRIPTION_CONFIDENCE] = showDescriptionConfidence;
+                state[SHOW_RECOGNITION_CONFIDENCE] = showRecognitionConfidence;
                 state[SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION] = showOriginalDescriptionOnTranslation;
                 state[VISION_SUBSCRIPTION_KEY] = visionSubscriptionKey;
-                state[EMOTION_SUBSCRIPTION_KEY] = emotionSubscriptionKey;
                 state[TRANSLATOR_SUBSCRIPTION_KEY] = translatorSubscriptionKey;
                 state[IS_TEXT_TO_SPEECH_ENABLED] = isTextToSpeechEnabled;
+                state[SHOW_DESCRIPTION_ON_FACE_IDENTIFICATION] = showDescriptionOnFaceIdentification;
             }
 
             return base.OnNavigatedFromAsync(state, suspending);
@@ -62,12 +70,13 @@ namespace See4Me.ViewModels
 
         private void Restore(IDictionary<string, object> state)
         {
-            showDescriptionConfidence = Convert.ToBoolean(state[SHOW_DESCRIPTION_CONFIDENCE]);
+            showRecognitionConfidence = Convert.ToBoolean(state[SHOW_RECOGNITION_CONFIDENCE]);
             showOriginalDescriptionOnTranslation = Convert.ToBoolean(state[SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION]);
             visionSubscriptionKey = state[VISION_SUBSCRIPTION_KEY].ToString();
-            emotionSubscriptionKey = state[EMOTION_SUBSCRIPTION_KEY].ToString();
             translatorSubscriptionKey = state[TRANSLATOR_SUBSCRIPTION_KEY].ToString();
+            faceSubscriptionKey = state[FACE_SUBSCRIPTION_KEY].ToString();
             isTextToSpeechEnabled = Convert.ToBoolean(state[IS_TEXT_TO_SPEECH_ENABLED]);
+            showDescriptionOnFaceIdentification = Convert.ToBoolean(state[SHOW_DESCRIPTION_ON_FACE_IDENTIFICATION]);
         }
     }
 }

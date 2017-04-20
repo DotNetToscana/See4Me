@@ -10,11 +10,13 @@ namespace See4Me.Engine
     {
         public VisionResult VisionResult { get; internal set; } = new VisionResult();
 
-        public IList<EmotionResult> EmotionResults { get; internal set; } = new List<EmotionResult>();
+        public IList<FaceResult> FaceResults { get; internal set; } = new List<FaceResult>();
 
         public OcrResult OcrResult { get; internal set; } = new OcrResult();
 
-        internal CognitiveResult() { }
+        internal CognitiveResult()
+        {
+        }
     }
 
     public class VisionResult
@@ -22,6 +24,8 @@ namespace See4Me.Engine
         public bool IsValid { get; internal set; }
 
         public double Confidence { get; internal set; }
+
+        public string RawDescription { get; internal set; }
 
         public string Description { get; internal set; }
 
@@ -34,28 +38,41 @@ namespace See4Me.Engine
 
         public bool IsTranslated => Description != translatedDescription;
 
-        public string RawDescription { get; set; }
-
-        internal VisionResult() { }
+        internal VisionResult()
+        {
+        }
     }
 
-    public class EmotionResult
+    public class FaceResult
     {
-        public Emotion Emotion { get; internal set; }
+        public Emotion Emotion { get; internal set; } = Emotion.Neutral;
 
         public int Age { get; internal set; }
 
         public Gender Gender { get; internal set; }
 
-        internal EmotionResult() { }
+        public string Name { get; internal set; }
+
+        public double IdentifyConfidence { get; internal set; }
+
+        internal FaceResult()
+        {
+        }
     }
 
     public class OcrResult
     {
-        public string Text { get; internal set; }
+        private string text;
+        public string Text
+        {
+            get { return !string.IsNullOrWhiteSpace(text) ? text : null; }
+            internal set { text = value; }
+        }
 
-        public bool IsValid => !string.IsNullOrWhiteSpace(Text);
+        public bool ContainsText => !string.IsNullOrWhiteSpace(Text);
 
-        internal OcrResult() { }
+        internal OcrResult()
+        {
+        }
     }
 }

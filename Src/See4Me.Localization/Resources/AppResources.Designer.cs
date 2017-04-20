@@ -233,15 +233,6 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Emotion Subscription Key.
-        /// </summary>
-        public static string EmotionSubscriptionKey {
-            get {
-                return ResourceManager.GetString("EmotionSubscriptionKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to I see.
         /// </summary>
         public static string FaceRecognizedSingular {
@@ -256,6 +247,15 @@ namespace See4Me.Localization.Resources {
         public static string FacesRecognizedPlural {
             get {
                 return ResourceManager.GetString("FacesRecognizedPlural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Face Subscription Key.
+        /// </summary>
+        public static string FaceSubscriptionKey {
+            get {
+                return ResourceManager.GetString("FaceSubscriptionKey", resourceCulture);
             }
         }
         
@@ -557,6 +557,15 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Register services.
+        /// </summary>
+        public static string RegisterServices {
+            get {
+                return ResourceManager.GetString("RegisterServices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to en.
         /// </summary>
         public static string ResourceLanguage {
@@ -593,7 +602,7 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Attention, the service is not registered. Go to Settings page to enter the required keys..
+        ///   Looks up a localized string similar to Attention, the service is not registered. Tap here to discover how to proceed..
         /// </summary>
         public static string ServiceNotRegistered {
             get {
@@ -611,11 +620,11 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show description confidence.
+        ///   Looks up a localized string similar to Show also image description when detecting one or more faces.
         /// </summary>
-        public static string ShowDescriptionConfidence {
+        public static string ShowDescriptionOnFaceIdentification {
             get {
-                return ResourceManager.GetString("ShowDescriptionConfidence", resourceCulture);
+                return ResourceManager.GetString("ShowDescriptionOnFaceIdentification", resourceCulture);
             }
         }
         
@@ -629,20 +638,20 @@ namespace See4Me.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Subscribe to get the key.
+        ///   Looks up a localized string similar to Show recognition confidence.
         /// </summary>
-        public static string SubscribeCognitiveServices {
+        public static string ShowRecognitionConfidence {
             get {
-                return ResourceManager.GetString("SubscribeCognitiveServices", resourceCulture);
+                return ResourceManager.GetString("ShowRecognitionConfidence", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Subscribe to get the key.
+        ///   Looks up a localized string similar to Shutting down the device....
         /// </summary>
-        public static string SubscribeTranslatorService {
+        public static string ShuttingDown {
             get {
-                return ResourceManager.GetString("SubscribeTranslatorService", resourceCulture);
+                return ResourceManager.GetString("ShuttingDown", resourceCulture);
             }
         }
         

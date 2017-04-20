@@ -20,6 +20,6 @@ namespace See4Me.Engine.Services.ServiceSettings
         public Dictionary<string, string> DescriptionsToReplace { get; set; }
 
         // The minimum confidence to consider a description valid.
-        public double MinimumConfidence { get; set; }
+        public double MinimumConfidence { get; set; } = 0.16;
     }
 }

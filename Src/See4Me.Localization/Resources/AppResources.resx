@@ -165,9 +165,6 @@
   <data name="DisgustMale" xml:space="preserve">
     <value>Disgusted</value>
   </data>
-  <data name="EmotionSubscriptionKey" xml:space="preserve">
-    <value>Emotion Subscription Key</value>
-  </data>
   <data name="FaceRecognizedSingular" xml:space="preserve">
     <value>I see</value>
   </data>
@@ -268,19 +265,16 @@
     <value>Save</value>
   </data>
   <data name="ServiceNotRegistered" xml:space="preserve">
-    <value>Attention, the service is not registered. Go to Settings page to enter the required keys.</value>
+    <value>Attention, the service is not registered. Tap here to discover how to proceed.</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="ShowDescriptionConfidence" xml:space="preserve">
-    <value>Show description confidence</value>
+  <data name="ShowRecognitionConfidence" xml:space="preserve">
+    <value>Show recognition confidence</value>
   </data>
   <data name="ShowOriginalDescriptionOnTranslation" xml:space="preserve">
     <value>Show original description on translation</value>
-  </data>
-  <data name="SubscribeCognitiveServices" xml:space="preserve">
-    <value>Subscribe to get the key</value>
   </data>
   <data name="SurpriseFemale" xml:space="preserve">
     <value>Surprised</value>
@@ -354,7 +348,16 @@
   <data name="iOSProjectAuthor" xml:space="preserve">
     <value>Developed by Riccardo Cappello</value>
   </data>
-  <data name="SubscribeTranslatorService" xml:space="preserve">
-    <value>Subscribe to get the key</value>
+  <data name="RegisterServices" xml:space="preserve">
+    <value>Register services</value>
+  </data>
+  <data name="FaceSubscriptionKey" xml:space="preserve">
+    <value>Face Subscription Key</value>
+  </data>
+  <data name="ShuttingDown" xml:space="preserve">
+    <value>Shutting down the device...</value>
+  </data>
+  <data name="ShowDescriptionOnFaceIdentification" xml:space="preserve">
+    <value>Show also image description when detecting one or more faces</value>
   </data>
 </root>

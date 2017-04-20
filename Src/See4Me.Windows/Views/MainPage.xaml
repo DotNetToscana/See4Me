@@ -2,59 +2,215 @@
     x:Class="See4Me.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:See4Me"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    DataContext="{Binding Source={StaticResource Locator}, Path=MainViewModel}"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:controls="using:Template10.Controls"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Media="using:Microsoft.Xaml.Interactions.Media"
     xmlns:behaviors="using:See4Me.Behaviors"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:See4Me"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:triggers="using:WindowsStateTriggers"
+    DataContext="{Binding Source={StaticResource Locator}, Path=MainViewModel}"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Storyboard x:Name="showFullSizeImageAnimation">
+            <DoubleAnimation
+                d:IsOptimized="True"
+                Storyboard.TargetName="fullSizeImage"
+                Storyboard.TargetProperty="Opacity"
+                To="1"
+                Duration="0:0:0.1" />
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="previewImageBorder" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="changeCameraButton" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="settingsButton" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="takePhotoButton" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="recognizeTextButton" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="hideFullSizeImageAnimation">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="fullSizeImage" Storyboard.TargetProperty="Opacity">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="0" />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="previewImageBorder" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="changeCameraButton" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="settingsButton" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="takePhotoButton" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="recognizeTextButton" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+
+    <Grid>
         <Grid>
-            <Grid>
-                <CaptureElement x:Name="video" Stretch="UniformToFill" />
-                <TextBlock Text="{Binding StatusMessage}" Style="{StaticResource SubheaderTextBlockStyle}" TextAlignment="Center"
-                               VerticalAlignment="Bottom" Margin="12" TextWrapping="Wrap" />
+            <CaptureElement x:Name="video" Stretch="UniformToFill" />
+            <Image
+                x:Name="fullSizeImage"
+                Opacity="0"
+                Stretch="UniformToFill">
+                <Interactivity:Interaction.Behaviors>
+                    <Interactions:EventTriggerBehavior EventName="Tapped">
+                        <Media:ControlStoryboardAction Storyboard="{StaticResource hideFullSizeImageAnimation}" />
+                    </Interactions:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+            </Image>
+            <TextBlock
+                Margin="12"
+                VerticalAlignment="Bottom"
+                Style="{StaticResource SubheaderTextBlockStyle}"
+                Text="{Binding StatusMessage}"
+                TextAlignment="Center"
+                TextWrapping="Wrap" />
+            <Border
+                x:Name="previewImageBorder"
+                Margin="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                BorderBrush="DarkGray"
+                BorderThickness="1"
+                Visibility="Collapsed">
+                <Image
+                    x:Name="previewImage"
+                    Width="60"
+                    Height="60"
+                    Stretch="UniformToFill" />
 
-                <Image x:Name="previewImage" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Opacity="0.75" />
-            </Grid>
+                <Interactivity:Interaction.Behaviors>
+                    <Interactions:EventTriggerBehavior EventName="Tapped">
+                        <Media:ControlStoryboardAction Storyboard="{StaticResource showFullSizeImageAnimation}" />
+                    </Interactions:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+            </Border>
 
-            <Button x:Name="changeCameraButton" Style="{StaticResource CircleButton}" VerticalAlignment="Top" HorizontalAlignment="Center"
-                    Command="{Binding SwapCameraCommand}" AutomationProperties.Name="{Binding Path=LocalizedResources.SwapCamera, Source={StaticResource LocalizedStrings}}">
-                <SymbolIcon Symbol="RotateCamera" Width="48" Height="48" />
-            </Button>
-            <Button x:Name="settingsButton" Style="{StaticResource CircleButton}" VerticalAlignment="Top" HorizontalAlignment="Right"
-                    Command="{Binding GotoSettingsCommand}" AutomationProperties.Name="{Binding Path=LocalizedResources.OpenSettings, Source={StaticResource LocalizedStrings}}">
-                <SymbolIcon Symbol="Setting" Width="48" Height="48" />
-            </Button>
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Button x:Name="takePhotoButton" Style="{StaticResource CircleButton}"
-                        HorizontalAlignment="Right"
-                        Command="{Binding DescribeImageCommand}"
-                        AutomationProperties.Name="{Binding Path=LocalizedResources.TakePhoto, Source={StaticResource LocalizedStrings}}">
-                    <SymbolIcon Symbol="Camera" Width="64" Height="64" />
-                </Button>
-                <Button x:Name="recognizeTextButton" Style="{StaticResource CircleButton}"
-                        HorizontalAlignment="Center" Margin="10,5,0,0"
-                        Command="{Binding GotoRecognizeTextCommand}" AutomationProperties.Name="{Binding Path=LocalizedResources.RecognizeText, Source={StaticResource LocalizedStrings}}">
-                    <SymbolIcon Symbol="Character" Width="48" Height="48" />
-                </Button>
-            </StackPanel>
+            <Interactivity:Interaction.Behaviors>
+                <Interactions:EventTriggerBehavior EventName="Tapped">
+                    <Interactions:InvokeCommandAction Command="{Binding HowToRegisterCommand}" />
+                </Interactions:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
         </Grid>
+        <Button
+            x:Name="changeCameraButton"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            AutomationProperties.Name="{Binding Path=LocalizedResources.SwapCamera, Source={StaticResource LocalizedStrings}}"
+            Command="{Binding SwapCameraCommand}"
+            Style="{StaticResource CircleButton}">
+            <SymbolIcon
+                Width="48"
+                Height="48"
+                Symbol="RotateCamera" />
+        </Button>
+        <Button
+            x:Name="settingsButton"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            AutomationProperties.Name="{Binding Path=LocalizedResources.OpenSettings, Source={StaticResource LocalizedStrings}}"
+            Command="{Binding GotoSettingsCommand}"
+            Style="{StaticResource CircleButton}">
+            <SymbolIcon
+                Width="48"
+                Height="48"
+                Symbol="Setting" />
+        </Button>
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Button
+                x:Name="takePhotoButton"
+                HorizontalAlignment="Right"
+                AutomationProperties.Name="{Binding Path=LocalizedResources.TakePhoto, Source={StaticResource LocalizedStrings}}"
+                Command="{Binding DescribeImageCommand}"
+                Style="{StaticResource CircleButton}">
+                <SymbolIcon
+                    Width="64"
+                    Height="64"
+                    Symbol="Camera" />
+            </Button>
+            <Button
+                x:Name="recognizeTextButton"
+                Margin="10,5,0,0"
+                HorizontalAlignment="Center"
+                AutomationProperties.Name="{Binding Path=LocalizedResources.RecognizeText, Source={StaticResource LocalizedStrings}}"
+                Command="{Binding GotoRecognizeTextCommand}"
+                Style="{StaticResource CircleButton}">
+                <SymbolIcon
+                    Width="48"
+                    Height="48"
+                    Symbol="Character" />
+            </Button>
+        </StackPanel>
 
-        <MediaElement x:Name="shutter" Source="/Assets/Sounds/Shutter.mp3" AutoPlay="False" />
+        <MediaElement
+            x:Name="shutter"
+            AutoPlay="False"
+            Source="/Assets/Sounds/Shutter.mp3" />
 
         <Interactivity:Interaction.Behaviors>
             <behaviors:CameraPressedBehavior>
                 <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}" />
             </behaviors:CameraPressedBehavior>
-            <behaviors:PushButtonPressedBehavior PinNumber="27" ButtonType="PullDown">
-                <Interactions:InvokeCommandAction Command="{Binding DescribeImageCommand}" />
-            </behaviors:PushButtonPressedBehavior>
+            <behaviors:PushButtonBehavior
+                ButtonType="PullDown"
+                ClickCommand="{Binding DescribeImageCommand}"
+                LongClickCommand="{Binding ShutdownCommand}"
+                PinNumber="27" />
         </Interactivity:Interaction.Behaviors>
 
         <VisualStateManager.VisualStateGroups>
@@ -66,10 +222,6 @@
                     <VisualState.Setters>
                         <Setter Target="video.Width" Value="640" />
                         <Setter Target="video.Height" Value="480" />
-                        <Setter Target="changeCameraButton.Visibility" Value="Collapsed" />
-                        <Setter Target="settingsButton.Visibility" Value="Collapsed" />
-                        <Setter Target="takePhotoButton.Visibility" Value="Collapsed" />
-                        <Setter Target="recognizeTextButton.Visibility" Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

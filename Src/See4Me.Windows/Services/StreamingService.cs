@@ -21,6 +21,8 @@ using Windows.Devices.Sensors;
 using Windows.Storage.FileProperties;
 using Windows.Foundation;
 using Windows.Media.Devices;
+using System.Collections.Generic;
+using Windows.System.Profile;
 
 namespace See4Me.Services
 {
@@ -38,7 +40,6 @@ namespace See4Me.Services
         /// </summary>
         private MediaCapture mediaCapture;
         private CaptureElement preview;
-
 
         // Information about the camera device
         private bool mirroringPreview;
@@ -156,7 +157,7 @@ namespace See4Me.Services
                 // microphone (default constructor) you must add "microphone" to the manifest or initialization will fail.
 
                 // Attempt to get the back camera if one is available, but use any camera device if not
-                var cameraDevice = await this.FindCameraDeviceByPanelAsync(this.ConvertCameraPanelToDevicePanel(panel));
+                var cameraDevice = await FindCameraDeviceByPanelAsync(this.ConvertCameraPanelToDevicePanel(panel));
 
                 var settings = new MediaCaptureInitializationSettings
                 {
@@ -164,18 +165,20 @@ namespace See4Me.Services
                     VideoDeviceId = cameraDevice.Id
                 };
 
-                this.mediaCapture = new MediaCapture();
-                await this.mediaCapture.InitializeAsync(settings);
-                this.mediaCapture.Failed += this.MediaCapture_CameraStreamFailed;
+                mediaCapture = new MediaCapture();
+                await mediaCapture.InitializeAsync(settings);
+                mediaCapture.Failed += this.MediaCapture_CameraStreamFailed;
 
                 // Query all preview properties of the device.
-                var deviceController = this.mediaCapture.VideoDeviceController;
+                var deviceController = mediaCapture.VideoDeviceController;
                 //var previewProperties = deviceController.GetAvailableMediaStreamProperties(MediaStreamType.VideoPreview).Select(x => new StreamResolution(x));
                 var photoProperties = deviceController.GetAvailableMediaStreamProperties(MediaStreamType.Photo).Select(x => new StreamResolution(x));
 
-                var defaultEncodingProperties = photoProperties.FirstOrDefault(x => x.Width == 640)?.EncodingProperties;
+                var defaultEncodingProperties = GetMediaEncodingProperties(photoProperties);
                 if (defaultEncodingProperties != null)
+                {
                     await deviceController.SetMediaStreamPropertiesAsync(MediaStreamType.Photo, defaultEncodingProperties);
+                }
 
                 var focusControl = deviceController.FocusControl;
                 if (focusControl.Supported)
@@ -201,10 +204,10 @@ namespace See4Me.Services
                 mirroringPreview = (cameraDevice.EnclosureLocation?.Panel == Windows.Devices.Enumeration.Panel.Front);
                 CameraPanel = this.ConvertDevicePanelToCameraPanel(cameraDevice.EnclosureLocation?.Panel ?? Windows.Devices.Enumeration.Panel.Unknown);
 
-                await this.StartPreviewAsync();
+                await StartPreviewAsync();
 
                 // Ensure the Semaphore is in the signalled state.
-                this.frameProcessingSemaphore.Release();
+                frameProcessingSemaphore.Release();
             }
             catch (UnauthorizedAccessException)
             {
@@ -227,13 +230,13 @@ namespace See4Me.Services
 
             // Immediately start streaming to our CaptureElement UI.
             // NOTE: CaptureElement's Source must be set before streaming is started.
-            this.preview.Source = this.mediaCapture;
-            this.preview.FlowDirection = mirroringPreview ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+            preview.Source = mediaCapture;
+            preview.FlowDirection = mirroringPreview ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
-            await this.mediaCapture.StartPreviewAsync();
-            await this.SetPreviewRotationAsync();
+            await mediaCapture.StartPreviewAsync();
+            await SetPreviewRotationAsync();
 
-            this.preview.Visibility = Visibility.Visible;
+            preview.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -263,13 +266,13 @@ namespace See4Me.Services
         /// </summary>
         private async void ShutdownWebCam()
         {
-            if (this.mediaCapture != null)
+            if (mediaCapture != null)
             {
-                if (this.mediaCapture.CameraStreamState == CameraStreamState.Streaming)
+                if (mediaCapture.CameraStreamState == CameraStreamState.Streaming)
                 {
                     try
                     {
-                        await this.mediaCapture.StopPreviewAsync();
+                        await mediaCapture.StopPreviewAsync();
 
                         // Allow the device screen to sleep now that the preview is stopped
                         displayRequest.RequestRelease();
@@ -280,10 +283,10 @@ namespace See4Me.Services
                     }
                 }
 
-                this.mediaCapture.Failed -= this.MediaCapture_CameraStreamFailed;
-                this.mediaCapture.Dispose();
-                this.preview.Source = null;
-                this.mediaCapture = null;
+                mediaCapture.Failed -= MediaCapture_CameraStreamFailed;
+                mediaCapture.Dispose();
+                preview.Source = null;
+                mediaCapture = null;
             }
         }
 
@@ -296,9 +299,13 @@ namespace See4Me.Services
         {
             var dispatcher = CoreApplication.MainView?.CoreWindow?.Dispatcher;
             if (dispatcher != null)
+            {
                 await dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () => await ChangeScenarioStateAsync(ScenarioState.Idle));
+            }
             else
+            {
                 await ChangeScenarioStateAsync(ScenarioState.Idle);
+            }
         }
 
         /// <summary>
@@ -311,14 +318,14 @@ namespace See4Me.Services
             switch (newState)
             {
                 case ScenarioState.Idle:
-                    this.ShutdownWebCam();
+                    ShutdownWebCam();
                     break;
 
                 case ScenarioState.Streaming:
                     preview = this.preview ?? preview;
-                    if (!await this.StartWebcamStreamingAsync(panel, preview))
+                    if (!await StartWebcamStreamingAsync(panel, preview))
                     {
-                        await this.ChangeScenarioStateAsync(ScenarioState.Idle);
+                        await ChangeScenarioStateAsync(ScenarioState.Idle);
                         newState = ScenarioState.Idle;
                         break;
                     }
@@ -326,19 +333,23 @@ namespace See4Me.Services
                     break;
             }
 
-            this.CurrentState = newState;
+            CurrentState = newState;
         }
 
         public async Task StartStreamingAsync(CameraPanel panel, object preview)
         {
             if (CurrentState == ScenarioState.Idle)
-                await this.ChangeScenarioStateAsync(ScenarioState.Streaming, panel, preview as CaptureElement);
+            {
+                await ChangeScenarioStateAsync(ScenarioState.Streaming, panel, preview as CaptureElement);
+            }
         }
 
         public async Task StopStreamingAsync()
         {
             if (CurrentState == ScenarioState.Streaming)
-                await this.ChangeScenarioStateAsync(ScenarioState.Idle);
+            {
+                await ChangeScenarioStateAsync(ScenarioState.Idle);
+            }
         }
 
         public async Task SwapCameraAsync()
@@ -352,18 +363,22 @@ namespace See4Me.Services
             catch { }
 
             var newPanel = CameraPanel == CameraPanel.Back ? CameraPanel.Front : CameraPanel.Back;
-            await this.ChangeScenarioStateAsync(ScenarioState.Streaming, newPanel, preview);
+            await ChangeScenarioStateAsync(ScenarioState.Streaming, newPanel, preview);
         }
 
         public async Task<Stream> GetCurrentFrameAsync()
         {
             if (CurrentState != ScenarioState.Streaming)
+            {
                 return null;
+            }
 
             // If a lock is being held it means we're still waiting for processing work on the previous frame to complete.
             // In this situation, don't wait on the semaphore but exit immediately.
             if (!frameProcessingSemaphore.Wait(0))
+            {
                 return null;
+            }
 
             try
             {
@@ -374,7 +389,8 @@ namespace See4Me.Services
                 return stream.AsStreamForRead();
             }
             catch
-            { }
+            {
+            }
             finally
             {
                 frameProcessingSemaphore.Release();
@@ -400,8 +416,6 @@ namespace See4Me.Services
             return desiredDevice ?? allVideoDevices.FirstOrDefault(x => x.EnclosureLocation == null || x.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Back)
                 ?? allVideoDevices.FirstOrDefault();
         }
-
-        #region Panel helpers
 
         private Windows.Devices.Enumeration.Panel ConvertCameraPanelToDevicePanel(CameraPanel panel)
         {
@@ -430,10 +444,6 @@ namespace See4Me.Services
                     return CameraPanel.Back;
             }
         }
-
-        #endregion
-
-        #region Rotation helpers
 
         /// <summary>
         /// Calculates the current camera orientation from the device orientation by taking into account whether the camera is external or facing the user
@@ -537,6 +547,24 @@ namespace See4Me.Services
             }
         }
 
-        #endregion Rotation helpers
+        private IMediaEncodingProperties GetMediaEncodingProperties(IEnumerable<StreamResolution> resolutions)
+        {
+            var deviceFamily = AnalyticsInfo.VersionInfo.DeviceFamily;
+            IMediaEncodingProperties defaultEncodingProperties = null;
+
+            if (deviceFamily == Constants.WindowsIoTFamily)
+            {
+                defaultEncodingProperties = resolutions.FirstOrDefault(x => x.Width == 640)?.EncodingProperties;
+            }
+            else
+            {
+                defaultEncodingProperties = resolutions.FirstOrDefault(x => x.Width == 1440)?.EncodingProperties ??
+                    resolutions.FirstOrDefault(x => x.Width == 1280)?.EncodingProperties ??
+                    resolutions.FirstOrDefault(x => x.Width == 800)?.EncodingProperties ??
+                    resolutions.FirstOrDefault(x => x.Width == 640)?.EncodingProperties;
+            }
+
+            return defaultEncodingProperties;
+        }
     }
 }

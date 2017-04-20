@@ -1,7 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.ProjectOxford.Emotion;
-using Microsoft.ProjectOxford.Vision;
 using See4Me.Common;
 using See4Me.Localization.Resources;
 using See4Me.Services;
@@ -15,7 +13,6 @@ using System.IO;
 using System.Text;
 using System.Net;
 using System.Text.RegularExpressions;
-using Microsoft.ProjectOxford.Vision.Contract;
 using Microsoft.Practices.ServiceLocation;
 using GalaSoft.MvvmLight.Ioc;
 using See4Me.Engine;
@@ -27,15 +24,11 @@ namespace See4Me.ViewModels
         private readonly ILauncherService launcherService;
         private readonly CognitiveClient cognitiveClient;
 
-        public AutoRelayCommand SubscribeCognitiveServicesCommand { get; set; }
-
-        public AutoRelayCommand SubscribeTranslatorServiceCommand { get; set; }
+        public AutoRelayCommand RegisterCommand { get; set; }
 
         public AutoRelayCommand GotoAboutCommand { get; set; }
 
         public AutoRelayCommand GotoPrivacyPolicyCommand { get; set; }
-
-        public AutoRelayCommand SaveCommand { get; set; }
 
         private string visionSubscriptionKey;
         public string VisionSubscriptionKey
@@ -44,11 +37,11 @@ namespace See4Me.ViewModels
             set { this.Set(ref visionSubscriptionKey, value); }
         }
 
-        private string emotionSubscriptionKey;
-        public string EmotionSubscriptionKey
+        private string faceSubscriptionKey;
+        public string FaceSubscriptionKey
         {
-            get { return emotionSubscriptionKey; }
-            set { this.Set(ref emotionSubscriptionKey, value); }
+            get { return faceSubscriptionKey; }
+            set { this.Set(ref faceSubscriptionKey, value); }
         }
 
         private string translatorSubscriptionKey;
@@ -65,11 +58,11 @@ namespace See4Me.ViewModels
             set { this.Set(ref isTextToSpeechEnabled, value); }
         }
 
-        private bool showDescriptionConfidence;
-        public bool ShowDescriptionConfidence
+        private bool showRecognitionConfidence;
+        public bool ShowRecognitionConfidence
         {
-            get { return showDescriptionConfidence; }
-            set { this.Set(ref showDescriptionConfidence, value); }
+            get { return showRecognitionConfidence; }
+            set { this.Set(ref showRecognitionConfidence, value); }
         }
 
         private bool showOriginalDescriptionOnTranslation;
@@ -77,6 +70,13 @@ namespace See4Me.ViewModels
         {
             get { return showOriginalDescriptionOnTranslation; }
             set { this.Set(ref showOriginalDescriptionOnTranslation, value); }
+        }
+
+        private bool showDescriptionOnFaceIdentification;
+        public bool ShowDescriptionOnFaceIdentification
+        {
+            get { return showDescriptionOnFaceIdentification; }
+            set { this.Set(ref showDescriptionOnFaceIdentification, value); }
         }
 
         public SettingsViewModel(CognitiveClient cognitiveClient, ILauncherService launcherService)
@@ -90,40 +90,37 @@ namespace See4Me.ViewModels
         public void Initialize()
         {
             VisionSubscriptionKey = ServiceKeys.VisionSubscriptionKey;
-            EmotionSubscriptionKey = ServiceKeys.EmotionSubscriptionKey;
+            FaceSubscriptionKey = ServiceKeys.FaceSubscriptionKey;
             TranslatorSubscriptionKey = ServiceKeys.TranslatorSubscriptionKey;
 
             IsTextToSpeechEnabled = Settings.IsTextToSpeechEnabled;
-            ShowDescriptionConfidence = Settings.ShowDescriptionConfidence;
+            ShowRecognitionConfidence = Settings.ShowRecognitionConfidence;
             ShowOriginalDescriptionOnTranslation = Settings.ShowOriginalDescriptionOnTranslation;
+            showDescriptionOnFaceIdentification = Settings.ShowDescriptionOnFaceIdentification;
         }
 
         private void CreateCommands()
         {
-            SaveCommand = new AutoRelayCommand(Save);
-
-            SubscribeCognitiveServicesCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.CognitiveServicesSubscriptionUrl));
-            SubscribeTranslatorServiceCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.TranslatorServiceSubscriptionUrl));
-            GotoAboutCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.AboutPage.ToString()));
-            GotoPrivacyPolicyCommand = new AutoRelayCommand(() => Navigator.NavigateTo(Pages.PrivacyPolicyPage.ToString()));
+            RegisterCommand = new AutoRelayCommand(() => launcherService.LaunchUriAsync(Constants.HowToRegisterUrl));
+            GotoAboutCommand = new AutoRelayCommand(() => AppNavigationService.NavigateTo(Pages.AboutPage.ToString()));
+            GotoPrivacyPolicyCommand = new AutoRelayCommand(() => AppNavigationService.NavigateTo(Pages.PrivacyPolicyPage.ToString()));
         }
 
         public void Save()
         {
             ServiceKeys.VisionSubscriptionKey = visionSubscriptionKey;
-            ServiceKeys.EmotionSubscriptionKey = emotionSubscriptionKey;
+            ServiceKeys.FaceSubscriptionKey = faceSubscriptionKey;
             ServiceKeys.TranslatorSubscriptionKey = translatorSubscriptionKey;
 
             Settings.IsTextToSpeechEnabled = isTextToSpeechEnabled;
-            Settings.ShowDescriptionConfidence = showDescriptionConfidence;
+            Settings.ShowRecognitionConfidence = showRecognitionConfidence;
             Settings.ShowOriginalDescriptionOnTranslation = showOriginalDescriptionOnTranslation;
+            Settings.ShowDescriptionOnFaceIdentification = showDescriptionOnFaceIdentification;
 
             var cognitiveSettings = cognitiveClient.Settings;
-            cognitiveSettings.EmotionSubscriptionKey = emotionSubscriptionKey;
             cognitiveSettings.VisionSubscriptionKey = visionSubscriptionKey;
+            cognitiveSettings.FaceSubscriptionKey = faceSubscriptionKey;
             cognitiveSettings.TranslatorSubscriptionKey = translatorSubscriptionKey;
-
-            Navigator.GoBack();
         }
     }
 }

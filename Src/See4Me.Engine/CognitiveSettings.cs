@@ -10,7 +10,7 @@ namespace See4Me.Engine
     {
         public string VisionSubscriptionKey { get; set; }
 
-        public string EmotionSubscriptionKey { get; set; }
+        public string FaceSubscriptionKey { get; set; }
 
         public string TranslatorSubscriptionKey { get; set; }
     }

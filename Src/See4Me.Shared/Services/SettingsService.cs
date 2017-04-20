@@ -7,15 +7,16 @@ namespace See4Me.Services
     public class SettingsService : ISettingsService
     {
         private const string CAMERA_PANEL = "CameraPanel";
-        private const string SHOW_DESCRIPTION_CONFIDENCE = "ShowDescriptionConfidence";
+        private const string SHOW_RECOGNITION_CONFIDENCE = "ShowRecognitionConfidence";
         private const string SHOW_EXCEPTION_ON_ERROR = "ShowExceptionOnError";
         private const string SHOW_ORIGINAL_DESCRIPTION_ON_TRANSLATION = "ShowOriginalDescriptionOnTranslation";
         private const string SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION = "ShowRawDescriptionOnInvalidRecognition";
         private const string VISION_SUBSCRIPTION_KEY = "VisionSubscriptionKey";
-        private const string EMOTION_SUBSCRIPTION_KEY = "EmotionSubscriptionKey";
+        private const string FACE_SUBSCRIPTION_KEY = "FaceSubscriptionKey";
         private const string TRANSLATOR_SUBSCRIPTION_KEY = "TranslatorSubscriptionKey";
         private const string IS_TEXT_TO_SPEECH_ENABLED = "IsTextToSpeechEnabled";
         private const string IS_CONSENT_GIVEN = "IsConsentGiven";
+        private const string SHOW_DESCRIPTION_ON_FACE_IDENTIFICATION = "ShowDescriptionOnFaceIdentification";
 
         private readonly ISettings settings;
 
@@ -34,10 +35,10 @@ namespace See4Me.Services
             set { settings.AddOrUpdateValue(CAMERA_PANEL, value.ToString()); }
         }
 
-        public bool ShowDescriptionConfidence
+        public bool ShowRecognitionConfidence
         {
-            get { return settings.GetValueOrDefault(SHOW_DESCRIPTION_CONFIDENCE, false); }
-            set { settings.AddOrUpdateValue(SHOW_DESCRIPTION_CONFIDENCE, value); }
+            get { return settings.GetValueOrDefault(SHOW_RECOGNITION_CONFIDENCE, false); }
+            set { settings.AddOrUpdateValue(SHOW_RECOGNITION_CONFIDENCE, value); }
         }
 
         public bool ShowOriginalDescriptionOnTranslation
@@ -61,7 +62,14 @@ namespace See4Me.Services
 
         public bool ShowRawDescriptionOnInvalidRecognition
         {
-            get { return settings.GetValueOrDefault(SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION, false); }
+            get
+            {
+#if DEBUG
+                return true;
+#else
+                return settings.GetValueOrDefault(SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION, false);
+#endif
+            }
             set { settings.AddOrUpdateValue(SHOW_RAW_DESCRIPTION_ON_INVALID_RECOGNITION, value); }
         }
 
@@ -71,10 +79,10 @@ namespace See4Me.Services
             set { settings.AddOrUpdateValue(VISION_SUBSCRIPTION_KEY, value); }
         }
 
-        public string EmotionSubscriptionKey
+        public string FaceSubscriptionKey
         {
-            get { return settings.GetValueOrDefault<string>(EMOTION_SUBSCRIPTION_KEY, null); }
-            set { settings.AddOrUpdateValue(EMOTION_SUBSCRIPTION_KEY, value); }
+            get { return settings.GetValueOrDefault<string>(FACE_SUBSCRIPTION_KEY, null); }
+            set { settings.AddOrUpdateValue(FACE_SUBSCRIPTION_KEY, value); }
         }
 
         public string TranslatorSubscriptionKey
@@ -100,8 +108,13 @@ namespace See4Me.Services
                 return settings.GetValueOrDefault(IS_CONSENT_GIVEN, false);
 #endif
             }
-
             set { settings.AddOrUpdateValue(IS_CONSENT_GIVEN, value); }
+        }
+
+        public bool ShowDescriptionOnFaceIdentification
+        {
+            get { return settings.GetValueOrDefault(SHOW_DESCRIPTION_ON_FACE_IDENTIFICATION, false); }
+            set { settings.AddOrUpdateValue(SHOW_DESCRIPTION_ON_FACE_IDENTIFICATION, value); }
         }
     }
 }

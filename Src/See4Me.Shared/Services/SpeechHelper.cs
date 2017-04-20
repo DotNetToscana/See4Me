@@ -1,5 +1,4 @@
 ﻿using Microsoft.Practices.ServiceLocation;
-using Microsoft.ProjectOxford.Vision.Contract;
 using See4Me.Engine;
 using See4Me.Localization.Resources;
 using See4Me.Services;
@@ -22,28 +21,48 @@ namespace See4Me.Services
             speechService = ServiceLocator.Current.GetInstance<ISpeechService>();
         }
 
-        public static string GetEmotionMessage(Gender gender, int age, Emotion bestEmotion)
+        public static FaceResultMessage GetFaceMessage(FaceResult face)
         {
-            // Creates the emotion description text to be speeched.
-            string emotionMessage = null;
+            var result = new FaceResultMessage();
 
-            var ageDescription = GetAgeDescription(age, gender);
-            var personAgeMessage = string.Format(GetString(Constants.PersonAgeMessage, gender), ageDescription, age);
+            // Creates the face description text to be speeched.
+            string faceMessage = null;
+            string personMessage;
 
-            if (bestEmotion != Emotion.Neutral)
+            if (!string.IsNullOrWhiteSpace(face.Name))
             {
-                var emotion = GetString(bestEmotion.ToString(), gender);
-                var lookingMessage = string.Format(GetString(Constants.LookingMessage, gender), emotion);
-                emotionMessage = $"{personAgeMessage} {lookingMessage}";
+                // A person name has been identified.
+                personMessage = $"{face.Name} ";
+
+                if (settings.ShowRecognitionConfidence)
+                { 
+                    personMessage = $"{personMessage} ({Math.Round(face.IdentifyConfidence, 2)})";
+                }
+
+                result.ContainsFace = true;
             }
             else
             {
-                // No emotion recognized, so includes only the age in the message.
-                emotionMessage = personAgeMessage;
+                var ageDescription = GetAgeDescription(face.Age, face.Gender);
+                personMessage = string.Format(GetString(Constants.PersonAgeMessage, face.Gender), ageDescription, face.Age);
             }
 
-            emotionMessage = $"{emotionMessage} {Constants.SentenceEnd} ";
-            return emotionMessage;
+            if (face.Emotion != Emotion.Neutral)
+            {
+                var emotion = GetString(face.Emotion.ToString(), face.Gender).ToLower();
+                var lookingMessage = string.Format(GetString(Constants.LookingMessage, face.Gender), emotion);
+                faceMessage = $"{personMessage} {lookingMessage}";
+            }
+            else
+            {
+                // No emotion recognized, so includes only the person name or age in the message.
+                faceMessage = personMessage;
+            }
+
+            faceMessage = $"{faceMessage} {Constants.SentenceEnd} ";
+            result.Message = faceMessage;
+
+            return result;
         }
 
         private static string GetAgeDescription(int age, Gender gender)
@@ -57,7 +76,7 @@ namespace See4Me.Services
             else
                 key = Constants.Man;
 
-            var ageDescription = GetString(key, gender);
+            var ageDescription = GetString(key, gender).ToLower();
             return ageDescription;
         }
 
@@ -72,5 +91,12 @@ namespace See4Me.Services
                 await speechService.SpeechAsync(speechMessage);
             }
         }
+    }
+
+    public class FaceResultMessage
+    {
+        public bool ContainsFace { get; set; }
+
+        public string Message { get; set; }
     }
 }

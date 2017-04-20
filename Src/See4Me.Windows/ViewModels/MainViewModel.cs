@@ -8,11 +8,43 @@ using Windows.UI.Xaml.Navigation;
 using Template10.Services.NavigationService;
 using Microsoft.Practices.ServiceLocation;
 using See4Me.Localization.Resources;
+using System;
+using Windows.System;
+using Windows.Foundation.Metadata;
+using System.Runtime.CompilerServices;
 
 namespace See4Me.ViewModels
 {
     public partial class MainViewModel : ViewModelBase
     {
+        public AutoRelayCommand ShutdownCommand { get; set; }
+
+        partial void OnCreateCommands()
+        {
+            ShutdownCommand = new AutoRelayCommand(async () => await Shutdown(), () => !IsBusy).DependsOn(() => IsBusy);
+        }
+
+        public async Task Shutdown()
+        {
+            try
+            {
+                // Shutdowns the device immediately.
+                if (ApiInformation.IsTypePresent("Windows.System.ShutdownManager"))
+                {
+                    IsBusy = true;
+                    StatusMessage = AppResources.ShuttingDown;
+                    await SpeechHelper.TrySpeechAsync(AppResources.ShuttingDown);
+
+                    ShutdownManager.BeginShutdown(ShutdownKind.Shutdown, TimeSpan.FromSeconds(3));
+                }
+            }
+            catch { }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             // Calls methods to initialize the app.
@@ -22,6 +54,7 @@ namespace See4Me.ViewModels
             DescribeImageCommand.RaiseCanExecuteChanged();
             SwapCameraCommand.RaiseCanExecuteChanged();
             GotoRecognizeTextCommand.RaiseCanExecuteChanged();
+            HowToRegisterCommand.RaiseCanExecuteChanged();
 
             await base.OnNavigatedToAsync(parameter, mode, state);
         }

@@ -10,24 +10,24 @@ namespace See4Me.ViewModels
     {
         protected ISettingsService Settings { get; }
 
-        protected INetworkService Network { get; }
+        protected INetworkService NetworkService { get; }
 
-        protected Services.INavigationService Navigator { get; }
+        protected Services.INavigationService AppNavigationService { get; }
 
         protected Services.IDialogService DialogService { get; }
 
         public ViewModelBase()
         {
             Settings = ServiceLocator.Current.GetInstance<ISettingsService>();
-            Network = ServiceLocator.Current.GetInstance<INetworkService>();
+            NetworkService = ServiceLocator.Current.GetInstance<INetworkService>();
 
-            Navigator = ServiceLocator.Current.GetInstance<Services.INavigationService>();
+            AppNavigationService = ServiceLocator.Current.GetInstance<Services.INavigationService>();
             DialogService = ServiceLocator.Current.GetInstance<Services.IDialogService>();
 
-            IsConnected = Network.IsConnected;
-            Network.ConnectivityChanged += (s, e) =>
+            IsConnected = NetworkService.IsConnected;
+            NetworkService.ConnectivityChanged += (s, e) =>
             {
-                DispatcherHelper.CheckBeginInvokeOnUI(() => IsConnected = Network.IsConnected);
+                DispatcherHelper.CheckBeginInvokeOnUI(() => IsConnected = NetworkService.IsConnected);
             };
         }
 
