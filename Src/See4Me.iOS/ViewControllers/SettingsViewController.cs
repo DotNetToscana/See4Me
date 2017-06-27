@@ -28,21 +28,22 @@ namespace See4Me
 
 			ViewModel.Initialize();
 
-			this.RegisterMessages();
 			this.SetTranslation();
+
 			this.bindings = new List<Binding>()
 			{
 				this.SetBinding(() => ViewModel.VisionSubscriptionKey, () => TextVisionSubscriptionKey.Text, BindingMode.TwoWay),
-				this.SetBinding(() => ViewModel.EmotionSubscriptionKey, () => TextEmotionSubscriptionKey.Text, BindingMode.TwoWay),
+				this.SetBinding(() => ViewModel.FaceSubscriptionKey, () => TextFaceSubscriptionKey.Text, BindingMode.TwoWay),
 				this.SetBinding(() => ViewModel.TranslatorSubscriptionKey, () => TextTranslatorSubscriptionKey.Text, BindingMode.TwoWay),
 
 				this.SetBinding(() => ViewModel.IsTextToSpeechEnabled, () => SwitchTextToSpeech.On, BindingMode.TwoWay),
 				this.SetBinding(() => ViewModel.ShowRecognitionConfidence, () => SwitchShowDescriptionConfidence.On, BindingMode.TwoWay),
 				this.SetBinding(() => ViewModel.ShowOriginalDescriptionOnTranslation, () => SwitchShowOriginalDescription.On, BindingMode.TwoWay),
+				this.SetBinding(() => ViewModel.ShowDescriptionOnFaceIdentification, () => SwitchShowDescriptionOnFaceIdentification.On, BindingMode.TwoWay),
 			};
 
 			TextVisionSubscriptionKey.DismissKeyboardOnReturn();
-			TextEmotionSubscriptionKey.DismissKeyboardOnReturn();
+			TextFaceSubscriptionKey.DismissKeyboardOnReturn();
 			TextTranslatorSubscriptionKey.DismissKeyboardOnReturn();
 
 			ButtonAbout.SetCommand(this.ViewModel.GotoAboutCommand);
@@ -52,6 +53,7 @@ namespace See4Me
 				new UIBarButtonItem(UIBarButtonSystemItem.Save, (sender, args) =>
 				{
 					this.ViewModel.Save();
+					NavigationController.PopViewController(true);
 				})
 			, true);
 
@@ -70,22 +72,19 @@ namespace See4Me
 			NavigationController.SetNavigationBarHidden(true, false);
 		}
 
-		private void RegisterMessages()
-		{
-
-		}
-
 		private void SetTranslation()
 		{
 			this.NavigationItem.Title = AppResources.Settings;
 
 			LabelVisionSubscriptionKey.Text = AppResources.VisionSubscriptionKey;
-			LabelEmotionSubscriptionKey.Text = AppResources.EmotionSubscriptionKey;
+			LabelFaceSubscriptionKey.Text = AppResources.FaceSubscriptionKey;
 			LabelTranslatorSubscriptionKey.Text = AppResources.TranslatorSubscriptionKey;
 
 			LabelTextToSpeech.Text = AppResources.TextToSpeech;
-			LabelShowDescriptionConfidence.Text = AppResources.ShowDescriptionConfidence;
+			LabelShowRecognitionConfidence.Text = AppResources.ShowRecognitionConfidence;
 			LabelShowOriginalDescription.Text = AppResources.ShowOriginalDescriptionOnTranslation;
+			LabelShowDescriptionOnFaceIdentification.Text = AppResources.ShowDescriptionOnFaceIdentification;
+			LabelShowDescriptionOnFaceIdentification.SizeToFit();
 
 			ButtonAbout.SetTitle(AppResources.AboutCommand, UIControlState.Normal);
 			ButtonPrivacy.SetTitle(AppResources.PrivacyPolicyCommand, UIControlState.Normal);
