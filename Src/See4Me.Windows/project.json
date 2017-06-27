@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
     "Microsoft.Xaml.Behaviors.Uwp.Managed": "2.0.0",
     "MvvmLightLibs": "5.3.0",
     "Newtonsoft.Json": "9.0.1",
@@ -8,7 +8,7 @@
     "Template10": "1.1.12",
     "WindowsStateTriggers": "1.1.0",
     "Xam.Plugin.Connectivity": "2.3.0",
-    "Xam.Plugins.Settings": "2.5.4",
+    "Xam.Plugins.Settings": "2.5.8",
     "Xam.Plugins.TextToSpeech": "2.0.0"
   },
   "frameworks": {

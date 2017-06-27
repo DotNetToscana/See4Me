@@ -11,6 +11,7 @@ using See4Me.Engine.Services.ServiceSettings;
 using System.Net;
 using System.Text.RegularExpressions;
 using Microsoft.ProjectOxford.Vision;
+using Newtonsoft.Json.Linq;
 
 namespace See4Me.Engine.Extensions
 {
@@ -43,6 +44,30 @@ namespace See4Me.Engine.Extensions
         {
             rawDescription = result.Description.Captions.FirstOrDefault();
             filteredDescription = null;
+
+            var detailNode = result.Categories.FirstOrDefault()?.Detail;
+            if (detailNode != null)
+            {
+                // Retrieves landmarks name and confidence, if any.
+                var details = JToken.Parse(detailNode.ToString());
+                var landmarks = details["landmarks"];
+                if (landmarks.Any())
+                {
+                    var name = landmarks[0]["name"]?.Value<string>();
+                    var confidence = landmarks[0]["confidence"]?.Value<double>();
+
+                    if (name != null && confidence.GetValueOrDefault() > settings?.MinimumConfidence)
+                    {
+                        filteredDescription = new Caption
+                        {
+                            Text = name,
+                            Confidence = confidence.Value
+                        };
+
+                        return true;
+                    }
+                }
+            }
 
             // If there is no settings, all the descriptions are valid.
             if (settings == null)

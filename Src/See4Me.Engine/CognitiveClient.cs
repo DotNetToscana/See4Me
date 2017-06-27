@@ -20,6 +20,9 @@ namespace See4Me.Engine
     {
         private const string DefaultLanguge = "en";
 
+        private const string Landmarks = "Landmarks";
+        private const string Celebrities = "Celebrieties";
+
         private readonly ITranslatorServiceClient translatorService;
 
         // Variables to handle face identification.
@@ -70,6 +73,7 @@ namespace See4Me.Engine
             if (recognitionType.HasFlag(RecognitionType.Vision))
             {
                 var features = new HashSet<VisualFeature> { VisualFeature.Description };
+                var details = new HashSet<string> { Landmarks };
 
                 if (recognitionType.HasFlag(RecognitionType.Face) || recognitionType.HasFlag(RecognitionType.Emotion))
                 {
@@ -80,7 +84,7 @@ namespace See4Me.Engine
 
                 try
                 {
-                    analyzeImageResult = await visionService.AnalyzeImageAsync(stream, features);
+                    analyzeImageResult = await visionService.AnalyzeImageAsync(stream, features, details);
                 }
                 catch (ClientException ex)
                 {
@@ -88,10 +92,8 @@ namespace See4Me.Engine
                     throw exception;
                 }
 
-                Caption originalDescription;
-                Caption filteredDescription;
                 var visionSettings = VisionSettingsProvider != null ? await VisionSettingsProvider.GetSettingsAsync() : null;
-                var isValid = analyzeImageResult.IsValid(out originalDescription, out filteredDescription, visionSettings);
+                var isValid = analyzeImageResult.IsValid(out var originalDescription, out var filteredDescription, visionSettings);
 
                 var visionResult = result.VisionResult;
                 visionResult.IsValid = isValid;
@@ -115,7 +117,6 @@ namespace See4Me.Engine
                 try
                 {
                     stream.Position = 0;
-
                     var attributes = new HashSet<FaceAttributeType> { FaceAttributeType.Gender, FaceAttributeType.Age };
 
                     if (recognitionType.HasFlag(RecognitionType.Emotion))
@@ -194,7 +195,7 @@ namespace See4Me.Engine
                         result.OcrResult.Text = text;
                     }
                 }
-                catch (Microsoft.ProjectOxford.Vision.ClientException ex)
+                catch (ClientException ex)
                 {
                     var exception = await CreateExceptionAsync(ex.Error.Code, ex.Error.Message, "Vision", ex.GetHttpStatusCode(), ex, language, onProgress);
                     throw exception;
